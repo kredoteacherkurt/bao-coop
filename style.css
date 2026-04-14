@@ -1,0 +1,488 @@
+/* General Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+:root {
+    /* BRAND COLORS EXTRACTED FROM LOGO */
+    --primary: #002060;   /* Deep Royal Blue (Main Brand Color) */
+    --secondary: #b30000; /* Deep Red (Logo Border Color) */
+    --accent: #d32f2f;    /* Brighter Red (For Buttons/CTAs) */
+    --text-on-primary: #ffffff;
+    
+    --light: #f0f4f8;     /* Very light blue-grey background */
+    --dark: #1a1a1a;      /* Dark text */
+}
+/* General Links inside white sections */
+p a {
+    color: var(--primary); /* Dark Blue */
+    font-weight: bold;
+}
+p a:hover {
+    color: var(--secondary); /* Red on hover */
+}
+html { scroll-behavior: smooth; }
+body { line-height: 1.6; color: var(--dark); background-color: #fff; }
+
+/* Navbar */
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.5rem 5%;
+    background-color: var(--primary); /* Blue Header */
+    color: white;
+    position: sticky; top: 0; z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-bottom: 3px solid var(--secondary); /* Red line at bottom of nav */
+}
+
+/* LOGO STYLING */
+.nav-logo {
+    height: 60px; /* Slightly larger to show detail */
+    width: auto;
+    display: block;
+    background: white; /* White circle background to make logo pop */
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.nav-links { list-style: none; display: flex; }
+.nav-links li { margin-left: 20px; }
+.nav-links a { 
+    text-decoration: none; 
+    color: rgba(255, 255, 255, 0.9); /* Softer White */
+    font-weight: 500; 
+    transition: all 0.3s ease; 
+    padding-bottom: 5px; /* Space for the underline */
+    border-bottom: 2px solid transparent; /* Invisible border by default */
+}
+
+.nav-links a:hover { 
+    color: #ffffff; /* Bright White on hover */
+    border-bottom: 2px solid var(--accent); /* Red line appears BELOW text */
+}
+
+.burger { display: none; font-size: 1.5rem; cursor: pointer; color: white; }
+
+/* Hero Section */
+.hero {
+    height: 85vh;
+    /* Updated Gradient to Blue */
+    background: linear-gradient(rgba(0, 32, 96, 0.85), rgba(0, 32, 96, 0.7)), url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover; background-position: center;
+    display: flex; align-items: center; justify-content: center; text-align: center; color: white;
+}
+.hero h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+
+/* Buttons */
+.btn {
+    display: inline-block; 
+    background: var(--secondary); /* Red Buttons */
+    color: white;
+    padding: 12px 35px; text-decoration: none; font-weight: bold; border-radius: 50px; border: none; cursor: pointer;
+    transition: 0.3s; margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+.btn:hover { 
+    background: #ff1a1a; /* Brighter red on hover */
+    transform: translateY(-2px);
+}
+
+/* Sections */
+.container { max-width: 1100px; margin: 0 auto; padding: 70px 20px; }
+.section-title { 
+    text-align: center; margin-bottom: 50px; 
+    color: var(--primary); /* Blue Titles */
+    font-size: 2.2rem; 
+    position: relative;
+    font-weight: 700;
+}
+.section-title::after {
+    content: ''; display: block; width: 60px; height: 3px; 
+    background: var(--secondary); /* Red underline for titles */
+    margin: 10px auto 0;
+}
+
+.bg-light { background-color: var(--light); }
+
+/* Grid Layouts */
+.content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+
+/* Feature Cards */
+.card { 
+    background: white; padding: 40px 30px; 
+    border-radius: 10px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+    text-align: center; transition: 0.3s; 
+    border-top: 4px solid var(--primary);
+}
+.card:hover { transform: translateY(-10px); border-top-color: var(--secondary); }
+.card i { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
+
+/* Financials Box */
+.financial-box { 
+    text-align: center; font-size: 1.2rem; background: white; 
+    padding: 50px; 
+    border-left: 8px solid var(--primary); 
+    border-right: 8px solid var(--secondary);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+    border-radius: 8px;
+}
+.financial-box p { margin: 15px 0; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+.financial-box span { font-weight: bold; color: var(--primary); font-size: 1.4rem; }
+
+/* Partners */
+.partners-logos { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.logo-box { 
+    background: white; color: var(--primary); padding: 20px 40px; 
+    font-weight: bold; border-radius: 4px; border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Forms */
+.styled-form { 
+    max-width: 600px; margin: 0 auto; background: white; 
+    padding: 40px; border-radius: 10px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+    border-top: 5px solid var(--secondary);
+}
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--primary); }
+.form-group input, .form-group textarea { 
+    width: 100%; padding: 12px; 
+    border: 1px solid #ccc; border-radius: 5px; 
+    background: #f9f9f9;
+}
+.form-group input:focus, .form-group textarea:focus {
+    outline: none; border-color: var(--primary); background: white;
+}
+
+/* Footer */
+footer { background: var(--primary); color: white; padding: 60px 0 0; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
+.footer-section h3 { margin-bottom: 20px; border-bottom: 2px solid var(--secondary); display: inline-block; padding-bottom: 5px; }
+.footer-section p { margin-bottom: 10px; }
+.footer-section i { width: 25px; color: var(--secondary); } /* Red Icons in footer */
+
+.footer-bottom { 
+    text-align: center; padding: 20px; 
+    background: #001540; /* Darker shade of Blue */
+    margin-top: 50px; font-size: 0.9rem; 
+}
+/* Social Media Icons */
+.socials a { 
+    background: rgba(255,255,255,0.1);
+    color: white; 
+    font-size: 1.2rem; margin-right: 10px; 
+    transition: all 0.3s ease; /* Smooth transition */
+    width: 40px; height: 40px;
+    display: inline-flex; justify-content: center; align-items: center;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.socials a:hover { 
+    background: var(--secondary); /* Red background on hover */
+    transform: translateY(-5px);  /* slight move up instead of spin */
+}
+/* Video */
+.video-container { 
+    position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; 
+    border-radius: 10px; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
+    border: 4px solid white;
+}
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+/* Responsive */
+@media(max-width: 768px) {
+    .content-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2rem; }
+    .nav-links { display: none; } 
+    .burger { display: block; }
+}
+/* Partners */
+.partners-logos { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; /* Ensures logos are vertically centered */
+    gap: 40px; 
+    flex-wrap: wrap; 
+}
+
+.partners-logos img {
+    height: 60px; /* Consistent height for all logos */
+    width: auto;
+    filter: grayscale(100%); /* Makes them black & white for a clean look */
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.partners-logos img:hover {
+    filter: grayscale(0%); /* Brings back color on hover */
+    opacity: 1;
+    transform: scale(1.1); /* Slightly grows on hover */
+}
+/* Footer */
+footer { background: var(--primary); color: white; padding: 60px 0 0; }
+
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
+
+.footer-section h3 { 
+    margin-bottom: 20px; 
+    border-bottom: 2px solid var(--secondary); 
+    display: inline-block; 
+    padding-bottom: 5px; 
+}
+
+.footer-section p { 
+    margin-bottom: 12px; 
+    color: #e0e0e0; /* Light Grey is softer than pure white */
+}
+
+.footer-section a {
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-section a:hover {
+    color: #ffffff;
+}
+
+.footer-section i { 
+    width: 25px; 
+    color: var(--accent); /* Keep icons Red, but text stays White/Grey */
+    text-align: center;
+}
+
+/* --- NEWSLETTER STYLES (FIXED) --- */
+#newsletterForm {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between input and button */
+}
+
+#newsletterForm input {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1rem;
+    color: #333;
+}
+
+#newsletterForm button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--secondary); /* Red Brand Color */
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background 0.3s, transform 0.2s;
+}
+
+#newsletterForm button:hover {
+    background-color: var(--accent); /* Brighter Red on hover */
+    transform: translateY(-2px);
+}
+/* -------------------------------- */
+
+.footer-bottom { 
+    text-align: center; padding: 20px; 
+    background: #001540; /* Darker shade of Blue */
+    margin-top: 50px; font-size: 0.9rem; 
+}
+
+/* Social Media Icons - Professional & Simple */
+.socials a { 
+    background: rgba(255, 255, 255, 0.1); /* Transparent White */
+    color: white; 
+    font-size: 1.2rem; 
+    margin-right: 10px; 
+    width: 40px; height: 40px;
+    display: inline-flex; justify-content: center; align-items: center;
+    border-radius: 50%; /* Circle shape */
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.socials a:hover { 
+    background: white;      /* Turns solid White */
+    color: var(--primary);  /* Icon turns Dark Blue */
+    transform: translateY(-3px); /* Subtle lift */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Soft shadow for depth */
+}
+/* Footer Links - Simple White Hover */
+.footer-section a {
+    color: #b0c4de; /* Light Blue-Grey */
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-section a:hover {
+    color: white; /* Just turns Bright White */
+}
+/* --- NEW STYLES FOR LISTS --- */
+
+/* Lists inside the Cards (Products Section) */
+.service-list {
+    text-align: left;
+    list-style: none;
+    padding: 0 10px;
+    margin-top: 15px;
+}
+
+.service-list li {
+    padding: 5px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.service-list li:last-child {
+    border-bottom: none;
+}
+
+.service-list li::before {
+    content: "✓";
+    color: var(--secondary);
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Styled UL for Community Section */
+.styled-ul {
+    list-style: none;
+    margin-top: 15px;
+}
+
+.styled-ul li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+}
+
+.styled-ul li::before {
+    content: "\f00c"; /* FontAwesome check */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+}
+
+/* Ensure Card height accommodates lists */
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+/* --- ADD TO BOTTOM OF STYLE.CSS --- */
+
+/* Member Nav Logout Button */
+.btn-logout {
+    background: transparent;
+    border: 1px solid var(--secondary);
+    color: var(--secondary);
+    padding: 6px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    margin-left: 15px;
+}
+.btn-logout:hover {
+    background: var(--secondary);
+    color: white;
+}
+
+/* Bulletin / Announcement Section */
+.bulletin-board {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border-left: 5px solid #28a745; /* Green for news */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.bulletin-item {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+.bulletin-item:last-child { border: none; margin: 0; padding: 0; }
+.bulletin-date { font-size: 0.8rem; color: #888; margin-bottom: 5px; display: block; }
+
+/* Loan Calculator Section */
+#loan-calculator-section {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+    border: 1px solid #dee2e6;
+    display: none; /* Hidden by default */
+}
+.calc-result {
+    margin-top: 15px;
+    padding: 10px;
+    background: #e9ecef;
+    font-weight: bold;
+    color: var(--primary);
+    text-align: center;
+    border-radius: 4px;
+}
+
+/* File Upload Style */
+.file-upload-wrapper {
+    margin-top: 15px;
+    width: 100%;
+}
+.file-upload-wrapper label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Terms and Conditions Checkbox */
+.terms-box {
+    margin-top: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+/* Custom Modal Styles */
+.custom-modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); z-index: 9999;
+    display: flex; justify-content: center; align-items: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.custom-modal-overlay.active {
+    opacity: 1; pointer-events: auto;
+}
+.custom-modal-box {
+    background: white; padding: 25px; border-radius: 8px; width: 90%; max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center; transform: translateY(-20px); transition: transform 0.3s;
+    border-top: 5px solid var(--primary);
+}
+.custom-modal-overlay.active .custom-modal-box {
+    transform: translateY(0);
+}
+.custom-modal-box h3 { margin-bottom: 15px; color: var(--primary); }
+.custom-modal-box p { margin-bottom: 20px; font-size: 0.95rem; color: #555; }
+.custom-modal-actions { display: flex; justify-content: center; gap: 10px; }
+.custom-modal-btn { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+.custom-modal-btn-primary { background: var(--primary); color: white; }
+.custom-modal-btn-cancel { background: #ccc; color: #333; }
+.custom-modal-box.wide { max-width: 600px; text-align: left; max-height: 80vh; overflow-y: auto; }
