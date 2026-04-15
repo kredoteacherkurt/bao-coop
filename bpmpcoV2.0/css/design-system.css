@@ -1,17 +1,112 @@
 /* design-system.css */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
-:root {--primary:#0F6F50; --primary-light:#16A075; --secondary:#D4AF37; --bg-color:#F8FAF9; --bg-alt:#FFFFFF; --text-main:#1A202C; --text-muted:#718096; --nav-bg:rgba(255, 255, 255, 0.85); --max-width:1200px; --section-padding:6rem 2rem; --glass-bg:rgba(255, 255, 255, 0.7); --glass-border:1px solid rgba(255, 255, 255, 0.5); --shadow-sm:0 4px 6px -1px rgba(0, 0, 0, 0.05); --shadow-md:0 10px 15px -3px rgba(0, 0, 0, 0.1); --shadow-lg:0 20px 25px -5px rgba(0, 0, 0, 0.15); --radius-sm:8px; --radius-md:16px; --radius-lg:24px; --radius-full:9999px; --font-family:'Outfit', sans-serif;}
-@media (prefers-color-scheme: dark) {
-:root {--bg-color:#0B1110; --bg-alt:#131E1B; --text-main:#F7FAFC; --text-muted:#A0AEC0; --nav-bg:rgba(11, 17, 16, 0.75); --glass-bg:rgba(30, 45, 42, 0.6); --glass-border:1px solid rgba(255, 255, 255, 0.1);}
+
+:root {
+  /* — New Color Palette — */
+  --primary:        #002060;        /* Deep navy (was green) */
+  --primary-light:  #003080;        /* Slightly lighter navy */
+  --secondary:      #b30000;        /* Deep red */
+  --accent:         #d32f2f;        /* Bright red */
+
+  /* — Surfaces & Text (light mode) — */
+  --bg-color:       #f0f4f8;        /* Your --light */
+  --bg-alt:         #FFFFFF;
+  --text-main:      #1a1a1a;        /* Your --dark */
+  --text-muted:     #5a6a7a;
+
+  /* — Glass / Nav — */
+  --nav-bg:         rgba(255, 255, 255, 0.85);
+  --glass-bg:       rgba(255, 255, 255, 0.7);
+  --glass-border:   1px solid rgba(255, 255, 255, 0.5);
+
+  /* — Shadows, Radii, etc. (unchanged) — */
+  --max-width:      1200px;
+  --section-padding:6rem 2rem;
+  --shadow-sm:      0 4px 6px -1px rgba(0, 0, 32, 0.08);
+  --shadow-md:      0 10px 15px -3px rgba(0, 0, 32, 0.12);
+  --shadow-lg:      0 20px 25px -5px rgba(0, 0, 32, 0.18);
+  --radius-sm:      8px;
+  --radius-md:      16px;
+  --radius-lg:      24px;
+  --radius-full:    9999px;
+  --font-family:    'Outfit', sans-serif;
 }
-* {margin:0; padding:0; box-sizing:border-box;}
-body {font-family:var(--font-family); background-color:var(--bg-color); color:var(--text-main); line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; transition:background-color 0.3s ease, color 0.3s ease;}
-h1, h2, h3, h4, h5, h6 {font-weight:700; line-height:1.2; margin-bottom:1rem;}
-a {color:inherit; text-decoration:none; transition:color 0.3s ease;}
-.glass {background:var(--glass-bg); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border:var(--glass-border); box-shadow:var(--shadow-md); border-radius:var(--radius-md);}
-.btn {display:inline-flex; align-items:center; justify-content:center; padding:0.8rem 1.8rem; border-radius:var(--radius-full); font-weight:600; cursor:pointer; transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border:none; font-size:1rem;}
-.btn-primary {background:linear-gradient(135deg, var(--primary), var(--primary-light)); color:#fff; box-shadow:var(--shadow-sm);}
-.btn-primary:hover {transform:translateY(-2px); box-shadow:var(--shadow-md);}
-.btn-secondary {background:transparent; color:var(--text-main); border:2px solid var(--text-main);}
-.btn-secondary:hover {background:var(--text-main); color:var(--bg-color);}
-.title-gradient {background:linear-gradient(to right, var(--primary-light), var(--secondary)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+
+/* — Dark Mode — */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color:     #0d1117;
+    --bg-alt:       #161b22;
+    --text-main:    #F7FAFC;
+    --text-muted:   #A0AEC0;
+    --nav-bg:       rgba(13, 17, 23, 0.75);
+    --glass-bg:     rgba(0, 32, 96, 0.35);   /* navy tint */
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* — Reset & Base (unchanged) — */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
+a { color: inherit; text-decoration: none; transition: color 0.3s ease; }
+
+/* — Components — */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: var(--glass-border);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-md);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  font-size: 1rem;
+}
+
+/* Navy → Red gradient to tie both brand colors together */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-main);
+  border: 2px solid var(--primary);
+}
+.btn-secondary:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Navy → Red gradient title */
+.title-gradient {
+  background: linear-gradient(to right, var(--primary-light), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

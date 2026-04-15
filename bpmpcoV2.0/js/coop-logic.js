@@ -153,16 +153,28 @@ const setText = (id, val) => { if(document.getElementById(id)) document.getEleme
 setText('hero-tagline-display', data.tagline);
 setText('about-text-display', data.aboutText);
 setText('assets-display', data.assets);
-// Inject Video (Only if ID exists)
-const vidSrc = document.getElementById('promo-video-src');
-const vidPlayer = document.getElementById('promo-video');
-if (vidSrc && data.videoFile) {
-const fullPath = "assets/mp4/" + data.videoFile;
-// Only reload if source changed to prevent flickering
-if (!vidSrc.src.includes(fullPath)) {
-vidSrc.src = fullPath;
-vidPlayer.load();
-}
+// Inject Embedded YouTube Video directly into the wrapper
+const videoWrapper = document.getElementById('promo-video-wrapper');
+if (videoWrapper) {
+  if (data.videoUrl) {
+    let ytUrl = data.videoUrl;
+    
+    // If admin pasted a full <iframe> embed code, place it directly in the wrapper
+    if (ytUrl.includes("<iframe")) {
+      // Add responsive inline styles to the pasted iframe so it fits our 16:9 container
+      ytUrl = ytUrl.replace("<iframe", '<iframe style="width:100%;height:100%;border:0;"');
+      videoWrapper.innerHTML = ytUrl;
+    } else {
+      // If it's just a raw link, convert to embed format and generate our own iframe
+      if (ytUrl.includes("watch?v=")) ytUrl = ytUrl.replace("watch?v=", "embed/").split("&")[0];
+      if (ytUrl.includes("youtu.be/")) ytUrl = ytUrl.replace("youtu.be/", "youtube.com/embed/").split("?")[0];
+      
+      videoWrapper.innerHTML = `<iframe src="${ytUrl}" title="Pre-Membership Education Seminar" style="width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    }
+  } else if (data.videoFile) {
+    // Fallback to local video file
+    videoWrapper.innerHTML = `<iframe src="assets/mp4/${data.videoFile}" title="Pre-Membership Education Seminar" style="width:100%;height:100%;border:0" allowfullscreen></iframe>`;
+  }
 }
 }
 // ==========================================
@@ -372,7 +384,8 @@ if(cmsForm) {
 cmsForm.addEventListener('submit', (e) => {
 e.preventDefault();
 const tagline = document.getElementById('cms-tagline').value;
-const assets = document.getElementById('cms-assets').value;
+const assetsEl = document.getElementById('cms-assets');
+const assets = assetsEl ? assetsEl.value : JSON.parse(localStorage.getItem('siteContent')).assets;
 const aboutText = document.getElementById('cms-about').value;
 // Video File Upload Logic (Fake Local Storage mapping for mockup)
 const videoInput = document.getElementById('cms-video');
@@ -380,7 +393,9 @@ let videoFileName = JSON.parse(localStorage.getItem('siteContent')).videoFile; /
 if(videoInput && videoInput.files.length > 0) {
 videoFileName = videoInput.files[0].name;
 }
-const content = { tagline, assets, aboutText, videoFile: videoFileName };
+const videoUrlEl = document.getElementById('cms-video-url');
+const videoUrl = videoUrlEl ? videoUrlEl.value.trim() : (JSON.parse(localStorage.getItem('siteContent')).videoUrl || '');
+const content = { tagline, assets, aboutText, videoFile: videoFileName, videoUrl: videoUrl };
 localStorage.setItem('siteContent', JSON.stringify(content));
 alert("Website Updated! Check index.html.");
 loadCMSValues();
@@ -392,6 +407,7 @@ const data = JSON.parse(localStorage.getItem('siteContent'));
 if(document.getElementById('cms-tagline')) document.getElementById('cms-tagline').value = data.tagline;
 if(document.getElementById('cms-assets')) document.getElementById('cms-assets').value = data.assets;
 if(document.getElementById('cms-about')) document.getElementById('cms-about').value = data.aboutText;
+if(document.getElementById('cms-video-url')) document.getElementById('cms-video-url').value = data.videoUrl || '';
 // We do not restore .value to an input type="file" since it violates browser security!
 }
 function renderAdminUserTable() {

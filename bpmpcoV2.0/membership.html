@@ -92,6 +92,14 @@
 <option>Above ₱50,000</option>
 </select>
 </div>
+<div class=form-group>
+<label>Create Password</label>
+<input type=password id=memberPassword placeholder="Create a password" required minlength=6>
+</div>
+<div class=form-group>
+<label>Confirm Password</label>
+<input type=password id=memberPasswordConfirm placeholder="Confirm your password" required minlength=6>
+</div>
 </div>
 <div class=form-step id=step3>
 <h2 class=title-gradient>Final Review</h2>
@@ -120,6 +128,26 @@
 </div>
 </div>
 <script>const form=document.getElementById('membershipForm');const steps=document.querySelectorAll('.form-step');const dots=document.querySelectorAll('.step-dot');const nextBtn=document.getElementById('nextBtn');const prevBtn=document.getElementById('prevBtn');const submitBtn=document.getElementById('submitBtn');let currentStep=0;function updateStep(){steps.forEach((step,index)=>{step.classList.toggle('active',index===currentStep);});dots.forEach((dot,index)=>{dot.classList.toggle('active',index===currentStep);});prevBtn.style.visibility=currentStep===0?'hidden':'visible';if(currentStep===steps.length-1){nextBtn.style.display='none';submitBtn.style.display='block';}else{nextBtn.style.display='block';submitBtn.style.display='none';}}
-nextBtn.addEventListener('click',()=>{if(currentStep<steps.length-1){currentStep++;updateStep();}});prevBtn.addEventListener('click',()=>{if(currentStep>0){currentStep--;updateStep();}});form.addEventListener('submit',(e)=>{e.preventDefault();alert('Application Submitted Successfully! Our team will contact you soon for the orientation.');window.location.href='index.html';});</script>
+nextBtn.addEventListener('click',()=>{
+  const inputs=steps[currentStep].querySelectorAll('input,select,textarea');
+  for(const el of inputs){
+    if(!el.checkValidity()){el.reportValidity();return;}
+  }
+  const pw=steps[currentStep].querySelector('#memberPassword');
+  const pw2=steps[currentStep].querySelector('#memberPasswordConfirm');
+  if(pw&&pw2&&pw.value!==pw2.value){alert('Passwords do not match.');return;}
+  if(currentStep<steps.length-1){currentStep++;updateStep();}
+});prevBtn.addEventListener('click',()=>{if(currentStep>0){currentStep--;updateStep();}});form.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  const name=document.querySelector('#step1 input[type=text]').value.trim();
+  const email=document.querySelector('#step2 input[type=email]').value.trim();
+  const password=document.getElementById('memberPassword').value;
+  const users=JSON.parse(localStorage.getItem('userDatabase'))||[];
+  if(users.find(u=>u.email===email)){alert('This email is already registered.');return;}
+  users.push({name,email,password,dateJoined:new Date().toLocaleDateString()});
+  localStorage.setItem('userDatabase',JSON.stringify(users));
+  alert('Application Submitted! You can now log in with your email and password.');
+  window.location.href='login.html';
+});</script>
 </body>
 </html>
