@@ -1,152 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=en>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Baao Coop Portal</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <style>
-        body {
-            background-image: linear-gradient(rgba(11, 17, 16, 0.7), rgba(11, 17, 16, 0.7)), url('assets/images/hero-bg.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .login-container {
-            width: 100%;
-            max-width: 450px;
-            padding: 3rem;
-            text-align: center;
-            position: relative;
-            z-index: 10;
-        }
-
-        .login-logo {
-            margin-bottom: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo-icon-large {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-            font-weight: 800;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text-main);
-        }
-
-        .login-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-        }
-
-        .forgot-password {
-            color: var(--primary-light);
-            font-weight: 500;
-            text-decoration: none;
-        }
-
-        .forgot-password:hover {
-            text-decoration: underline;
-        }
-
-        .signup-prompt {
-            margin-top: 2rem;
-            font-size: 0.95rem;
-        }
-
-        .signup-prompt a {
-            color: var(--primary-light);
-            font-weight: 600;
-        }
-
-        .back-home {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 500;
-            text-decoration: none;
-        }
-
-        .back-home:hover {
-            color: var(--primary-light);
-        }
-    </style>
-    <link rel="icon" href="assets/images/logo.png" type="image/png">
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<title>Login | Baao Coop Portal</title>
+<link rel=stylesheet href=css/styles.css>
+<style>body{background-image:linear-gradient(rgba(11,17,16,0.7),rgba(11,17,16,0.7)),url('assets/images/hero-bg.png');background-size:cover;background-position:center;background-attachment:fixed;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}.login-container{width:100%;max-width:450px;padding:3rem;text-align:center;position:relative;z-index:10}.login-logo{margin-bottom:2rem;display:flex;flex-direction:column;align-items:center;gap:1rem}.logo-icon-large{width:60px;height:60px;background:linear-gradient(135deg,var(--primary),var(--primary-light));border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:white;font-size:2rem;font-weight:800}.form-group{margin-bottom:1.5rem;text-align:left}.form-group label{display:block;margin-bottom:.5rem;font-weight:500;color:var(--text-main)}.login-options{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;font-size:.9rem}.forgot-password{color:var(--primary-light);font-weight:500;text-decoration:none}.forgot-password:hover{text-decoration:underline}.signup-prompt{margin-top:2rem;font-size:.95rem}.signup-prompt a{color:var(--primary-light);font-weight:600}.back-home{position:absolute;top:2rem;left:2rem;color:white;display:flex;align-items:center;gap:.5rem;font-weight:500;text-decoration:none}.back-home:hover{color:var(--primary-light)}</style>
+<link rel=icon href=assets/images/logo.png type=image/png>
 </head>
 <body>
-
-    <a href="index.html" class="back-home">
-        ← Back to Home
-    </a>
-
-    <div class="login-container glass fade-up visible">
-        <div class="login-logo">
-            <img src="assets/images/logo.png" alt="Baao Coop Logo" style="height:60px;width:60px;border-radius:var(--radius-md);object-fit:cover;">
-            <h2 class="title-gradient">Member Portal</h2>
-        </div>
-
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="emailInput">Member Email</label>
-                <input type="text" id="emailInput" placeholder="Enter your email" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="passwordInput">Password</label>
-                <input type="password" id="passwordInput" placeholder="Enter your password" required>
-            </div>
-
-            <div class="login-options">
-                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; color: var(--text-main); font-weight: 500;">
-                    <input type="checkbox"> Remember me
-                </label>
-            </div>
-
-            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1.1rem;">
-                Sign In
-            </button>
-        </form>
-
-        <div class="signup-prompt">
-            Not a member yet? <a href="signup.html">Create an Account</a>
-        </div>
-    </div>
-
-    <!-- Modals require font-awesome for some icons if ported, but core logic handles basic alerts -->
-    <script src="js/main.js"></script>
-    <script src="js/coop-logic.js"></script>
+<a href=index.html class=back-home>
+← Back to Home
+</a>
+<div class="login-container glass fade-up visible">
+<div class=login-logo>
+<img src=assets/images/logo.png alt="Baao Coop Logo" style=height:60px;width:60px;border-radius:var(--radius-md);object-fit:cover>
+<h2 class=title-gradient>Member Portal</h2>
+</div>
+<form id=loginForm>
+<div class=form-group>
+<label for=emailInput>Member Email</label>
+<input type=text id=emailInput placeholder="Enter your email" required>
+</div>
+<div class=form-group>
+<label for=passwordInput>Password</label>
+<input type=password id=passwordInput placeholder="Enter your password" required>
+</div>
+<div class=login-options>
+<label style=display:flex;align-items:center;gap:.5rem;cursor:pointer;color:var(--text-main);font-weight:500>
+<input type=checkbox> Remember me
+</label>
+</div>
+<button type=submit class="btn btn-primary" style=width:100%;padding:1rem;font-size:1.1rem>
+Sign In
+</button>
+</form>
+<div class=signup-prompt>
+Not a member yet? <a href=signup.html>Create an Account</a>
+</div>
+</div>
+<script src=js/main.js></script>
+<script src=js/coop-logic.js></script>
 </body>
 </html>
