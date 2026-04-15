@@ -199,6 +199,7 @@ header {
 
 input[type="email"],
 input[type="text"],
+input[type="password"],
 textarea {
   width: 100%;
   padding: 1rem 1.5rem;
@@ -263,3 +264,49 @@ footer {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* =========================================
+   Hero Text Override (dark background)
+   ========================================= */
+.hero h1, .hero p {
+  color: #fff;
+}
+
+.hero p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* =========================================
+   Global Custom Modal (shared by all pages)
+   ========================================= */
+.custom-modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6); z-index: 9999;
+  display: flex; justify-content: center; align-items: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  backdrop-filter: blur(6px);
+}
+.custom-modal-overlay.active {
+  opacity: 1; pointer-events: auto;
+}
+.custom-modal-box {
+  background: var(--bg-alt); padding: 2rem; border-radius: var(--radius-md);
+  width: 90%; max-width: 420px; box-shadow: var(--shadow-lg);
+  text-align: center; transform: translateY(-20px); transition: transform 0.3s;
+  border-top: 4px solid var(--primary);
+}
+.custom-modal-overlay.active .custom-modal-box { transform: translateY(0); }
+.custom-modal-box h3 { margin-bottom: 1rem; color: var(--primary); }
+.custom-modal-box p  { margin-bottom: 1rem; color: var(--text-muted); font-size: 0.95rem; }
+.custom-modal-actions { display: flex; justify-content: center; gap: 0.75rem; }
+.custom-modal-btn { padding: 0.6rem 1.4rem; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; transition: 0.2s; }
+.custom-modal-btn-primary { background: var(--primary); color: white; }
+.custom-modal-btn-primary:hover { background: var(--primary-light); }
+.custom-modal-btn-cancel { background: #e5e7eb; color: #374151; }
+.custom-modal-btn-cancel:hover { background: #d1d5db; }
+.custom-modal-box.wide { max-width: 600px; text-align: left; max-height: 80vh; overflow-y: auto; }
+
+/* =========================================
+   Table hover row effect (shared)
+   ========================================= */
+tr:hover td { background: rgba(22, 160, 117, 0.04); }
