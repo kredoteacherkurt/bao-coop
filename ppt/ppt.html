@@ -1,474 +1,281 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang=en>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Baao Coop Web Portal Presentation</title>
-
-    <!-- Reveal.js CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reset.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/theme/simple.min.css"
-        id="theme">
-
-    <!-- Google Fonts & Font Awesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        /* Baao Coop Custom Theme */
-        :root {
-            --baao-blue: #0f3d8a;
-            --baao-light-blue: #3b82f6;
-            --baao-accent: #f59e0b;
-        }
-
-        .reveal {
-            font-family: 'Inter', sans-serif;
-        }
-
-        .reveal h1,
-        .reveal h2,
-        .reveal h3,
-        .reveal h4 {
-            font-family: 'Inter', sans-serif;
-            text-transform: none;
-            font-weight: 800;
-            color: var(--baao-blue);
-            letter-spacing: -0.02em;
-            margin-bottom: 15px;
-            margin-top: 0;
-        }
-
-        /* Slide text alignment */
-        .reveal .slides section {
-            text-align: left;
-            max-height: 100%;
-            overflow-y: auto;
-            overflow-x: hidden;
-            scrollbar-width: thin;
-            scrollbar-color: var(--baao-light-blue) transparent;
-        }
-        
-        .reveal .slides section::-webkit-scrollbar {
-            width: 6px;
-        }
-        .reveal .slides section::-webkit-scrollbar-thumb {
-            background-color: var(--baao-light-blue);
-            border-radius: 10px;
-        }
-
-        .reveal .slides section.center-slide {
-            text-align: center;
-        }
-
-        /* Hero / Blue Background Slides */
-        .reveal .slides section.hero-slide {
-            background: linear-gradient(135deg, var(--baao-blue), #1e40af);
-            color: white;
-        }
-
-        .reveal .slides section.hero-slide h1,
-        .reveal .slides section.hero-slide h2,
-        .reveal .slides section.hero-slide h3,
-        .reveal .slides section.hero-slide p {
-            color: white;
-        }
-
-        /* Visual Placeholders (where screenshots will go) */
-        .visual-box {
-            background: #f8fafc;
-            border: 2px dashed #cbd5e1;
-            border-radius: 12px;
-            padding: 15px; /* Reduced from 30px */
-            text-align: center;
-            color: #64748b;
-            font-size: 0.8em;
-            margin-bottom: 15px; /* Reduced from 30px */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 120px; /* Reduced from 200px */
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .visual-box i {
-            font-size: 2em;
-            color: var(--baao-light-blue);
-            margin-bottom: 10px;
-        }
-
-        /* List styling */
-        .reveal ul {
-            display: block;
-            margin-left: 1.5em;
-        }
-
-        .reveal li {
-            margin-bottom: 0.3em;
-            font-size: 0.85em;
-            color: #334155;
-        }
-
-        .hero-slide li {
-            color: #e2e8f0;
-        }
-
-        /* Part Headers */
-        .part-badge {
-            display: inline-block;
-            background: var(--baao-light-blue);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.4em;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 10px; /* Reduced from 20px */
-        }
-
-        /* Highlight text */
-        .highlight {
-            color: var(--baao-light-blue);
-            font-weight: 600;
-        }
-
-        /* Footer hints */
-        .controls-hint {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            font-size: 14px;
-            color: #94a3b8;
-            font-family: 'Inter', sans-serif;
-            z-index: 1000;
-        }
-    </style>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Baao Coop Web Portal Presentation</title>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reset.min.css>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.min.css>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/theme/simple.min.css id=theme>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel=stylesheet>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css>
+<style>:root{--baao-blue:#0f3d8a;--baao-light-blue:#3b82f6;--baao-accent:#f59e0b}.reveal{font-family:'Inter',sans-serif}.reveal h1,.reveal h2,.reveal h3,.reveal h4{font-family:'Inter',sans-serif;text-transform:none;font-weight:800;color:var(--baao-blue);letter-spacing:-0.02em;margin-bottom:15px;margin-top:0}.reveal .slides section{text-align:left;max-height:100%;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--baao-light-blue) transparent}.reveal .slides section::-webkit-scrollbar{width:6px}.reveal .slides section::-webkit-scrollbar-thumb{background-color:var(--baao-light-blue);border-radius:10px}.reveal .slides section.center-slide{text-align:center}.reveal .slides section.hero-slide{background:linear-gradient(135deg,var(--baao-blue),#1e40af);color:white}.reveal .slides section.hero-slide h1,.reveal .slides section.hero-slide h2,.reveal .slides section.hero-slide h3,.reveal .slides section.hero-slide p{color:white}.visual-box{background:#f8fafc;border:2px dashed #cbd5e1;border-radius:12px;padding:15px;text-align:center;color:#64748b;font-size:.8em;margin-bottom:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;box-shadow:inset 0 2px 4px rgba(0,0,0,0.05)}.visual-box i{font-size:2em;color:var(--baao-light-blue);margin-bottom:10px}.reveal ul{display:block;margin-left:1.5em}.reveal li{margin-bottom:.3em;font-size:.85em;color:#334155}.hero-slide li{color:#e2e8f0}.part-badge{display:inline-block;background:var(--baao-light-blue);color:white;padding:5px 15px;border-radius:20px;font-size:.4em;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}.highlight{color:var(--baao-light-blue);font-weight:600}.controls-hint{position:fixed;bottom:20px;left:20px;font-size:14px;color:#94a3b8;font-family:'Inter',sans-serif;z-index:1000}</style>
 </head>
-
 <body>
-
-    <div class="controls-hint">
-        <i class="fas fa-keyboard"></i> Press <strong>Space</strong> to advance &bull; Press <strong>S</strong> for
-        Speaker Notes
-    </div>
-
-    <div class="reveal">
-        <div class="slides">
-
-            <!-- PART 1: INTRODUCTION & BRAND AESTHETIC -->
-
-            <!-- Slide 1 -->
-            <section class="hero-slide center-slide">
-                <div
-                    style="background: white; padding: 20px; border-radius: 50%; width: 120px; height: 120px; margin: 0 auto 30px; display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-hands-holding-circle fa-4x" style="color: var(--baao-blue);"></i>
-                </div>
-                <h1>Baao Coop Web Portal</h1>
-                <h3>Modernizing Cooperative Services</h3>
-                <p style="opacity: 0.8; font-size: 0.6em; margin-top: 40px;">Part 1: Introduction & Brand Aesthetic</p>
-
-                <aside class="notes">
-                    SPEAKER NOTES: Introduce the project goal: digitizing the cooperative sector to establish trust,
-                    transparency, and ease of access for members.
-                </aside>
-            </section>
-
-            <!-- Slide 2 -->
-            <section>
-                <div class="part-badge">Part 1: Introduction</div>
-                <h2>About Baao Coop</h2>
-                <div class="visual-box">
-                    <i class="fas fa-landmark"></i>
-                    <strong>Visual:</strong> Screenshot of the homepage "About Us" section with the dynamically managed
-                    "Large Cooperative Category" text and heritage history.
-                </div>
-                <ul>
-                    <li><span class="highlight">Heritage:</span> Established August 26, 1963.</li>
-                    <li><span class="highlight">Evolution:</span> Progressing into modern web infrastructure.</li>
-                    <li><span class="highlight">Scale:</span> Officially recognized as a Large Cooperative Category.
-                    </li>
-                </ul>
-                <aside class="notes">
-                    SPEAKER NOTES: Mention the importance of showcasing organizational roots combined with
-                    forward-thinking tech. We are honoring the past while building for the future.
-                </aside>
-            </section>
-
-            <!-- Slide 3 -->
-            <section>
-                <div class="part-badge">Part 1: Introduction</div>
-                <h2>Homepage Overview</h2>
-                <p style="font-size: 0.7em; color: #64748b;">The Public Gateway</p>
-                <div class="visual-box">
-                    <i class="fas fa-laptop-house"></i>
-                    <strong>Visual:</strong> A full-page high-fidelity screenshot of index.html.
-                </div>
-                <ul>
-                    <li>Dynamic Hero Banner for immediate impact.</li>
-                    <li>Embedded Video Promotions seamlessly integrated.</li>
-                    <li>Core messaging: <span class="highlight">"baaocoop... truly cares!"</span></li>
-                </ul>
-                <aside class="notes">
-                    SPEAKER NOTES: Emphasize that the homepage content is driven dynamically by the Admin CMS, ensuring
-                    marketing agility without touching code.
-                </aside>
-            </section>
-
-            <!-- PART 2: THE MEMBER JOURNEY -->
-
-            <!-- Slide 4 -->
-            <section>
-                <div class="part-badge" style="background: var(--baao-blue);">Part 2: The Member Journey</div>
-                <h2>Frictionless Onboarding</h2>
-                <div style="display: flex; gap: 20px;">
-                    <div class="visual-box" style="flex: 1; min-height: 150px;">
-                        <i class="fas fa-user-plus"></i>
-                        <strong>signup.html</strong>
-                    </div>
-                    <div class="visual-box" style="flex: 1; min-height: 150px;">
-                        <i class="fas fa-sign-in-alt"></i>
-                        <strong>login.html</strong>
-                    </div>
-                </div>
-                <ul>
-                    <li><strong>Secure Authentication:</strong> Industry-standard credential protection.</li>
-                    <li><strong>Intuitive Workflows:</strong> Step-by-step guidance preventing drop-off.</li>
-                    <li><strong>Role-Based Access:</strong> Strict separation of member vs. admin states.</li>
-                </ul>
-                <aside class="notes">
-                    SPEAKER NOTES: Walk through how a user easily creates an account and logs into their strictly scoped
-                    "Member Portal" safely. Emphasize the ease of use.
-                </aside>
-            </section>
-
-            <!-- Slide 5 -->
-            <section>
-                <div class="part-badge" style="background: var(--baao-blue);">Part 2: The Member Journey</div>
-                <h2>The Member Dashboard</h2>
-                <div class="visual-box">
-                    <i class="fas fa-chart-pie"></i>
-                    <strong>Visual:</strong> Screenshot of members.html fully loaded. Highlighting Total Savings and
-                    Active Loans widgets.
-                </div>
-                <ul>
-                    <li><strong>Real-Time Balances:</strong> Immediate visibility into financial standing.</li>
-                    <li><strong>Automated Bulletins:</strong> Centralized communication for coop updates.</li>
-                    <li><strong>One-Stop Service Application:</strong> Apply for products without leaving the dashboard.
-                    </li>
-                </ul>
-                <aside class="notes">
-                    SPEAKER NOTES: Highlight the unified dashboard that keeps members informed of their financial status
-                    and cooperative announcements exactly when they log in. No more calling the office for basic
-                    balances.
-                </aside>
-            </section>
-
-            <!-- Slide 6 -->
-            <section>
-                <div class="part-badge" style="background: var(--baao-blue);">Part 2: The Member Journey</div>
-                <h2>Submitting an Application</h2>
-                <div class="visual-box">
-                    <i class="fas fa-calculator"></i>
-                    <strong>Visual:</strong> Sequence/GIF showing Category dropdown selecting "Apply for Loan" ->
-                    updating product list -> rendering dynamic Loan Simulator.
-                </div>
-                <ul>
-                    <li><span class="highlight">Interactive Loan Calculator:</span> Members model their financial future
-                        instantly.</li>
-                    <li><span class="highlight">Live Monthly Amortization Estimates:</span> Fully transparent cost
-                        projections.</li>
-                    <li><span class="highlight">Dynamic Form Rendering:</span> Context-aware fields based on selection.
-                    </li>
-                </ul>
-                <aside class="notes">
-                    SPEAKER NOTES: Detail the smart routing: applying for a loan requires uploading a valid PDF document
-                    (strictly enforced), whereas depositing savings avoids unnecessary file prompts. It’s an intelligent
-                    form.
-                </aside>
-            </section>
-
-            <!-- Slide 7 -->
-            <section>
-                <div class="part-badge" style="background: var(--baao-blue);">Part 2: The Member Journey</div>
-                <h2>Security & Consents</h2>
-                <div class="visual-box">
-                    <i class="fas fa-shield-halved"></i>
-                    <strong>Visual:</strong> A zoomed-in graphic of the Terms & Conditions Custom Modal popup.
-                </div>
-                <ul>
-                    <li><strong>Protected Consents:</strong> Explicit user agreements logged securely.</li>
-                    <li><strong>Data Privacy Act Compliance:</strong> Adhering to strict local and national standards.
-                    </li>
-                    <li><strong>Modern Modal Overlays:</strong> Clean, non-blocking UI interactions.</li>
-                </ul>
-                <aside class="notes">
-                    SPEAKER NOTES: Explain the transition away from generic browser alerts to a modern, branded modal
-                    system that ensures critical legal terms are read securely without blocking the browser thread.
-                </aside>
-            </section>
-
-            <!-- PART 3: THE ADMIN COMMAND CENTER -->
-
-            <!-- Slide 8 -->
-            <section>
-                <div class="part-badge" style="background: var(--baao-accent); color: #000;">Part 3: Admin Command
-                    Center</div>
-                <h2>Secure Admin Login</h2>
-                <div class="visual-box" style="border-color: var(--baao-accent);">
-                    <i class="fas fa-user-shield" style="color: var(--baao-accent);"></i>
-                    <strong>Visual:</strong> Mockup of an Admin logging into the system successfully, highlighting
-                    role-validation logic.
-                </div>
-                <ul>
-                    <li><span class="highlight">Global Controller:</span> Complete oversight of platform operations.
-                    </li>
-                    <li><span class="highlight">Secured Access:</span> Specifically scoped credentials (bpmpc@admin.me).
-                    </li>
-                    <li><span class="highlight">Data Integrity:</span> Walled garden preventing unauthorized mutations.
-                    </li>
-                </ul>
-                <aside class="notes">
-                    SPEAKER NOTES: Emphasize that standard users strictly cannot bypass routing or enter the backend
-                    admin environments. Security is enforced at the routing level.
-                </aside>
-            </section>
-
-            <!-- Slide 9 -->
-            <section>
-                <div class="part-badge" style="background: var(--baao-accent); color: #000;">Part 3: Admin Command
-                    Center</div>
-                <h2>Command Center Analytics</h2>
-                <div class="visual-box" style="border-color: var(--baao-accent);">
-                    <i class="fas fa-chart-line" style="color: var(--baao-accent);"></i>
-                    <strong>Visual:</strong> The top row of admin.html showing Pending Requests, Approved Volume, and
-                    Total Members widgets.
-                </div>
-                <ul>
-                    <li><strong>Real-Time Cooperative Telemetry:</strong> Live pulse on organizational health.</li>
-                    <li><strong>Actionable Metrics:</strong> Data structured for immediate decision-making.</li>
-                    <li><strong>Holistic View:</strong> Instantly track pending pipelines vs approved volumes.</li>
-                </ul>
-                <aside class="notes">
-                    SPEAKER NOTES: Showcase how management evaluates application pipeline throughput at a glance exactly
-                    as the data hits the database.
-                </aside>
-            </section>
-
-            <!-- Slide 10 -->
-            <section>
-                <div class="part-badge" style="background: var(--baao-accent); color: #000;">Part 3: Admin Command
-                    Center</div>
-                <h2>Dynamic CMS</h2>
-                <div class="visual-box" style="border-color: var(--baao-accent);">
-                    <i class="fas fa-pen-to-square" style="color: var(--baao-accent);"></i>
-                    <strong>Visual:</strong> Screenshot of the Website Content Editor within the Admin Dashboard.
-                </div>
-                <ul>
-                    <li><span class="highlight">No-Code Marketing Hub:</span> Update text and banners without IT
-                        intervention.</li>
-                    <li><span class="highlight">File Upload Integration:</span> Easily deploy new media and promotional
-                        files.</li>
-                    <li><span class="highlight">Instant Deployment:</span> Changes reflect immediately on the public
-                        portal.</li>
-                </ul>
-                <aside class="notes">
-                    SPEAKER NOTES: Demonstrate how an admin can actively change homepage taglines or upload a new
-                    promotional MP4 video file entirely through the UI which immediately deploys to the public.
-                </aside>
-            </section>
-
-            <!-- Slide 11 -->
-            <section>
-                <div class="part-badge" style="background: var(--baao-accent); color: #000;">Part 3: Admin Command
-                    Center</div>
-                <h2>Transaction Processing</h2>
-                <p style="font-size: 0.7em; color: #64748b;">Built-in PDF Viewer</p>
-                <div class="visual-box" style="border-color: var(--baao-accent);">
-                    <i class="fas fa-file-pdf" style="color: var(--baao-accent);"></i>
-                    <strong>Visual:</strong> Split view: Pending Transactions Table alongside the Sliding Document
-                    Viewer panel rendering an embedded PDF.
-                </div>
-                <ul>
-                    <li><strong>Built-In PDF Verification:</strong> Review documents without downloading them.</li>
-                    <li><strong>Safe Confirmations:</strong> Two-step approval prevents accidental authorizations.</li>
-                    <li><strong>Immutable History:</strong> Audit logs for all processed transactions.</li>
-                </ul>
-                <aside class="notes">
-                    SPEAKER NOTES: Show standard workflow: clicking "View PDF" slides out a secure review frame.
-                    Clicking "Approve" triggers a permanent action custom confirmation preventing accidental
-                    authorizations while safely managing local data quotas.
-                </aside>
-            </section>
-
-            <!-- PART 4: CONCLUSION -->
-
-            <!-- Slide 12 -->
-            <section class="hero-slide">
-                <div class="part-badge" style="background: rgba(255,255,255,0.2); color: white;">Part 4: Conclusion
-                </div>
-                <h2>Why This Architecture Excels</h2>
-                <div style="display: flex; justify-content: space-between; margin-top: 20px; text-align: center;">
-                    <div style="flex: 1;">
-                        <i class="fas fa-bolt fa-3x" style="color: var(--baao-accent); margin-bottom: 20px;"></i>
-                        <h4 style="color: white; font-size: 1.2em;">Lightning Fast</h4>
-                        <p style="font-size: 0.6em;">Vanilla JS Performance</p>
-                    </div>
-                    <div style="flex: 1;">
-                        <i class="fas fa-lock fa-3x" style="color: var(--baao-accent); margin-bottom: 20px;"></i>
-                        <h4 style="color: white; font-size: 1.2em;">Data Safe</h4>
-                        <p style="font-size: 0.6em;">Secure Input Sanitization</p>
-                    </div>
-                    <div class="fragment" style="flex: 1;">
-                        <i class="fas fa-mobile-screen fa-3x"
-                            style="color: var(--baao-accent); margin-bottom: 20px;"></i>
-                        <h4 style="color: white; font-size: 1.2em;">Responsive</h4>
-                        <p style="font-size: 0.6em;">Cross-device compatibility</p>
-                    </div>
-                </div>
-                <aside class="notes">
-                    SPEAKER NOTES: Wrap up by reassuring the audience of the focus on strong validations, restricted
-                    .pdf requirements, and memory management protecting browser resources. Emphasize that the mock
-                    LocalStorage setup perfectly demonstrates the zero-latency feel.
-                </aside>
-            </section>
-
-            <!-- Slide 13 -->
-            <section class="hero-slide center-slide">
-                <i class="fas fa-check-circle fa-5x" style="color: var(--baao-accent); margin-bottom: 30px;"></i>
-                <h1 style="font-size: 3em;">Thank You</h1>
-                <p style="font-size: 1.2em; margin-bottom: 40px;">Live Q&A / System Demo</p>
-                <div
-                    style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; display: inline-block;">
-                    <p style="margin: 0; font-size: 0.7em;"><i class="fas fa-envelope"></i> contact@baaocoop.com | <i
-                            class="fas fa-globe"></i> www.baaocoop.com</p>
-                </div>
-                <aside class="notes">
-                    SPEAKER NOTES: Seamlessly transition from PowerPoint directly to opening the web browser to play out
-                    the live member-to-admin approval loop you just described. "Now, let's look at the actual system..."
-                </aside>
-            </section>
-
-        </div>
-    </div>
-
-    <!-- Reveal.js Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/notes/notes.min.js"></script>
-    <script>
-        Reveal.initialize({
-            hash: true,
-            controls: true,
-            progress: true,
-            center: false,
-            slideNumber: 'c/t',
-            transition: 'slide', // none/fade/slide/convex/concave/zoom
-            plugins: [RevealNotes]
-        });
-    </script>
+<div class=controls-hint>
+<i class="fas fa-keyboard"></i> Press <strong>Space</strong> to advance &bull; Press <strong>S</strong> for
+Speaker Notes
+</div>
+<div class=reveal>
+<div class=slides>
+<section class="hero-slide center-slide">
+<div style="background:white;padding:20px;border-radius:50%;width:120px;height:120px;margin:0 auto 30px;display:flex;align-items:center;justify-content:center">
+<i class="fas fa-hands-holding-circle fa-4x" style=color:var(--baao-blue)></i>
+</div>
+<h1>Baao Coop Web Portal</h1>
+<h3>Modernizing Cooperative Services</h3>
+<p style=opacity:.8;font-size:.6em;margin-top:40px>Part 1: Introduction & Brand Aesthetic</p>
+<aside class=notes>
+SPEAKER NOTES: Introduce the project goal: digitizing the cooperative sector to establish trust,
+transparency, and ease of access for members.
+</aside>
+</section>
+<section>
+<div class=part-badge>Part 1: Introduction</div>
+<h2>About Baao Coop</h2>
+<div class=visual-box>
+<i class="fas fa-landmark"></i>
+<strong>Visual:</strong> Screenshot of the homepage "About Us" section with the dynamically managed
+"Large Cooperative Category" text and heritage history.
+</div>
+<ul>
+<li><span class=highlight>Heritage:</span> Established August 26, 1963.</li>
+<li><span class=highlight>Evolution:</span> Progressing into modern web infrastructure.</li>
+<li><span class=highlight>Scale:</span> Officially recognized as a Large Cooperative Category.
+</li>
+</ul>
+<aside class=notes>
+SPEAKER NOTES: Mention the importance of showcasing organizational roots combined with
+forward-thinking tech. We are honoring the past while building for the future.
+</aside>
+</section>
+<section>
+<div class=part-badge>Part 1: Introduction</div>
+<h2>Homepage Overview</h2>
+<p style=font-size:.7em;color:#64748b>The Public Gateway</p>
+<div class=visual-box>
+<i class="fas fa-laptop-house"></i>
+<strong>Visual:</strong> A full-page high-fidelity screenshot of index.html.
+</div>
+<ul>
+<li>Dynamic Hero Banner for immediate impact.</li>
+<li>Embedded Video Promotions seamlessly integrated.</li>
+<li>Core messaging: <span class=highlight>"baaocoop... truly cares!"</span></li>
+</ul>
+<aside class=notes>
+SPEAKER NOTES: Emphasize that the homepage content is driven dynamically by the Admin CMS, ensuring
+marketing agility without touching code.
+</aside>
+</section>
+<section>
+<div class=part-badge style=background:var(--baao-blue)>Part 2: The Member Journey</div>
+<h2>Frictionless Onboarding</h2>
+<div style=display:flex;gap:20px>
+<div class=visual-box style=flex:1;min-height:150px>
+<i class="fas fa-user-plus"></i>
+<strong>signup.html</strong>
+</div>
+<div class=visual-box style=flex:1;min-height:150px>
+<i class="fas fa-sign-in-alt"></i>
+<strong>login.html</strong>
+</div>
+</div>
+<ul>
+<li><strong>Secure Authentication:</strong> Industry-standard credential protection.</li>
+<li><strong>Intuitive Workflows:</strong> Step-by-step guidance preventing drop-off.</li>
+<li><strong>Role-Based Access:</strong> Strict separation of member vs. admin states.</li>
+</ul>
+<aside class=notes>
+SPEAKER NOTES: Walk through how a user easily creates an account and logs into their strictly scoped
+"Member Portal" safely. Emphasize the ease of use.
+</aside>
+</section>
+<section>
+<div class=part-badge style=background:var(--baao-blue)>Part 2: The Member Journey</div>
+<h2>The Member Dashboard</h2>
+<div class=visual-box>
+<i class="fas fa-chart-pie"></i>
+<strong>Visual:</strong> Screenshot of members.html fully loaded. Highlighting Total Savings and
+Active Loans widgets.
+</div>
+<ul>
+<li><strong>Real-Time Balances:</strong> Immediate visibility into financial standing.</li>
+<li><strong>Automated Bulletins:</strong> Centralized communication for coop updates.</li>
+<li><strong>One-Stop Service Application:</strong> Apply for products without leaving the dashboard.
+</li>
+</ul>
+<aside class=notes>
+SPEAKER NOTES: Highlight the unified dashboard that keeps members informed of their financial status
+and cooperative announcements exactly when they log in. No more calling the office for basic
+balances.
+</aside>
+</section>
+<section>
+<div class=part-badge style=background:var(--baao-blue)>Part 2: The Member Journey</div>
+<h2>Submitting an Application</h2>
+<div class=visual-box>
+<i class="fas fa-calculator"></i>
+<strong>Visual:</strong> Sequence/GIF showing Category dropdown selecting "Apply for Loan" ->
+updating product list -> rendering dynamic Loan Simulator.
+</div>
+<ul>
+<li><span class=highlight>Interactive Loan Calculator:</span> Members model their financial future
+instantly.</li>
+<li><span class=highlight>Live Monthly Amortization Estimates:</span> Fully transparent cost
+projections.</li>
+<li><span class=highlight>Dynamic Form Rendering:</span> Context-aware fields based on selection.
+</li>
+</ul>
+<aside class=notes>
+SPEAKER NOTES: Detail the smart routing: applying for a loan requires uploading a valid PDF document
+(strictly enforced), whereas depositing savings avoids unnecessary file prompts. It’s an intelligent
+form.
+</aside>
+</section>
+<section>
+<div class=part-badge style=background:var(--baao-blue)>Part 2: The Member Journey</div>
+<h2>Security & Consents</h2>
+<div class=visual-box>
+<i class="fas fa-shield-halved"></i>
+<strong>Visual:</strong> A zoomed-in graphic of the Terms & Conditions Custom Modal popup.
+</div>
+<ul>
+<li><strong>Protected Consents:</strong> Explicit user agreements logged securely.</li>
+<li><strong>Data Privacy Act Compliance:</strong> Adhering to strict local and national standards.
+</li>
+<li><strong>Modern Modal Overlays:</strong> Clean, non-blocking UI interactions.</li>
+</ul>
+<aside class=notes>
+SPEAKER NOTES: Explain the transition away from generic browser alerts to a modern, branded modal
+system that ensures critical legal terms are read securely without blocking the browser thread.
+</aside>
+</section>
+<section>
+<div class=part-badge style=background:var(--baao-accent);color:#000>Part 3: Admin Command
+Center</div>
+<h2>Secure Admin Login</h2>
+<div class=visual-box style=border-color:var(--baao-accent)>
+<i class="fas fa-user-shield" style=color:var(--baao-accent)></i>
+<strong>Visual:</strong> Mockup of an Admin logging into the system successfully, highlighting
+role-validation logic.
+</div>
+<ul>
+<li><span class=highlight>Global Controller:</span> Complete oversight of platform operations.
+</li>
+<li><span class=highlight>Secured Access:</span> Specifically scoped credentials (bpmpc@admin.me).
+</li>
+<li><span class=highlight>Data Integrity:</span> Walled garden preventing unauthorized mutations.
+</li>
+</ul>
+<aside class=notes>
+SPEAKER NOTES: Emphasize that standard users strictly cannot bypass routing or enter the backend
+admin environments. Security is enforced at the routing level.
+</aside>
+</section>
+<section>
+<div class=part-badge style=background:var(--baao-accent);color:#000>Part 3: Admin Command
+Center</div>
+<h2>Command Center Analytics</h2>
+<div class=visual-box style=border-color:var(--baao-accent)>
+<i class="fas fa-chart-line" style=color:var(--baao-accent)></i>
+<strong>Visual:</strong> The top row of admin.html showing Pending Requests, Approved Volume, and
+Total Members widgets.
+</div>
+<ul>
+<li><strong>Real-Time Cooperative Telemetry:</strong> Live pulse on organizational health.</li>
+<li><strong>Actionable Metrics:</strong> Data structured for immediate decision-making.</li>
+<li><strong>Holistic View:</strong> Instantly track pending pipelines vs approved volumes.</li>
+</ul>
+<aside class=notes>
+SPEAKER NOTES: Showcase how management evaluates application pipeline throughput at a glance exactly
+as the data hits the database.
+</aside>
+</section>
+<section>
+<div class=part-badge style=background:var(--baao-accent);color:#000>Part 3: Admin Command
+Center</div>
+<h2>Dynamic CMS</h2>
+<div class=visual-box style=border-color:var(--baao-accent)>
+<i class="fas fa-pen-to-square" style=color:var(--baao-accent)></i>
+<strong>Visual:</strong> Screenshot of the Website Content Editor within the Admin Dashboard.
+</div>
+<ul>
+<li><span class=highlight>No-Code Marketing Hub:</span> Update text and banners without IT
+intervention.</li>
+<li><span class=highlight>File Upload Integration:</span> Easily deploy new media and promotional
+files.</li>
+<li><span class=highlight>Instant Deployment:</span> Changes reflect immediately on the public
+portal.</li>
+</ul>
+<aside class=notes>
+SPEAKER NOTES: Demonstrate how an admin can actively change homepage taglines or upload a new
+promotional MP4 video file entirely through the UI which immediately deploys to the public.
+</aside>
+</section>
+<section>
+<div class=part-badge style=background:var(--baao-accent);color:#000>Part 3: Admin Command
+Center</div>
+<h2>Transaction Processing</h2>
+<p style=font-size:.7em;color:#64748b>Built-in PDF Viewer</p>
+<div class=visual-box style=border-color:var(--baao-accent)>
+<i class="fas fa-file-pdf" style=color:var(--baao-accent)></i>
+<strong>Visual:</strong> Split view: Pending Transactions Table alongside the Sliding Document
+Viewer panel rendering an embedded PDF.
+</div>
+<ul>
+<li><strong>Built-In PDF Verification:</strong> Review documents without downloading them.</li>
+<li><strong>Safe Confirmations:</strong> Two-step approval prevents accidental authorizations.</li>
+<li><strong>Immutable History:</strong> Audit logs for all processed transactions.</li>
+</ul>
+<aside class=notes>
+SPEAKER NOTES: Show standard workflow: clicking "View PDF" slides out a secure review frame.
+Clicking "Approve" triggers a permanent action custom confirmation preventing accidental
+authorizations while safely managing local data quotas.
+</aside>
+</section>
+<section class=hero-slide>
+<div class=part-badge style=background:rgba(255,255,255,0.2);color:white>Part 4: Conclusion
+</div>
+<h2>Why This Architecture Excels</h2>
+<div style=display:flex;justify-content:space-between;margin-top:20px;text-align:center>
+<div style=flex:1>
+<i class="fas fa-bolt fa-3x" style=color:var(--baao-accent);margin-bottom:20px></i>
+<h4 style=color:white;font-size:1.2em>Lightning Fast</h4>
+<p style=font-size:.6em>Vanilla JS Performance</p>
+</div>
+<div style=flex:1>
+<i class="fas fa-lock fa-3x" style=color:var(--baao-accent);margin-bottom:20px></i>
+<h4 style=color:white;font-size:1.2em>Data Safe</h4>
+<p style=font-size:.6em>Secure Input Sanitization</p>
+</div>
+<div class=fragment style=flex:1>
+<i class="fas fa-mobile-screen fa-3x" style=color:var(--baao-accent);margin-bottom:20px></i>
+<h4 style=color:white;font-size:1.2em>Responsive</h4>
+<p style=font-size:.6em>Cross-device compatibility</p>
+</div>
+</div>
+<aside class=notes>
+SPEAKER NOTES: Wrap up by reassuring the audience of the focus on strong validations, restricted
+.pdf requirements, and memory management protecting browser resources. Emphasize that the mock
+LocalStorage setup perfectly demonstrates the zero-latency feel.
+</aside>
+</section>
+<section class="hero-slide center-slide">
+<i class="fas fa-check-circle fa-5x" style=color:var(--baao-accent);margin-bottom:30px></i>
+<h1 style=font-size:3em>Thank You</h1>
+<p style=font-size:1.2em;margin-bottom:40px>Live Q&A / System Demo</p>
+<div style=background:rgba(255,255,255,0.1);padding:15px;border-radius:8px;display:inline-block>
+<p style=margin:0;font-size:.7em><i class="fas fa-envelope"></i> contact@baaocoop.com | <i class="fas fa-globe"></i> www.baaocoop.com</p>
+</div>
+<aside class=notes>
+SPEAKER NOTES: Seamlessly transition from PowerPoint directly to opening the web browser to play out
+the live member-to-admin approval loop you just described. "Now, let's look at the actual system..."
+</aside>
+</section>
+</div>
+</div>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/notes/notes.min.js></script>
+<script>Reveal.initialize({hash:true,controls:true,progress:true,center:false,slideNumber:"c/t",transition:"slide",plugins:[RevealNotes]});</script>
 </body>
-
 </html>
