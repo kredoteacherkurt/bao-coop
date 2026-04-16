@@ -6,14 +6,15 @@
 <title>Baao Coop | Empowering Our Community Through Cooperation</title>
 <meta name=description content="Official website of Baao Parish Multi-Purpose Cooperative. Join us for better savings, loans, and community benefits.">
 <link rel=stylesheet href=css/styles.css>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css>
 <link rel=icon href=assets/images/logo.png type=image/png>
 </head>
 <body id="public-page">
+<div id="page-loader" class="page-loader"><div class="spinner"></div></div>
 <header>
 <div class="container nav-container">
 <a href=index.html class=logo>
-<img src=assets/images/logo.png alt="Baao Coop Logo" style=height:40px;width:40px;border-radius:var(--radius-sm);object-fit:cover>
-<span>Baao Coop</span>
+<span style="font-size: 1.2rem;">Baao Parish Multi-purpose Cooperative</span>
 </a>
 <nav>
 <ul class=nav-links>
@@ -33,7 +34,7 @@
 <section class=hero>
 <div class=hero-bg></div>
 <div class=container>
-<div class="hero-content fade-up visible">
+<div class="hero-content" id="hero-content-anim">
 <h1>Growth, <span class=title-gradient>Unity</span>, and Financial Prosperity.</h1>
 <p>Empowering the citizens of Baao through sustainable financial solutions and community-focused cooperation since 1990.</p>
 <div class=hero-actions>
@@ -46,7 +47,11 @@
 <section id=about class=fade-up>
 <div class=container>
 <div class=about-grid>
-<div class="about-image glass">
+<div class="about-carousel glass" id="about-carousel">
+<div class="carousel-slides" id="carousel-slides">
+<!-- JS injects images here -->
+</div>
+<div class="carousel-pills" id="carousel-pills"></div>
 </div>
 <div class=about-text>
 <h2 class=title-gradient>Our Legacy & Mission</h2>
@@ -61,19 +66,33 @@
 <h2 class=section-title>Premium <span class=title-gradient>Products & Services</span></h2>
 <div class=grid-cards>
 <div class="card glass">
-<div class=card-icon>💰</div>
-<h3>Savings Programs</h3>
-<p>High-interest regular savings and time deposits tailored to your goals.</p>
+<div class=card-icon><i class="fas fa-piggy-bank"></i></div>
+<h3>Savings Deposits</h3>
+<ul style="list-style-type:none;padding:0;color:var(--text-muted);display:flex;flex-direction:column;gap:0.75rem">
+<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Regular Savings</li>
+<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Time Deposit</li>
+<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Retirement Savings</li>
+<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Koop Alkansya (For Kids)</li>
+</ul>
 </div>
 <div class="card glass">
-<div class=card-icon>📉</div>
-<h3>Affordable Loans</h3>
-<p>Salary, educational, and business loans with the most competitive rates in the market.</p>
+<div class=card-icon><i class="fas fa-hand-holding-usd"></i></div>
+<h3>Loan Products</h3>
+<ul style="list-style-type:none;padding:0;color:var(--text-muted);display:flex;flex-direction:column;gap:0.75rem">
+<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Microfinance & Salary Loans</li>
+<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Agricultural / Farmer’s Loan</li>
+<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Business Loans</li>
+<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Gadget & Solar Loan</li>
+</ul>
 </div>
 <div class="card glass">
-<div class=card-icon>🏠</div>
-<h3>Housing Assistance</h3>
-<p>Helping our members build their dreams through flexible housing programs.</p>
+<div class=card-icon><i class="fas fa-heartbeat"></i></div>
+<h3>Member Benefits</h3>
+<ul style="list-style-type:none;padding:0;color:var(--text-muted);display:flex;flex-direction:column;gap:0.75rem">
+<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Damayang Pangkalusugan (DPK)</li>
+<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Death Aid Program (DAP)</li>
+<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Coop Life Program (CLP)</li>
+</ul>
 </div>
 </div>
 </div>
@@ -83,17 +102,17 @@
 <h2 class=section-title>The <span class=title-gradient>Coop Advantage</span></h2>
 <div class=grid-cards>
 <div class="card glass">
-<div class=card-icon>🎁</div>
+<div class=card-icon><i class="fas fa-chart-line"></i></div>
 <h3>Annual Dividends</h3>
 <p>Share in our success. Members receive annual dividends and patronage refunds.</p>
 </div>
 <div class="card glass">
-<div class=card-icon>🛡️</div>
+<div class=card-icon><i class="fas fa-shield-alt"></i></div>
 <h3>Insurance Coverage</h3>
 <p>Automatic member insurance and credit protection for your peace of mind.</p>
 </div>
 <div class="card glass">
-<div class=card-icon>🎓</div>
+<div class=card-icon><i class="fas fa-graduation-cap"></i></div>
 <h3>Education Grants</h3>
 <p>Scholarships and educational support for members and their dependents.</p>
 </div>
@@ -102,12 +121,14 @@
 </section>
 <section id=video class=fade-up>
 <div class=container>
-<h2 class=section-title>Education <span class=title-gradient>& Resources</span></h2>
-<p style=text-align:center;color:var(--text-muted);margin-bottom:2rem>Watch our Pre-Membership Education Seminar (PMES) before applying. It's required for all new members.</p>
-<div class="glass" id="promo-video-wrapper" style="width:100%; aspect-ratio:16/9; border-radius:var(--radius-lg); overflow:hidden; background:#000; box-shadow:var(--shadow-md);">
+<h2 class=section-title>Testimonies, <span class=title-gradient>News & Updates</span></h2>
+<p style=text-align:center;color:var(--text-muted);margin-bottom:2rem><i class="fas fa-info-circle"></i> <a href="membership.html" style="color:var(--primary-light);font-weight:600;text-decoration:underline">Watch our Pre-Membership Education Seminar (PMES)</a> before applying. It's required for all new members.</p>
+<div id="promo-video-wrapper" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius-lg);background:#000;box-shadow:var(--shadow-md);">
     <!-- Script will inject iframe here -->
 </div>
-<p style=text-align:center;margin-top:1.5rem;font-size:.9rem;color:var(--text-muted)>After watching, proceed to the <a href=membership.html style=color:var(--primary-light);font-weight:600>Membership Application Form →</a></p>
+<div style="text-align:center;margin-top:2.5rem;">
+<a href="membership.html" class="btn btn-primary" style="font-size:1.1rem;"><i class="fas fa-file-signature" style="margin-right:8px;"></i> Proceed to Membership Application Form →</a>
+</div>
 </div>
 </section>
 <section id=finance class=fade-up>
@@ -116,19 +137,18 @@
 <div class=glass style=padding:3rem;text-align:center>
 <div style=display:flex;justify-content:space-around;flex-wrap:wrap;gap:2rem>
 <div>
-<h3 style=font-size:2.5rem class=title-gradient>₱500M+</h3>
+<h3 style=font-size:2.5rem class=title-gradient>₱<span class="count-up" id="stat-assets-val" data-target="500">0</span>M+</h3>
 <p>Total Assets</p>
 </div>
 <div>
-<h3 style=font-size:2.5rem class=title-gradient>15,000+</h3>
+<h3 style=font-size:2.5rem class=title-gradient><span class="count-up" id="stat-members-val" data-target="15000">0</span>+</h3>
 <p>Active Members</p>
 </div>
 <div>
-<h3 style=font-size:2.5rem class=title-gradient>30+ Years</h3>
+<h3 style=font-size:2.5rem class=title-gradient><span class="count-up" id="stat-years-val" data-target="30">0</span>+ Years</h3>
 <p>Service Excellence</p>
 </div>
 </div>
-<p style=margin-top:2rem><a href=# class="btn btn-secondary">Download 2023 Annual Report</a></p>
 </div>
 </div>
 </section>
@@ -158,13 +178,14 @@
 <br>
 <p>📍 <strong>Main Office:</strong> San Nicolas, Baao, Camarines Sur</p>
 <p>📞 <strong>Phone:</strong> (054) 123-4567</p>
-<p>📧 <strong>Email:</strong> info@baaocoop.com</p>
+<p>📧 <strong>Email:</strong> inquiries@baaocoop.com</p>
 <p>🕗 <strong>Hours:</strong> Mon–Fri, 8:00 AM – 5:00 PM</p>
 <br>
 <p style=font-weight:600;margin-bottom:.75rem>Follow Us</p>
-<div style=display:flex;gap:1rem>
-<a href=https://facebook.com target=_blank class="btn btn-primary" style=display:flex;align-items:center;gap:0.5rem>📘 Facebook</a>
-<a href=https://twitter.com target=_blank class="btn btn-secondary" style=display:flex;align-items:center;gap:0.5rem>🐦 Twitter</a>
+<div style=display:flex;gap:1.5rem;font-size:2.2rem>
+<a href="https://www.facebook.com/baaocoop" target=_blank style="color:#1877F2;transition:transform 0.3s" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"><i class="fab fa-facebook"></i></a>
+<a href="https://www.instagram.com/baaocoop.bpmpco/" target=_blank style="color:#E4405F;transition:transform 0.3s" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"><i class="fab fa-instagram"></i></a>
+<a href="https://www.youtube.com/@BaaoCoop.BPMPCO" target=_blank style="color:#FF0000;transition:transform 0.3s" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"><i class="fab fa-youtube"></i></a>
 </div>
 </div>
 <div class=glass style=padding:2rem>
@@ -198,7 +219,7 @@
 <footer>
 <div class=footer-grid>
 <div>
-<h3 class=logo>Baao Coop</h3>
+<h3 class=logo style="font-size:1.2rem">Baao Parish Multi-purpose Cooperative</h3>
 <p>Your partner in financial empowerment and community unity.</p>
 </div>
 <div>
@@ -225,5 +246,6 @@
 </div>
 </footer>
 <script src=js/main.js></script>
+<script src=js/coop-logic.js></script>
 </body>
 </html>
