@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Apply Online | Baao Coop</title>
@@ -58,5 +59,82 @@ body{background:var(--bg-color);display:flex;align-items:center;justify-content:
 
 <script type="module" src="js/config.js"></script>
 <script src="js/main.js"></script>
+=======
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<title>Apply Online | Baao Coop</title>
+<link rel=stylesheet href=css/styles.css>
+<style>body{background:var(--bg-color);display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem}.form-wrapper{background:var(--bg-alt);padding:3rem;border-radius:var(--radius-md);box-shadow:var(--shadow-lg);width:100%;max-width:500px;border-top:4px solid var(--primary)}.form-control{width:100%;padding:.8rem;margin-bottom:1.2rem;border:1px solid var(--text-muted);border-radius:var(--radius-sm);font-family:var(--font-family);background:var(--bg-color)}.btn-group{display:flex;gap:1rem;margin-top:1rem}.back-home{position:absolute;top:2rem;left:2rem;color:var(--text-main);display:flex;align-items:center;gap:.5rem;font-weight:600;text-decoration:none}.back-home:hover{color:var(--primary)}</style>
+<link rel=icon href=assets/images/logo.png type=image/png>
+</head>
+<body>
+<a href=index.html class=back-home id=backHomeBtn>
+← Back to Home
+</a>
+<div class=form-wrapper>
+<div style=text-align:center;margin-bottom:2rem>
+<img src=assets/images/logo.png alt=Logo style=width:60px;height:60px>
+<h2 style=color:var(--text-main);margin-top:1rem>Membership Application</h2>
+<p style=color:var(--text-muted);font-size:.9rem>Upload your completed form here.</p>
+</div>
+<form id=onlineApplyForm>
+<label style=font-weight:600;font-size:.9rem>Email Address</label>
+<input type=email class=form-control required placeholder=you@email.com>
+<label style=font-weight:600;font-size:.9rem>First Name</label>
+<input type=text class=form-control required placeholder=Juan>
+<label style=font-weight:600;font-size:.9rem>Middle Name</label>
+<input type=text class=form-control placeholder=Dela>
+<label style=font-weight:600;font-size:.9rem>Last Name</label>
+<input type=text class=form-control required placeholder=Cruz>
+<label style=font-weight:600;font-size:.9rem>Upload Application Form (PDF/IMG)</label>
+<input type=file class=form-control accept=".pdf, image/*" required>
+<div class=btn-group>
+<button type=button class="btn btn-secondary" style=flex:1 onclick="document.getElementById('onlineApplyForm').reset()">Clear</button>
+<button type=submit class="btn btn-primary" style=flex:2>Submit Application</button>
+</div>
+</form>
+</div>
+<script type="module">
+import { auth, db } from './js/config.js';
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const lastHash = localStorage.getItem('baaocoop_last_hash') || '#home';
+document.getElementById('backHomeBtn').href = 'index.html' + lastHash;
+
+document.getElementById('onlineApplyForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = e.target.querySelector('input[type="email"]').value;
+  const inputs = e.target.querySelectorAll('input[type="text"]');
+  const fName = inputs[0].value;
+  const lName = inputs[2].value;
+  const btn = e.target.querySelector('button[type="submit"]');
+  
+  try {
+    btn.textContent = 'Processing...';
+    btn.disabled = true;
+    
+    const userCred = await createUserWithEmailAndPassword(auth, email, 'BaaoCoop123!');
+    await setDoc(doc(db, 'members', userCred.user.uid), {
+      email,
+      firstName: fName,
+      lastName: lName,
+      status: 'pending_approval',
+      appliedAt: new Date().toISOString()
+    });
+    
+    // Save locally to bypass feedback gate automatically
+    localStorage.setItem('baaocoop_user', JSON.stringify({ name: fName + ' ' + lName, email }));
+    alert("Application submitted! Your temporary password is 'BaaoCoop123!'. We will review your documents shortly.");
+    window.location.href = 'index.html#home';
+  } catch(err) {
+    alert("Error saving record: " + err.message);
+    btn.textContent = 'Submit Application';
+    btn.disabled = false;
+  }
+});
+</script>
+<script src=js/main.js></script>
+>>>>>>> 4b0120d1df4e87f36c5ef2216ee75c428b80d5c7
 </body>
 </html>
