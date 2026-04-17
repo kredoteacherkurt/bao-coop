@@ -1,124 +1,594 @@
 <!DOCTYPE html>
-<html lang=en>
+<html lang="en">
 <head>
-<meta charset=UTF-8>
-<meta name=viewport content="width=device-width, initial-scale=1.0">
-<title>Admin Console | Baao Coop V2.0</title>
-<link rel=stylesheet href=css/styles.css>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css>
-<style>body{background-color:var(--bg-color);display:none}body#admin-page{background-image:linear-gradient(135deg, rgba(0, 32, 96, 0.92), rgba(179, 0, 0, 0.92)), url('assets/images/hero-bg.png');background-size:cover, contain;background-repeat:no-repeat;background-attachment:fixed;background-position:center}.dashboard-header{background:var(--nav-bg);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow-sm);position:sticky;top:0;z-index:100;backdrop-filter:blur(16px)}.dashboard-container{max-width:var(--max-width);margin:2rem auto;padding:0 2rem;display:grid;gap:2rem}.stat-card{padding:2rem;display:flex;flex-direction:column;gap:.5rem;justify-content:center;align-items:center;text-align:center;border-bottom:4px solid var(--primary)}.stat-value{font-size:2.5rem;font-weight:700;color:var(--text-main)}.panel{padding:2rem;overflow-x:auto}table{width:100%;border-collapse:collapse;margin-top:1rem}th,td{padding:1rem;text-align:left;border-bottom:1px solid rgba(0,0,0,0.05)}th{font-weight:600;color:var(--text-muted);text-transform:uppercase;font-size:.85rem}.btn-sm{padding:.4rem .8rem;font-size:.8rem;border-radius:var(--radius-sm);border:0;cursor:pointer;font-weight:bold}.badge{padding:.3rem .8rem;border-radius:var(--radius-full);font-size:.8rem;font-weight:600}.badge-approved{background:#bbf7d0;color:#166534}.panel-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);z-index:1000}.side-panel{position:fixed;top:0;right:-500px;width:450px;max-width:100vw;height:100vh;background:var(--bg-alt);box-shadow:var(--shadow-lg);transition:right .4s cubic-bezier(0.4,0,0.2,1);z-index:1100;padding:2rem;display:flex;flex-direction:column}.side-panel.open{right:0}.doc-preview-box{background:#f8f9fa;border:2px dashed #ccc;flex-grow:1;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-sm);position:relative;overflow:hidden;margin-bottom:1.5rem}</style>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css>
-<link rel=icon href=assets/images/logo.png type=image/png>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Baao Coop</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="icon" href="assets/images/logo.png" type="image/png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+:root {
+  --bg-color:#f1f5f9; --bg-alt:#ffffff; --text-main:#0f172a; --text-muted:#64748b; 
+  --primary:#dc2626; --primary-light:#ef4444; --secondary:#1d4ed8; 
+  --nav-bg:rgba(255, 255, 255, 0.95); --glass-border:1px solid rgba(0, 0, 0, 0.08); 
+  --shadow-sm:0 1px 2px rgba(0, 0, 0, 0.05); --shadow-md:0 4px 6px -1px rgba(0, 0, 0, 0.1); 
+  --shadow-lg:0 10px 15px -3px rgba(0, 0, 0, 0.1); --radius-sm:8px; --radius-md:12px; 
+  --font-family:'Inter', sans-serif;
+}
+* {margin:0; padding:0; box-sizing:border-box; font-family:var(--font-family);}
+body {background:var(--bg-color); color:var(--text-main); overflow-x:hidden;}
+
+/* Login Overlay */
+#login-overlay {
+  position:fixed; inset:0; background:var(--text-main); z-index:9999; display:flex; 
+  align-items:center; justify-content:center; flex-direction:column; gap:2rem;
+}
+.login-box {
+  background:var(--bg-alt); padding:3rem; border-radius:var(--radius-md); 
+  width:90%; max-width:400px; box-shadow:var(--shadow-lg); text-align:center;
+}
+.login-input {
+  width:100%; padding:0.8rem 1rem; border:1px solid #cbd5e1; border-radius:var(--radius-sm); 
+  margin-bottom:1rem; font-size:1rem; outline:none;
+}
+.login-input:focus {border-color:var(--primary);}
+.login-btn {
+  width:100%; padding:0.8rem; background:var(--primary); color:white; border:none; 
+  border-radius:var(--radius-sm); font-weight:700; font-size:1rem; cursor:pointer; transition:0.3s;
+}
+.login-btn:hover {background:var(--primary-light);}
+
+/* Layout */
+header {
+  background:var(--nav-bg); border-bottom:var(--glass-border); position:sticky; top:0; z-index:100;
+}
+.header-top {
+  display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; border-bottom:1px solid rgba(0,0,0,0.04);
+}
+.brand {display:flex; align-items:center; gap:1rem; font-weight:800; font-size:1.2rem; color:var(--text-main);}
+.brand img {width:40px;}
+.nav-tabs {display:flex; gap:1rem; padding:0 2rem; background:var(--bg-alt); overflow-x:auto;}
+.tab-btn {
+  padding:1rem; border:none; background:none; font-weight:600; color:var(--text-muted); 
+  cursor:pointer; border-bottom:3px solid transparent; transition:0.2s; white-space:nowrap;
+}
+.tab-btn:hover {color:var(--primary);}
+.tab-btn.active {color:var(--primary); border-bottom-color:var(--primary);}
+
+main {padding:2rem; max-width:1400px; margin:0 auto;}
+.admin-pane {display:none; animation:fadeIn 0.3s ease;}
+.admin-pane.active {display:block;}
+@keyframes fadeIn {from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+
+/* CMS Cards */
+.cms-card {
+  background:var(--bg-alt); border-radius:var(--radius-md); padding:1.5rem; margin-bottom:1.5rem; 
+  box-shadow:var(--shadow-sm); border:var(--glass-border);
+}
+.cms-card h3 {margin-bottom:1rem; color:var(--secondary); display:flex; align-items:center; gap:0.5rem; font-size:1.1rem; border-bottom:1px solid rgba(0,0,0,0.05); padding-bottom:0.8rem;}
+.form-group {margin-bottom:1rem;}
+.form-label {display:block; font-size:0.85rem; font-weight:600; color:var(--text-muted); margin-bottom:0.4rem;}
+.form-control {
+  width:100%; padding:0.6rem 0.8rem; border:1px solid #e2e8f0; border-radius:var(--radius-sm); 
+  font-family:inherit; outline:none; background:#f8fafc;
+}
+.form-control:focus {border-color:var(--primary); background:white;}
+.btn {padding:0.6rem 1.2rem; border-radius:var(--radius-sm); font-weight:600; cursor:pointer; border:none; display:inline-flex; align-items:center; gap:0.5rem; transition:0.2s;}
+.btn-primary {background:var(--primary); color:white;}
+.btn-primary:hover {background:var(--primary-light);}
+.btn-secondary {background:#e2e8f0; color:var(--text-main);}
+.btn-secondary:hover {background:#cbd5e1;}
+.btn-danger {background:#ef4444; color:white;}
+
+/* Sub Tabs */
+.sub-tabs {display:flex; gap:0.5rem; margin-bottom:1rem; background:#f1f5f9; padding:0.5rem; border-radius:var(--radius-sm);}
+.sub-tab-btn {padding:0.5rem 1rem; border:none; background:transparent; border-radius:var(--radius-sm); font-weight:600; color:var(--text-muted); cursor:pointer;}
+.sub-tab-btn.active {background:white; color:var(--primary); box-shadow:var(--shadow-sm);}
+.sub-pane {display:none;}
+.sub-pane.active {display:block;}
+
+/* Data Tables */
+.data-table {width:100%; border-collapse:collapse;}
+.data-table th, .data-table td {padding:1rem; text-align:left; border-bottom:1px solid rgba(0,0,0,0.05);}
+.data-table th {color:var(--text-muted); font-size:0.85rem; text-transform:uppercase;}
+.data-table tr:hover {background:rgba(0,0,0,0.02);}
+.action-icons i {cursor:pointer; color:var(--text-muted); margin-right:1rem; font-size:1.1rem;}
+.action-icons i.fa-edit:hover {color:var(--secondary);}
+.action-icons i.fa-trash:hover {color:var(--primary);}
+
+/* Feedback 70/30 Grid */
+.grid-70-30 {display:grid; grid-template-columns:70fr 30fr; gap:2rem; align-items:start;}
+.glass-scroll {
+  background:rgba(255,255,255,0.8); backdrop-filter:blur(10px); border:var(--glass-border); 
+  border-radius:var(--radius-md); box-shadow:var(--shadow-md); height:600px; overflow-y:auto; padding:1.5rem;
+}
+
+/* Toast Notifications */
+.toast-container {position:fixed; bottom:2rem; right:2rem; z-index:9999; display:flex; flex-direction:column; gap:0.5rem;}
+.toast {background:var(--text-main); color:white; padding:1rem 1.5rem; border-radius:var(--radius-sm); font-weight:600; font-size:0.9rem; display:flex; align-items:center; gap:0.75rem; box-shadow:var(--shadow-lg); transform:translateX(120%); opacity:0; transition:0.3s cubic-bezier(0.2, 0.8, 0.2, 1);}
+.toast.show {transform:translateX(0); opacity:1;}
+.toast-success {border-left:4px solid #10b981;}
+.toast-error {border-left:4px solid #ef4444;}
+
+/* Modals */
+.modal-overlay {position:fixed; inset:0; background:rgba(0,0,0,0.5); backdrop-filter:blur(3px); z-index:2000; display:none; align-items:center; justify-content:center; padding:2rem 0;}
+.modal-content {background:var(--bg-alt); padding:2.5rem; border-radius:var(--radius-md); width:90%; max-width:700px; min-height:600px; max-height:95vh; overflow-y:auto; box-shadow:var(--shadow-lg); display:flex; flex-direction:column;}
+#modal-body {flex:1; display:flex; flex-direction:column;}
+.modal-header {display:flex; justify-content:space-between; margin-bottom:1.5rem; font-size:1.2rem; font-weight:700; color:var(--text-main);}
+</style>
 </head>
-<body id=admin-page>
-<header class=dashboard-header>
-<a href=index.html class=logo style=text-decoration:none;color:inherit>
-<img src=assets/images/logo.png alt="Baao Coop Logo" style=height:40px;width:40px;border-radius:var(--radius-sm);object-fit:contain>
-<span>Admin Console</span>
-</a>
-<div style=display:flex;align-items:center;gap:1.5rem>
-<span style=font-weight:500;color:var(--text-muted)>SuperAdmin</span>
-<button onclick=logout() class="btn btn-secondary" style="padding:.5rem 1rem"><i class="fas fa-sign-out-alt"></i> Logout</button>
+<body>
+
+<!-- Login Overlay -->
+<div id="login-overlay">
+  <div style="color:white;text-align:center;margin-bottom:-1rem;">
+    <img src="assets/images/logo.png" style="width:80px; margin-bottom:1rem;">
+    <h2>Baao Coop CMS</h2>
+  </div>
+  <div class="login-box">
+    <h3 style="margin-bottom:1.5rem;color:var(--text-main);">Admin Login</h3>
+    <input type="text" id="admin-user" class="login-input" placeholder="Username">
+    <input type="password" id="admin-pass" class="login-input" placeholder="Password">
+    <button class="login-btn" onclick="handleLogin()">Sign In</button>
+    <p id="login-error" style="color:var(--primary); font-size:0.85rem; margin-top:1rem; display:none;">Invalid credentials.</p>
+  </div>
 </div>
+
+<!-- Header -->
+<header>
+  <div class="header-top">
+    <div class="brand">
+      <img src="assets/images/logo.png" alt="Logo">
+      Admin Control Panel
+    </div>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <span style="font-weight:600;font-size:0.9rem;">Logged in as: SuperAdmin</span>
+      <button onclick="location.reload()" class="btn btn-secondary"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </div>
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchMainTab('tab-home', this)"><i class="fas fa-home"></i> Home</button>
+    <button class="tab-btn" onclick="switchMainTab('tab-about', this)"><i class="fas fa-info-circle"></i> About Us</button>
+    <button class="tab-btn" onclick="switchMainTab('tab-services', this)"><i class="fas fa-box"></i> Products & Services</button>
+    <button class="tab-btn" onclick="switchMainTab('tab-membership', this)"><i class="fas fa-users"></i> Membership</button>
+    <button class="tab-btn" onclick="switchMainTab('tab-news', this)"><i class="fas fa-newspaper"></i> News</button>
+    <button class="tab-btn" onclick="switchMainTab('tab-branches', this)"><i class="fas fa-map-marker-alt"></i> Branches</button>
+    <button class="tab-btn" onclick="switchMainTab('tab-feedback', this)"><i class="fas fa-comments"></i> Feedback</button>
+    <button class="tab-btn" onclick="switchMainTab('tab-settings', this)"><i class="fas fa-cog"></i> Settings</button>
+  </div>
 </header>
-<div class=dashboard-container>
-<div class=grid-cards style=grid-template-columns:repeat(auto-fit,minmax(250px,1fr))>
-<div class="stat-card glass" style=border-bottom-color:#eab308>
-<h3 style=font-size:1rem;color:var(--text-muted)>Pending Requests</h3>
-<div class=stat-value id=stat-pending>0</div>
+
+<!-- Toast Container -->
+<div id="toast-container" class="toast-container"></div>
+
+<main>
+  <!-- Global Banner Manager (Appears on every tab via JS logic, shown here for structure) -->
+  <div class="cms-card" style="background:linear-gradient(to right, #1e293b, #0f172a); color:white;">
+    <h3 style="color:white; border-color:rgba(255,255,255,0.1);"><i class="fas fa-images"></i> Dynamic Tab Banner Manager</h3>
+    <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:1rem;">Upload images here to change the Hero Banner of the currently active tab. Multiple uploads will create a carousel.</p>
+    <div class="form-group">
+      <input type="file" multiple accept="image/*" class="form-control" style="background:rgba(255,255,255,0.1); color:white; border:none;">
+    </div>
+    <button class="btn btn-primary" onclick="showToast('Banners updated for this tab!')"><i class="fas fa-upload"></i> Upload & Apply</button>
+  </div>
+
+  <!-- TAB: HOME -->
+  <div id="tab-home" class="admin-pane active">
+    <div class="cms-card">
+      <h3><i class="fas fa-play-circle"></i> Media Embeds</h3>
+      <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">Paste links from Youtube or Facebook to render them on the Homepage.</p>
+      <div class="form-group">
+        <label class="form-label">Main Video URL (YouTube / Facebook Embed Link)</label>
+        <input type="text" class="form-control" value="https://www.youtube.com/embed/ScMzIvxBSi4">
+      </div>
+      <button class="btn btn-primary" onclick="showToast('Media links saved successfully!')"><i class="fas fa-save"></i> Save Links</button>
+    </div>
+  </div>
+
+  <!-- TAB: ABOUT US -->
+  <div id="tab-about" class="admin-pane">
+    <div class="cms-card">
+      <h3><i class="fas fa-heading"></i> Hero Tagline</h3>
+      <div class="form-group">
+        <label class="form-label">Hero H1 Text (If left empty, the background banner will NOT blur and text will hide)</label>
+        <input type="text" class="form-control" value="Rooted in Faith, Built Through Cooperation">
+      </div>
+      <button class="btn btn-primary" onclick="showToast('Tagline updated successfully!')"><i class="fas fa-save"></i> Update Tagline</button>
+    </div>
+
+    <!-- Sub Navigation for About -->
+    <div class="sub-tabs">
+      <button class="sub-tab-btn active" onclick="switchSubTab('sub-about', this)">About Us</button>
+      <button class="sub-tab-btn" onclick="switchSubTab('sub-history', this)">Our History</button>
+      <button class="sub-tab-btn" onclick="switchSubTab('sub-execs', this)">Executives</button>
+      <button class="sub-tab-btn" onclick="switchSubTab('sub-mgmt', this)">Management</button>
+    </div>
+
+    <!-- Sub Pane: About Us -->
+    <div id="sub-about" class="sub-pane active cms-card">
+      <div class="form-group">
+        <label class="form-label">Section Tagline (H3)</label>
+        <input type="text" class="form-control" value="- Who We Are -">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Main Header (H1)</label>
+        <input type="text" class="form-control" value="Rooted in Faith, Built Through Cooperation">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description Paragraphs</label>
+        <textarea class="form-control" rows="5">Baao Parish Multi-Purpose Cooperative...</textarea>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1.5rem;">
+        <div class="form-group"><label class="form-label">Total Assets (M)</label><input type="number" class="form-control" value="500"></div>
+        <div class="form-group"><label class="form-label">Active Members</label><input type="number" class="form-control" value="15000"></div>
+        <div class="form-group"><label class="form-label">Years in Service</label><input type="number" class="form-control" value="30"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Section Graphic (Replaces the empty placeholder)</label>
+        <input type="file" accept="image/*" class="form-control">
+      </div>
+      <button class="btn btn-primary" onclick="showToast('About Us details saved successfully!')"><i class="fas fa-save"></i> Save Info Details</button>
+    </div>
+
+    <!-- Sub Pane: History -->
+    <div id="sub-history" class="sub-pane cms-card">
+      <button class="btn btn-secondary" style="margin-bottom:1rem;" onclick="openModal('Generic Modal')"><i class="fas fa-plus"></i> Add Milestone</button>
+      <table class="data-table">
+        <thead><tr><th>Year</th><th>Title</th><th>Image</th><th>Actions</th></tr></thead>
+        <tbody>
+          <tr><td>1963</td><td>Foundation</td><td><span style="color:var(--text-muted);font-size:0.8rem;">No Image</span></td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Milestone', '1963', 'Foundation', 'Registered as Baao Parish Cooperative Credit Union, Inc. (BPCCUI) on August 26, 1963, starting with 50 members and Php 1,193.00 in capital. Founded by parishioners led by the Hijas de Maria...')"></i><i class="fas fa-trash" onclick="showToast('Item deleted', 'error')"></i></td></tr>
+          <tr><td>1989</td><td>Milestone Growth</td><td><span style="color:var(--text-muted);font-size:0.8rem;">No Image</span></td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Milestone', '1989', 'Milestone Growth', 'Reached Php 1 million in total assets and was recognized as a “Millionaire Cooperative,” marking a significant step in its financial stability and growth.')"></i><i class="fas fa-trash" onclick="alert('Item deleted')"></i></td></tr>
+          <tr><td>1991</td><td>Formal Registration</td><td><span style="color:var(--text-muted);font-size:0.8rem;">No Image</span></td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Milestone', '1991', 'Formal Registration', 'Re-registered with the Cooperative Development Authority under Republic Act No. 6938 as Baao Parish Multi-Purpose Cooperative (BPMPCO), expanding its legal and operational scope.')"></i><i class="fas fa-trash" onclick="alert('Item deleted')"></i></td></tr>
+          <tr><td>1990s–2000s</td><td>Expansion of Services</td><td><span style="color:var(--text-muted);font-size:0.8rem;">No Image</span></td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Milestone', '1990s–2000s', 'Expansion of Services', 'Transitioned from a credit union into a multi-purpose cooperative, introducing savings, expanded loan products, and livelihood programs to better serve members’ growing needs.')"></i><i class="fas fa-trash" onclick="alert('Item deleted')"></i></td></tr>
+          <tr><td>2010s–Present</td><td>Regional Expansion</td><td><span style="color:var(--text-muted);font-size:0.8rem;">No Image</span></td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Milestone', '2010s–Present', 'Regional Expansion', 'Expanded its reach across the Bicol region, establishing branches in Goa, Iriga City, Ocampo, Naga City, Sipocot, and Polangui, strengthening financial inclusion and accessibility.')"></i><i class="fas fa-trash" onclick="alert('Item deleted')"></i></td></tr>
+          <tr><td>2022</td><td>Recognition</td><td><span style="color:var(--text-muted);font-size:0.8rem;">No Image</span></td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Milestone', '2022', 'Recognition', 'Honored at the Asia’s Pinnacle Awards as the “Most Dedicated & Exemplary Trusted Cooperative in Camarines Sur,” recognizing its strong performance and leadership.')"></i><i class="fas fa-trash" onclick="alert('Item deleted')"></i></td></tr>
+          <tr><td>Today</td><td>Continuing the Mission</td><td><span style="color:var(--text-muted);font-size:0.8rem;">No Image</span></td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Milestone', 'Today', 'Continuing the Mission', 'BPMPCO continues to uphold cooperative values while delivering inclusive financial services, empowering members, and strengthening communities for long-term development.')"></i><i class="fas fa-trash" onclick="alert('Item deleted')"></i></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sub Pane: Execs -->
+    <div id="sub-execs" class="sub-pane cms-card">
+      <button class="btn btn-secondary" style="margin-bottom:1rem;" onclick="openModal('Add Executive')"><i class="fas fa-plus"></i> Add Executive</button>
+      <table class="data-table">
+        <thead><tr><th>Name</th><th>Role</th><th>Department</th><th>Actions</th></tr></thead>
+        <tbody>
+          <tr><td>John Doe</td><td>Board of Director</td><td>Executives</td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Executive', 'John Doe', 'Board of Director', 'Executives')"></i><i class="fas fa-trash" onclick="alert('Item deleted')"></i></td></tr>
+          <tr><td>Jane Smith</td><td>Board of Director</td><td>Executives</td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Executive', 'Jane Smith', 'Board of Director', 'Executives')"></i><i class="fas fa-trash" onclick="alert('Item deleted')"></i></td></tr>
+          <tr><td>Mark Lee</td><td>Board of Director</td><td>Executives</td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Executive', 'Mark Lee', 'Board of Director', 'Executives')"></i><i class="fas fa-trash" onclick="alert('Item deleted')"></i></td></tr>
+          <tr><td>Lucy Anne</td><td>Board of Director</td><td>Executives</td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Executive', 'Lucy Anne', 'Board of Director', 'Executives')"></i><i class="fas fa-trash" onclick="alert('Item deleted')"></i></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sub Pane: Management -->
+    <div id="sub-mgmt" class="sub-pane cms-card">
+      <button class="btn btn-secondary" style="margin-bottom:1rem;" onclick="openModal('Add Management')"><i class="fas fa-plus"></i> Add Management</button>
+      <table class="data-table">
+        <thead><tr><th>Name</th><th>Role</th><th>Department</th><th>Actions</th></tr></thead>
+        <tbody>
+          <tr><td>Sarah Connor</td><td>Chief Executive Officer</td><td>Management</td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Management', 'Sarah Connor', 'Chief Executive Officer', 'Management')"></i><i class="fas fa-trash" onclick="alert('Item deleted')"></i></td></tr>
+          <tr><td>Alan Wake</td><td>Operations Manager</td><td>Management</td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Management', 'Alan Wake', 'Operations Manager', 'Management')"></i><i class="fas fa-trash" onclick="alert('Item deleted')"></i></td></tr>
+          <tr><td>Jill Valentine</td><td>Finance Head</td><td>Management</td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Management', 'Jill Valentine', 'Finance Head', 'Management')"></i><i class="fas fa-trash" onclick="alert('Item deleted')"></i></td></tr>
+          <tr><td>Chris Redfield</td><td>Branch Manager</td><td>Management</td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Management', 'Chris Redfield', 'Branch Manager', 'Management')"></i><i class="fas fa-trash" onclick="alert('Item deleted')"></i></td></tr>
+          <tr><td>Leon Kennedy</td><td>IT Director</td><td>Management</td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Management', 'Leon Kennedy', 'IT Director', 'Management')"></i><i class="fas fa-trash" onclick="alert('Item deleted')"></i></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB: PRODUCTS & SERVICES -->
+  <div id="tab-services" class="admin-pane">
+    <div class="cms-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h3><i class="fas fa-box"></i> Services & Programs</h3>
+        <button class="btn btn-secondary" onclick="openModal('Generic Modal')"><i class="fas fa-plus"></i> Add New Service</button>
+      </div>
+      <table class="data-table">
+        <thead><tr><th>Category Name</th><th>Programs Included</th><th>Actions</th></tr></thead>
+        <tbody>
+          <tr><td>Loan Products</td><td>14 Items</td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Service Category', 'Loan Products', 'Microfinance Loan|Salary Loan|Pension Loan|OFW Loan|Back-to-Back Loan|Solar Package Loan|Jewelry Loan|Character Loan|Grocery Loan|Medical Loan|Enrollment Loan|Farmer’s Loan|Calamity Loan|Petty Cash / Emergency Loan')"></i><i class="fas fa-trash" onclick="alert('Category deleted')"></i></td></tr>
+          <tr><td>Regular Savings</td><td>6 Items</td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Service Category', 'Regular Savings', 'Retirement Savings|Birthday Savings|Travel Savings|Anniversary Savings|Koop Alkansya (For Kids)|Time Deposit')"></i><i class="fas fa-trash" onclick="alert('Category deleted')"></i></td></tr>
+          <tr><td>Social Services</td><td>5 Items</td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Service Category', 'Social Services', 'Damayang Pangkalusugan (DPK)|Death Aid Program (DAP)|Coop Life Program (CLP)|Koop Assurance Program|Baaocoop Damayan Insurance')"></i><i class="fas fa-trash" onclick="alert('Category deleted')"></i></td></tr>
+          <tr><td>Member Services</td><td>4 Items</td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Service Category', 'Member Services', 'SSS / Philhealth Payment|Accommodation|Automated Teller Machine (ATM)|KAYA Payment')"></i><i class="fas fa-trash" onclick="alert('Category deleted')"></i></td></tr>
+          <tr><td>Special Coop Programs</td><td>10 Items</td><td class="action-icons"><i class="fas fa-edit" onclick="openModal('Edit Service Category', 'Special Coop Programs', 'Aflatoun Program (School-based Savings)|Coop College Assistance Program (CCAP)|Coop Youth Exposure Program (CYEP)|Coop Youth Volunteer Exposure Program|Adopt-a-Barangay Feeding Program|Koop Kalinga (Scholarship Grant)|Koop Negosyo (Business Dev’t Assistance)|Koop Paligiran (Environmental Program)|Coop Marketing Program (Advertising)|Balik Eskwela Program (Free School Supplies)')"></i><i class="fas fa-trash" onclick="alert('Category deleted')"></i></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB: MEMBERSHIP -->
+  <div id="tab-membership" class="admin-pane">
+    <div class="cms-card">
+      <h3><i class="fas fa-user-plus"></i> Join Us Details</h3>
+      <div class="form-group">
+        <label class="form-label">Requirements List (One per line)</label>
+        <textarea class="form-control" rows="5">Pre-membership Education Seminar Attendance
+1x1 Recent Colored Picture (4 pcs.)
+1x1 Recent Colored Picture of Spouse; if married (1 pc.)
+Photocopy of Birth Certificate or Marriage Contract
+Photocopy of two (2) valid IDs</textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Payment List (One per line)</label>
+        <textarea class="form-control" rows="5">Php 200.00 - Membership Fee
+Php 100.00 - Initial Savings
+Php 100.00 - Initial Share Capital
+Php 100.00 - 2 Passbook (Share Capital & Savings)
+Php 100.00 - Membership ID
+Php 300.00 - DAMAYAN</textarea>
+      </div>
+      <div class="form-group" style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(0,0,0,0.05);">
+        <label class="form-label">Upload Application Form (PDF)</label>
+        <input type="file" accept=".pdf" class="form-control">
+      </div>
+      <button class="btn btn-primary" style="margin-top:1rem;" onclick="showToast('Membership data saved successfully!')"><i class="fas fa-save"></i> Save Membership Data</button>
+    </div>
+  </div>
+
+  <!-- TAB: NEWS -->
+  <div id="tab-news" class="admin-pane">
+    <div class="cms-card">
+      <h3><i class="fas fa-newspaper"></i> News Manager</h3>
+      <p style="color:var(--text-muted);">News CMS implementation placeholder. Ready for further structure.</p>
+    </div>
+  </div>
+
+  <!-- TAB: BRANCHES -->
+  <div id="tab-branches" class="admin-pane">
+    <div class="cms-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h3><i class="fas fa-building"></i> Branch Locations</h3>
+        <button class="btn btn-primary" onclick="openBranchModal()"><i class="fas fa-plus"></i> Add New Branch</button>
+      </div>
+      <table class="data-table">
+        <thead><tr><th>Branch Name</th><th>Contact / Email</th><th>Actions</th></tr></thead>
+        <tbody id="branch-table-body">
+          <tr><td>Baao Parish Multi-Purpose Cooperative (Main)</td><td>0542663199 <br> inquire@baaocoop.com</td><td class="action-icons"><i class="fas fa-edit" onclick="openBranchModal('Baao Parish Multi-Purpose Cooperative (Main)', 'Rizal Street, San Nicolas District, Baao, 4432 Camarines Sur', '0542663199', 'inquire@baaocoop.com', 'Mon-Fri 8:30 AM–2:30 PM')"></i><i class="fas fa-trash" onclick="alert('Branch deleted')"></i></td></tr>
+          <tr><td>Goa Branch</td><td>09508983131 <br> goa@baaocoop.com</td><td class="action-icons"><i class="fas fa-edit" onclick="openBranchModal('Goa Branch', 'Rivero Building, San Jose St Goa N/A, 4422 Camarines Sur', '09508983131', 'goa@baaocoop.com', 'Mon-Fri 8:30 AM–3:30 PM')"></i><i class="fas fa-trash" onclick="alert('Branch deleted')"></i></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB: FEEDBACK -->
+  <div id="tab-feedback" class="admin-pane">
+    <div class="grid-70-30">
+      <!-- 70% Left Side -->
+      <div class="glass-scroll">
+        <h3 style="color:var(--text-main); margin-bottom:1.5rem; border-bottom:2px solid rgba(0,0,0,0.05); padding-bottom:0.5rem;"><i class="fas fa-comments" style="color:var(--secondary);margin-right:8px;"></i> User Feedbacks</h3>
+        <div id="admin-feedback-list" style="display:flex; flex-direction:column; gap:1rem;">
+          <!-- Fetched dynamically -->
+        </div>
+      </div>
+      <!-- 30% Right Side -->
+      <div>
+        <div class="cms-card">
+          <h3>Feedback Stats</h3>
+          <h1 style="font-size:3rem; color:var(--primary);" id="fb-total-count">0</h1>
+          <p style="color:var(--text-muted); font-weight:600;">Total Feedbacks</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: SETTINGS -->
+  <div id="tab-settings" class="admin-pane">
+    <div class="cms-card" style="max-width:500px;">
+      <h3><i class="fas fa-lock"></i> Update Admin Password</h3>
+      <div class="form-group">
+        <label class="form-label">Current Password</label>
+        <input type="password" class="form-control">
+      </div>
+      <div class="form-group">
+        <label class="form-label">New Password</label>
+        <input type="password" class="form-control">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirm New Password</label>
+        <input type="password" class="form-control">
+      </div>
+      <button class="btn btn-primary" onclick="showToast('Password updated successfully!')"><i class="fas fa-save"></i> Save Changes</button>
+    </div>
+  </div>
+
+</main>
+
+<!-- Generic Modal / Branch Modal -->
+<div class="modal-overlay" id="crud-modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span id="modal-title">Add/Edit Branch</span>
+      <i class="fas fa-times" style="cursor:pointer; color:var(--text-muted);" onclick="closeModal()"></i>
+    </div>
+    <div id="modal-body">
+      <div class="form-group">
+        <label class="form-label">Branch Name</label>
+        <input type="text" class="form-control" placeholder="e.g. Naga Branch">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Address</label>
+        <input type="text" class="form-control" placeholder="Full Address">
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="form-group"><label class="form-label">Phone</label><input type="text" class="form-control"></div>
+        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Office Hours</label>
+        <input type="text" class="form-control" placeholder="Mon-Fri 8:30 AM–3:30 PM">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Google Maps Embed URL</label>
+        <textarea class="form-control" rows="2" placeholder="src='https://www.google.com/maps/embed...'"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Branch Banner Image (Bleeds to top)</label>
+        <input type="file" accept="image/*" class="form-control">
+      </div>
+      <div style="text-align:right; margin-top:auto; padding-top:2rem;">
+        <button class="btn btn-secondary" onclick="closeModal()" style="margin-right:0.5rem;">Cancel</button>
+        <button class="btn btn-primary" onclick="showToast('Branch saved successfully!'); closeModal();"><i class="fas fa-save"></i> Save Branch</button>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="stat-card glass" style=border-bottom-color:#22c55e>
-<h3 style=font-size:1rem;color:var(--text-muted)>Approved Volume</h3>
-<div class=stat-value id=stat-volume style=color:#16a34a>₱0</div>
-</div>
-<div class="stat-card glass">
-<h3 style=font-size:1rem;color:var(--text-muted)>Total Members</h3>
-<div class=stat-value id=stat-members>0</div>
-</div>
-</div>
-<div class="panel glass">
-<h2 style=margin-bottom:1rem>Transaction Approvals</h2>
-<table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Member</th>
-<th>Product</th>
-<th>Amount</th>
-<th>Term</th>
-<th>Proof of Income</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody id=admin-trans-table>
-<tr><td colspan=7>Loading...</td></tr>
-</tbody>
-</table>
-</div>
-<div class="panel glass">
-<h2 style=margin-bottom:1rem>CMS Settings</h2>
-<form id=cmsForm>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
-<div>
-<label style=display:block;margin-bottom:.5rem>Hero Tagline</label>
-<input type=text id=cms-tagline class=form-control style="width:100%;padding:.8rem;border-radius:var(--radius-sm);border:1px solid var(--text-muted)">
-</div>
-<div>
-<label style=display:block;margin-bottom:.5rem>Homepage Video (Embed Code)</label>
-<textarea id=cms-video-url class=form-control placeholder="Paste YouTube link or embed code (e.g. https://youtu.be/xxx or <iframe...>)" style="width:100%;padding:.8rem;border-radius:var(--radius-sm);border:1px solid var(--text-muted)" rows=3></textarea>
-</div>
-</div>
-<div style=margin-bottom:1.5rem>
-<label style=display:block;margin-bottom:.5rem>About Us Text</label>
-<textarea id=cms-about style="width:100%;padding:.8rem;border-radius:var(--radius-sm);border:1px solid var(--text-muted)" rows=4></textarea>
-</div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
-<div><label style=display:block;margin-bottom:.5rem>Total Assets (M)</label><input type=number id=cms-stat-assets class=form-control style="width:100%;padding:.8rem;border-radius:var(--radius-sm);border:1px solid var(--text-muted)"></div>
-<div><label style=display:block;margin-bottom:.5rem>Active Members</label><input type=number id=cms-stat-members class=form-control style="width:100%;padding:.8rem;border-radius:var(--radius-sm);border:1px solid var(--text-muted)"></div>
-<div><label style=display:block;margin-bottom:.5rem>Years Service</label><input type=number id=cms-stat-years class=form-control style="width:100%;padding:.8rem;border-radius:var(--radius-sm);border:1px solid var(--text-muted)"></div>
-</div>
-<div style=margin-bottom:1.5rem>
-<label style=display:block;margin-bottom:.5rem>About Section Images (Upload Multiple)</label>
-<input type="file" id="cms-about-images" multiple accept="image/*" class=form-control style="width:100%;padding:.8rem;border-radius:var(--radius-sm);border:1px solid var(--text-muted)">
-<small style="color:var(--text-muted)">Selecting new files overwrites the current gallery.</small>
-</div>
-<button type=submit class="btn btn-primary">Save Changes to V2.0 Index</button>
-</form>
-</div>
-<div class="panel glass">
-<h2 style=margin-bottom:1rem>Member Database</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Email</th>
-<th>Status</th>
-<th>Date Joined</th>
-</tr>
-</thead>
-<tbody id=admin-users-table>
-<tr><td colspan=4>Loading...</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class=panel-overlay id=panelOverlay onclick=closeFilePanel()></div>
-<div class=side-panel id=fileSidePanel>
-<div style=display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem>
-<h3 style=margin:0;color:var(--primary);font-size:1.2rem>Document Viewer</h3>
-<i class="fas fa-times" onclick=closeFilePanel() style=cursor:pointer;font-size:1.5rem;color:var(--text-muted)></i>
-</div>
-<div style=margin-bottom:1rem;font-size:.9rem>
-<p><strong>Member:</strong> <span id=view-member-name>...</span></p>
-<p><strong>File:</strong> <span id=view-filename style=color:var(--primary)>...</span></p>
-</div>
-<div class=doc-preview-box>
-<iframe id=document-frame style=width:100%;height:100%;border:0 src></iframe>
-</div>
-<button onclick=closeFilePanel() class="btn btn-primary" style=width:100%>Close Viewer</button>
-</div>
-<script src=js/main.js></script>
-<script src=js/coop-logic.js></script>
-<script>const _origAuth=window.loadAdminPage;document.addEventListener("DOMContentLoaded",function(){setTimeout(function(){if(document.body.style.display==="flex"){document.body.style.display="block"}},10)});</script>
+
+<script>
+// Persistent Login Logic
+if (localStorage.getItem('bpmpc_admin_auth') === 'true') {
+  document.getElementById('login-overlay').style.display = 'none';
+}
+
+function handleLogin() {
+  const user = document.getElementById('admin-user').value.trim();
+  const pass = document.getElementById('admin-pass').value;
+  // Simple Base64 check simulating hash: btoa('admin101') === 'YWRtaW4xMDE='
+  if (user === 'bpmpc' && btoa(pass) === 'YWRtaW4xMDE=') {
+    localStorage.setItem('bpmpc_admin_auth', 'true');
+    document.getElementById('login-overlay').style.display = 'none';
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+
+function handleLogout() {
+  localStorage.removeItem('bpmpc_admin_auth');
+  location.reload();
+}
+
+// Toast Logic
+function showToast(message, type = 'success') {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}" style="color:${type === 'success' ? '#10b981' : '#ef4444'}; font-size:1.2rem;"></i> ${message}`;
+  container.appendChild(toast);
+  
+  // Trigger animation
+  setTimeout(() => toast.classList.add('show'), 10);
+  
+  // Remove after 3s
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+
+// Modal Logic dynamically capturing static parameters
+
+// Ensure enter key triggers login
+document.getElementById('admin-pass').addEventListener('keypress', function(e){
+  if(e.key === 'Enter') handleLogin();
+});
+
+// Main Tab Logic
+function switchMainTab(tabId, btn) {
+  document.querySelectorAll('.admin-pane').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+
+  if(tabId === 'tab-feedback') loadFeedbacks();
+}
+
+// Sub Tab Logic (About Us)
+function switchSubTab(tabId, btn) {
+  document.querySelectorAll('.sub-pane').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.sub-tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Modal Logic dynamically capturing static parameters
+function openModal(title, val1 = '', val2 = '', val3 = '', val4 = '', val5 = '') {
+  document.getElementById('modal-title').innerText = title;
+  const modalBody = document.getElementById('modal-body');
+  
+  if (title.includes('Branch')) {
+    modalBody.innerHTML = `
+      <div class="form-group"><label class="form-label">Branch Name</label><input type="text" class="form-control" value="${val1}" placeholder="e.g. Naga Branch"></div>
+      <div class="form-group"><label class="form-label">Address</label><input type="text" class="form-control" value="${val2}" placeholder="Full Address"></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="form-group"><label class="form-label">Phone</label><input type="text" class="form-control" value="${val3}"></div>
+        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" value="${val4}"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Office Hours</label><input type="text" class="form-control" value="${val5}" placeholder="Mon-Fri 8:30 AM–3:30 PM"></div>
+      <div class="form-group"><label class="form-label">Google Maps Embed URL</label><textarea class="form-control" rows="2" placeholder="src='https://www.google.com/maps/embed...'"></textarea></div>
+      <div class="form-group"><label class="form-label">Branch Banner Image (Bleeds to top)</label><input type="file" accept="image/*" class="form-control"></div>
+      <div style="text-align:right; margin-top:2rem;">
+        <button class="btn btn-secondary" onclick="closeModal()" style="margin-right:0.5rem;">Cancel</button>
+        <button class="btn btn-primary" onclick="closeModal()"><i class="fas fa-save"></i> Save Branch</button>
+      </div>
+    `;
+  } else if (title.includes('Executive')) {
+    modalBody.innerHTML = `
+      <div class="form-group"><label class="form-label">Name</label><input type="text" class="form-control" value="${val1}" placeholder="Enter name"></div>
+      <div class="form-group"><label class="form-label">Role</label><input type="text" class="form-control" value="${val2}" placeholder="Enter role"></div>
+      <div class="form-group"><label class="form-label">Department</label><input type="text" class="form-control" value="${val3}" placeholder="Enter department"></div>
+      <div class="form-group"><label class="form-label">Upload Image</label><input type="file" accept="image/*" class="form-control"></div>
+      <div style="text-align:right; margin-top:auto; padding-top:2rem;">
+        <button class="btn btn-secondary" onclick="closeModal()" style="margin-right:0.5rem;">Cancel</button>
+        <button class="btn btn-primary" onclick="showToast('Changes saved successfully!'); closeModal();"><i class="fas fa-save"></i> Save Changes</button>
+      </div>
+    `;
+  } else if (title.includes('Milestone')) {
+    modalBody.innerHTML = `
+      <div class="form-group"><label class="form-label">Year</label><input type="text" class="form-control" value="${val1}" placeholder="e.g. 1963"></div>
+      <div class="form-group"><label class="form-label">Title</label><input type="text" class="form-control" value="${val2}" placeholder="e.g. Foundation"></div>
+      <div class="form-group" style="flex:1; display:flex; flex-direction:column;"><label class="form-label">Description</label><textarea class="form-control" style="flex:1; min-height:150px;">${val3}</textarea></div>
+      <div class="form-group"><label class="form-label">Upload Image</label><input type="file" accept="image/*" class="form-control"></div>
+      <div style="text-align:right; margin-top:auto; padding-top:2rem;">
+        <button class="btn btn-secondary" onclick="closeModal()" style="margin-right:0.5rem;">Cancel</button>
+        <button class="btn btn-primary" onclick="showToast('Changes saved successfully!'); closeModal();"><i class="fas fa-save"></i> Save Changes</button>
+      </div>
+    `;
+  } else {
+    // Services / Generic
+    modalBody.innerHTML = `
+      <div class="form-group"><label class="form-label">Category / Name</label><input type="text" class="form-control" value="${val1}" placeholder="Enter name"></div>
+      <div class="form-group" style="flex:1; display:flex; flex-direction:column;"><label class="form-label">Programs / Details <span style="font-weight:normal; color:var(--text-muted); font-size:0.75rem;">(1 type per line)</span></label><textarea class="form-control" style="flex:1; min-height:220px;" placeholder="Item 1\nItem 2\nItem 3">${val2.split('|').join('\n')}</textarea></div>
+      <div style="text-align:right; margin-top:auto; padding-top:2rem;">
+        <button class="btn btn-secondary" onclick="closeModal()" style="margin-right:0.5rem;">Cancel</button>
+        <button class="btn btn-primary" onclick="showToast('Changes saved successfully!'); closeModal();"><i class="fas fa-save"></i> Save Changes</button>
+      </div>
+    `;
+  }
+  document.getElementById('crud-modal').style.display = 'flex';
+}
+
+function openBranchModal(name='', address='', phone='', email='', hours='') {
+  openModal('Add/Edit Branch Location', name, address, phone, email, hours);
+}
+function closeModal() {
+  document.getElementById('crud-modal').style.display = 'none';
+}
+
+// Feedback Fetching Logic (syncs with index local storage)
+function loadFeedbacks() {
+  const list = document.getElementById('admin-feedback-list');
+  const countEl = document.getElementById('fb-total-count');
+  const items = JSON.parse(localStorage.getItem('baaocoop_feedbacks') || '[]');
+  
+  countEl.innerText = items.length;
+  if(items.length === 0) {
+    list.innerHTML = `<p style="color:var(--text-muted); padding:2rem 0; text-align:center;">No feedbacks available yet.</p>`;
+    return;
+  }
+  
+  list.innerHTML = items.slice().reverse().map(f => `
+    <div style="background:var(--bg-alt); padding:1rem 1.5rem; border-radius:var(--radius-sm); box-shadow:var(--shadow-sm); border:var(--glass-border);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+        <span style="font-weight:700; color:var(--text-main);">${f.name}</span>
+        <span style="font-size:0.75rem; color:var(--text-muted);">${f.date}</span>
+      </div>
+      <div style="margin-bottom:0.5rem; color:#f59e0b;">${'★'.repeat(f.rating)}<span style="color:#cbd5e1;">${'★'.repeat(5 - f.rating)}</span></div>
+      <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.5;">${f.message}</p>
+    </div>
+  `).join('');
+}
+</script>
+
 </body>
 </html>

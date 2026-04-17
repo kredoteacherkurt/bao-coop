@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<title>Terms of Service | Baao Coop</title>
+<link rel=stylesheet href=css/styles.css>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css>
+<link rel=icon href=assets/images/logo.png type=image/png>
+</head>
+<body>
+<div class=cmd-modal id=cmdModal>
+<div class=cmd-box>
+<div class=cmd-header>
+<i class="fas fa-search" style=color:var(--text-muted)></i>
+<input type=text id=cmdInput class=cmd-input placeholder="Search pages, services, or forms...">
+<span class=cmd-esc>ESC</span>
+</div>
+<div id=cmdResults class=cmd-results></div>
+</div>
+</div>
+<header>
+<div class=nav-row-1>
+<a href=index.html#home class=brand-area>
+<img src=assets/images/logo.png alt="Baao Coop Logo">
+<span>Baao Parish Multi-purpose Cooperative</span>
+</a>
+<div class=nav-actions>
+<button class=cmd-palette-btn onclick=openSearch()><i class="fas fa-search"></i> Search (Ctrl+K)</button>
+<a href=login.html style=font-weight:600;color:var(--text-main)>Log In</a>
+<a href=membership.html class="btn btn-primary">Join Now</a>
+</div>
+</div>
+<div class=nav-row-2>
+<div class=nav-item><a href=index.html#home>Home</a></div>
+<div class=nav-item>About Us <i class="fas fa-caret-down"></i>
+<div class=dropdown-menu>
+<a href=index.html#our-history>Our History</a>
+<a href=index.html#our-partners>Our Partners</a>
+<a href=faq.html>FAQ</a>
+</div>
+</div>
+<div class=nav-item>Products & Services <i class="fas fa-caret-down"></i>
+<div class=dropdown-menu>
+<a href=index.html#services>All Services</a>
+</div>
+</div>
+<div class=nav-item>Membership <i class="fas fa-caret-down"></i>
+<div class=dropdown-menu>
+<a href=index.html#join-us>Join Us Now</a>
+<a href=index.html#forms>Download Forms</a>
+</div>
+</div>
+</div>
+</header>
+<main class=container style=padding-top:160px;padding-bottom:4rem;min-height:80vh>
+<div class=service-card style=height:auto;padding:3rem;background:var(--bg-alt)>
+<h2 class=services-title style=text-align:left;color:var(--text-main)>Terms and Conditions</h2>
+<p style=color:var(--text-muted);font-size:.9rem;margin-bottom:2rem>Last Updated: January 1, 2026</p>
+<div style=color:var(--text-main);font-size:.95rem;line-height:1.8>
+<h3 style="color:var(--primary);margin:1.5rem 0 .5rem">1. Acceptance of Terms</h3>
+<p>By accessing the Baao Parish Multi-Purpose Cooperative (BPMPCO) website and applying for membership, you agree to be bound by these Terms and Conditions. These terms govern your use of our online portal and your relationship with the cooperative.</p>
+<h3 style="color:var(--primary);margin:1.5rem 0 .5rem">2. Membership Obligations</h3>
+<p>Members agree to abide by the cooperative's By-Laws, actively participate in cooperative activities, maintain required minimum share capital, and continuously support the cooperative's services and programs. Failure to meet these obligations may result in suspension of privileges.</p>
+<h3 style="color:var(--primary);margin:1.5rem 0 .5rem">3. Financial Transactions and Loans</h3>
+<p>All loan applications are subject to evaluation and approval based on credit policies. By taking out a loan, you agree to adhere strictly to the amortization schedule. BPMPCO reserves the right to deduct outstanding dues from your regular savings or share capital in the event of default, as stipulated in the loan agreement.</p>
+<h3 style="color:var(--primary);margin:1.5rem 0 .5rem">4. Online Portal Usage</h3>
+<p>You are responsible for maintaining the confidentiality of your Member Portal login credentials. Any transaction initiated through your account is considered authorized by you. BPMPCO is not liable for unauthorized access resulting from your negligence.</p>
+<h3 style="color:var(--primary);margin:1.5rem 0 .5rem">5. Amendments</h3>
+<p>BPMPCO reserves the right to amend these terms, our By-Laws, or operating policies at any time. Significant changes will be communicated to members via our official website, branch postings, or General Assembly meetings.</p>
+</div>
+</div>
+</main>
+<footer id=footer>
+<div class=footer-grid>
+<div style=text-align:left>
+<h4 style=margin-bottom:1rem>Get In Touch</h4>
+<select id=branch-select class=branch-select>
+<option value=main>Main Branch (Baao)</option>
+<option value=goa>Goa Branch</option>
+</select>
+<div id=branch-details class=branch-details></div>
+</div>
+<div style=text-align:left>
+<h4>Pages</h4>
+<ul style=list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.5rem>
+<li><a href=index.html#about>About Us</a></li>
+<li><a href=index.html#services>Services</a></li>
+<li><a href=index.html#join-us>Membership</a></li>
+</ul>
+</div>
+<div style=text-align:left>
+<h4>Support</h4>
+<ul style=list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.5rem>
+<li><a href=privacy-policy.html>Privacy Policy</a></li>
+<li><a href=terms.html>Terms of Service</a></li>
+<li><a href=faq.html>FAQ</a></li>
+</ul>
+</div>
+<div style=text-align:left>
+<h4>Stay Updated</h4>
+<p style=font-size:.85rem;color:#cbd5e1;margin-bottom:1rem>Subscribe to our newsletter for the latest updates.</p>
+<form class=newsletter-form style=display:flex;flex-direction:column;gap:.5rem>
+<input type=email placeholder="Email Address" required style="padding:.6rem 1rem;border-radius:var(--radius-sm);border:0;outline:0">
+<button type=submit class="btn btn-primary" style=padding:0.6rem>Subscribe</button>
+</form>
+</div>
+</div>
+<div class=footer-bottom>
+<p>&copy; 2026 Baao Parish Multi-Purpose Cooperative. All Rights Reserved.</p>
+</div>
+</footer>
+<script src=js/main.js></script>
+</body>
+</html>

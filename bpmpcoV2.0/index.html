@@ -1,251 +1,683 @@
 <!DOCTYPE html>
-<html lang=en>
+<html lang="en">
 <head>
-<meta charset=UTF-8>
-<meta name=viewport content="width=device-width, initial-scale=1.0">
-<title>Baao Coop | Empowering Our Community Through Cooperation</title>
-<meta name=description content="Official website of Baao Parish Multi-Purpose Cooperative. Join us for better savings, loans, and community benefits.">
-<link rel=stylesheet href=css/styles.css>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css>
-<link rel=icon href=assets/images/logo.png type=image/png>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baao Coop | Empowering Our Community</title>
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="icon" href="assets/images/logo.png" type="image/png">
 </head>
-<body id="public-page">
-<div id="page-loader" class="page-loader"><div class="spinner"></div></div>
+<body>
+
+<div class="cmd-modal" id="cmdModal">
+  <div class="cmd-box">
+    <div class="cmd-header">
+      <i class="fas fa-search" style="color:var(--text-muted)"></i>
+      <input type="text" id="cmdInput" class="cmd-input" placeholder="Search pages, services, or forms...">
+      <span class="cmd-esc">ESC</span>
+    </div>
+    <div id="cmdResults" class="cmd-results"></div>
+  </div>
+</div>
+
 <header>
-<div class="container nav-container">
-<a href=index.html class=logo>
-<span style="font-size: 1.2rem;">Baao Parish Multi-purpose Cooperative</span>
-</a>
-<nav>
-<ul class=nav-links>
-<li><a href=#about>About</a></li>
-<li><a href=#products>Services</a></li>
-<li><a href=#benefits>Benefits</a></li>
-<li><a href=#finance>Reports</a></li>
-<li><a href=#contact>Contact</a></li>
-</ul>
-</nav>
-<div style=display:flex;gap:1rem;align-items:center>
-<a href=login.html style=font-weight:600;color:var(--text-main)>Log In</a>
-<a href=membership.html class="btn btn-primary">Join Now</a>
-</div>
-</div>
+  <div class="nav-row-1">
+    <a href="#home" class="brand-area">
+      <img src="assets/images/logo.png" alt="Baao Coop Logo">
+      <span>Baao Parish Multi-purpose Cooperative</span>
+    </a>
+    <div class="nav-actions">
+      <button class="cmd-palette-btn" onclick="openSearch()">
+        <i class="fas fa-search"></i>
+        <span>Search</span>
+        <span class="cmd-trigger">Ctrl + K</span>
+      </button>
+      <a href="login.html" style="font-weight:600;color:var(--text-main)">Log In</a>
+      <a href="membership.html" class="btn btn-primary">Join Now</a>
+    </div>
+  </div>
+  <div class="nav-row-2">
+    <div class="nav-item"><a href="#home">Home</a></div>
+    <div class="nav-item"><a href="#about">About Us</a></div>
+    <div class="nav-item">Products & Services <i class="fas fa-caret-down"></i>
+      <div class="dropdown-menu">
+        <a href="#services">All Services</a>
+        <a href="#calculator">Loan Calculator</a>
+      </div>
+    </div>
+    <div class="nav-item">Membership <i class="fas fa-caret-down"></i>
+      <div class="dropdown-menu">
+        <a href="#join-us">Join Us Now</a>
+        <a href="#forms">Download Forms</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="#news">News</a></div>
+    <div class="nav-item"><a href="#branches">Branches</a></div>
+    <div class="nav-item"><a href="#feedback">Feedback</a></div>
+  </div>
 </header>
-<section class=hero>
-<div class=hero-bg></div>
-<div class=container>
-<div class="hero-content" id="hero-content-anim">
-<h1>Growth, <span class=title-gradient>Unity</span>, and Financial Prosperity.</h1>
-<p>Empowering the citizens of Baao through sustainable financial solutions and community-focused cooperation since 1990.</p>
-<div class=hero-actions>
-<a href=membership.html class="btn btn-primary">Become a Member</a>
-<a href=#products class="btn btn-secondary">Explore Products</a>
-</div>
-</div>
-</div>
-</section>
-<section id=about class=fade-up>
-<div class=container>
-<div class=about-grid>
-<div class="about-carousel glass" id="about-carousel">
-<div class="carousel-slides" id="carousel-slides">
-<!-- JS injects images here -->
-</div>
-<div class="carousel-pills" id="carousel-pills"></div>
-</div>
-<div class=about-text>
-<h2 class=title-gradient>Our Legacy & Mission</h2>
-<p>Founded with a vision of mutual help and economic empowerment, the Baao Parish Multi-Purpose Cooperative has grown from a small savings group into a cornerstone of our community's financial stability.</p>
-<p>Our mission is to provide accessible financial services while fostering a culture of thrift, cooperation, and social responsibility among our members.</p>
-</div>
-</div>
-</div>
-</section>
-<section id=products class=fade-up>
-<div class=container>
-<h2 class=section-title>Premium <span class=title-gradient>Products & Services</span></h2>
-<div class=grid-cards>
-<div class="card glass">
-<div class=card-icon><i class="fas fa-piggy-bank"></i></div>
-<h3>Savings Deposits</h3>
-<ul style="list-style-type:none;padding:0;color:var(--text-muted);display:flex;flex-direction:column;gap:0.75rem">
-<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Regular Savings</li>
-<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Time Deposit</li>
-<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Retirement Savings</li>
-<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Koop Alkansya (For Kids)</li>
-</ul>
-</div>
-<div class="card glass">
-<div class=card-icon><i class="fas fa-hand-holding-usd"></i></div>
-<h3>Loan Products</h3>
-<ul style="list-style-type:none;padding:0;color:var(--text-muted);display:flex;flex-direction:column;gap:0.75rem">
-<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Microfinance & Salary Loans</li>
-<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Agricultural / Farmer’s Loan</li>
-<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Business Loans</li>
-<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Gadget & Solar Loan</li>
-</ul>
-</div>
-<div class="card glass">
-<div class=card-icon><i class="fas fa-heartbeat"></i></div>
-<h3>Member Benefits</h3>
-<ul style="list-style-type:none;padding:0;color:var(--text-muted);display:flex;flex-direction:column;gap:0.75rem">
-<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Damayang Pangkalusugan (DPK)</li>
-<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Death Aid Program (DAP)</li>
-<li><i class="fas fa-check" style="color:var(--primary);margin-right:8px"></i>Coop Life Program (CLP)</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id=benefits class=fade-up>
-<div class=container>
-<h2 class=section-title>The <span class=title-gradient>Coop Advantage</span></h2>
-<div class=grid-cards>
-<div class="card glass">
-<div class=card-icon><i class="fas fa-chart-line"></i></div>
-<h3>Annual Dividends</h3>
-<p>Share in our success. Members receive annual dividends and patronage refunds.</p>
-</div>
-<div class="card glass">
-<div class=card-icon><i class="fas fa-shield-alt"></i></div>
-<h3>Insurance Coverage</h3>
-<p>Automatic member insurance and credit protection for your peace of mind.</p>
-</div>
-<div class="card glass">
-<div class=card-icon><i class="fas fa-graduation-cap"></i></div>
-<h3>Education Grants</h3>
-<p>Scholarships and educational support for members and their dependents.</p>
-</div>
-</div>
-</div>
-</section>
-<section id=video class=fade-up>
-<div class=container>
-<h2 class=section-title>Testimonies, <span class=title-gradient>News & Updates</span></h2>
-<p style=text-align:center;color:var(--text-muted);margin-bottom:2rem><i class="fas fa-info-circle"></i> <a href="membership.html" style="color:var(--primary-light);font-weight:600;text-decoration:underline">Watch our Pre-Membership Education Seminar (PMES)</a> before applying. It's required for all new members.</p>
-<div id="promo-video-wrapper" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius-lg);background:#000;box-shadow:var(--shadow-md);">
-    <!-- Script will inject iframe here -->
-</div>
-<div style="text-align:center;margin-top:2.5rem;">
-<a href="membership.html" class="btn btn-primary" style="font-size:1.1rem;"><i class="fas fa-file-signature" style="margin-right:8px;"></i> Proceed to Membership Application Form →</a>
-</div>
-</div>
-</section>
-<section id=finance class=fade-up>
-<div class=container>
-<h2 class=section-title>Transparency <span class=title-gradient>& Financial Health</span></h2>
-<div class=glass style=padding:3rem;text-align:center>
-<div style=display:flex;justify-content:space-around;flex-wrap:wrap;gap:2rem>
-<div>
-<h3 style=font-size:2.5rem class=title-gradient>₱<span class="count-up" id="stat-assets-val" data-target="500">0</span>M+</h3>
-<p>Total Assets</p>
-</div>
-<div>
-<h3 style=font-size:2.5rem class=title-gradient><span class="count-up" id="stat-members-val" data-target="15000">0</span>+</h3>
-<p>Active Members</p>
-</div>
-<div>
-<h3 style=font-size:2.5rem class=title-gradient><span class="count-up" id="stat-years-val" data-target="30">0</span>+ Years</h3>
-<p>Service Excellence</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id=partners class=fade-up>
-<div class=container>
-<h2 class=section-title>Our <span class=title-gradient>Partners & Linkages</span></h2>
-<p style=text-align:center;color:var(--text-muted);margin-bottom:2.5rem>We work closely with trusted government and industry partners to serve our members better.</p>
-<div style=display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:3rem;padding:2rem>
-<img src=assets/images/cda.svg alt="Cooperative Development Authority" title=CDA style="height:60px;max-width:140px;object-fit:contain;filter:grayscale(0.4);transition:filter .3s" onmouseover="this.style.filter='grayscale(0)'" onmouseout="this.style.filter='grayscale(0.4)'">
-<img src=assets/images/landbank.png alt="Land Bank of the Philippines" title="Land Bank" style="height:60px;max-width:140px;object-fit:contain;filter:grayscale(0.4);transition:filter .3s" onmouseover="this.style.filter='grayscale(0)'" onmouseout="this.style.filter='grayscale(0.4)'">
-<img src=assets/images/natcco.png alt="NATCCO Network" title=NATCCO style="height:60px;max-width:140px;object-fit:contain;filter:grayscale(0.4);transition:filter .3s" onmouseover="this.style.filter='grayscale(0)'" onmouseout="this.style.filter='grayscale(0.4)'">
-<img src=assets/images/pfcco.png alt=PFCCO title=PFCCO style="height:60px;max-width:140px;object-fit:contain;filter:grayscale(0.4);transition:filter .3s" onmouseover="this.style.filter='grayscale(0)'" onmouseout="this.style.filter='grayscale(0.4)'">
-</div>
-</div>
-</section>
-<section id=contact class=fade-up>
-<div class=container>
-<h2 class=section-title>Office Locations <span class=title-gradient>& Contact</span></h2>
-<div style=width:100%;height:300px;border-radius:var(--radius-lg);overflow:hidden;margin-bottom:3rem;box-shadow:var(--shadow-md)>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3905.016!2d123.3673!3d13.6512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a176b1b8b8b8b8%3A0x123456789!2sBaao%2C+Camarines+Sur!5e0!3m2!1sen!2sph!4v1700000000000" width=100% height=300 style=border:0 allowfullscreen loading=lazy referrerpolicy=no-referrer-when-downgrade title="Baao Coop Office Location">
-</iframe>
-</div>
-<div class=about-grid>
-<div>
-<h2 class=title-gradient>Get In Touch</h2>
-<p>Visit our main office or any of our satellite branches. We are here to serve you.</p>
-<br>
-<p>📍 <strong>Main Office:</strong> San Nicolas, Baao, Camarines Sur</p>
-<p>📞 <strong>Phone:</strong> (054) 123-4567</p>
-<p>📧 <strong>Email:</strong> inquiries@baaocoop.com</p>
-<p>🕗 <strong>Hours:</strong> Mon–Fri, 8:00 AM – 5:00 PM</p>
-<br>
-<p style=font-weight:600;margin-bottom:.75rem>Follow Us</p>
-<div style=display:flex;gap:1.5rem;font-size:2.2rem>
-<a href="https://www.facebook.com/baaocoop" target=_blank style="color:#1877F2;transition:transform 0.3s" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"><i class="fab fa-facebook"></i></a>
-<a href="https://www.instagram.com/baaocoop.bpmpco/" target=_blank style="color:#E4405F;transition:transform 0.3s" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"><i class="fab fa-instagram"></i></a>
-<a href="https://www.youtube.com/@BaaoCoop.BPMPCO" target=_blank style="color:#FF0000;transition:transform 0.3s" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"><i class="fab fa-youtube"></i></a>
-</div>
-</div>
-<div class=glass style=padding:2rem>
-<h3 style=margin-bottom:1.5rem>Send a Message</h3>
-<form id=contactForm>
-<div style=margin-bottom:1rem>
-<input type=text placeholder="Full Name" required>
-</div>
-<div style=margin-bottom:1rem>
-<input type=email placeholder="Email Address" required>
-</div>
-<div style=margin-bottom:1.5rem>
-<textarea placeholder="Your Message" rows=4 required></textarea>
-</div>
-<button type=submit class="btn btn-primary" style=width:100%>Send Message</button>
-</form>
-</div>
-</div>
-</div>
-</section>
-<section style=background:var(--bg-alt)>
-<div class=container style=text-align:center>
-<h2 class=title-gradient>Stay Updated</h2>
-<p style=margin-bottom:2rem>Subscribe to our newsletter for the latest updates on products and community events.</p>
-<form class=newsletter-form>
-<input type=email placeholder="Enter your email" required>
-<button type=submit class="btn btn-primary">Subscribe</button>
-</form>
-</div>
-</section>
-<footer>
-<div class=footer-grid>
-<div>
-<h3 class=logo style="font-size:1.2rem">Baao Parish Multi-purpose Cooperative</h3>
-<p>Your partner in financial empowerment and community unity.</p>
-</div>
-<div>
-<h4>Pages</h4>
-<ul>
-<li><a href=#about>About Us</a></li>
-<li><a href=#products>Services</a></li>
-<li><a href=#benefits>Benefits</a></li>
-<li><a href=membership.html>Membership</a></li>
-</ul>
-</div>
-<div>
-<h4>Support</h4>
-<ul>
-<li><a href=#>Privacy Policy</a></li>
-<li><a href=#>Terms of Service</a></li>
-<li><a href=#>FAQ</a></li>
-<li><a href=#contact>Contact Support</a></li>
-</ul>
-</div>
-</div>
-<div class=footer-bottom>
-<p>&copy; 2026 Baao Parish Multi-Purpose Cooperative. All Rights Reserved.</p>
-</div>
+
+<main class="container">
+  <!-- SECTION: HOME -->
+  <section id="home" class="tab-pane active">
+    <div class="hero-banner">
+      <img src="assets/images/hero-bg.png" alt="Hero Banner" loading="lazy">
+      <div class="hero-island">
+        <h2><i class="fas fa-bullhorn"></i> BPMPC UPDATES</h2>
+        <p>Stay informed with the latest news, announcements, and community events directly from Baao Coop.</p>
+        <div class="cta">
+          <a href="#news" class="btn btn-secondary">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <h2 class="services-title">Testimonies & Media</h2>
+    <div class="testimonies-grid">
+      <div class="vid-wrapper">
+        <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="vid-wrapper">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#1e293b;color:white">Video Area</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: ABOUT US -->
+  <section id="about" class="tab-pane">
+    <div class="hero-banner stagger-up" style="margin-bottom:0;">
+      <img src="assets/images/hero-bg.png" alt="Hero Banner" loading="lazy">
+      <div class="hero-island" style="left:50%; transform:translate(-50%, -50%); text-align:center; width:90%; max-width:800px;">
+        <h1 style="color:var(--primary); font-size:2.5rem; margin-bottom:0;">Rooted in Faith, Built Through Cooperation</h1>
+      </div>
+    </div>
+
+    <div class="about-nav-container stagger-up">
+      <div class="about-sub-nav">
+        <button class="sub-tab-btn active" onclick="openAboutTab('about-who', event)">
+          <i class="fas fa-info-circle"></i> ABOUT US
+        </button>
+        <button class="sub-tab-btn" onclick="openAboutTab('about-history', event)">
+          <i class="fas fa-history"></i> OUR HISTORY
+        </button>
+        <button class="sub-tab-btn" onclick="openAboutTab('about-exec', event)">
+          <i class="fas fa-university"></i> EXECUTIVES
+        </button>
+        <button class="sub-tab-btn" onclick="openAboutTab('about-mgmt', event)">
+          <i class="fas fa-sitemap"></i> MANAGEMENT
+        </button>
+      </div>
+    </div>
+
+    <div id="about-who" class="about-sub-pane active">
+      <div class="stagger-up" style="text-align:center; max-width:800px; margin:0 auto 4rem;">
+        <h3 style="color:var(--primary); letter-spacing:2px; text-transform:uppercase; font-size:1rem; margin-bottom:1rem;">- Who We Are -</h3>
+        <h1 style="color:var(--text-main); font-size:2.5rem; margin-bottom:1.5rem;">Rooted in Faith, Built Through Cooperation</h1>
+        <p style="color:var(--text-muted); margin-bottom:1rem;">Baao Parish Multi-Purpose Cooperative (BPMPCO) is a member-owned, community-driven institution grounded in cooperative principles and guided by shared faith and responsibility. Established through the collective effort of parishioners and community members, it exists to uplift lives by providing accessible financial services and sustainable livelihood support.</p>
+        <p style="color:var(--text-muted);">More than a financial institution, BPMPCO is a platform for mutual growth—where members are not just clients, but active participants in building a stronger, more resilient community. It continues to evolve while staying anchored on its core purpose: service through unity and cooperation.</p>
+      </div>
+
+      <div class="coop-stats stagger-up" style="background:var(--bg-alt); padding:3rem; border-radius:var(--radius-md); box-shadow:var(--shadow-md); border:var(--glass-border); margin-bottom:4rem;">
+        <div class="stat-item">
+          <h3>₱<span class="count-up" data-target="500">0</span>M+</h3>
+          <p>Total Assets</p>
+        </div>
+        <div class="stat-item">
+          <h3><span class="count-up" data-target="15000">0</span>+</h3>
+          <p>Active Members</p>
+        </div>
+        <div class="stat-item">
+          <h3><span class="count-up" data-target="30">0</span>+ Years</h3>
+          <p>Service Excellence</p>
+        </div>
+      </div>
+
+      <div class="grid-2 stagger-up" style="align-items:center;">
+        <div style="background:rgba(0,0,0,0.05); border-radius:var(--radius-md); height:100%; min-height:450px; width:100%;"></div>
+        <div style="padding:2rem 0;">
+          <h3 style="color:var(--primary); font-size:1rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:0.5rem;">Our Identity</h3>
+          <h1 style="color:var(--text-main); font-size:2.5rem; margin-bottom:1.5rem;">Who We Are</h1>
+          <p style="color:var(--text-muted); margin-bottom:2rem;">BPMPCO stands as one of the trusted cooperatives in Camarines Sur, committed to empowering members through inclusive financial solutions and community development initiatives. From its humble beginnings as a parish initiative, it has grown into a multi-purpose cooperative serving diverse member needs while staying true to its founding values.</p>
+          <div style="display:flex; flex-direction:column; gap:1rem;">
+            <div class="core-card"><span>01</span><p>Provide accessible and responsible financial services to members</p></div>
+            <div class="core-card"><span>02</span><p>Uphold cooperative values through education, trust, and participation</p></div>
+            <div class="core-card"><span>03</span><p>Strengthen community resilience through sustainable development programs</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="about-history" class="about-sub-pane">
+      <div class="stagger-up" style="text-align:center; max-width:800px; margin:0 auto;">
+        <h3 style="color:var(--primary); letter-spacing:2px; text-transform:uppercase; font-size:1rem; margin-bottom:1rem;">- Our Path -</h3>
+        <h1 style="color:var(--text-main); font-size:2.5rem;">A Journey of Growth, Service, and Cooperative Strength</h1>
+      </div>
+      <div class="timeline stagger-up">
+        <div class="tl-item"><div class="tl-bullet"></div><div class="tl-card"><h2 style="color:var(--secondary);margin-bottom:0.5rem;">1963</h2><h4 style="margin-bottom:0.5rem;">Foundation</h4><p style="color:var(--text-muted);font-size:0.9rem;">Registered as Baao Parish Cooperative Credit Union, Inc. (BPCCUI) on August 26, 1963...</p></div></div>
+        <div class="tl-item"><div class="tl-bullet"></div><div class="tl-card"><h2 style="color:var(--secondary);margin-bottom:0.5rem;">1989</h2><h4 style="margin-bottom:0.5rem;">Milestone Growth</h4><p style="color:var(--text-muted);font-size:0.9rem;">Reached Php 1 million in total assets...</p></div></div>
+        <div class="tl-item"><div class="tl-bullet"></div><div class="tl-card"><h2 style="color:var(--secondary);margin-bottom:0.5rem;">1991</h2><h4 style="margin-bottom:0.5rem;">Formal Registration</h4><p style="color:var(--text-muted);font-size:0.9rem;">Re-registered with the Cooperative Development Authority...</p></div></div>
+        <div class="tl-item"><div class="tl-bullet"></div><div class="tl-card"><h2 style="color:var(--secondary);margin-bottom:0.5rem;">1990s–2000s</h2><h4 style="margin-bottom:0.5rem;">Expansion of Services</h4><p style="color:var(--text-muted);font-size:0.9rem;">Transitioned from a credit union into a multi-purpose cooperative...</p></div></div>
+        <div class="tl-item"><div class="tl-bullet"></div><div class="tl-card"><h2 style="color:var(--secondary);margin-bottom:0.5rem;">2010s–Present</h2><h4 style="margin-bottom:0.5rem;">Regional Expansion</h4><p style="color:var(--text-muted);font-size:0.9rem;">Expanded its reach across the Bicol region...</p></div></div>
+        <div class="tl-item"><div class="tl-bullet"></div><div class="tl-card"><h2 style="color:var(--secondary);margin-bottom:0.5rem;">2022</h2><h4 style="margin-bottom:0.5rem;">Recognition</h4><p style="color:var(--text-muted);font-size:0.9rem;">Honored at the Asia’s Pinnacle Awards...</p></div></div>
+        <div class="tl-item"><div class="tl-bullet"></div><div class="tl-card"><h2 style="color:var(--secondary);margin-bottom:0.5rem;">Today</h2><h4 style="margin-bottom:0.5rem;">Continuing the Mission</h4><p style="color:var(--text-muted);font-size:0.9rem;">BPMPCO continues to uphold cooperative values...</p></div></div>
+      </div>
+    </div>
+
+    <div id="about-exec" class="about-sub-pane">
+      <div class="stagger-up" style="text-align:center; max-width:800px; margin:0 auto 3rem;">
+        <h3 style="color:var(--primary); letter-spacing:2px; text-transform:uppercase; font-size:1rem; margin-bottom:1rem;">- Leaderships -</h3>
+        <h1 style="color:var(--text-main); font-size:2.5rem; margin-bottom:1.5rem;">Our Executives</h1>
+        <p style="color:var(--text-muted);">Meet the executives — entrusted with steering the organization’s direction...</p>
+      </div>
+      <div class="team-grid stagger-up">
+        <div class="team-card"><div class="team-img"></div><div class="team-info"><h4>John Doe</h4><p>Board of Director</p></div></div>
+        <div class="team-card"><div class="team-img"></div><div class="team-info"><h4>Jane Smith</h4><p>Board of Director</p></div></div>
+        <div class="team-card"><div class="team-img"></div><div class="team-info"><h4>Mark Lee</h4><p>Board of Director</p></div></div>
+        <div class="team-card"><div class="team-img"></div><div class="team-info"><h4>Lucy Anne</h4><p>Board of Director</p></div></div>
+      </div>
+    </div>
+
+    <div id="about-mgmt" class="about-sub-pane">
+      <div class="stagger-up" style="text-align:center; max-width:800px; margin:0 auto 3rem;">
+        <h3 style="color:var(--primary); letter-spacing:2px; text-transform:uppercase; font-size:1rem; margin-bottom:1rem;">- The Team -</h3>
+        <h1 style="color:var(--text-main); font-size:2.5rem; margin-bottom:1.5rem;">Meet the Management</h1>
+        <p style="color:var(--text-muted);">The passionate people behind BPMPC who work every day to deliver world-class cooperative service.</p>
+      </div>
+      <div class="team-grid stagger-up">
+        <div class="team-card ceo-card">
+          <div class="team-img"></div>
+          <div class="team-info">
+            <h2 style="color:var(--secondary);font-size:1.8rem;margin-bottom:0.5rem;">Sarah Connor</h2>
+            <p style="font-size:1rem;color:var(--primary);margin-bottom:1rem;">Chief Executive Officer</p>
+            <p style="color:var(--text-muted);text-transform:none;font-weight:400;font-size:0.95rem;line-height:1.6;">Sarah brings over 20 years of cooperative management experience...</p>
+          </div>
+        </div>
+        <div class="team-card"><div class="team-img"></div><div class="team-info"><h4>Alan Wake</h4><p>Operations Manager</p></div></div>
+        <div class="team-card"><div class="team-img"></div><div class="team-info"><h4>Jill Valentine</h4><p>Finance Head</p></div></div>
+        <div class="team-card"><div class="team-img"></div><div class="team-info"><h4>Chris Redfield</h4><p>Branch Manager</p></div></div>
+        <div class="team-card"><div class="team-img"></div><div class="team-info"><h4>Leon Kennedy</h4><p>IT Director</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: PARTNERS -->
+  <section id="our-partners" class="tab-pane">
+    <div class="hero-banner stagger-up">
+      <img src="assets/images/hero-bg.png" alt="Hero Banner" loading="lazy">
+      <div class="hero-island" style="left:50%; transform:translate(-50%, -50%); text-align:center; width:90%; max-width:800px;">
+        <h1 style="color:var(--primary); font-size:2.5rem; margin-bottom:0;">Our Partners & Linkages</h1>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--text-muted);margin-bottom:4rem">We work closely with trusted government and industry partners to serve our members better.</p>
+    <div class="partners-wrap">
+      <img src="assets/images/cda.svg" alt="CDA" title="Cooperative Development Authority" loading="lazy">
+      <img src="assets/images/landbank.png" alt="Landbank" title="Land Bank of the Philippines" loading="lazy">
+      <img src="assets/images/natcco.png" alt="NATCCO" title="NATCCO Network" loading="lazy">
+      <img src="assets/images/pfcco.png" alt="PFCCO" title="PFCCO" loading="lazy">
+    </div>
+  </section>
+
+  <!-- SECTION: SERVICES -->
+  <section id="services" class="tab-pane">
+    <div class="hero-banner stagger-up">
+      <img src="assets/images/hero-bg.png" alt="Hero Banner" loading="lazy">
+      <div class="hero-island" style="left:50%; transform:translate(-50%, -50%); text-align:center; width:90%; max-width:800px;">
+        <h1 style="color:var(--primary); font-size:2.5rem; margin-bottom:0;">Products & Services</h1>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="service-category">
+        <h3><i class="fas fa-hand-holding-usd"></i> Loan Products</h3>
+        <ul class="list-2-col">
+          <li>Microfinance Loan</li><li>Salary Loan</li><li>Pension Loan</li>
+          <li>OFW Loan</li><li>Back-to-Back Loan</li><li>Solar Package Loan</li>
+          <li>Jewelry Loan</li><li>Character Loan</li><li>Grocery Loan</li>
+          <li>Medical Loan</li><li>Enrollment Loan</li><li>Farmer's Loan</li>
+          <li>Calamity Loan</li><li>Petty Cash / Emergency Loan</li>
+        </ul>
+      </div>
+      <div class="service-category">
+        <h3><i class="fas fa-piggy-bank"></i> Regular Savings</h3>
+        <ul class="list-2-col">
+          <li>Retirement Savings</li><li>Birthday Savings</li>
+          <li>Travel Savings</li><li>Anniversary Savings</li>
+          <li>Koop Alkansya (For Kids)</li><li>Time Deposit</li>
+        </ul>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="service-category">
+        <h3><i class="fas fa-heartbeat"></i> Social Services</h3>
+        <ul class="list-2-col">
+          <li>Damayang Pangkalusugan (DPK)</li><li>Death Aid Program (DAP)</li>
+          <li>Coop Life Program (CLP)</li><li>Koop Assurance Program</li>
+          <li>Baaocoop Damayan Insurance</li>
+        </ul>
+      </div>
+      <div class="service-category">
+        <h3><i class="fas fa-users"></i> Member Services</h3>
+        <ul class="list-2-col">
+          <li>SSS / Philhealth Payment</li><li>Accommodation</li>
+          <li>Automated Teller Machine (ATM)</li><li>KAYA Payment</li>
+        </ul>
+      </div>
+    </div>
+    <div class="service-category">
+      <h3><i class="fas fa-star"></i> Special Coop Programs</h3>
+      <ul class="list-2-col">
+        <li>Aflatoun Program (School-based Savings)</li><li>Coop College Assistance Program (CCAP)</li>
+        <li>Coop Youth Exposure Program (CYEP)</li><li>Coop Youth Volunteer Exposure Program</li>
+        <li>Adopt-a-Barangay Feeding Program</li><li>Koop Kalinga (Scholarship Grant)</li>
+        <li>Koop Negosyo (Business Dev’t Assistance)</li><li>Koop Paligiran (Environmental Program)</li>
+        <li>Coop Marketing Program (Advertising)</li><li>Balik Eskwela Program (Free School Supplies)</li>
+      </ul>
+    </div>
+    <div style="text-align:center;margin-top:1rem">
+      <a href="#branches" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="btn btn-primary" style="font-size:1.1rem;padding:1rem 3rem;border-radius:50px;box-shadow:var(--shadow-md)">Inquire at a Branch <i class="fas fa-arrow-right" style="margin-left:8px"></i></a>
+    </div>
+  </section>
+
+  <!-- SECTION: JOIN US -->
+  <section id="join-us" class="tab-pane">
+    <div class="hero-banner stagger-up">
+      <img src="assets/images/hero-bg.png" alt="Hero Banner" loading="lazy">
+      <div class="hero-island" style="left:50%; transform:translate(-50%, -50%); text-align:center; width:90%; max-width:800px;">
+        <h1 style="color:var(--primary); font-size:2.5rem; margin-bottom:0;">Become a Member Now!</h1>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="service-card" style="height:auto">
+        <h3>Requirements</h3>
+        <ul>
+          <li>Pre-membership Education Seminar Attendance</li>
+          <li>1x1 Recent Colored Picture (4 pcs.)</li>
+          <li>1x1 Recent Colored Picture of Spouse; if married (1 pc.)</li>
+          <li>Photocopy of Birth Certificate or Marriage Contract</li>
+          <li>Photocopy of two (2) valid IDs</li>
+        </ul>
+        <br>
+        <h3>Amount to be paid upon membership:</h3>
+        <ul style="color:var(--text-main)">
+          <li>Php 200.00 - Membership Fee</li>
+          <li>Php 100.00 - Initial Savings</li>
+          <li>Php 100.00 - Initial Share Capital</li>
+          <li>Php 100.00 - 2 Passbook (Share Capital & Savings)</li>
+          <li>Php 100.00 - Membership ID</li>
+          <li>Php 300.00 - DAMAYAN</li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2rem;justify-content:center;align-items:center">
+        <img src="assets/images/logo.png" style="width:150px;opacity:.8" alt="">
+        <a href="assets/forms/application_form.pdf" download class="btn btn-secondary" style="width:80%;font-size:1.1rem"><i class="fas fa-download"></i> Download Application Form</a>
+        <p style="color:var(--text-muted)">Ready your documents?</p>
+        <a href="membership.html" class="btn btn-primary" style="width:80%;font-size:1.2rem;padding:1rem"><i class="fas fa-file-signature"></i> Apply Online Here</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: FORMS -->
+  <section id="forms" class="tab-pane">
+    <div class="hero-banner stagger-up">
+      <img src="assets/images/hero-bg.png" alt="Hero Banner" loading="lazy">
+      <div class="hero-island" style="left:50%; transform:translate(-50%, -50%); text-align:center; width:90%; max-width:800px;">
+        <h1 style="color:var(--primary); font-size:2.5rem; margin-bottom:0.5rem;">Downloadable Forms</h1>
+        <p style="color:var(--text-muted); margin:0; font-size:1.1rem">Click icons to download the file</p>
+      </div>
+    </div>
+    <div class="forms-grid">
+      <a href="assets/forms/loan_app.pdf" download class="form-card">
+        <i class="fas fa-file-invoice-dollar"></i>
+        <div>
+          <h3 style="color:var(--text-main);font-size:1.1rem">Loan Application Form</h3>
+          <p style="color:var(--text-muted);font-size:.85rem">PDF Document (1.2MB)</p>
+        </div>
+      </a>
+      <a href="assets/forms/withdrawal.pdf" download class="form-card">
+        <i class="fas fa-money-check-alt"></i>
+        <div>
+          <h3 style="color:var(--text-main);font-size:1.1rem">Savings Withdrawal Slip</h3>
+          <p style="color:var(--text-muted);font-size:.85rem">PDF Document (0.5MB)</p>
+        </div>
+      </a>
+      <a href="assets/forms/membership.pdf" download class="form-card">
+        <i class="fas fa-user-plus"></i>
+        <div>
+          <h3 style="color:var(--text-main);font-size:1.1rem">Membership Form</h3>
+          <p style="color:var(--text-muted);font-size:.85rem">PDF Document (2.1MB)</p>
+        </div>
+      </a>
+      <a href="assets/forms/dap.pdf" download class="form-card">
+        <i class="fas fa-heartbeat"></i>
+        <div>
+          <h3 style="color:var(--text-main);font-size:1.1rem">Death Aid Program Claim Form</h3>
+          <p style="color:var(--text-muted);font-size:.85rem">PDF Document (1.0MB)</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- SECTION: CALCULATOR -->
+  <section id="calculator" class="tab-pane">
+    <div class="hero-banner stagger-up">
+      <img src="assets/images/hero-bg.png" alt="Hero Banner" loading="lazy">
+      <div class="hero-island" style="left:50%; transform:translate(-50%, -50%); text-align:center; width:90%; max-width:800px;">
+        <h1 style="color:var(--primary); font-size:2.5rem; margin-bottom:0;">Loan Calculator</h1>
+      </div>
+    </div>
+    <div class="calc-container">
+      <div class="calc-panel" id="calcPanel">
+        <h3 id="calcTargetName" style="color:var(--text-main);font-size:2rem;margin-bottom:2rem;display:flex;align-items:center;font-weight:700">
+          <i class="fas fa-shopping-cart" style="color:var(--secondary);margin-right:15px;font-size:2.5rem"></i> Grocery Loan
+        </h3>
+        <div style="margin-bottom:1rem">
+          <label class="calc-form-label">Select Member Classification <span style="color:red">*</span></label>
+          <select class="calc-form-control" style="background:#f1f5f9; border-color:rgba(0,0,0,0.1)">
+            <option value="">Select an option</option>
+            <option value="regular">Regular Member</option>
+            <option value="associate">Associate Member</option>
+          </select>
+        </div>
+        <div style="margin-bottom:1rem">
+          <label class="calc-form-label">Loan Amount (PHP) <span style="color:red">*</span></label>
+          <input type="number" id="calcAmount" class="calc-form-control" placeholder="e.g. 20000" oninput="calculateLoan()">
+        </div>
+        <div style="margin-bottom:1rem">
+          <label class="calc-form-label">Select Terms (Months) <span style="color:red">*</span></label>
+          <select id="calcTerms" class="calc-form-control" onchange="calculateLoan()">
+            <option value="12">1 Year (12 months)</option>
+            <option value="24">2 Years (24 months)</option>
+            <option value="36" selected>3 Years (36 months)</option>
+          </select>
+        </div>
+        <div class="calc-row">
+          <div>
+            <label class="calc-form-label">Service Fee</label>
+            <input type="text" id="calcService" class="calc-form-control" disabled placeholder="₱ 0.00">
+          </div>
+          <div>
+            <label class="calc-form-label">Coop Life Insurance</label>
+            <input type="text" id="calcLife" class="calc-form-control" disabled placeholder="₱ 0.00">
+          </div>
+        </div>
+        <div class="calc-row">
+          <div>
+            <label class="calc-form-label">Loan Protection Plan</label>
+            <input type="text" id="calcProtection" class="calc-form-control" disabled placeholder="₱ 0.00">
+          </div>
+          <div>
+            <label class="calc-form-label">Savings Retention</label>
+            <input type="text" id="calcSavings" class="calc-form-control" disabled placeholder="₱ 0.00">
+          </div>
+        </div>
+        <div style="margin-top:1rem;border-top:1px solid rgba(0,0,0,0.1);padding-top:1rem">
+          <label class="calc-form-label" style="color:var(--text-main);font-size:0.9rem">Net Proceeds</label>
+          <input type="text" id="calcNet" class="calc-form-control" disabled style="font-size:1.1rem;color:var(--primary);background:rgba(220,38,38,0.05);border-color:var(--primary)" placeholder="₱ 0.00">
+        </div>
+        <div style="margin-top:1rem">
+          <a href="membership.html" class="btn btn-primary" style="width:100%;padding:0.6rem">Proceed to Application</a>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:1.5rem;font-size:1.4rem;font-weight:400;color:var(--text-main)">Other Loans:</h3>
+        <div class="calc-icons">
+          <div class="calc-icon-btn active" onclick="selectCalcLoan('Grocery Loan','fa-shopping-cart',event)">
+            <i class="fas fa-shopping-cart"></i><span>Grocery Loan</span>
+          </div>
+          <div class="calc-icon-btn" onclick="selectCalcLoan('Pensioner Loan','fa-id-card',event)">
+            <i class="far fa-id-card"></i><span>Pensioner Loan</span>
+          </div>
+          <div class="calc-icon-btn" onclick="selectCalcLoan('Bonus Loan','fa-users',event)">
+            <i class="fas fa-users"></i><span>Government and Pensioner Bonus Loan</span>
+          </div>
+          <div class="calc-icon-btn" onclick="selectCalcLoan('Car Loan','fa-car-side',event)">
+            <i class="fas fa-car-side"></i><span>Car Loan</span>
+          </div>
+          <div class="calc-icon-btn" onclick="selectCalcLoan('Back-to-Back Loan','fa-user-clock',event)">
+            <i class="fas fa-user-clock"></i><span>Back-to-Back Loan</span>
+          </div>
+          <div class="calc-icon-btn" onclick="selectCalcLoan('P3 Loan','fa-business-time',event)">
+            <i class="fas fa-business-time"></i><span>P3 Loan</span>
+          </div>
+          <div class="calc-icon-btn" onclick="selectCalcLoan('Easy Loan','fa-hand-holding-heart',event)">
+            <i class="fas fa-hand-holding-heart"></i><span>Easy Loan</span>
+          </div>
+          <div class="calc-icon-btn" onclick="selectCalcLoan('Microfinance','fa-leaf',event)">
+            <i class="fas fa-leaf"></i><span>Microfinance Loan</span>
+          </div>
+          <div class="calc-icon-btn" onclick="selectCalcLoan('ATM Loan','fa-credit-card',event)">
+            <i class="far fa-credit-card"></i><span>ATM Loan</span>
+          </div>
+          <div class="calc-icon-btn" onclick="selectCalcLoan('Tindahan Loan','fa-store',event)">
+            <i class="fas fa-store"></i><span>Coop Tindahan Loan</span>
+          </div>
+          <div class="calc-icon-btn" onclick="selectCalcLoan('Honorarium Loan','fa-user-tie',event)">
+            <i class="fas fa-user-tie"></i><span>Honorarium Loan</span>
+          </div>
+          <div class="calc-icon-btn" onclick="selectCalcLoan('GAAF Loan','fa-laptop',event)">
+            <i class="fas fa-laptop"></i><span style="font-size:0.6rem;color:var(--text-muted);font-weight:600">GAAF Loan<br>Gadget, Appliance, Auto Accessories</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: NEWS -->
+  <section id="news" class="tab-pane">
+    <div class="hero-banner stagger-up">
+      <img src="assets/images/hero-bg.png" alt="Hero Banner" loading="lazy">
+      <div class="hero-island" style="left:50%; transform:translate(-50%, -50%); text-align:center; width:90%; max-width:800px;">
+        <h1 style="color:var(--primary); font-size:2.5rem; margin-bottom:0;">Latest News</h1>
+      </div>
+    </div>
+    <p style="text-align:center; padding:2rem 0">Coming Soon...</p>
+  </section>
+
+  <!-- SECTION: BRANCHES -->
+  <section id="branches" class="tab-pane">
+    <div class="hero-banner stagger-up">
+      <img src="assets/images/hero-bg.png" alt="Hero Banner" loading="lazy">
+      <div class="hero-island" style="left:50%; transform:translate(-50%, -50%); text-align:center; width:90%; max-width:800px;">
+        <h1 style="color:var(--primary); font-size:2.5rem; margin-bottom:0;">Find a branch near you</h1>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="service-card">
+        <h3 style="color:var(--secondary);margin-bottom:1rem;font-size:1.1rem;line-height:1.4"><i class="fas fa-building" style="margin-right:8px"></i>Baao Parish Multi-Purpose Cooperative (Main)</h3>
+        <p style="color:var(--text-muted);margin-bottom:.5rem"><i class="fas fa-map-marker-alt" style="color:var(--primary);width:25px"></i>Rizal Street, San Nicolas District, Baao, 4432, Camarines Sur</p>
+        <p style="color:var(--text-muted);margin-bottom:.5rem"><i class="fas fa-clock" style="color:var(--primary);width:25px"></i>Mon-Fri 8:30 AM–2:30 PM</p>
+        <p style="color:var(--text-muted);margin-bottom:.5rem"><i class="fas fa-envelope" style="color:var(--primary);width:25px"></i>inquire@baaocoop.com</p>
+        <p style="color:var(--text-muted);margin-bottom:.5rem"><i class="fas fa-phone" style="color:var(--primary);width:25px"></i>0542663199</p>
+        <a href="javascript:void(0)" style="color:var(--primary);font-weight:600;display:inline-flex;align-items:center;gap:.5rem;background:none;border:none;cursor:pointer;font-size:1rem" onclick="updateBranchMap('main')"><i class="fas fa-map-location-dot"></i> View Branch</a>
+      </div>
+      <div class="service-card">
+        <h3 style="color:var(--secondary);margin-bottom:1rem;font-size:1.1rem;line-height:1.4"><i class="fas fa-building" style="margin-right:8px"></i>Goa Branch-Baao Parish Multi-Purpose Cooperative</h3>
+        <p style="color:var(--text-muted);margin-bottom:.5rem"><i class="fas fa-map-marker-alt" style="color:var(--primary);width:25px"></i>Rivero Building, San Jose St Goa N/A, 4422 Camarines Sur</p>
+        <p style="color:var(--text-muted);margin-bottom:.5rem"><i class="fas fa-clock" style="color:var(--primary);width:25px"></i>Mon-Fri 8:30 AM–3:30 PM</p>
+        <p style="color:var(--text-muted);margin-bottom:.5rem"><i class="fas fa-envelope" style="color:var(--primary);width:25px"></i>goa@baaocoop.com</p>
+        <p style="color:var(--text-muted);margin-bottom:.5rem"><i class="fas fa-phone" style="color:var(--primary);width:25px"></i>09508983131</p>
+        <a href="javascript:void(0)" style="color:var(--primary);font-weight:600;display:inline-flex;align-items:center;gap:.5rem;background:none;border:none;cursor:pointer;font-size:1rem" onclick="updateBranchMap('goa')"><i class="fas fa-map-location-dot"></i> View Branch</a>
+      </div>
+    </div>
+    <div id="view-on-maps" style="width:100%;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(0,0,0,0.1);scroll-margin-top:160px">
+      <h2 class="services-title" style="text-align:left;font-size:1.5rem"><i class="fas fa-map-marked-alt"></i> Branch Location</h2>
+      <div style="width:100%;height:450px;background:var(--bg-alt);border-radius:var(--radius-md);box-shadow:var(--shadow-md);border:var(--glass-border);overflow:hidden">
+        <iframe id="shared-branch-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3880.3040773402536!2d123.36318577508484!3d13.455343886906247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a197438f68d539%3A0x87a534f84abc3f68!2sBaao%20Parish%20Multi-Purpose%20Cooperative!5e0!3m2!1sen!2sph!4v1776357602995!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: FEEDBACK -->
+  <section id="feedback" class="tab-pane">
+    <div class="hero-banner stagger-up">
+      <img src="assets/images/hero-bg.png" alt="Hero Banner" loading="lazy">
+      <div class="hero-island" style="left:50%; transform:translate(-50%, -50%); text-align:center; width:90%; max-width:800px;">
+        <h1 style="color:var(--primary); font-size:2.5rem; margin-bottom:0;">Member Feedback</h1>
+      </div>
+    </div>
+    <!-- GATE: Not Logged In -->
+    <div id="feedback-gate" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:40vh;gap:1.5rem;text-align:center">
+      <i class="fas fa-lock" style="font-size:3rem;color:var(--primary);opacity:0.6"></i>
+      <h3 style="color:var(--text-main);font-size:1.8rem">Members Only</h3>
+      <p style="color:var(--text-muted);max-width:420px">Must be logged in to view and submit feedback. Join our community of cooperative members.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center">
+        <a href="login.html" class="btn btn-primary" style="padding:0.8rem 2rem;font-size:1rem"><i class="fas fa-sign-in-alt" style="margin-right:8px"></i>Log In</a>
+        <a href="membership.html" class="btn btn-secondary" style="padding:0.8rem 2rem;font-size:1rem"><i class="fas fa-user-plus" style="margin-right:8px"></i>Join Now</a>
+      </div>
+    </div>
+    <!-- LOGGED IN: Split Layout -->
+    <div id="feedback-authenticated" style="display:none">
+      <div style="display:grid;grid-template-columns:70fr 30fr;gap:3rem;align-items:start">
+        <!-- LEFT: Feedback Feed -->
+        <div>
+          <h3 style="color:var(--text-main);font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:2px solid rgba(0,0,0,0.06)"><i class="fas fa-comments" style="color:var(--secondary);margin-right:8px"></i>What Members Are Saying</h3>
+          <div id="feedback-list" style="display:flex;flex-direction:column;gap:1.2rem"></div>
+        </div>
+        <!-- RIGHT: Form -->
+        <div style="position:sticky;top:180px">
+          <h3 style="color:var(--text-main);font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:2px solid rgba(0,0,0,0.06)"><i class="fas fa-pen" style="color:var(--primary);margin-right:8px"></i>Leave a Feedback</h3>
+          <div style="margin-bottom:1.2rem">
+            <label style="display:block;font-size:0.8rem;font-weight:600;color:var(--text-muted);margin-bottom:0.3rem">Full Name</label>
+            <input id="fb-name" type="text" class="calc-form-control" readonly style="background:#f1f5f9;cursor:not-allowed">
+          </div>
+          <div style="margin-bottom:1.2rem">
+            <label style="display:block;font-size:0.8rem;font-weight:600;color:var(--text-muted);margin-bottom:0.5rem">Rating</label>
+            <div id="fb-stars" style="display:flex;gap:0.4rem">
+              <i class="fas fa-star fb-star" data-val="1" style="font-size:1.8rem;cursor:pointer;color:#cbd5e1;transition:0.2s"></i>
+              <i class="fas fa-star fb-star" data-val="2" style="font-size:1.8rem;cursor:pointer;color:#cbd5e1;transition:0.2s"></i>
+              <i class="fas fa-star fb-star" data-val="3" style="font-size:1.8rem;cursor:pointer;color:#cbd5e1;transition:0.2s"></i>
+              <i class="fas fa-star fb-star" data-val="4" style="font-size:1.8rem;cursor:pointer;color:#cbd5e1;transition:0.2s"></i>
+              <i class="fas fa-star fb-star" data-val="5" style="font-size:1.8rem;cursor:pointer;color:#cbd5e1;transition:0.2s"></i>
+            </div>
+          </div>
+          <div style="margin-bottom:1.5rem">
+            <label style="display:block;font-size:0.8rem;font-weight:600;color:var(--text-muted);margin-bottom:0.3rem">Message</label>
+            <textarea id="fb-message" class="calc-form-control" placeholder="Share your experience with Baao Coop..." style="resize:vertical;min-height:140px;line-height:1.6"></textarea>
+          </div>
+          <div style="display:flex;gap:0.75rem">
+            <button onclick="clearFeedbackForm()" class="btn" style="flex:1;padding:0.7rem;background:rgba(0,0,0,0.05);color:var(--text-main);font-weight:600">Clear</button>
+            <button onclick="submitFeedback()" class="btn btn-primary" style="flex:2;padding:0.7rem"><i class="fas fa-paper-plane" style="margin-right:6px"></i>Submit</button>
+          </div>
+          <p id="fb-msg" style="margin-top:0.75rem;font-size:0.85rem;text-align:center;min-height:1.2rem"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="footer">
+  <div class="footer-grid">
+    <div style="text-align:left">
+      <h4 style="margin-bottom:1rem">Get In Touch</h4>
+      <div class="nav-item footer-branch-dropdown" style="margin-bottom:1rem;background:#1e293b;border:1px solid #334155;border-radius:var(--radius-sm);padding:0.6rem;color:white;position:relative">
+        <div id="branch-select-display" style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600">
+          <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Baao Parish Multi-Purpose Cooperative (Main)</span> <i class="fas fa-caret-down"></i>
+        </div>
+        <div class="dropdown-menu" style="width:100%;left:0;transform:none;background:#0f172a;border:1px solid #334155;top:100%;padding:0.5rem;box-shadow:var(--shadow-lg)">
+          <a href="javascript:void(0)" onclick="updateFooterBranch('main','Baao Parish Multi-Purpose Cooperative (Main)')" style="color:#f8fafc;padding:0.6rem 1rem;border-radius:4px;transition:0.3s;margin-bottom:0.2rem" onmouseover="this.style.background='var(--primary)';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#f8fafc'">Baao Parish Multi-Purpose Cooperative (Main)</a>
+          <a href="javascript:void(0)" onclick="updateFooterBranch('goa','Goa Branch-Baao Parish Multi-Purpose Cooperative')" style="color:#f8fafc;padding:0.6rem 1rem;border-radius:4px;transition:0.3s" onmouseover="this.style.background='var(--primary)';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#f8fafc'">Goa Branch-Baao Parish Multi-Purpose Cooperative</a>
+        </div>
+      </div>
+      <div id="branch-details" class="branch-details"></div>
+    </div>
+    <div style="text-align:left">
+      <h4>Pages</h4>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.5rem">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#join-us">Membership</a></li>
+        <li><a href="#news">News & Events</a></li>
+      </ul>
+    </div>
+    <div style="text-align:left">
+      <h4>Support</h4>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.5rem">
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="javascript:void(0)" onclick="if(!window.chatOpen) toggleChat(); switchChatTab('message');">Contact Support</a></li>
+      </ul>
+    </div>
+    <div style="text-align:left">
+      <h4>Stay Updated</h4>
+      <p style="font-size:.85rem;color:#cbd5e1;margin-bottom:1rem">Subscribe to our newsletter for the latest updates.</p>
+      <form class="newsletter-form" style="display:flex;flex-direction:column;gap:.5rem">
+        <input type="email" placeholder="Email Address" required style="padding:.6rem 1rem;border-radius:var(--radius-sm);border:0;outline:0">
+        <button type="submit" class="btn btn-primary" style="padding:0.6rem">Subscribe</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Baao Parish Multi-Purpose Cooperative. All Rights Reserved.</p>
+  </div>
 </footer>
-<script src=js/main.js></script>
-<script src=js/coop-logic.js></script>
+
+<!-- CHAT WIDGET (Left) -->
+<div id="chat-widget" style="position:fixed;bottom:2rem;left:2rem;z-index:9998;display:flex;flex-direction:column;align-items:flex-start;gap:0.75rem">
+  <!-- Chat Panel -->
+  <div id="chat-panel" style="display:none;flex-direction:column;width:380px;border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.15);border:var(--glass-border);opacity:0;transform:translateY(10px);transition:0.3s ease">
+    <!-- Header -->
+    <div style="background:var(--text-main);padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center">
+      <div style="display:flex;align-items:center;gap:0.75rem">
+        <img src="assets/images/logo.png" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.2)">
+        <div>
+          <p style="color:white;font-weight:700;font-size:0.95rem;margin:0">Baao Coop</p>
+          <p style="color:#94a3b8;font-size:0.75rem;margin:0;display:flex;align-items:center;gap:0.4rem"><span style="width:7px;height:7px;background:#22c55e;border-radius:50%;display:inline-block"></span>Usually replies same day</p>
+        </div>
+      </div>
+      <button onclick="toggleChat()" style="background:rgba(255,255,255,0.1);border:none;color:white;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center"><i class="fas fa-times"></i></button>
+    </div>
+    <!-- Tab Bar -->
+    <div style="background:#1e293b;display:flex;border-bottom:1px solid rgba(255,255,255,0.05)">
+      <button onclick="switchChatTab('home')" id="chat-tab-home" class="chat-tab-btn" style="flex:1;padding:0.75rem;background:white;color:var(--text-main);border:none;cursor:pointer;font-size:0.75rem;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:0.3rem;transition:0.2s"><i class="fas fa-home" style="font-size:1rem"></i>Home</button>
+      <button onclick="switchChatTab('message')" id="chat-tab-message" class="chat-tab-btn" style="flex:1;padding:0.75rem;background:transparent;color:#64748b;border:none;cursor:pointer;font-size:0.75rem;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:0.3rem;transition:0.2s"><i class="far fa-comment-dots" style="font-size:1rem"></i>Messages</button>
+      <button onclick="switchChatTab('help')" id="chat-tab-help" class="chat-tab-btn" style="flex:1;padding:0.75rem;background:transparent;color:#64748b;border:none;cursor:pointer;font-size:0.75rem;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:0.3rem;transition:0.2s"><i class="far fa-question-circle" style="font-size:1rem"></i>Help</button>
+    </div>
+    <!-- Tab: Home -->
+    <div id="chat-pane-home" style="background:white;padding:1.5rem;display:flex;flex-direction:column;gap:1rem;max-height:380px;overflow-y:auto">
+      <div>
+        <h3 style="font-size:1.4rem;color:var(--text-main);margin-bottom:0.3rem">Hi there 👋</h3>
+        <p style="color:var(--text-muted);font-size:0.9rem">How can we help you today?</p>
+      </div>
+      <button onclick="switchChatTab('message')" style="background:var(--text-main);color:white;border:none;border-radius:var(--radius-md);padding:1rem 1.2rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;text-align:left">
+        <div><p style="font-weight:700;margin:0;font-size:0.95rem">Send a message</p><p style="color:#94a3b8;font-size:0.8rem;margin:0">We'll get back to you shortly</p></div>
+        <i class="fas fa-chevron-right" style="color:#94a3b8"></i>
+      </button>
+      <div style="border-top:1px solid rgba(0,0,0,0.06);padding-top:1rem;display:flex;flex-direction:column;gap:0.75rem">
+        <p style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:1px">QUICK LINKS</p>
+        <a href="#services" onclick="toggleChat()" style="display:flex;justify-content:space-between;align-items:center;color:var(--text-main);font-weight:600;font-size:0.9rem;padding:0.5rem 0;border-bottom:1px solid rgba(0,0,0,0.04)">Our Services <i class="fas fa-chevron-right" style="color:var(--text-muted);font-size:0.8rem"></i></a>
+        <a href="#join-us" onclick="toggleChat()" style="display:flex;justify-content:space-between;align-items:center;color:var(--text-main);font-weight:600;font-size:0.9rem;padding:0.5rem 0;border-bottom:1px solid rgba(0,0,0,0.04)">Become a Member <i class="fas fa-chevron-right" style="color:var(--text-muted);font-size:0.8rem"></i></a>
+        <a href="#branches" onclick="toggleChat()" style="display:flex;justify-content:space-between;align-items:center;color:var(--text-main);font-weight:600;font-size:0.9rem;padding:0.5rem 0;border-bottom:1px solid rgba(0,0,0,0.04)">Find a Branch <i class="fas fa-chevron-right" style="color:var(--text-muted);font-size:0.8rem"></i></a>
+        <a href="#calculator" onclick="toggleChat()" style="display:flex;justify-content:space-between;align-items:center;color:var(--text-main);font-weight:600;font-size:0.9rem;padding:0.5rem 0">Loan Calculator <i class="fas fa-chevron-right" style="color:var(--text-muted);font-size:0.8rem"></i></a>
+      </div>
+    </div>
+    <!-- Tab: Message -->
+    <div id="chat-pane-message" style="background:white;display:none;flex-direction:column;max-height:420px;padding:1.5rem;gap:1rem;overflow-y:auto">
+      <h4 style="color:var(--text-main);margin-bottom:0.2rem">Live Chat</h4>
+      <div id="chat-messages" style="flex:1;min-height:150px;background:#f8fafc;border-radius:var(--radius-sm);padding:1rem;display:flex;flex-direction:column;gap:0.75rem;overflow-y:auto;">
+        <!-- Messages will pop in here -->
+      </div>
+      <div style="display:flex;gap:0.5rem">
+        <input type="text" id="chat-input" placeholder="Type a message..." style="flex:1;padding:0.6rem 0.9rem;border:1px solid rgba(0,0,0,0.1);border-radius:var(--radius-sm);font-family:inherit;font-size:0.88rem;outline:none;background:white">
+        <button onclick="sendChatMessage()" style="background:#2563eb;color:white;border:none;padding:0 1rem;border-radius:var(--radius-sm);font-weight:600;cursor:pointer;transition:0.3s"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+    <!-- Tab: Help -->
+    <div id="chat-pane-help" style="background:white;display:none;padding:1.5rem;flex-direction:column;gap:0.75rem;max-height:380px;overflow-y:auto">
+      <h4 style="color:var(--text-main);margin-bottom:0.5rem">Help Center</h4>
+      <details style="border:1px solid rgba(0,0,0,0.07);border-radius:var(--radius-sm);padding:0.75rem"><summary style="font-weight:600;font-size:0.9rem;cursor:pointer;color:var(--text-main)">How do I become a member?</summary><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.5rem;line-height:1.6">Visit the Membership section or click Join Now. Prepare your valid IDs, 1x1 photos, and birth certificate. You may also apply online.</p></details>
+      <details style="border:1px solid rgba(0,0,0,0.07);border-radius:var(--radius-sm);padding:0.75rem"><summary style="font-weight:600;font-size:0.9rem;cursor:pointer;color:var(--text-main)">What loans are available?</summary><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.5rem;line-height:1.6">We offer Microfinance, Salary, Pension, OFW, Grocery, Medical, Calamity Loans and more. Check our Products & Services section for the full list.</p></details>
+      <details style="border:1px solid rgba(0,0,0,0.07);border-radius:var(--radius-sm);padding:0.75rem"><summary style="font-weight:600;font-size:0.9rem;cursor:pointer;color:var(--text-main)">Where are your branches?</summary><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.5rem;line-height:1.6">We have branches in Baao (Main), Goa, Iriga City, Ocampo, Naga City, Sipocot, and Polangui.</p></details>
+      <details style="border:1px solid rgba(0,0,0,0.07);border-radius:var(--radius-sm);padding:0.75rem"><summary style="font-weight:600;font-size:0.9rem;cursor:pointer;color:var(--text-main)">What are your office hours?</summary><p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.5rem;line-height:1.6">Monday to Friday, 8:30 AM – 2:30 PM (Main). Branch hours may vary slightly.</p></details>
+      <p style="text-align:center;margin-top:0.5rem"><button onclick="switchChatTab('message')" style="background:none;border:none;color:var(--secondary);font-weight:600;cursor:pointer;font-size:0.88rem">Still need help? Send a message</button></p>
+    </div>
+  </div>
+  <!-- Chat FAB Toggle -->
+  <button id="chat-fab" onclick="toggleChat()" style="width:52px;height:52px;border-radius:50%;background:var(--text-main);color:white;border:none;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:0.3s"><i id="chat-fab-icon" class="far fa-comment-dots"></i></button>
+</div>
+
+<!-- SCROLL TO TOP FAB -->
+<button id="fabTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:2rem;right:2rem;z-index:9998;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:white;border:none;cursor:pointer;box-shadow:0 4px 15px rgba(220,38,38,0.4);display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:0.3s;opacity:0;pointer-events:none;transform:translateY(20px)"><i class="fas fa-arrow-up"></i></button>
+
+<script type="module" src="js/config.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

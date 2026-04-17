@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<title>Frequently Asked Questions | Baao Coop</title>
+<link rel=stylesheet href=css/styles.css>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css>
+<link rel=icon href=assets/images/logo.png type=image/png>
+</head>
+<body>
+<div class=cmd-modal id=cmdModal>
+<div class=cmd-box>
+<div class=cmd-header>
+<i class="fas fa-search" style=color:var(--text-muted)></i>
+<input type=text id=cmdInput class=cmd-input placeholder="Search pages, services, or forms...">
+<span class=cmd-esc>ESC</span>
+</div>
+<div id=cmdResults class=cmd-results></div>
+</div>
+</div>
+<header>
+<div class=nav-row-1>
+<a href=index.html#home class=brand-area>
+<img src=assets/images/logo.png alt="Baao Coop Logo">
+<span>Baao Parish Multi-purpose Cooperative</span>
+</a>
+<div class=nav-actions>
+<button class=cmd-palette-btn onclick=openSearch()><i class="fas fa-search"></i> Search (Ctrl+K)</button>
+<a href=login.html style=font-weight:600;color:var(--text-main)>Log In</a>
+<a href=membership.html class="btn btn-primary">Join Now</a>
+</div>
+</div>
+<div class=nav-row-2>
+<div class=nav-item><a href=index.html#home>Home</a></div>
+<div class=nav-item>About Us <i class="fas fa-caret-down"></i>
+<div class=dropdown-menu>
+<a href=index.html#our-history>Our History</a>
+<a href=index.html#our-partners>Our Partners</a>
+<a href=index.html#team>Our Team</a>
+<a href=index.html#gallery>Gallery</a>
+<a href=faq.html>FAQ</a>
+</div>
+</div>
+<div class=nav-item>Products & Services <i class="fas fa-caret-down"></i>
+<div class=dropdown-menu>
+<a href=index.html#services>All Services</a>
+<a href=index.html#calculator>Loan Calculator</a>
+</div>
+</div>
+<div class=nav-item>Membership <i class="fas fa-caret-down"></i>
+<div class=dropdown-menu>
+<a href=index.html#join-us>Join Us Now</a>
+<a href=index.html#forms>Download Forms</a>
+</div>
+</div>
+<div class=nav-item><a href=index.html#news>News</a></div>
+<div class=nav-item><a href=index.html#branches>Branches</a></div>
+<div class=nav-item><a href=index.html#feedback>Feedback</a></div>
+</div>
+</header>
+<main class=container style=padding-top:160px;padding-bottom:4rem;min-height:80vh>
+<h2 class=services-title style=text-align:left;margin-bottom:1rem>Frequently Asked Questions</h2>
+<p style=color:var(--text-muted);margin-bottom:3rem>Find answers to the most common questions about joining and transacting with Baao Coop.</p>
+<div style=display:flex;flex-direction:column;gap:1.5rem>
+<div class=service-card style=height:auto;padding:1.5rem>
+<h3 style=color:var(--primary);font-size:1.1rem;border-bottom:0;margin-bottom:.5rem><i class="fas fa-question-circle"></i> How do I become a member?</h3>
+<p style=color:var(--text-muted);font-size:.95rem>To become a member, you must first attend the Pre-Membership Education Seminar (PMES). Afterward, submit the required documents (IDs, pictures, Birth Certificate/Marriage Contract) and pay the initial fees totaling Php 900.00. You can start by downloading the forms online or visiting our nearest branch.</p>
+</div>
+<div class=service-card style=height:auto;padding:1.5rem>
+<h3 style=color:var(--primary);font-size:1.1rem;border-bottom:0;margin-bottom:.5rem><i class="fas fa-question-circle"></i> Can non-residents of Baao join the cooperative?</h3>
+<p style=color:var(--text-muted);font-size:.95rem>Yes! While we originated in Baao, our cooperative is open to individuals residing in areas where we have satellite branches, including Goa, Iriga City, Ocampo, Naga City, Sipocot, and Polangui.</p>
+</div>
+<div class=service-card style=height:auto;padding:1.5rem>
+<h3 style=color:var(--primary);font-size:1.1rem;border-bottom:0;margin-bottom:.5rem><i class="fas fa-question-circle"></i> What are the requirements to apply for a loan?</h3>
+<p style=color:var(--text-muted);font-size:.95rem>Members must be in good standing with updated share capital. General requirements include a completed loan application form, valid IDs, proof of income (payslips or business permits), and depending on the loan amount, a co-maker or collateral may be required.</p>
+</div>
+<div class=service-card style=height:auto;padding:1.5rem>
+<h3 style=color:var(--primary);font-size:1.1rem;border-bottom:0;margin-bottom:.5rem><i class="fas fa-question-circle"></i> What is the Damayang Pangkalusugan (DPK)?</h3>
+<p style=color:var(--text-muted);font-size:.95rem>The DPK is a health and medical assistance program exclusively for members. It acts as an emergency health fund that members can tap into during hospitalizations or severe medical situations.</p>
+</div>
+<div class=service-card style=height:auto;padding:1.5rem>
+<h3 style=color:var(--primary);font-size:1.1rem;border-bottom:0;margin-bottom:.5rem><i class="fas fa-question-circle"></i> How can I view my account balance?</h3>
+<p style=color:var(--text-muted);font-size:.95rem>You can view your savings and loan balances by bringing your passbook to any of our branches for updating. You can also view your transaction history by logging into the Member Portal via this website.</p>
+</div>
+</div>
+</main>
+<footer id=footer>
+<div class=footer-grid>
+<div style=text-align:left>
+<h4 style=margin-bottom:1rem>Get In Touch</h4>
+<select id=branch-select class=branch-select>
+<option value=main>Main Branch (Baao)</option>
+<option value=goa>Goa Branch</option>
+</select>
+<div id=branch-details class=branch-details></div>
+</div>
+<div style=text-align:left>
+<h4>Pages</h4>
+<ul style=list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.5rem>
+<li><a href=index.html#about>About Us</a></li>
+<li><a href=index.html#services>Services</a></li>
+<li><a href=index.html#join-us>Membership</a></li>
+<li><a href=index.html#news>News & Events</a></li>
+</ul>
+</div>
+<div style=text-align:left>
+<h4>Support</h4>
+<ul style=list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.5rem>
+<li><a href=privacy-policy.html>Privacy Policy</a></li>
+<li><a href=terms.html>Terms of Service</a></li>
+<li><a href=faq.html>FAQ</a></li>
+<li><a href=index.html#feedback>Contact Support</a></li>
+</ul>
+</div>
+<div style=text-align:left>
+<h4>Stay Updated</h4>
+<p style=font-size:.85rem;color:#cbd5e1;margin-bottom:1rem>Subscribe to our newsletter for the latest updates.</p>
+<form class=newsletter-form style=display:flex;flex-direction:column;gap:.5rem>
+<input type=email placeholder="Email Address" required style="padding:.6rem 1rem;border-radius:var(--radius-sm);border:0;outline:0">
+<button type=submit class="btn btn-primary" style=padding:0.6rem>Subscribe</button>
+</form>
+</div>
+</div>
+<div class=footer-bottom>
+<p>&copy; 2026 Baao Parish Multi-Purpose Cooperative. All Rights Reserved.</p>
+</div>
+</footer>
+<script src=js/main.js></script>
+</body>
+</html>
