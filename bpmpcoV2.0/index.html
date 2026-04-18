@@ -26,34 +26,37 @@
 <span>Baao Parish Multi-purpose Cooperative</span>
 </a>
 <div class=nav-actions>
-<button class=cmd-palette-btn onclick=openSearch()>
+<button style="width:200px;align-items:left"class=cmd-palette-btn onclick=openSearch()>
 <i class="fas fa-search"></i>
 <span>Search</span>
-<span class=cmd-trigger>Ctrl + K</span>
 </button>
 <a href=login.html style=font-weight:600;color:var(--text-main)>Log In</a>
 <a href=membership.html class="btn btn-primary">Join Now</a>
 </div>
 </div>
 <div class=nav-row-2>
-<div class=nav-item><a href=#home>Home</a></div>
-<div class=nav-item><a href=#about>About Us</a></div>
-<div class=nav-item>Products & Services <i class="fas fa-caret-down"></i>
+<div style=display:flex;gap:1rem;align-items:center;flex-wrap:wrap>
+<div class=nav-item><a href=#home><i class="fas fa-home"></i> HOME</a></div>
+<div class=nav-item><a href=#about><i class="fas fa-info-circle"></i> ABOUT US</a></div>
+<div class=nav-item><i class="fas fa-box"></i> PRODUCTS & SERVICES <i class="fas fa-caret-down"></i>
 <div class=dropdown-menu>
-<a href=#services>All Services</a>
-<a href=#calculator>Loan Calculator</a>
+<a href=#services><i class="fas fa-box"></i> ALL SERVICES</a>
 </div>
 </div>
-<div class=nav-item>Membership <i class="fas fa-caret-down"></i>
+<div class=nav-item><i class="fas fa-id-card"></i> MEMBERSHIP <i class="fas fa-caret-down"></i>
 <div class=dropdown-menu>
-<a href=#join-us>Join Us Now</a>
-<a href=#forms>Download Forms</a>
+<a href=#join-us><i class="fas fa-users"></i> JOIN US</a>
+<a href=#forms><i class="fas fa-download"></i> FORMS</a>
 </div>
 </div>
-<div class=nav-item><a href=#gallery>Gallery</a></div>
-<div class=nav-item><a href=#news>News</a></div>
-<div class=nav-item><a href=#branches>Branches</a></div>
-<div class=nav-item><a href=#feedback>Feedback</a></div>
+<div class=nav-item><a href=#gallery><i class="fas fa-images"></i> GALLERY</a></div>
+<div class=nav-item><a href=#branches><i class="fas fa-map-marker-alt"></i> BRANCHES</a></div>
+</div>
+<div style=display:flex;gap:1rem;align-items:center;flex-wrap:wrap>
+<div class=nav-item><a href=#news><i class="fas fa-newspaper"></i> ARTICLES</a></div>
+<div class=nav-item><a href=#feedback><i class="fas fa-comments"></i> FEEDBACK</a></div>
+<div class=nav-item><a href=#contact><i class="fas fa-envelope"></i> CONTACT US</a></div>
+</div>
 </div>
 </header>
 <main class=container>
@@ -61,11 +64,12 @@
 <div class=hero-banner>
 <img src=assets/images/hero-bg.png alt="Hero Banner" loading=lazy>
 <div class=hero-island>
-<h2>BPMPC UPDATES</h2>
-<h1>Welcome to Baao Coop</h1>
-<p>Stay informed with the latest news, announcements, and community events directly from Baao Parish Multi-Purpose Cooperative.</p>
+<h2 id=home-hero-h2>BPMPC UPDATES</h2>
+<h1 id=home-hero-h1>Welcome to Baao Coop</h1>
+<p id=home-hero-p>Stay informed with the latest news, announcements, and community events directly from Baao Parish Multi-Purpose Cooperative.</p>
 <div class=cta>
 <a href=#news class="btn btn-secondary">Read More <i class="fas fa-arrow-right"></i></a>
+<a href=#join-us class="btn btn-primary" style=margin-left:1rem>Be One Of Us? <i class="fas fa-users"></i></a>
 </div>
 </div>
 </div>
@@ -76,9 +80,9 @@
 <div class="hero-banner stagger-up" style=margin-bottom:0>
 <img src=assets/images/hero-bg.png alt="Hero Banner" loading=lazy>
 <div class=hero-island>
-<h2>ABOUT US</h2>
-<h1>Rooted in Faith, Built Through Cooperation</h1>
-<p>Discover our journey from a humble parish initiative to a leading multi-purpose cooperative, guided by shared faith and a commitment to uplift lives.</p>
+<h2 id=about-hero-h2>ABOUT US</h2>
+<h1 id=about-hero-h1>Rooted in Faith, Built Through Cooperation</h1>
+<p id=about-hero-p>Discover our journey from a humble parish initiative to a leading multi-purpose cooperative, guided by shared faith and a commitment to uplift lives.</p>
 </div>
 </div>
 <div class="about-nav-container stagger-up">
@@ -99,10 +103,9 @@
 </div>
 <div id=about-who class="about-sub-pane active">
 <div class=stagger-up style="text-align:center;max-width:800px;margin:0 auto 4rem">
-<h3 style=color:var(--primary);letter-spacing:2px;text-transform:uppercase;font-size:1rem;margin-bottom:1rem>- Who We Are -</h3>
-<h1 style=color:var(--text-main);font-size:2.5rem;margin-bottom:1.5rem>Rooted in Faith, Built Through Cooperation</h1>
-<p style=color:var(--text-muted);margin-bottom:1rem>Baao Parish Multi-Purpose Cooperative (BPMPCO) is a member-owned, community-driven institution grounded in cooperative principles and guided by shared faith and responsibility. Established through the collective effort of parishioners and community members, it exists to uplift lives by providing accessible financial services and sustainable livelihood support.</p>
-<p style=color:var(--text-muted)>More than a financial institution, BPMPCO is a platform for mutual growth—where members are not just clients, but active participants in building a stronger, more resilient community. It continues to evolve while staying anchored on its core purpose: service through unity and cooperation.</p>
+<h3 id=about-who-h3 style=color:var(--primary);letter-spacing:2px;text-transform:uppercase;font-size:1rem;margin-bottom:1rem>- Who We Are -</h3>
+<h1 id=about-who-h1 style=color:var(--text-main);font-size:1.8rem;margin-bottom:0.8rem>Rooted in Faith, Built Through Cooperation</h1>
+<p id=about-who-p style=color:var(--text-muted);margin-bottom:1rem>Baao Parish Multi-Purpose Cooperative (BPMPCO) is a member-owned, community-driven institution grounded in cooperative principles and guided by shared faith and responsibility. Established through the collective effort of parishioners and community members, it exists to uplift lives by providing accessible financial services and sustainable livelihood support.</p>
 </div>
 <div class="coop-stats stagger-up" style=background:var(--bg-alt);padding:3rem;border-radius:var(--radius-md);box-shadow:var(--shadow-md);border:var(--glass-border);margin-bottom:4rem>
 <div class=stat-item>
@@ -118,16 +121,19 @@
 <p>Service Excellence</p>
 </div>
 </div>
-<div class="grid-2 stagger-up" style=align-items:center>
-<div style=background:rgba(0,0,0,0.05);border-radius:var(--radius-md);height:100%;min-height:450px;width:100%></div>
+<div class="grid-2 stagger-up" style="align-items:center;gap:4rem;max-width:1100px;margin:0 auto">
+<div style=display:flex;justify-content:center;align-items:center>
+<div id=about-who-graphic style=background:rgba(0,0,0,0.05);border-radius:var(--radius-lg);width:100%;max-width:420px;aspect-ratio:4/5;background-size:cover;background-position:center;box-shadow:var(--shadow-lg)></div>
+</div>
 <div style="padding:2rem 0">
-<h3 style=color:var(--primary);font-size:1rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:.5rem>Our Identity</h3>
-<h1 style=color:var(--text-main);font-size:2.5rem;margin-bottom:1.5rem>Who We Are</h1>
-<p style=color:var(--text-muted);margin-bottom:2rem>BPMPCO stands as one of the trusted cooperatives in Camarines Sur, committed to empowering members through inclusive financial solutions and community development initiatives. From its humble beginnings as a parish initiative, it has grown into a multi-purpose cooperative serving diverse member needs while staying true to its founding values.</p>
+<h3 id=about-identity-h3 style=color:var(--primary);font-size:1rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:.5rem>Our Identity</h3>
+<h1 id=about-identity-h1 style=color:var(--text-main);font-size:1.8rem;margin-bottom:0.8rem>Who We Are</h1>
+<p id=about-identity-p style=color:var(--text-muted);margin-bottom:2rem>BPMPCO stands as one of the trusted cooperatives in Camarines Sur, committed to empowering members through inclusive financial solutions and community development initiatives. From its humble beginnings as a parish initiative, it has grown into a multi-purpose cooperative serving diverse member needs while staying true to its founding values.</p>
 <div style=display:flex;flex-direction:column;gap:1rem>
-<div class=core-card><span>01</span><p>Provide accessible and responsible financial services to members</p></div>
-<div class=core-card><span>02</span><p>Uphold cooperative values through education, trust, and participation</p></div>
-<div class=core-card><span>03</span><p>Strengthen community resilience through sustainable development programs</p></div>
+<div class=core-card><span>01</span><p id=about-card-1>Provide accessible and responsible financial services to members</p></div>
+<div class=core-card><span>02</span><p id=about-card-2>Uphold cooperative values through education, trust, and participation</p></div>
+<div class=core-card><span>03</span><p id=about-card-3>Strengthen community resilience through sustainable development programs</p></div>
+</div>
 </div>
 </div>
 </div>
@@ -137,15 +143,7 @@
 <h3 style=color:var(--primary);letter-spacing:2px;text-transform:uppercase;font-size:1rem;margin-bottom:1rem>- Our Path -</h3>
 <h1 style=color:var(--text-main);font-size:2.5rem>A Journey of Growth, Service, and Cooperative Strength</h1>
 </div>
-<div class="timeline stagger-up">
-<div class=tl-item><div class=tl-bullet></div><div class=tl-card><h2 style=color:var(--secondary);margin-bottom:0.5rem>1963</h2><h4 style=margin-bottom:0.5rem>Foundation</h4><p style=color:var(--text-muted);font-size:0.9rem>Registered as Baao Parish Cooperative Credit Union, Inc. (BPCCUI) on August 26, 1963, starting with 50 members and Php 1,193.00 in capital. Founded by parishioners led by the Hijas de Maria, with support from the Baao Parish Council, to provide accessible credit to underserved members of the community.</p></div></div>
-<div class=tl-item><div class=tl-bullet></div><div class=tl-card><h2 style=color:var(--secondary);margin-bottom:0.5rem>1989</h2><h4 style=margin-bottom:0.5rem>Milestone Growth</h4><p style=color:var(--text-muted);font-size:0.9rem>Reached Php 1 million in total assets and was recognized as a “Millionaire Cooperative,” marking a significant step in its financial stability and growth.</p></div></div>
-<div class=tl-item><div class=tl-bullet></div><div class=tl-card><h2 style=color:var(--secondary);margin-bottom:0.5rem>1991</h2><h4 style=margin-bottom:0.5rem>Formal Registration</h4><p style=color:var(--text-muted);font-size:0.9rem>Re-registered with the Cooperative Development Authority under Republic Act No. 6938 as Baao Parish Multi-Purpose Cooperative (BPMPCO), expanding its legal and operational scope.</p></div></div>
-<div class=tl-item><div class=tl-bullet></div><div class=tl-card><h2 style=color:var(--secondary);margin-bottom:0.5rem>1990s–2000s</h2><h4 style=margin-bottom:0.5rem>Expansion of Services</h4><p style=color:var(--text-muted);font-size:0.9rem>Transitioned from a credit union into a multi-purpose cooperative, introducing savings, expanded loan products, and livelihood programs to better serve members’ growing needs.</p></div></div>
-<div class=tl-item><div class=tl-bullet></div><div class=tl-card><h2 style=color:var(--secondary);margin-bottom:0.5rem>2010s–Present</h2><h4 style=margin-bottom:0.5rem>Regional Expansion</h4><p style=color:var(--text-muted);font-size:0.9rem>Expanded its reach across the Bicol region, establishing branches in Goa, Iriga City, Ocampo, Naga City, Sipocot, and Polangui, strengthening financial inclusion and accessibility.</p></div></div>
-<div class=tl-item><div class=tl-bullet></div><div class=tl-card><h2 style=color:var(--secondary);margin-bottom:0.5rem>2022</h2><h4 style=margin-bottom:0.5rem>Recognition</h4><p style=color:var(--text-muted);font-size:0.9rem>Honored at the Asia’s Pinnacle Awards as the “Most Dedicated & Exemplary Trusted Cooperative in Camarines Sur,” recognizing its strong performance and leadership.</p></div></div>
-<div class=tl-item><div class=tl-bullet></div><div class=tl-card><h2 style=color:var(--secondary);margin-bottom:0.5rem>Today</h2><h4 style=margin-bottom:0.5rem>Continuing the Mission</h4><p style=color:var(--text-muted);font-size:0.9rem>BPMPCO continues to uphold cooperative values while delivering inclusive financial services, empowering members, and strengthening communities for long-term development.</p></div></div>
-</div>
+<div class="timeline stagger-up" id=history-timeline></div>
 </div>
 <div id=about-exec class=about-sub-pane>
 <div class=stagger-up style="text-align:center;max-width:800px;margin:0 auto 3rem">
@@ -153,12 +151,7 @@
 <h1 style=color:var(--text-main);font-size:2.5rem;margin-bottom:1.5rem>Our Executives</h1>
 <p style=color:var(--text-muted)>Meet the executives — entrusted with steering the organization’s direction...</p>
 </div>
-<div class="team-grid stagger-up">
-<div class=team-card><div class=team-img></div><div class=team-info><h4>John Doe</h4><p>Board of Director</p></div></div>
-<div class=team-card><div class=team-img></div><div class=team-info><h4>Jane Smith</h4><p>Board of Director</p></div></div>
-<div class=team-card><div class=team-img></div><div class=team-info><h4>Mark Lee</h4><p>Board of Director</p></div></div>
-<div class=team-card><div class=team-img></div><div class=team-info><h4>Lucy Anne</h4><p>Board of Director</p></div></div>
-</div>
+<div class="team-grid stagger-up" id=execs-grid></div>
 </div>
 <div id=about-mgmt class=about-sub-pane>
 <div class=stagger-up style="text-align:center;max-width:800px;margin:0 auto 3rem">
@@ -166,20 +159,7 @@
 <h1 style=color:var(--text-main);font-size:2.5rem;margin-bottom:1.5rem>Meet the Management</h1>
 <p style=color:var(--text-muted)>The passionate people behind BPMPC who work every day to deliver world-class cooperative service.</p>
 </div>
-<div class="team-grid stagger-up">
-<div class="team-card ceo-card">
-<div class=team-img></div>
-<div class=team-info>
-<h2 style=color:var(--secondary);font-size:1.8rem;margin-bottom:0.5rem>Sarah Connor</h2>
-<p style=font-size:1rem;color:var(--primary);margin-bottom:1rem>Chief Executive Officer</p>
-<p style=color:var(--text-muted);text-transform:none;font-weight:400;font-size:0.95rem;line-height:1.6>Sarah brings over 20 years of cooperative management experience...</p>
-</div>
-</div>
-<div class=team-card><div class=team-img></div><div class=team-info><h4>Alan Wake</h4><p>Operations Manager</p></div></div>
-<div class=team-card><div class=team-img></div><div class=team-info><h4>Jill Valentine</h4><p>Finance Head</p></div></div>
-<div class=team-card><div class=team-img></div><div class=team-info><h4>Chris Redfield</h4><p>Branch Manager</p></div></div>
-<div class=team-card><div class=team-img></div><div class=team-info><h4>Leon Kennedy</h4><p>IT Director</p></div></div>
-</div>
+<div class="team-grid stagger-up" id=mgmt-grid></div>
 </div>
 </section>
 <section id=our-partners class=tab-pane>
@@ -208,6 +188,7 @@
 <p>Explore our wide range of loan products, savings accounts, and specialized programs designed to secure your financial future and support your goals.</p>
 </div>
 </div>
+<div id="dynamic-services-container" style="display:grid;gap:2rem">
 <div class=grid-2>
 <div class=service-category>
 <h3><i class="fas fa-hand-holding-usd"></i> Loan Products</h3>
@@ -228,6 +209,7 @@
 </ul>
 </div>
 </div>
+<div id="dynamic-services-container" style="display:grid;gap:2rem">
 <div class=grid-2>
 <div class=service-category>
 <h3><i class="fas fa-heartbeat"></i> Social Services</h3>
@@ -255,6 +237,7 @@
 <li>Coop Marketing Program (Advertising)</li><li>Balik Eskwela Program (Free School Supplies)</li>
 </ul>
 </div>
+</div>
 <div style=text-align:center;margin-top:1rem>
 <a href=#branches onclick="window.scrollTo({top:0,behavior:'smooth'})" class="btn btn-primary" style="font-size:1.1rem;padding:1rem 3rem;border-radius:50px;box-shadow:var(--shadow-md)">Inquire at a Branch <i class="fas fa-arrow-right" style=margin-left:8px></i></a>
 </div>
@@ -271,7 +254,7 @@
 <div class=grid-2>
 <div class=service-card style=height:auto>
 <h3>Requirements</h3>
-<ul>
+<ul id="front-req-list">
 <li>Pre-membership Education Seminar Attendance</li>
 <li>1x1 Recent Colored Picture (4 pcs.)</li>
 <li>1x1 Recent Colored Picture of Spouse; if married (1 pc.)</li>
@@ -280,7 +263,7 @@
 </ul>
 <br>
 <h3>Amount to be paid upon membership:</h3>
-<ul style=color:var(--text-main)>
+<ul id="front-pay-list" style=color:var(--text-main)>
 <li>Php 200.00 - Membership Fee</li>
 <li>Php 100.00 - Initial Savings</li>
 <li>Php 100.00 - Initial Share Capital</li>
@@ -306,8 +289,7 @@
 <p>Access our official application forms, withdrawal slips, and claim documents here. Click on the respective icons to quickly download the PDF files you need.</p>
 </div>
 </div>
-<div class="forms-grid" id="dynamic-forms-grid">
-  <!-- Dynamic forms will be rendered here via JS -->
+<div class=forms-grid id=dynamic-forms-grid>
 </div>
 </section>
 <section id=calculator class=tab-pane>
@@ -415,75 +397,68 @@
 </div>
 </section>
 <section id=gallery class=tab-pane>
-  <div class="hero-banner stagger-up" style="margin-bottom:0;">
-    <img src=assets/images/hero-bg.png alt="Hero Banner" loading=lazy>
-    <div class=hero-island>
-      <h2>VIEW OUR GALLERY</h2>
-      <h1>OUR GALLERY</h1>
-      <p>Welcome to the Baao Coop Gallery! Here, we showcase the vibrant activities, events, and milestones that reflect our commitment to advancing cooperative services and empowering individuals.</p>
-    </div>
-  </div>
-
-  <div style="margin:2rem 0 1.5rem; padding:0 2rem; display:flex; align-items:center; justify-content:flex-end; position:relative; z-index:50;">
-    <div id=gallery-album-selector style="position:relative; display:inline-block; min-width:280px; max-width:420px; width:100%;">
-      <div id=gallery-dropdown-btn onclick=toggleGalleryDropdown() style="display:flex; align-items:center; justify-content:space-between; gap:1rem; cursor:pointer; padding:1.2rem 1.5rem; background:#0f172a; border-radius:8px; box-shadow:0 10px 25px rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.05); transition:0.3s;">
-        <div style="display:flex; align-items:center; gap:0.8rem;">
-          <i class="fas fa-filter" style="color:#facc15; font-size:1.2rem;"></i>
-          <span id=gallery-selected-label style="font-weight:800; font-size:1.1rem; color:#f8fafc; text-transform:uppercase; letter-spacing:1px;">ALL PROGRAMS</span>
-        </div>
-        <i class="fas fa-chevron-down" id=gallery-dropdown-chevron style="color:#f8fafc; transition:0.2s; font-size:1.2rem;"></i>
-      </div>
-      <div id=gallery-dropdown-list style="display:none; position:absolute; top:100%; left:0; right:0; margin-top:0.5rem; background:var(--bg-alt); border-radius:8px; box-shadow:var(--shadow-lg); border:var(--glass-border); z-index:50; max-height:320px; overflow-y:auto;"></div>
-    </div>
-  </div>
-
-  <div id=gallery-album-info style="display:none; margin-bottom:1.5rem; padding:0 2rem;">
-    <p id=gallery-album-meta style="font-size:0.88rem;color:var(--text-muted);display:flex;flex-wrap:wrap;gap:0.75rem"></p>
-    <p id=gallery-album-desc style="color:var(--text-muted);font-size:0.95rem;margin-top:0.4rem"></p>
-  </div>
-
-  <div id=gallery-grid style="display:none; grid-template-columns:repeat(5,150px); gap:1rem; justify-content:start; padding:0 2rem;"></div>
-
-  <div id=gallery-empty style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:35vh;gap:1.5rem;text-align:center;padding:4rem 2rem">
-    <div style="width:80px;height:80px;border-radius:50%;background:rgba(220,38,38,0.08);display:flex;align-items:center;justify-content:center">
-      <i class="fas fa-images" style="font-size:2rem;color:var(--primary);opacity:0.5"></i>
-    </div>
-    <div>
-      <h3 style="color:var(--text-main);font-size:1.5rem;margin-bottom:0.5rem">No Albums Yet</h3>
-      <p style="color:var(--text-muted);max-width:380px;margin:0 auto;font-size:0.95rem;line-height:1.7">Photo albums from Baao Coop events and activities will appear here.</p>
-    </div>
-  </div>
-
-  <div id=gallery-lightbox style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9000;flex-direction:column;align-items:center;justify-content:center">
-    <button onclick=closeLightbox() style="position:absolute;top:1.5rem;right:1.5rem;background:rgba(255,255,255,0.1);border:none;color:white;width:44px;height:44px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10"><i class="fas fa-times"></i></button>
-    <div id=lightbox-counter style="position:absolute;top:1.5rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.6);font-size:0.85rem;font-weight:600;letter-spacing:1px"></div>
-    <div style="display:flex;align-items:center;gap:1rem;width:100%;max-width:1100px;padding:0 1rem">
-      <button onclick=lightboxNav(-1) id=lb-prev style="background:rgba(255,255,255,0.1);border:none;color:white;width:48px;height:48px;border-radius:50%;font-size:1.2rem;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:0.2s"><i class="fas fa-chevron-left"></i></button>
-      <div style="flex:1;display:flex;align-items:center;justify-content:center;max-height:65vh">
-        <img id=lightbox-img src="" style="max-width:100%;max-height:65vh;object-fit:contain;border-radius:8px;display:block">
-      </div>
-      <button onclick=lightboxNav(1) id=lb-next style="background:rgba(255,255,255,0.1);border:none;color:white;width:48px;height:48px;border-radius:50%;font-size:1.2rem;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:0.2s"><i class="fas fa-chevron-right"></i></button>
-    </div>
-    <div id=lightbox-thumbs style="display:flex;gap:0.5rem;margin-top:1.5rem;overflow-x:auto;max-width:90vw;padding:0.5rem;scrollbar-width:thin"></div>
-  </div>
+<div class="hero-banner stagger-up" style=margin-bottom:0>
+<img src=assets/images/hero-bg.png alt="Hero Banner" loading=lazy>
+<div class=hero-island>
+<h2>VIEW OUR GALLERY</h2>
+<h1>OUR GALLERY</h1>
+<p>Welcome to the Baao Coop Gallery! Here, we showcase the vibrant activities, events, and milestones that reflect our commitment to advancing cooperative services and empowering individuals.</p>
+</div>
+</div>
+<div style="margin:2rem 0 1.5rem;padding:0 2rem;display:flex;align-items:center;justify-content:flex-end;position:relative;z-index:50">
+<div id=gallery-album-selector style=position:relative;display:inline-block;min-width:280px;max-width:420px;width:100%>
+<div id=gallery-dropdown-btn onclick=toggleGalleryDropdown() style="display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:pointer;padding:1.2rem 1.5rem;background:#0f172a;border-radius:8px;box-shadow:0 10px 25px rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.05);transition:.3s">
+<div style=display:flex;align-items:center;gap:.8rem>
+<i class="fas fa-filter" style=color:#facc15;font-size:1.2rem></i>
+<span id=gallery-selected-label style=font-weight:800;font-size:1.1rem;color:#f8fafc;text-transform:uppercase;letter-spacing:1px>ALL PROGRAMS</span>
+</div>
+<i class="fas fa-chevron-down" id=gallery-dropdown-chevron style=color:#f8fafc;transition:.2s;font-size:1.2rem></i>
+</div>
+<div id=gallery-dropdown-list style=display:none;position:absolute;top:100%;left:0;right:0;margin-top:.5rem;background:var(--bg-alt);border-radius:8px;box-shadow:var(--shadow-lg);border:var(--glass-border);z-index:50;max-height:320px;overflow-y:auto></div>
+</div>
+</div>
+<div id=gallery-album-info style="display:none;margin-bottom:1.5rem;padding:0 2rem">
+<p id=gallery-album-meta style=font-size:0.88rem;color:var(--text-muted);display:flex;flex-wrap:wrap;gap:0.75rem></p>
+<p id=gallery-album-desc style=color:var(--text-muted);font-size:0.95rem;margin-top:0.4rem></p>
+</div>
+<div id=gallery-grid style="display:none;grid-template-columns:repeat(5,150px);gap:1rem;justify-content:start;padding:0 2rem"></div>
+<div id=gallery-empty style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:35vh;gap:1.5rem;text-align:center;padding:4rem 2rem">
+<div style=width:80px;height:80px;border-radius:50%;background:rgba(220,38,38,0.08);display:flex;align-items:center;justify-content:center>
+<i class="fas fa-images" style=font-size:2rem;color:var(--primary);opacity:0.5></i>
+</div>
+<div>
+<h3 style=color:var(--text-main);font-size:1.5rem;margin-bottom:0.5rem>No Albums Yet</h3>
+<p style="color:var(--text-muted);max-width:380px;margin:0 auto;font-size:.95rem;line-height:1.7">Photo albums from Baao Coop events and activities will appear here.</p>
+</div>
+</div>
+<div id=gallery-lightbox style=display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9000;flex-direction:column;align-items:center;justify-content:center>
+<button onclick=closeLightbox() style=position:absolute;top:1.5rem;right:1.5rem;background:rgba(255,255,255,0.1);border:none;color:white;width:44px;height:44px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10><i class="fas fa-times"></i></button>
+<div id=lightbox-counter style=position:absolute;top:1.5rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.6);font-size:0.85rem;font-weight:600;letter-spacing:1px></div>
+<div style="display:flex;align-items:center;gap:1rem;width:100%;max-width:1100px;padding:0 1rem">
+<button onclick=lightboxNav(-1) id=lb-prev style=background:rgba(255,255,255,0.1);border:none;color:white;width:48px;height:48px;border-radius:50%;font-size:1.2rem;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:0.2s><i class="fas fa-chevron-left"></i></button>
+<div style=flex:1;display:flex;align-items:center;justify-content:center;max-height:65vh>
+<img id=lightbox-img src style=max-width:100%;max-height:65vh;object-fit:contain;border-radius:8px;display:block>
+</div>
+<button onclick=lightboxNav(1) id=lb-next style=background:rgba(255,255,255,0.1);border:none;color:white;width:48px;height:48px;border-radius:50%;font-size:1.2rem;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:0.2s><i class="fas fa-chevron-right"></i></button>
+</div>
+<div id=lightbox-thumbs style=display:flex;gap:0.5rem;margin-top:1.5rem;overflow-x:auto;max-width:90vw;padding:0.5rem;scrollbar-width:thin></div>
+</div>
 </section>
 <section id=news class=tab-pane>
 <div class="hero-banner stagger-up">
 <img src=assets/images/hero-bg.png alt="Hero Banner" loading=lazy>
 <div class=hero-island>
 <h2>STAY UPDATED</h2>
-<h1>Latest News</h1>
+<h1>Articles & News</h1>
 <p>Catch up on the latest announcements, policy updates, community outreach events, and exciting milestones happening inside and around Baao Coop.</p>
 </div>
 </div>
-<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:40vh;gap:1.5rem;text-align:center;padding:4rem 2rem">
-  <div style="width:80px;height:80px;border-radius:50%;background:rgba(220,38,38,0.08);display:flex;align-items:center;justify-content:center">
-    <i class="fas fa-newspaper" style="font-size:2rem;color:var(--primary);opacity:0.5"></i>
-  </div>
-  <div>
-    <h3 style="color:var(--text-main);font-size:1.5rem;margin-bottom:0.5rem">No News Yet</h3>
-    <p style="color:var(--text-muted);max-width:380px;margin:0 auto;font-size:0.95rem;line-height:1.7">Articles and announcements from Baao Coop will appear here. Check back soon for the latest updates.</p>
-  </div>
+<div style="max-width:var(--max-width);margin:0 auto;padding:0 2rem 4rem">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding-bottom:1rem;border-bottom:2px solid rgba(0,0,0,0.06)">
+<h2 style="font-size:1.4rem;color:var(--text-main)">Latest Posts</h2>
+<span id=articles-count style="font-size:0.8rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:1px"></span>
+</div>
+<div id=articles-grid class=articles-grid></div>
 </div>
 </section>
 <section id=branches class=tab-pane>
@@ -521,13 +496,10 @@
 </div>
 </section>
 <section id=feedback class=tab-pane>
-<div class="hero-banner stagger-up">
-<img src=assets/images/hero-bg.png alt="Hero Banner" loading=lazy>
-<div class=hero-island>
-<h2>WE VALUE YOUR VOICE</h2>
-<h1>Member Feedback</h1>
-<p>Your experience matters. Share your thoughts, suggestions, and stories so we can continue to improve our services and strengthen our cooperative community.</p>
-</div>
+<div class=stagger-up style="padding:2rem 0 4rem;max-width:800px;margin:0 auto;text-align:center">
+<h2 style=color:var(--primary);letter-spacing:2px;text-transform:uppercase;font-size:1rem;margin-bottom:1rem>WE VALUE YOUR VOICE</h2>
+<h1 style=color:var(--text-main);font-size:2.5rem;margin-bottom:1.5rem>Member Feedback</h1>
+<p style=color:var(--text-muted)>Your experience matters. Share your thoughts, suggestions, and stories so we can continue to improve our services and strengthen our cooperative community.</p>
 </div>
 <div id=feedback-gate style=display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:40vh;gap:1.5rem;text-align:center>
 <i class="fas fa-lock" style=font-size:3rem;color:var(--primary);opacity:0.6></i>
@@ -573,6 +545,35 @@
 </div>
 </div>
 </section>
+<section id=contact class=tab-pane>
+<div class=stagger-up style="padding:2rem;max-width:800px;margin:0 auto;text-align:center">
+<h2 style=color:var(--primary);letter-spacing:2px;text-transform:uppercase;font-size:1rem;margin-bottom:1rem>GET IN TOUCH</h2>
+<h1 style=color:var(--text-main);font-size:2.5rem;margin-bottom:1.5rem>Contact Us</h1>
+<p style=color:var(--text-muted)>Have a question or need assistance? Fill out the form below and our team will get back to you shortly.</p>
+</div>
+<div class="service-card stagger-up" style="max-width:600px;margin:0 auto">
+<form style=display:flex;flex-direction:column;gap:1.2rem>
+<div>
+<label class=calc-form-label>Full Name</label>
+<input type=text class=calc-form-control placeholder="Enter your name" required>
+</div>
+<div>
+<label class=calc-form-label>Email Address</label>
+<input type=email class=calc-form-control placeholder="Enter your email" required>
+</div>
+<div>
+<label class=calc-form-label>Subject</label>
+<input type=text class=calc-form-control placeholder="What is this regarding?" required>
+</div>
+<div>
+<label class=calc-form-label>Message</label>
+<textarea class=calc-form-control placeholder="Type your message here..." style=resize:vertical;min-height:120px required></textarea>
+</div>
+<button type=button class="btn btn-primary" style=margin-top:.5rem onclick=submitContactForm(event)><i class="fas fa-paper-plane" style=margin-right:6px></i> Send Message</button>
+<p id=contact-msg style=margin-top:0.75rem;font-size:0.85rem;text-align:center;min-height:1.2rem></p>
+</form>
+</div>
+</section>
 </main>
 <footer id=footer>
 <div class=footer-grid>
@@ -580,11 +581,11 @@
 <h4 style=margin-bottom:1rem>Get In Touch</h4>
 <div class="nav-item footer-branch-dropdown" style="margin-bottom:1rem;background:#1e293b;border:1px solid #334155;border-radius:var(--radius-sm);padding:.6rem;color:white;position:relative">
 <div id=branch-select-display style=display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600>
-<span style=white-space:nowrap;overflow:hidden;text-overflow:ellipsis>Baao Parish Multi-Purpose Cooperative (Main)</span> <i class="fas fa-caret-down"></i>
+<span style=white-space:nowrap;overflow:hidden;text-overflow:ellipsis>Main</span> <i class="fas fa-caret-down"></i>
 </div>
 <div class=dropdown-menu style="width:100%;left:0;transform:none;background:#0f172a;border:1px solid #334155;top:100%;padding:.5rem;box-shadow:var(--shadow-lg)">
-<a href=javascript:void(0) onclick="updateFooterBranch('main','Baao Parish Multi-Purpose Cooperative (Main)')" style="color:#f8fafc;padding:.6rem 1rem;border-radius:4px;transition:.3s;margin-bottom:.2rem" onmouseover="this.style.background='var(--primary)';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#f8fafc'">Baao Parish Multi-Purpose Cooperative (Main)</a>
-<a href=javascript:void(0) onclick="updateFooterBranch('goa','Goa Branch-Baao Parish Multi-Purpose Cooperative')" style="color:#f8fafc;padding:.6rem 1rem;border-radius:4px;transition:.3s" onmouseover="this.style.background='var(--primary)';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#f8fafc'">Goa Branch-Baao Parish Multi-Purpose Cooperative</a>
+<a href=javascript:void(0) onclick="updateFooterBranch('main','Baao Parish Multi-Purpose Cooperative (Main)')" style="color:#f8fafc;padding:.6rem 1rem;border-radius:4px;transition:.3s;margin-bottom:.2rem" onmouseover="this.style.background='var(--primary)';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#f8fafc'">Main</a>
+<a href=javascript:void(0) onclick="updateFooterBranch('goa','Goa Branch-Baao Parish Multi-Purpose Cooperative')" style="color:#f8fafc;padding:.6rem 1rem;border-radius:4px;transition:.3s" onmouseover="this.style.background='var(--primary)';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#f8fafc'">Goa</a>
 </div>
 </div>
 <div id=branch-details class=branch-details></div>
@@ -656,11 +657,20 @@
 </div>
 <div id=chat-pane-message style=background:white;display:none;flex-direction:column;max-height:420px;padding:1.5rem;gap:1rem;overflow-y:auto>
 <h4 style=color:var(--text-main);margin-bottom:0.2rem>Live Chat</h4>
-<div id=chat-messages style=flex:1;min-height:150px;background:#f8fafc;border-radius:var(--radius-sm);padding:1rem;display:flex;flex-direction:column;gap:0.75rem;overflow-y:auto>
+<!-- Name Gate -->
+<div id=chat-name-gate style=display:flex;flex-direction:column;gap:0.75rem>
+<p style=color:var(--text-muted);font-size:0.88rem>Before we start, what's your name?</p>
+<input id=chat-name-input type=text class=calc-form-control placeholder="Enter your name..." style=font-size:0.9rem onkeypress="if(event.key==='Enter')askChatName()">
+<button onclick=askChatName() style="background:var(--text-main);color:white;border:0;border-radius:var(--radius-sm);padding:0.6rem 1rem;font-weight:600;cursor:pointer;font-size:0.88rem">Start Chat</button>
 </div>
+<!-- Message Body -->
+<div id=chat-message-body style=display:none;flex-direction:column;gap:0.75rem>
+<div id=chat-messages style=flex:1;min-height:150px;background:#f8fafc;border-radius:var(--radius-sm);padding:1rem;display:flex;flex-direction:column;gap:0.75rem;overflow-y:auto></div>
 <div style=display:flex;gap:0.5rem>
-<input type=text id=chat-input placeholder="Type a message..." style="flex:1;padding:.6rem .9rem;border:1px solid rgba(0,0,0,0.1);border-radius:var(--radius-sm);font-family:inherit;font-size:.88rem;outline:0;background:white">
+<input type=text id=chat-input placeholder="Type a message..." style="flex:1;padding:.6rem .9rem;border:1px solid rgba(0,0,0,0.1);border-radius:var(--radius-sm);font-family:inherit;font-size:.88rem;outline:0;background:white" onkeypress="if(event.key==='Enter')sendChatMessage()">
 <button onclick=sendChatMessage() style="background:#2563eb;color:white;border:0;padding:0 1rem;border-radius:var(--radius-sm);font-weight:600;cursor:pointer;transition:.3s"><i class="fas fa-paper-plane"></i></button>
+</div>
+<button onclick=guestEndChat() style="background:none;border:none;color:#94a3b8;font-size:0.75rem;cursor:pointer;text-align:center;padding:0.3rem;transition:0.2s;align-self:center" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#94a3b8'"><i class="fas fa-phone-slash" style="margin-right:4px"></i>End Chat</button>
 </div>
 </div>
 <div id=chat-pane-help style=background:white;display:none;padding:1.5rem;flex-direction:column;gap:0.75rem;max-height:380px;overflow-y:auto>
@@ -675,218 +685,6 @@
 <button id=chat-fab onclick=toggleChat() style="width:52px;height:52px;border-radius:50%;background:var(--text-main);color:white;border:0;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:.3s"><i id=chat-fab-icon class="far fa-comment-dots"></i></button>
 </div>
 <button id=fabTop onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:2rem;right:2rem;z-index:9998;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:white;border:0;cursor:pointer;box-shadow:0 4px 15px rgba(220,38,38,0.4);display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:.3s;opacity:0;pointer-events:none;transform:translateY(20px)"><i class="fas fa-arrow-up"></i></button>
-<script type="module">
-  import { db } from './js/config.js';
-  import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-  window.addEventListener('DOMContentLoaded', async () => {
-    try {
-      const snap = await getDoc(doc(db, 'settings', 'banners'));
-      if (snap.exists()) {
-        const banners = snap.data();
-        // Match saved tab IDs to index panes (e.g. 'home', 'about', 'services')
-        document.querySelectorAll('.tab-pane').forEach(pane => {
-          if (banners[pane.id]) {
-            const img = pane.querySelector('.hero-banner img');
-            if (img) img.src = banners[pane.id];
-          }
-        });
-      }
-
-      // Fetch and Render Dynamic Media Links
-      const mediaSnap = await getDoc(doc(db, 'settings', 'media'));
-      if (mediaSnap.exists() && mediaSnap.data().links) {
-        const grid = document.getElementById('index-media-grid');
-        if (grid) {
-          grid.innerHTML = mediaSnap.data().links.map(link => `
-            <div class="vid-wrapper">
-              <iframe src="${link}" allowfullscreen loading="lazy"></iframe>
-            </div>
-          `).join('');
-        }
-      }
-    } catch (e) {
-      console.error("Failed to load data:", e);
-    }
-  });
-</script>
-<script type="module" src="js/config.js"></script>
-<script src="js/main.js"></script>
-<script>
-// ===================== GALLERY PUBLIC =====================
-const GALLERY_KEY = 'baaocoop_gallery_albums';
-let galleryCurrentAlbum = null;
-let lightboxIndex = 0;
-let lightboxPhotos = [];
-
-function getAlbums() {
-  return JSON.parse(localStorage.getItem(GALLERY_KEY) || '[]');
-}
-
-function toggleGalleryDropdown() {
-  const list = document.getElementById('gallery-dropdown-list');
-  const chevron = document.getElementById('gallery-dropdown-chevron');
-  const isOpen = list.style.display !== 'none';
-  list.style.display = isOpen ? 'none' : 'block';
-  chevron.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
-}
-
-function selectGalleryAlbum(id) {
-  const albums = getAlbums();
-  const album = albums.find(a => a.id === id);
-  if (!album) return;
-  galleryCurrentAlbum = album;
-
-  document.getElementById('gallery-selected-label').textContent = album.title;
-  document.getElementById('gallery-dropdown-list').style.display = 'none';
-  document.getElementById('gallery-dropdown-chevron').style.transform = 'rotate(0deg)';
-
-  const infoEl = document.getElementById('gallery-album-info');
-  const metaEl = document.getElementById('gallery-album-meta');
-  const descEl = document.getElementById('gallery-album-desc');
-  const metaParts = [
-    album.date ? `<span><i class="fas fa-calendar-alt" style="margin-right:4px;color:var(--primary)"></i>${album.date}</span>` : '',
-    album.location ? `<span><i class="fas fa-map-marker-alt" style="margin-right:4px;color:var(--primary)"></i>${album.location}</span>` : '',
-    `<span><i class="fas fa-image" style="margin-right:4px;color:var(--primary)"></i>${(album.photos||[]).length} photo${(album.photos||[]).length !== 1 ? 's' : ''}</span>`
-  ].filter(Boolean).join('<span style="color:#cbd5e1;margin:0 0.5rem">|</span>');
-  metaEl.innerHTML = metaParts;
-  descEl.textContent = album.desc || '';
-  infoEl.style.display = 'block';
-
-  renderGalleryGrid(album);
-}
-
-function renderGalleryGrid(album) {
-  const grid = document.getElementById('gallery-grid');
-  const empty = document.getElementById('gallery-empty');
-  const photos = album.photos || [];
-
-  if (photos.length === 0) {
-    grid.style.display = 'none';
-    empty.style.display = 'flex';
-    empty.querySelector('h3').textContent = 'No Photos in This Album';
-    empty.querySelector('p').textContent = 'Photos will appear here once the admin adds them.';
-    return;
-  }
-
-  empty.style.display = 'none';
-  grid.style.display = 'grid';
-  grid.innerHTML = photos.map((url, i) => `
-    <div onclick="openLightbox(${i})" style="width:150px;height:150px;border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:0.2s;background:#0f172a" onmouseover="this.style.borderColor='var(--primary)';this.style.transform='scale(1.03)'" onmouseout="this.style.borderColor='transparent';this.style.transform='scale(1)'">
-      <img src="${url}" loading=lazy style="width:100%;height:100%;object-fit:cover;display:block">
-    </div>`).join('');
-
-  lightboxPhotos = photos;
-}
-
-function renderGalleryDropdown() {
-  const list = document.getElementById('gallery-dropdown-list');
-  const grid = document.getElementById('gallery-grid');
-  const empty = document.getElementById('gallery-empty');
-  const albums = getAlbums();
-
-  if (!list) return;
-
-  if (albums.length === 0) {
-    list.innerHTML = '';
-    grid.style.display = 'none';
-    empty.style.display = 'flex';
-    empty.querySelector('h3').textContent = 'No Albums Yet';
-    empty.querySelector('p').textContent = 'Photo albums from Baao Coop events and activities will appear here.';
-    document.getElementById('gallery-album-info').style.display = 'none';
-    document.getElementById('gallery-selected-label').textContent = 'ALL PROGRAMS';
-    return;
-  }
-
-  empty.style.display = 'none';
-
-  list.innerHTML = albums.map(album => `
-    <div onclick="selectGalleryAlbum('${album.id}')" style="padding:0.9rem 1.2rem;cursor:pointer;border-bottom:1px solid rgba(0,0,0,0.04);transition:0.15s" onmouseover="this.style.background='rgba(220,38,38,0.05)'" onmouseout="this.style.background='transparent'">
-      <p style="font-weight:700;color:var(--text-main);margin:0 0 0.2rem;font-size:0.95rem">${album.title}</p>
-      <p style="font-size:0.78rem;color:var(--text-muted);margin:0;display:flex;gap:0.75rem;flex-wrap:wrap">
-        ${album.date ? `<span><i class="fas fa-calendar-alt" style="margin-right:3px"></i>${album.date}</span>` : ''}
-        ${album.location ? `<span><i class="fas fa-map-marker-alt" style="margin-right:3px"></i>${album.location}</span>` : ''}
-        <span><i class="fas fa-image" style="margin-right:3px"></i>${(album.photos||[]).length} photos</span>
-      </p>
-    </div>`).join('');
-
-  // Auto-select first album
-  selectGalleryAlbum(albums[0].id);
-}
-
-function openLightbox(index) {
-  lightboxIndex = index;
-  const lb = document.getElementById('gallery-lightbox');
-  lb.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-  updateLightbox();
-}
-
-function closeLightbox() {
-  document.getElementById('gallery-lightbox').style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-function lightboxNav(dir) {
-  lightboxIndex = (lightboxIndex + dir + lightboxPhotos.length) % lightboxPhotos.length;
-  updateLightbox();
-}
-
-function updateLightbox() {
-  const img = document.getElementById('lightbox-img');
-  const counter = document.getElementById('lightbox-counter');
-  const thumbsEl = document.getElementById('lightbox-thumbs');
-
-  img.src = lightboxPhotos[lightboxIndex];
-  counter.textContent = `${lightboxIndex + 1} / ${lightboxPhotos.length}`;
-
-  thumbsEl.innerHTML = lightboxPhotos.map((url, i) => `
-    <div onclick="lightboxIndex=${i};updateLightbox()" style="width:60px;height:60px;flex-shrink:0;border-radius:5px;overflow:hidden;cursor:pointer;border:2px solid ${i === lightboxIndex ? 'var(--primary)' : 'transparent'};transition:0.2s;opacity:${i === lightboxIndex ? '1' : '0.5'}">
-      <img src="${url}" style="width:100%;height:100%;object-fit:cover">
-    </div>`).join('');
-
-  const activeThumb = thumbsEl.children[lightboxIndex];
-  if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-}
-
-document.addEventListener('keydown', e => {
-  const lb = document.getElementById('gallery-lightbox');
-  if (!lb || lb.style.display === 'none') return;
-  if (e.key === 'ArrowLeft') lightboxNav(-1);
-  if (e.key === 'ArrowRight') lightboxNav(1);
-  if (e.key === 'Escape') closeLightbox();
-});
-
-document.addEventListener('click', e => {
-  const selector = document.getElementById('gallery-album-selector');
-  if (selector && !selector.contains(e.target)) {
-    const list = document.getElementById('gallery-dropdown-list');
-    const chevron = document.getElementById('gallery-dropdown-chevron');
-    if (list) list.style.display = 'none';
-    if (chevron) chevron.style.transform = 'rotate(0deg)';
-  }
-});
-
-function refreshGallery() {
-  galleryCurrentAlbum = null;
-  renderGalleryDropdown();
-}
-
-window.addEventListener('hashchange', () => {
-  if (window.location.hash === '#gallery') refreshGallery();
-});
-
-if (window.location.hash === '#gallery') refreshGallery();
-
-document.querySelector('a[href="#gallery"]')?.addEventListener('click', refreshGallery);
-
-window.toggleGalleryDropdown = toggleGalleryDropdown;
-window.selectGalleryAlbum = selectGalleryAlbum;
-window.openLightbox = openLightbox;
-window.closeLightbox = closeLightbox;
-window.lightboxNav = lightboxNav;
-window.updateLightbox = updateLightbox;
-// ===================== END GALLERY PUBLIC =====================
-</script>
+<script type=module src=js/main.js></script>
 </body>
 </html>

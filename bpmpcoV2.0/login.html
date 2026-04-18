@@ -40,34 +40,7 @@ Not a member yet?<a href=membership.html style=margin-left:10px> Create an Accou
 </div>
 </div>
 <script type="module">
-import { auth } from './js/config.js';
-import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-const lastHash = localStorage.getItem('baaocoop_last_hash') || '#home';
-document.getElementById('backHomeBtn').href = 'index.html' + lastHash;
-document.body.style.opacity = '0';
-requestAnimationFrame(() => requestAnimationFrame(() => document.body.style.opacity = '1'));
-
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const email = document.getElementById('emailInput').value;
-  const pass = document.getElementById('passwordInput').value;
-  const btn = e.target.querySelector('button');
-  
-  try {
-    btn.textContent = 'Signing in...';
-    btn.disabled = true;
-    const userCred = await signInWithEmailAndPassword(auth, email, pass);
-    
-    // Maintain mock user state for feedback gate on index
-    localStorage.setItem('baaocoop_user', JSON.stringify({ email: userCred.user.email, name: email.split('@')[0] }));
-    window.location.href = 'index.html#home';
-  } catch(err) {
-    alert("Invalid credentials or user not found.");
-    btn.textContent = 'Sign In';
-    btn.disabled = false;
-  }
-});
+import{auth}from'./js/config.js';import{signInWithEmailAndPassword}from"https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";const lastHash=localStorage.getItem('baaocoop_last_hash')||'#home';document.getElementById('backHomeBtn').href='index.html'+lastHash;document.body.style.opacity='0';requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.style.opacity='1'));document.getElementById('loginForm').addEventListener('submit',async(e)=>{e.preventDefault();const email=document.getElementById('emailInput').value;const pass=document.getElementById('passwordInput').value;const btn=e.target.querySelector('button');try{btn.textContent='Signing in...';btn.disabled=true;const userCred=await signInWithEmailAndPassword(auth,email,pass);localStorage.setItem('baaocoop_user',JSON.stringify({email:userCred.user.email,name:email.split('@')[0]}));window.location.href='index.html#home';}catch(err){alert("Invalid credentials or user not found.");btn.textContent='Sign In';btn.disabled=false;}});
 </script>
 <script src=js/main.js></script>
 </body>

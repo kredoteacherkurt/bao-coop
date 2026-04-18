@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article | Baao Coop</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/images/logo.png" type="image/png">
+<style>
+/* =============================================
+   ROOT & RESET
+============================================= */
+:root {
+  --bg-color: #f8fafc;
+  --bg-alt: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --primary: #dc2626;
+  --primary-light: #ef4444;
+  --secondary: #1d4ed8;
+  --nav-bg: rgba(255,255,255,0.95);
+  --glass-border: 1px solid rgba(0,0,0,0.06);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --content-width: 720px;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+a { text-decoration: none; color: inherit; }
+
+/* =============================================
+   HEADER
+============================================= */
+.art-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 64px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s;
+}
+.art-header.scrolled { box-shadow: var(--shadow-md); }
+.art-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--text-main);
+}
+.art-header-brand img { width: 32px; height: 32px; object-fit: contain; }
+.art-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0,0,0,0.08);
+  transition: 0.2s;
+  background: white;
+}
+.art-back-btn:hover { color: var(--primary); border-color: var(--primary); }
+.art-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.art-share-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0,0,0,0.08);
+  transition: 0.2s;
+  background: white;
+}
+.art-share-btn:hover { color: var(--secondary); border-color: var(--secondary); }
+
+/* Reading progress bar */
+.art-progress-bar {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  z-index: 1001;
+  transition: width 0.1s linear;
+}
+
+/* =============================================
+   MAIN LAYOUT
+============================================= */
+main {
+  padding-top: 64px;
+  min-height: 100vh;
+}
+
+/* =============================================
+   HERO HEADER & COVER
+============================================= */
+.art-hero-header {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  padding: 5rem 0 8rem;
+  color: white;
+  position: relative;
+}
+.art-container {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.art-hero-header .art-category-badge {
+  display: inline-block;
+  color: #facc15;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+.art-hero-header .art-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.15;
+  color: white;
+  margin-bottom: 1rem;
+}
+.art-hero-header .art-subtitle {
+  font-size: 1.15rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+.art-hero-header .art-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.art-hero-header .art-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+.art-hero-header .art-meta-item i { color: #facc15; }
+.art-hero-header .art-label-tag {
+  margin-left: auto;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.3rem 0.8rem;
+  border-radius: 99px;
+  letter-spacing: 0.5px;
+}
+
+/* Cover image blurred background trick */
+.art-cover-wrap {
+  max-width: 900px;
+  margin: -5rem auto 3rem;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 10;
+}
+.art-cover-inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  background: #0f172a; /* Fallback */
+}
+.art-cover-bg {
+  position: absolute;
+  inset: -20px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(20px) brightness(0.6);
+  transform: scale(1.1);
+  z-index: 0;
+}
+.art-cover-img {
+  position: relative;
+  width: 100%;
+  max-height: 600px;
+  object-fit: contain;
+  display: block;
+  z-index: 1;
+}
+.art-cover-placeholder {
+  width: 100%;
+  height: 350px;
+  background: #1e293b;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: rgba(255,255,255,0.05);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* =============================================
+   ARTICLE BODY / SECTIONS
+============================================= */
+.art-body { padding-bottom: 4rem; }
+
+.art-section {
+  margin-bottom: 2.5rem;
+  animation: fadeInUp 0.5s ease both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* The new top label with the separator line */
+.art-section-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--primary);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.art-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(0,0,0,0.1);
+}
+
+/* The large serif heading */
+.art-section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+}
+
+/* Clean, justified paragraph text */
+.art-section-content {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: #2d3748;
+  word-break: break-word;
+  white-space: pre-wrap;
+  text-align: justify;
+}
+
+/* Properly spaced images and captions */
+.art-section-img {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  margin: 1.5rem 0 0.5rem;
+  display: block;
+  object-fit: contain;
+  max-height: 600px;
+}
+.art-section-img-caption {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 0.5rem;
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.05em;
+}
+
+/* Announcement highlight box */
+.art-highlight-box {
+  background: linear-gradient(135deg, rgba(220,38,38,0.04) 0%, rgba(29,78,216,0.04) 100%);
+  border-left: 4px solid var(--primary);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0;
+}
+
+/* Promotion box */
+.art-promo-box {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 1.5px solid #fcd34d;
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  text-align: center;
+}
+.art-promo-box .promo-badge {
+  display: inline-block;
+  background: #f59e0b;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  margin-bottom: 0.75rem;
+}
+
+/* SOS Insider Style Event List */
+.art-events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+.art-event-item {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding: 1.25rem;
+  border-left: 3px solid var(--primary);
+  background: rgba(220, 38, 38, 0.03); /* Very subtle primary tint */
+  border-radius: 0 8px 8px 0;
+}
+.art-event-date {
+  min-width: 55px;
+  text-align: center;
+  background: var(--secondary);
+  color: white;
+  padding: 0.6rem 0.5rem;
+  border-radius: 6px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(29, 78, 216, 0.2);
+}
+.art-event-month {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 700;
+}
+.art-event-day {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-top: 0.15rem;
+}
+.art-event-info h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.35rem;
+  line-height: 1.3;
+}
+.art-event-info p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Highlight / quote style */
+.art-section-highlight {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--text-main);
+  padding: 1.5rem 2rem;
+  border-left: 4px solid var(--primary);
+  background: rgba(220,38,38,0.03);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin: 1.5rem 0;
+  line-height: 1.7;
+}
+
+/* Gallery grid */
+.art-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+.art-gallery-grid img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.art-gallery-grid img:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-md);
+}
+
+/* Section divider */
+.art-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+  margin: 2rem 0;
+}
+
+/* =============================================
+   SKELETON LOADER
+============================================= */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.skeleton-cover { width: 100%; height: 380px; border-radius: 0; }
+.skeleton-badge { width: 80px; height: 24px; margin-bottom: 1rem; border-radius: 99px; }
+.skeleton-title { width: 85%; height: 40px; margin-bottom: 0.75rem; }
+.skeleton-title-2 { width: 60%; height: 40px; margin-bottom: 1rem; }
+.skeleton-subtitle { width: 90%; height: 20px; margin-bottom: 0.5rem; }
+.skeleton-subtitle-2 { width: 70%; height: 20px; margin-bottom: 1.5rem; }
+.skeleton-meta { width: 50%; height: 16px; margin: 1.25rem 0; }
+.skeleton-text { width: 100%; height: 16px; margin-bottom: 0.5rem; }
+.skeleton-text-short { width: 75%; height: 16px; margin-bottom: 1.5rem; }
+
+/* =============================================
+   404 / ERROR STATE
+============================================= */
+.art-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 4rem 2rem;
+  gap: 1rem;
+}
+.art-not-found .nf-icon {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(220,38,38,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+.art-not-found h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--text-main);
+}
+.art-not-found p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  max-width: 360px;
+  line-height: 1.7;
+}
+.art-not-found a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--primary);
+  color: white;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  transition: 0.2s;
+}
+.art-not-found a:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+/* =============================================
+   RELATED ARTICLES
+============================================= */
+.art-related {
+  background: var(--bg-alt);
+  border-top: 1px solid rgba(0,0,0,0.07);
+  padding: 3rem 0 4rem;
+  margin-top: 2rem;
+}
+.art-related-inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.art-related-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(0,0,0,0.07);
+}
+.art-related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+.art-related-card {
+  background: var(--bg-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.25s;
+  border: var(--glass-border);
+}
+.art-related-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.art-related-card img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+}
+.art-related-card-placeholder {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, var(--text-main), #1e3a5f);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.15);
+  font-size: 1.5rem;
+}
+.art-related-card-body { padding: 0.85rem; }
+.art-related-card-cat {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--primary);
+  margin-bottom: 0.3rem;
+}
+.art-related-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+
+/* =============================================
+   FOOTER
+============================================= */
+.art-footer {
+  background: var(--text-main);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 1.5rem 2rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.5px;
+  border-top: 3px solid var(--primary);
+}
+.art-footer strong { color: rgba(255,255,255,0.85); }
+
+/* =============================================
+   SHARE TOOLTIP
+============================================= */
+.share-copied-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--text-main);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 9999;
+  pointer-events: none;
+  border-left: 3px solid #10b981;
+}
+.share-copied-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* =============================================
+   RESPONSIVE
+============================================= */
+@media (max-width: 768px) {
+  .art-header { padding: 0 1rem; }
+  .art-header-brand span { display: none; }
+  .art-hero-header { padding: 4rem 0 6rem; }
+  .art-cover-image-container { margin-top: -4rem; }
+  .art-cover-image-container img { max-height: 400px; }
+  .skeleton-cover { height: 300px !important; }
+  .art-hero-header .art-meta-row { gap: 0.75rem; }
+  .art-hero-header .art-label-tag { margin-left: 0; }
+  .art-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .art-related-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .art-title { font-size: 1.5rem; }
+  .art-gallery-grid { grid-template-columns: 1fr 1fr; }
+  .art-related-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="art-header" id="art-header">
+  <a href="index.html#news" class="art-back-btn">
+    <i class="fas fa-chevron-left"></i>
+    <span>Back to Articles</span>
+  </a>
+  <a href="index.html" class="art-header-brand">
+    <img src="assets/images/logo.png" alt="Baao Coop Logo">
+    <span>Baao Coop</span>
+  </a>
+  <div class="art-header-actions">
+    <button class="art-share-btn" onclick="shareArticle()">
+      <i class="fas fa-share-alt"></i>
+      <span>Share</span>
+    </button>
+  </div>
+</header>
+
+<!-- READING PROGRESS -->
+<div class="art-progress-bar" id="art-progress"></div>
+
+<!-- MAIN -->
+<main id="art-main">
+  <!-- Skeleton loader shown while fetching -->
+  <div id="art-skeleton">
+    <div class="art-hero-header" style="padding: 5rem 0 8rem; text-align: left;">
+      <div class="art-container">
+        <div class="skeleton skeleton-badge" style="background: rgba(255,255,255,0.1); width: 120px; height: 16px;"></div>
+        <div class="skeleton skeleton-title" style="background: rgba(255,255,255,0.1); width: 85%; height: 48px; margin-top: 1.5rem;"></div>
+        <div class="skeleton skeleton-title" style="background: rgba(255,255,255,0.1); width: 60%; height: 48px; margin-top: 0.5rem;"></div>
+        <div class="skeleton skeleton-meta" style="background: rgba(255,255,255,0.1); width: 100%; height: 24px; margin-top: 2.5rem;"></div>
+      </div>
+    </div>
+    <div class="art-cover-image-container">
+       <div class="skeleton skeleton-cover" style="border-radius: 12px; height: 500px; width: 100%;"></div>
+    </div>
+    <div class="art-container" style="margin-top: 2rem;">
+       <div class="skeleton skeleton-text"></div>
+       <div class="skeleton skeleton-text"></div>
+       <div class="skeleton skeleton-text"></div>
+       <div class="skeleton skeleton-text-short"></div>
+    </div>
+  </div>
+
+  <!-- Article content injected here -->
+  <div id="art-content" style="display:none"></div>
+</main>
+
+<!-- Related articles -->
+<div id="art-related-wrap" style="display:none" class="art-related">
+  <div class="art-related-inner">
+    <div class="art-related-title">Read Next</div>
+    <div class="art-related-grid" id="art-related-grid"></div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="art-footer">
+  &copy; 2026 <strong>Baao Parish Multi-Purpose Cooperative</strong>. All Rights Reserved.
+</footer>
+
+<!-- Share toast -->
+<div class="share-copied-toast" id="share-toast">
+  <i class="fas fa-check" style="margin-right:6px;color:#10b981"></i> Link copied to clipboard!
+</div>
+
+<script type="module">
+import { db } from './js/config.js';
+import {
+  doc, getDoc, collection, query, orderBy, limit, getDocs
+} from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+
+// -----------------------------------------------
+// HELPERS
+// -----------------------------------------------
+function getParam(key) {
+  return new URLSearchParams(window.location.search).get(key);
+}
+
+function formatDate(str) {
+  if (!str) return '';
+  try {
+    return new Date(str).toLocaleDateString('en-PH', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+  } catch { return str; }
+}
+
+function stripHtml(html) {
+  const d = document.createElement('div');
+  d.innerHTML = html;
+  return d.textContent || '';
+}
+
+// -----------------------------------------------
+// READING PROGRESS
+// -----------------------------------------------
+const progressBar = document.getElementById('art-progress');
+const artHeader   = document.getElementById('art-header');
+window.addEventListener('scroll', () => {
+  const scrollTop    = window.scrollY;
+  const docHeight    = document.documentElement.scrollHeight - window.innerHeight;
+  const progress     = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  progressBar.style.width = progress + '%';
+  artHeader.classList.toggle('scrolled', scrollTop > 10);
+}, { passive: true });
+
+// -----------------------------------------------
+// SECTION ICON MAP
+// -----------------------------------------------
+const SECTION_ICONS = {
+  news:         'fa-newspaper',
+  announcement: 'fa-bullhorn',
+  event:        'fa-calendar-alt',
+  promotion:    'fa-tag',
+  highlight:    'fa-star',
+  gallery:      'fa-images',
+  custom:       'fa-pen',
+};
+
+// -----------------------------------------------
+// RENDER ARTICLE
+// -----------------------------------------------
+function renderArticle(article) {
+  const content = document.getElementById('art-content');
+  const skeleton = document.getElementById('art-skeleton');
+
+  // Update page title
+  document.title = `${article.title} | Baao Coop`;
+
+  const date       = formatDate(article.published_at);
+  const sections   = article.sections || [];
+
+  let html = '';
+
+// ---- HERO HEADER (Title, Meta) ----
+  html += `<div class="art-hero-header">`;
+  html += `<div class="art-container">`;
+  html += `<span class="art-category-badge">${article.category || 'News'}</span>`;
+  html += `<h1 class="art-title">${article.title}</h1>`;
+  if (article.subtitle) {
+    html += `<p class="art-subtitle">${article.subtitle}</p>`;
+  }
+  html += `<div class="art-meta-row">`;
+  if (date) html += `<span class="art-meta-item"><i class="fas fa-calendar-alt"></i>${date}</span>`;
+  if (article.author) html += `<span class="art-meta-item"><i class="fas fa-user"></i>${article.author}</span>`;
+  if (article.read_time) html += `<span class="art-meta-item"><i class="fas fa-clock"></i>${article.read_time} min read</span>`;
+  if (article.label) html += `<span class="art-label-tag">${article.label}</span>`;
+  html += `</div>`; // meta-row
+  html += `</div>`; // container
+  html += `</div>`; // hero-header
+
+  // ---- COVER IMAGE ----
+  html += `<div class="art-cover-wrap">`;
+  if (article.cover_image) {
+    html += `
+      <div class="art-cover-inner">
+        <div class="art-cover-bg" style="background-image:url('${article.cover_image}')"></div>
+        <img class="art-cover-img" src="${article.cover_image}" alt="${article.title}" loading="eager">
+      </div>`;
+  } else {
+    html += `<div class="art-cover-placeholder"><i class="fas fa-newspaper"></i></div>`;
+  }
+  html += `</div>`;
+
+  // ---- SECTIONS ----
+  html += `<div class="art-container"><div class="art-body">`;
+  sections.forEach((s, i) => {
+    const delay = (i * 0.08).toFixed(2);
+    const icon  = SECTION_ICONS[s.type] || 'fa-pen';
+
+    html += `<div class="art-section" style="animation-delay:${delay}s">`;
+
+    // Section heading
+        const typeLabels = {
+          news: 'News Update',
+          announcement: 'Announcement',
+          event: 'Event Details',
+          promotion: 'Promotion',
+          highlight: 'Highlight',
+          gallery: 'Photo Gallery',
+          custom: 'Custom Section'
+        };
+        const sectionLabel = typeLabels[s.type] || 'Section';
+
+        // 1. Section Label (The separator line + icon)
+        html += `<div class="art-section-label"><i class="fas ${icon}"></i> ${sectionLabel}</div>`;
+
+        // 2. Section heading (Pure text, large serif font)
+        if (s.heading) {
+          html += `<h2 class="art-section-heading">${s.heading}</h2>`;
+        }
+
+        // 3. Section image (Moved to be immediately after heading)
+        if (s.image) {
+          html += `<img class="art-section-img" src="${s.image}" alt="${s.image_caption || s.heading || ''}" loading="lazy">`;
+          if (s.image_caption) {
+            html += `<p class="art-section-img-caption">${s.image_caption}</p>`;
+          }
+        }
+
+        // Render content based on type
+        if (s.type === 'event' && s.events && s.events.length > 0) {
+          // EVENT section — SOS Insider List Style
+          if (s.content) {
+            html += `<div class="art-section-content">${s.content}</div>`;
+          }
+          html += `<div class="art-events-list">`;
+          s.events.forEach(ev => {
+            const d = ev.date ? new Date(ev.date) : null;
+            html += `
+              <div class="art-event-item">
+                ${d ? `
+                <div class="art-event-date">
+                  <div class="art-event-month">${d.toLocaleDateString('en-US', { month: 'short' })}</div>
+                  <div class="art-event-day">${d.getDate()}</div>
+                </div>` : ''}
+                <div class="art-event-info">
+                  <h4>${ev.title || 'Untitled Event'}</h4>
+                  ${ev.description ? `<p>${ev.description}</p>` : ''}
+                </div>
+              </div>`;
+          });
+          html += `</div>`;
+
+        } else {
+          // ALL OTHER SECTIONS — Normal, clean paragraph text (SOS Insider style)
+          if (s.content) {
+            html += `<div class="art-section-content">${s.content}</div>`;
+          }
+        }
+
+        html += `</div>`; // .art-section
+
+    // Divider between sections (not after last)
+    if (i < sections.length - 1) {
+      html += `<div class="art-divider"></div>`;
+    }
+  });
+
+ html += `</div>`; // .art-body
+  html += `</div>`; // .art-container
+
+  // Show
+  skeleton.style.display    = 'none';
+  content.innerHTML         = html;
+  content.style.display     = 'block';
+}
+
+// -----------------------------------------------
+// SHOW NOT FOUND
+// -----------------------------------------------
+function showNotFound(msg) {
+  const skeleton = document.getElementById('art-skeleton');
+  const content  = document.getElementById('art-content');
+  skeleton.style.display = 'none';
+  content.style.display  = 'block';
+  content.innerHTML = `
+    <div class="art-not-found">
+      <div class="nf-icon"><i class="fas fa-file-slash"></i></div>
+      <h2>Article Not Found</h2>
+      <p>${msg || 'This article may have been removed or the link is invalid.'}</p>
+      <a href="index.html#news"><i class="fas fa-arrow-left"></i> Back to Articles</a>
+    </div>`;
+}
+
+// -----------------------------------------------
+// RELATED ARTICLES
+// -----------------------------------------------
+async function loadRelated(currentId, category) {
+  try {
+    const q = query(
+      collection(db, 'articles'),
+      orderBy('createdAt', 'desc'),
+      limit(10)
+    );
+    const snap = await getDocs(q);
+    let related = snap.docs
+      .map(d => ({ id: d.id, ...d.data() }))
+      .filter(a => a.id !== currentId && a.status !== 'draft')
+      .slice(0, 3);
+
+    if (related.length === 0) return;
+
+    const wrap  = document.getElementById('art-related-wrap');
+    const grid  = document.getElementById('art-related-grid');
+
+    grid.innerHTML = related.map(a => `
+      <div class="art-related-card" onclick="window.location.href='article.html?id=${a.id}'">
+        ${a.cover_image
+          ? `<img src="${a.cover_image}" alt="${a.title}" loading="lazy">`
+          : `<div class="art-related-card-placeholder"><i class="fas fa-newspaper"></i></div>`
+        }
+        <div class="art-related-card-body">
+          <div class="art-related-card-cat">${a.category || 'News'}</div>
+          <div class="art-related-card-title">${a.title}</div>
+        </div>
+      </div>`).join('');
+
+    wrap.style.display = 'block';
+  } catch (e) {
+    console.error('Failed to load related articles:', e);
+  }
+}
+
+// -----------------------------------------------
+// SHARE
+// -----------------------------------------------
+window.shareArticle = async function () {
+  const url = window.location.href;
+  const title = document.querySelector('.art-title')?.textContent || 'Baao Coop Article';
+
+  if (navigator.share) {
+    try {
+      await navigator.share({ title, url });
+      return;
+    } catch {}
+  }
+
+  // Fallback: copy to clipboard
+  try {
+    await navigator.clipboard.writeText(url);
+  } catch {
+    const ta = document.createElement('textarea');
+    ta.value = url;
+    ta.style.position = 'fixed';
+    ta.style.opacity  = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+
+  const toast = document.getElementById('share-toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2800);
+};
+
+// -----------------------------------------------
+// INIT
+// -----------------------------------------------
+(async () => {
+  const id = getParam('id');
+  if (!id) { showNotFound('No article ID specified.'); return; }
+
+  try {
+    const snap = await getDoc(doc(db, 'articles', id));
+    if (!snap.exists()) { showNotFound(); return; }
+    const article = { id: snap.id, ...snap.data() };
+    if (article.status === 'draft') { showNotFound('This article is not yet published.'); return; }
+    renderArticle(article);
+    loadRelated(id, article.category);
+  } catch (e) {
+    console.error('Failed to load article:', e);
+    showNotFound('Failed to load article. Please try again.');
+  }
+})();
+</script>
+</body>
+</html>
