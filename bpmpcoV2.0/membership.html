@@ -36,7 +36,45 @@
 </form>
 </div>
 <script type=module>
-import{auth,db}from'./js/config.js';import{createUserWithEmailAndPassword}from"https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";import{doc,setDoc}from"https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";const lastHash=localStorage.getItem('baaocoop_last_hash')||'#home';document.getElementById('backHomeBtn').href='index.html'+lastHash;document.getElementById('onlineApplyForm').addEventListener('submit',async(e)=>{e.preventDefault();const email=e.target.querySelector('input[type="email"]').value;const inputs=e.target.querySelectorAll('input[type="text"]');const fName=inputs[0].value;const lName=inputs[2].value;const btn=e.target.querySelector('button[type="submit"]');try{btn.textContent='Processing...';btn.disabled=true;const userCred=await createUserWithEmailAndPassword(auth,email,'BaaoCoop123!');await setDoc(doc(db,'members',userCred.user.uid),{email,firstName:fName,lastName:lName,status:'pending_approval',appliedAt:new Date().toISOString()});localStorage.setItem('baaocoop_user',JSON.stringify({name:fName+' '+lName,email}));alert("Application submitted! Your temporary password is 'BaaoCoop123!'. We will review your documents shortly.");window.location.href='index.html#home';}catch(err){alert("Error saving record: "+err.message);btn.textContent='Submit Application';btn.disabled=false;}});
+import{db}from'./js/config.js';
+import{collection,addDoc}from"https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import{cloudinaryConfig}from'./js/config.js';
+const lastHash=localStorage.getItem('baaocoop_last_hash')||'#home';
+document.getElementById('backHomeBtn').href='index.html'+lastHash;
+document.getElementById('onlineApplyForm').addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  const email=e.target.querySelector('input[type="email"]').value.trim();
+  const inputs=e.target.querySelectorAll('input[type="text"]');
+  const fName=inputs[0].value.trim();
+  const mName=inputs[1].value.trim();
+  const lName=inputs[2].value.trim();
+  const fileInput=e.target.querySelector('input[type="file"]');
+  const btn=e.target.querySelector('button[type="submit"]');
+  if(!email||!fName||!lName){alert('Please fill in all required fields.');return;}
+  try{
+    btn.textContent='Submitting...';btn.disabled=true;
+    let fileUrl='';
+    if(fileInput&&fileInput.files[0]){
+      btn.textContent='Uploading file...';
+      const formData=new FormData();
+      formData.append('file',fileInput.files[0]);
+      formData.append('upload_preset',cloudinaryConfig.uploadPreset);
+      const res=await fetch(`https://api.cloudinary.com/v1_1/${cloudinaryConfig.cloudName}/upload`,{method:'POST',body:formData});
+      const data=await res.json();
+      if(data.secure_url)fileUrl=data.secure_url;
+    }
+    await addDoc(collection(db,'members'),{
+      email,firstName:fName,middleName:mName,lastName:lName,
+      fileUrl,status:'pending_approval',
+      appliedAt:new Date().toISOString()
+    });
+    alert('Application submitted! We will review your documents and send you an email once approved.');
+    window.location.href='index.html'+lastHash;
+  }catch(err){
+    alert('Error: '+err.message);
+    btn.textContent='Submit Application';btn.disabled=false;
+  }
+});
 </script>
 <script src=js/main.js></script>
 </body>

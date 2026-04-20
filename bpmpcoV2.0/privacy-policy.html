@@ -21,35 +21,29 @@
 </div>
 <header>
 <div class=nav-row-1>
-<a href=index.html#home class=brand-area>
+<a href=index.html class=brand-area>
 <img src=assets/images/logo.png alt="Baao Coop Logo">
 <span>Baao Parish Multi-purpose Cooperative</span>
 </a>
-<div class=nav-actions>
-<button class=cmd-palette-btn onclick=openSearch()><i class="fas fa-search"></i> Search (Ctrl+K)</button>
-<a href=login.html style=font-weight:600;color:var(--text-main)>Log In</a>
-<a href=membership.html class="btn btn-primary">Join Now</a>
-</div>
 </div>
 <div class=nav-row-2>
-<div class=nav-item><a href=index.html#home>Home</a></div>
-<div class=nav-item>About Us <i class="fas fa-caret-down"></i>
+<div style=display:flex;gap:1rem;align-items:center;flex-wrap:wrap>
+<div class=nav-item><a href=index.html#home><i class="fas fa-home"></i> HOME</a></div>
+<div class=nav-item><a href=index.html#about><i class="fas fa-info-circle"></i> ABOUT US</a></div>
+<div class=nav-item><a href=index.html#services><i class="fas fa-box"></i> PRODUCTS & SERVICES</a></div>
+<div class=nav-item><i class="fas fa-id-card"></i> MEMBERSHIP <i class="fas fa-caret-down"></i>
 <div class=dropdown-menu>
-<a href=index.html#our-history>Our History</a>
-<a href=index.html#our-partners>Our Partners</a>
-<a href=faq.html>FAQ</a>
+<a href=index.html#join-us><i class="fas fa-users"></i> JOIN US</a>
+<a href=index.html#forms><i class="fas fa-download"></i> FORMS</a>
 </div>
 </div>
-<div class=nav-item>Products & Services <i class="fas fa-caret-down"></i>
-<div class=dropdown-menu>
-<a href=index.html#services>All Services</a>
+<div class=nav-item><a href=index.html#gallery><i class="fas fa-images"></i> GALLERY</a></div>
+<div class=nav-item><a href=index.html#branches><i class="fas fa-map-marker-alt"></i> BRANCHES</a></div>
 </div>
-</div>
-<div class=nav-item>Membership <i class="fas fa-caret-down"></i>
-<div class=dropdown-menu>
-<a href=index.html#join-us>Join Us Now</a>
-<a href=index.html#forms>Download Forms</a>
-</div>
+<div style=display:flex;gap:1rem;align-items:center;flex-wrap:wrap>
+<div class=nav-item><a href=index.html#news><i class="fas fa-newspaper"></i> ARTICLES</a></div>
+<div class=nav-item><a href=index.html#feedback><i class="fas fa-comments"></i> FEEDBACK</a></div>
+<div class=nav-item><a href=index.html#contact><i class="fas fa-envelope"></i> CONTACT US</a></div>
 </div>
 </div>
 </header>
@@ -86,10 +80,15 @@
 <div class=footer-grid>
 <div style=text-align:left>
 <h4 style=margin-bottom:1rem>Get In Touch</h4>
-<select id=branch-select class=branch-select>
-<option value=main>Main Branch (Baao)</option>
-<option value=goa>Goa Branch</option>
-</select>
+<div class="footer-branch-dropdown" tabindex="0" style="margin-bottom:1rem;position:relative;outline:none" onblur="setTimeout(() => { const menu = document.getElementById('footer-branch-list'); if(menu) menu.style.display='none'; }, 200)">
+<div id="branch-select-display" onclick="const menu = document.getElementById('footer-branch-list'); menu.style.display = menu.style.display === 'block' ? 'none' : 'block';" style="background:#1e293b;border:1px solid #334155;border-radius:var(--radius-sm);padding:0.75rem 1rem;color:white;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600;transition:0.2s" onmouseover="this.style.borderColor='#475569'" onmouseout="this.style.borderColor='#334155'">
+<span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Main Branch</span> <i class="fas fa-caret-down" style="color:#94a3b8"></i>
+</div>
+<div id="footer-branch-list" style="display:none;position:absolute;width:100%;left:0;top:100%;margin-top:0.3rem;background:#0f172a;border:1px solid #334155;border-radius:var(--radius-sm);padding:0.4rem;box-shadow:0 10px 15px -3px rgba(0,0,0,0.5);z-index:100">
+<div onclick="updateFooterBranch('main','Main Branch');this.parentElement.style.display='none'" style="display:block;cursor:pointer;color:#cbd5e1;padding:0.6rem 1rem;border-radius:4px;transition:0.2s;margin-bottom:0.2rem;font-size:0.9rem" onmouseover="this.style.background='rgba(255,255,255,0.08)';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#cbd5e1'">Main Branch</div>
+<div onclick="updateFooterBranch('goa','Goa Branch');this.parentElement.style.display='none'" style="display:block;cursor:pointer;color:#cbd5e1;padding:0.6rem 1rem;border-radius:4px;transition:0.2s;font-size:0.9rem" onmouseover="this.style.background='rgba(255,255,255,0.08)';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#cbd5e1'">Goa Branch</div>
+</div>
+</div>
 <div id=branch-details class=branch-details></div>
 </div>
 <div style=text-align:left>
@@ -98,6 +97,7 @@
 <li><a href=index.html#about>About Us</a></li>
 <li><a href=index.html#services>Services</a></li>
 <li><a href=index.html#join-us>Membership</a></li>
+<li><a href=index.html#news>News & Events</a></li>
 </ul>
 </div>
 <div style=text-align:left>
@@ -106,6 +106,7 @@
 <li><a href=privacy-policy.html>Privacy Policy</a></li>
 <li><a href=terms.html>Terms of Service</a></li>
 <li><a href=faq.html>FAQ</a></li>
+<li><a href=index.html#contact>Contact Support</a></li>
 </ul>
 </div>
 <div style=text-align:left>
@@ -121,6 +122,6 @@
 <p>&copy; 2026 Baao Parish Multi-Purpose Cooperative. All Rights Reserved.</p>
 </div>
 </footer>
-<script src=js/main.js></script>
+<script type=module src=js/main.js></script>
 </body>
 </html>

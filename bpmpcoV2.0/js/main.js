@@ -1,16 +1,46 @@
 import { db } from './config.js';
 import { doc, getDoc, setDoc, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
 document.addEventListener('DOMContentLoaded', async () => {
+  function setHeaderHeight() {
+  const h = document.querySelector('header')?.offsetHeight || 120;
+  document.documentElement.style.setProperty('--header-h', h + 'px');
+}
+setHeaderHeight();
+window.addEventListener('resize', setHeaderHeight);
+  window.toggleMobileMenu = () => {
+    const nav = document.querySelector('.nav-row-2');
+    if (nav) nav.classList.toggle('active');
+  };
+  // Mobile Dropdown Accordion Logic
+  document.querySelectorAll('.nav-item').forEach(item => {
+    if (item.querySelector('.dropdown-menu')) {
+      item.addEventListener('click', (e) => {
+        // Only trigger on mobile and ignore if clicking an actual link inside the dropdown
+        if (window.innerWidth <= 900 && !e.target.closest('.dropdown-menu a')) {
+          item.classList.toggle('mobile-expanded');
+        }
+      });
+    }
+  });
   // 1. Tab Navigation System (Slug-based)
   const handleRoute = () => {
-    const hash = window.location.hash || '#home';
+  const hash = window.location.hash || '#home';
+  // Clean up default hash from URL
+  if (window.location.hash === '#home') {
+    history.replaceState(null, '', window.location.pathname);
+  }
     // Hide all tabs
     document.querySelectorAll('.tab-pane').forEach(tab => tab.classList.remove('active'));
     // Show target tab
     const target = document.querySelector(hash);
     if (target) {
       target.classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  });
+});
     document.body.style.minHeight = '100vh';
       // Ensure map resets to main branch when clicking into Branches tab
       if (hash === '#branches' && window.updateBranchMap) {
@@ -29,7 +59,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
   };
-  window.addEventListener('hashchange', handleRoute);
+  window.addEventListener('hashchange', () => {
+    handleRoute();
+    const mobileNav = document.querySelector('.nav-row-2');
+    if (mobileNav) mobileNav.classList.remove('active');
+  });
   initArticlesListener();
   document.querySelectorAll('a[href]').forEach(a => {
     a.addEventListener('click', function() {
@@ -74,14 +108,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const match = text.match(/https?:\/\/[^\s]+/);
     return match ? match[0] : null;
   }
-
   const SLUG_LABELS = {
     'home': '🏠 Home', 'about': '📖 About Us', 'services': '💼 Products & Services',
     'join-us': '🤝 Join Us', 'forms': '📄 Downloadable Forms', 'calculator': '🧮 Loan Calculator',
     'gallery': '🖼️ Gallery', 'news': '📰 News', 'branches': '📍 Branches',
     'feedback': '💬 Feedback', 'contact': '✉️ Contact Us', 'our-partners': '🤝 Our Partners'
   };
-
   function getLinkMeta(url) {
     try {
       const parsed = new URL(url);
@@ -94,14 +126,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch(e) {}
     return { isInternal: false, label: url.replace(/^https?:\/\//, '').split('/')[0], icon: 'fa-external-link-alt', color: 'var(--primary)' };
   }
-
   function renderChatBubble(data, container) {
     const div = document.createElement('div');
     const isUser = data.sender === 'user';
     div.style.cssText = isUser
       ? 'background:var(--primary);color:white;border-radius:12px 12px 0 12px;padding:0.8rem 1rem;max-width:85%;font-size:0.88rem;align-self:flex-end;line-height:1.5;margin-left:auto'
       : 'background:#f1f5f9;border-radius:12px 12px 12px 0;padding:0.8rem 1rem;max-width:85%;font-size:0.88rem;color:var(--text-main);line-height:1.5';
-
     const url = extractUrl(data.text);
     if (!isUser && url) {
       const meta = getLinkMeta(url);
@@ -125,7 +155,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
       div.textContent = data.text;
     }
-
     container.appendChild(div);
     container.scrollTop = container.scrollHeight;
   }
@@ -165,7 +194,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
   }
-
   window.submitChatEmail = async () => {
     const emailVal = document.getElementById('chat-email-input')?.value.trim();
     if (emailVal) {
@@ -174,7 +202,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     resetChat();
   };
-
   window.guestEndChat = async () => {
     if (!confirm('End this chat session?')) return;
     const { doc: fdoc, setDoc: fset } = await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js');
@@ -183,7 +210,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (window.chatOpen) toggleChat();
     setTimeout(() => resetChat(), 350);
   };
-
   window.resetChat = () => {
     localStorage.removeItem('baaocoop_chat_name');
     localStorage.removeItem('baaocoop_chat_id');
@@ -205,7 +231,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.chatOpen = true; toggleChat();
   };
   let chatGuestName = localStorage.getItem('baaocoop_chat_name') || '';
-
   window.askChatName = async () => {
     const input = document.getElementById('chat-name-input');
     const val = input ? input.value.trim() : '';
@@ -219,7 +244,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('chat-message-body').style.display = 'flex';
     startChatListener();
   };
-
   window.sendChatMessage = async () => {
     const input = document.getElementById('chat-input');
     if (!input) return;
@@ -290,15 +314,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         const links = mediaSnap.data().links;
         grid.setAttribute('data-count', Math.min(links.length, 4));
         if (links.length > 4) grid.classList.add('many-vids');
-        grid.innerHTML = links.map(src => {
-          const isFb = src.includes('facebook.com');
-          const isDrive = src.includes('drive.google.com');
-          return `<div class="vid-wrapper ${isDrive ? 'drive-wrapper' : ''}">
-            <iframe src="${src}" allowfullscreen loading="lazy"
-              ${isFb ? 'allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"' : ''}
-            ></iframe>
-          </div>`;
-        }).join('');
+        grid.innerHTML = links.map((item, i) => {
+  const src = typeof item === 'string' ? item : (item.url || '');
+  const title = typeof item === 'object' ? (item.title || '') : '';
+  const isFb = src.includes('facebook.com');
+  const isDrive = src.includes('drive.google.com');
+  const isYt = src.includes('youtube.com') || src.includes('youtu.be');
+  return `
+  <div style="display:flex;flex-direction:column;gap:0;border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-md);background:#fff">
+    <div class="vid-wrapper ${isDrive ? 'drive-wrapper' : ''}" style="border-radius:0;box-shadow:none;margin:0">
+    <iframe src="${src}" allowfullscreen loading="lazy"
+      ${isFb ? 'allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"' : ''}
+    ></iframe>
+  </div>
+    <div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:#fff">
+      <img src="assets/images/logo.png" style="width:36px;height:36px;border-radius:50%;object-fit:contain;flex-shrink:0;border:1px solid rgba(0,0,0,0.08)">
+      <div style="overflow:hidden">
+        <p style="font-weight:700;font-size:0.88rem;color:var(--text-main);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${title || 'Baao Coop Video'}</p>
+        <p style="font-size:0.75rem;color:var(--text-muted);margin:0">Baao Parish Multi-Purpose Cooperative</p>
+      </div>
+    </div>
+  </div>`;
+}).join('');
       }
     }
   } catch(e) {
@@ -384,7 +421,6 @@ document.addEventListener('DOMContentLoaded', async () => {
           }
       }
   } catch(e) { console.error('Services Rendering Error:', e); }
-
   try {
       const mSnap = await getDoc(doc(db, 'settings', 'membership_details'));
       if (mSnap.exists()) {
@@ -397,7 +433,6 @@ document.addEventListener('DOMContentLoaded', async () => {
           }
       }
   } catch(e) { console.error('Membership Rendering Error:', e); }
-
   // --- RENDER DYNAMIC FORMS ---
   try {
     const formsSnap = await getDoc(doc(db, 'settings', 'form_links'));
@@ -405,15 +440,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     const formsGrid = document.getElementById('dynamic-forms-grid');
     if (formsGrid) {
         if (savedForms.length > 0) {
-            formsGrid.innerHTML = savedForms.map(form => `
-                <a href="${form.url}" target="_blank" rel="noopener noreferrer" class="form-card">
-                    <i class="fas fa-file-pdf"></i>
-                    <div>
-                        <h3 style="color:var(--text-main);font-size:1.1rem">${form.title}</h3>
-                        <p style="color:var(--text-muted);font-size:.85rem">Download Document</p>
-                    </div>
-                </a>
-            `).join('');
+           formsGrid.innerHTML = savedForms.map(form => {
+    const m = form.url.match(/drive\.google\.com\/file\/d\/([A-Za-z0-9_-]+)/);
+const previewUrl = m ? `https://drive.google.com/file/d/${m[1]}/preview?usp=sharing` : form.url;
+const downloadUrl = m ? `https://drive.google.com/uc?export=download&id=${m[1]}` : form.url;
+return `<a href="${previewUrl}" target="_blank" class="form-card">
+        <i class="fas fa-file-pdf"></i>
+<div style="display:flex;align-items:center;justify-content:space-between;width:100%">
+    <h3 style="color:var(--text-main);font-size:1.1rem">${form.title}</h3>
+    <i class="fas fa-eye" style="color:var(--primary);font-size:1rem;flex-shrink:0"></i>
+</div>
+    </a>`;
+}).join('');
         } else {
             formsGrid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)">No forms available at the moment.</div>`;
         }
@@ -507,7 +545,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   // 3. Footer Smart Branch Switcher
   const branchDetails = document.getElementById('branch-details');
-  const branches = {
+  let branches = {
     main: `
               <p><strong>Baao Parish Multi-Purpose Cooperative</strong></p>
               <p>Rizal Street, San Nicolas District, Baao, 4432 <br> Camarines Sur</p>
@@ -519,10 +557,80 @@ document.addEventListener('DOMContentLoaded', async () => {
               <p>Mon-Fri 8:30 AM–3:30 PM</p>
               <p><i class="fas fa-phone" style="margin-right: 10px;"></i> 09508983131</p>`
   };
-  const mapIframes = {
+  let mapIframes = {
     main: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3880.3040773402536!2d123.36318577508484!3d13.455343886906247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a197438f68d539%3A0x87a534f84abc3f68!2sBaao%20Parish%20Multi-Purpose%20Cooperative!5e0!3m2!1sen!2sph!4v1776357602995!5m2!1sen!2sph',
     goa: 'https://maps.google.com/maps?q=Goa+Branch-Baao+Parish+Multi-Purpose+Cooperative&t=&z=17&ie=UTF8&iwloc=&output=embed'
   };
+  // Fetch branches dynamically
+  (async () => {
+    try {
+      const snap = await getDoc(doc(db, 'settings', 'branches'));
+      if (snap.exists() && snap.data().items && snap.data().items.length > 0) {
+        const items = snap.data().items;
+        branches = {}; mapIframes = {};
+        const listEl = document.getElementById('footer-branch-list');
+              if (listEl) listEl.innerHTML = '';
+              const branchesGrid = document.querySelector('#branches .grid-2');
+              if (branchesGrid) branchesGrid.innerHTML = '';
+              items.forEach((b, i) => {
+                const id = 'branch_' + i;
+                const shortName = b.name.includes('Main') ? 'Main Branch' : b.name.replace(' Branch', '') + ' Branch';
+                branches[id] = `<p><strong>${b.name}</strong></p><p>${b.address}</p><p>${b.hours}</p><p><i class="fas fa-phone"></i> ${b.phone}</p>`;
+                if (b.mapUrl) mapIframes[id] = b.mapUrl;
+                if (listEl) {
+                  listEl.innerHTML += `<div onclick="updateFooterBranch('${id}','${shortName}');this.parentElement.style.display='none'" style="display:block;cursor:pointer;color:#cbd5e1;padding:0.6rem 1rem;border-radius:4px;transition:0.2s;margin-bottom:0.2rem;font-size:0.9rem" onmouseover="this.style.background='rgba(255,255,255,0.08)';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#cbd5e1'">${shortName}</div>`;
+                }
+                if (branchesGrid) {
+                  const mapBtn = b.mapUrl ? `<a href="javascript:void(0)" style="color:var(--primary);font-weight:600;display:inline-flex;align-items:center;gap:.5rem;background:none;border:none;cursor:pointer;font-size:1rem" onclick="updateBranchMap('${id}')"><i class="fas fa-map-location-dot"></i> View Branch</a>` : '';
+                  branchesGrid.innerHTML += `
+                    <div class="service-card">
+                      <h3 style="color:var(--secondary);margin-bottom:1rem;font-size:1.1rem;line-height:1.4"><i class="fas fa-building" style="margin-right:8px"></i>${b.name}</h3>
+                      ${b.address ? `<p style="color:var(--text-muted);margin-bottom:.5rem"><i class="fas fa-map-marker-alt" style="color:var(--primary);width:25px"></i>${b.address}</p>` : ''}
+                      ${b.hours ? `<p style="color:var(--text-muted);margin-bottom:.5rem"><i class="fas fa-clock" style="color:var(--primary);width:25px"></i>${b.hours}</p>` : ''}
+                      ${b.email ? `<p style="color:var(--text-muted);margin-bottom:.5rem"><i class="fas fa-envelope" style="color:var(--primary);width:25px"></i>${b.email}</p>` : ''}
+                      ${b.phone ? `<p style="color:var(--text-muted);margin-bottom:.5rem"><i class="fas fa-phone" style="color:var(--primary);width:25px"></i>${b.phone}</p>` : ''}
+                      ${mapBtn}
+                    </div>
+                  `;
+                }
+              });
+              if (branchDetails) branchDetails.innerHTML = branches['branch_0'];
+              const displaySpan = document.querySelector('#branch-select-display span');
+              if (displaySpan) displaySpan.innerText = items[0].name.includes('Main') ? 'Main Branch' : items[0].name.replace(' Branch', '') + ' Branch';
+              const mapContainer = document.getElementById('view-on-maps');
+              if (mapContainer) {
+                mapContainer.style.display = Object.keys(mapIframes).length > 0 ? 'block' : 'none';
+              }
+            }
+          } catch(e) { console.error('Failed to load dynamic branches:', e); }
+  })();
+  window.openPdfPreview = (previewUrl, downloadUrl, title) => {
+    const existing = document.getElementById('pdf-preview-modal');
+    if (existing) existing.remove();
+    const modal = document.createElement('div');
+    modal.id = 'pdf-preview-modal';
+    modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem';
+    modal.innerHTML = `
+        <div style="background:white;border-radius:var(--radius-md);width:100%;max-width:860px;height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 25px 50px rgba(0,0,0,0.4)">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1.25rem;background:#1e293b;flex-shrink:0">
+                <div style="display:flex;align-items:center;gap:0.75rem">
+                    <i class="fas fa-file-pdf" style="color:var(--primary);font-size:1.2rem"></i>
+                    <span style="color:white;font-weight:700;font-size:0.95rem">${title}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:0.75rem">
+                    <a href="${downloadUrl}" download="${title}.pdf" style="background:var(--primary);color:white;padding:0.45rem 1rem;border-radius:var(--radius-sm);font-size:0.82rem;font-weight:700;display:flex;align-items:center;gap:0.5rem;text-decoration:none">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                    <button onclick="document.getElementById('pdf-preview-modal').remove()" style="background:rgba(255,255,255,0.1);border:none;color:white;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <iframe src="${previewUrl}" style="flex:1;border:none;width:100%"></iframe>
+        </div>`;
+    modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
+    document.body.appendChild(modal);
+};
   // About Us Sub-Tab Logic
   window.openAboutTab = (tabId, event) => {
     document.querySelectorAll('.about-sub-pane').forEach(el => el.classList.remove('active'));
@@ -547,7 +655,7 @@ const navContainer = document.querySelector('.about-nav-container'); if (navCont
   // Dedicated function for Branch Section Map Buttons
   window.updateBranchMap = (id, preventScroll = false) => {
     const mapEl = document.querySelector('#branches #shared-branch-map');
-    if (mapEl) {
+    if (mapEl && mapIframes[id]) {
       mapEl.src = mapIframes[id];
       // Scroll down to the map cleanly without changing the URL hash
       const mapContainer = document.getElementById('view-on-maps');
@@ -555,24 +663,72 @@ const navContainer = document.querySelector('.about-nav-container'); if (navCont
     }
   };
   window.updateFooterBranch = (id, name) => {
-    if (branchDetails) branchDetails.innerHTML = branches[id];
+    if (branchDetails) branchDetails.innerHTML = branches[id] || '';
     const displaySpan = document.querySelector('#branch-select-display span');
     if (displaySpan && name) displaySpan.innerText = name;
     // Close specific footer dropdown robustly
-    const dropdown = document.querySelector('.footer-branch-dropdown .dropdown-menu');
-    if (dropdown) { dropdown.style.display = 'none'; setTimeout(() => dropdown.style.display = '', 100); }
+    const dropdown = document.getElementById('footer-branch-list');
+    if (dropdown) { dropdown.style.display = 'none'; }
   };
   if (branchDetails) branchDetails.innerHTML = branches['main'];
   // 6. Feedback Gate & Logic
-  const mockUser = JSON.parse(localStorage.getItem('baaocoop_user') || 'null');
   const feedbackGate = document.getElementById('feedback-gate');
   const feedbackAuth = document.getElementById('feedback-authenticated');
-  if (mockUser && feedbackGate && feedbackAuth) {
-    feedbackGate.style.display = 'none';
-    feedbackAuth.style.display = 'block';
-    const nameInput = document.getElementById('fb-name');
-    if (nameInput) nameInput.value = mockUser.name;
-  }
+  const nameInput = document.getElementById('fb-name');
+  const auth = getAuth();
+  onAuthStateChanged(auth, async (user) => {
+    const loginBtn = document.getElementById('nav-login-btn');
+    const joinBtn = document.getElementById('nav-join-btn');
+    const memberBtn = document.getElementById('nav-member-btn');
+    const logoutBtn = document.getElementById('nav-logout-btn');
+    if (user) {
+      if (loginBtn) loginBtn.style.display = 'none';
+      if (joinBtn) joinBtn.style.display = 'none';
+      if (memberBtn) {
+        memberBtn.style.display = 'inline-flex';
+        memberBtn.innerHTML = '<i class="fas fa-user-circle"></i> Member Portal';
+        memberBtn.href = 'members.html';
+      }
+      if (logoutBtn) logoutBtn.style.display = 'inline-flex';
+      try {
+        const snap = await getDoc(doc(db, 'members', user.uid));
+        const data = snap.exists() ? snap.data() : { firstName: user.displayName || 'Member' };
+        const fullName = `${data.firstName || ''} ${data.lastName || ''}`.trim() || user.email.split('@')[0];
+        if (feedbackGate && feedbackAuth) {
+          feedbackGate.style.display = 'none';
+          feedbackAuth.style.display = 'block';
+          if (nameInput) nameInput.value = fullName;
+        }
+      } catch(e) { console.error('Error fetching user for feedback:', e); }
+    } else {
+      if (loginBtn) loginBtn.style.display = 'inline-block';
+      if (joinBtn) joinBtn.style.display = 'inline-block';
+      if (memberBtn) memberBtn.style.display = 'none';
+      if (logoutBtn) logoutBtn.style.display = 'none';
+      if (feedbackGate && feedbackAuth) {
+        feedbackGate.style.display = 'flex';
+        feedbackAuth.style.display = 'none';
+        if (nameInput) nameInput.value = '';
+      }
+    }
+  });
+  window.indexLogout = async () => {
+    await signOut(auth);
+    window.location.reload();
+  };
+  window.gateLogin = async () => {
+    const email = document.getElementById('gate-email').value;
+    const pass = document.getElementById('gate-pass').value;
+    const msg = document.getElementById('gate-msg');
+    if (!email || !pass) { msg.textContent = 'Please enter email and password.'; return; }
+    try {
+      msg.textContent = 'Signing in...';
+      await signInWithEmailAndPassword(auth, email, pass);
+      msg.textContent = '';
+    } catch (err) {
+      msg.textContent = 'Invalid credentials. Please try again.';
+    }
+  };
   // Star Rating
   let selectedRating = 0;
   document.querySelectorAll('.fb-star').forEach(star => {
@@ -631,8 +787,9 @@ const navContainer = document.querySelector('.about-nav-container'); if (navCont
     try {
         const snap = await getDoc(doc(db, 'settings', 'feedbacks'));
         const feedbacks = snap.exists() ? (snap.data().items || []) : [];
+        const fbName = document.getElementById('fb-name') ? document.getElementById('fb-name').value : 'Verified Member';
         feedbacks.push({
-            name: mockUser ? mockUser.name : 'Verified Member',
+            name: fbName,
             rating: selectedRating,
             message,
             date: new Date().toLocaleDateString('en-PH', { year:'numeric', month:'short', day:'numeric' })
@@ -748,12 +905,56 @@ async function getAlbums(){return _galleryAlbums;}
     renderGalleryDropdown();
 })();
 function toggleGalleryDropdown(){const list=document.getElementById('gallery-dropdown-list');const chevron=document.getElementById('gallery-dropdown-chevron');const isOpen=list.style.display!=='none';list.style.display=isOpen?'none':'block';chevron.style.transform=isOpen?'rotate(0deg)':'rotate(180deg)';}
-async function selectGalleryAlbum(id){const albums=await getAlbums();const album=albums.find(a=>a.id===id);if(!album)return;galleryCurrentAlbum=album;document.getElementById('gallery-selected-label').textContent=album.title;document.getElementById('gallery-dropdown-list').style.display='none';document.getElementById('gallery-dropdown-chevron').style.transform='rotate(0deg)';const infoEl=document.getElementById('gallery-album-info');const metaEl=document.getElementById('gallery-album-meta');const descEl=document.getElementById('gallery-album-desc');const metaParts=[album.date?`<span><i class="fas fa-calendar-alt"style="margin-right:4px;color:var(--primary)"></i>${album.date}</span>`:'',album.location?`<span><i class="fas fa-map-marker-alt"style="margin-right:4px;color:var(--primary)"></i>${album.location}</span>`:'',`<span><i class="fas fa-image"style="margin-right:4px;color:var(--primary)"></i>${(album.photos||[]).length}photo${(album.photos||[]).length!==1?'s':''}</span>`].filter(Boolean).join('<span style="color:#cbd5e1;margin:0 0.5rem">|</span>');metaEl.innerHTML=metaParts;descEl.textContent=album.desc||'';infoEl.style.display='block';renderGalleryGrid(album);}
-function renderGalleryGrid(album){const grid=document.getElementById('gallery-grid');const empty=document.getElementById('gallery-empty');const photos=album.photos||[];if(photos.length===0){grid.style.display='none';empty.style.display='flex';empty.querySelector('h3').textContent='No Photos in This Album';empty.querySelector('p').textContent='Photos will appear here once the admin adds them.';return;}
-empty.style.display='none';grid.style.display='grid';grid.innerHTML=photos.map((url,i)=>`<div onclick="openLightbox(${i})"style="width:150px;height:150px;border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:0.2s;background:#0f172a"onmouseover="this.style.borderColor='var(--primary)';this.style.transform='scale(1.03)'"onmouseout="this.style.borderColor='transparent';this.style.transform='scale(1)'"><img src="${url}"loading=lazy style="width:100%;height:100%;object-fit:cover;display:block"></div>`).join('');lightboxPhotos=photos;}
+let currentGalleryPage = 1;
+const GALLERY_PER_PAGE = 24;
+async function selectGalleryAlbum(id){const albums=await getAlbums();const album=albums.find(a=>a.id===id);if(!album)return;galleryCurrentAlbum=album;currentGalleryPage=1;document.getElementById('gallery-selected-label').textContent=album.title;document.getElementById('gallery-dropdown-list').style.display='none';document.getElementById('gallery-dropdown-chevron').style.transform='rotate(0deg)';const infoEl=document.getElementById('gallery-album-info');const metaEl=document.getElementById('gallery-album-meta');const descEl=document.getElementById('gallery-album-desc');const metaParts=[album.date?`<span><i class="fas fa-calendar-alt"style="margin-right:4px;color:var(--primary)"></i>${album.date}</span>`:'',album.location?`<span><i class="fas fa-map-marker-alt"style="margin-right:4px;color:var(--primary)"></i>${album.location}</span>`:''].filter(Boolean).join('<span style="color:#cbd5e1;margin:0 0.5rem">|</span>');metaEl.innerHTML=metaParts;descEl.textContent=album.desc||'';infoEl.style.display='block';renderGalleryGrid(album);}
+window.changeGalleryPage = (dir) => {
+    currentGalleryPage += dir;
+    renderGalleryGrid(galleryCurrentAlbum);
+    document.getElementById('gallery-album-selector').scrollIntoView({behavior: 'smooth', block: 'start'});
+};
+function renderGalleryGrid(album){
+    const grid=document.getElementById('gallery-grid');
+    const empty=document.getElementById('gallery-empty');
+    let pagination=document.getElementById('gallery-pagination');
+    if(!pagination) {
+        pagination = document.createElement('div');
+        pagination.id = 'gallery-pagination';
+        pagination.style.cssText = 'display:flex;justify-content:center;gap:1rem;margin-top:2rem;padding:0 2rem;width:100%';
+        grid.parentNode.insertBefore(pagination, grid.nextSibling);
+    }
+    const photos=album.photos||[];
+    if(photos.length===0){
+        grid.style.display='none'; pagination.style.display='none'; empty.style.display='flex';
+        empty.querySelector('h3').textContent='No Photos in This Album';
+        empty.querySelector('p').textContent='Photos will appear here once the admin adds them.';
+        return;
+    }
+    empty.style.display='none'; grid.style.display='grid';
+    const totalPages = Math.ceil(photos.length / GALLERY_PER_PAGE);
+    if(currentGalleryPage < 1) currentGalleryPage = 1;
+    if(currentGalleryPage > totalPages) currentGalleryPage = totalPages;
+    const startIdx = (currentGalleryPage - 1) * GALLERY_PER_PAGE;
+    const currentPhotos = photos.slice(startIdx, startIdx + GALLERY_PER_PAGE);
+    grid.innerHTML=currentPhotos.map((url,i)=> {
+        const absoluteIdx = startIdx + i;
+        return `<div onclick="openLightbox(${absoluteIdx})"style="width:100%;aspect-ratio:1;border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:0.2s;background:#0f172a"onmouseover="this.style.borderColor='var(--primary)';this.style.transform='scale(1.03)'"onmouseout="this.style.borderColor='transparent';this.style.transform='scale(1)'"><img src="${url}"loading=lazy style="width:100%;height:100%;object-fit:cover;display:block"></div>`;
+    }).join('');
+    lightboxPhotos=photos;
+    if(totalPages > 1) {
+        pagination.style.display='flex';
+        pagination.innerHTML = `
+            <button class="btn btn-secondary" onclick="changeGalleryPage(-1)" ${currentGalleryPage === 1 ? 'disabled style="opacity:0.5;cursor:not-allowed"' : ''}><i class="fas fa-chevron-left"></i> Prev</button>
+            <span style="display:flex;align-items:center;font-weight:700;color:var(--text-muted)">Page ${currentGalleryPage} of ${totalPages}</span>
+            <button class="btn btn-secondary" onclick="changeGalleryPage(1)" ${currentGalleryPage === totalPages ? 'disabled style="opacity:0.5;cursor:not-allowed"' : ''}>Next <i class="fas fa-chevron-right"></i></button>
+        `;
+    } else {
+        pagination.style.display='none';
+    }
+}
 async function renderGalleryDropdown(){const list=document.getElementById('gallery-dropdown-list');const grid=document.getElementById('gallery-grid');const empty=document.getElementById('gallery-empty');const albums=await getAlbums();if(!list)return;if(albums.length===0){list.innerHTML='';grid.style.display='none';empty.style.display='flex';empty.querySelector('h3').textContent='No Albums Yet';empty.querySelector('p').textContent='Photo albums from Baao Coop events and activities will appear here.';document.getElementById('gallery-album-info').style.display='none';document.getElementById('gallery-selected-label').textContent='ALL PROGRAMS';return;}
 empty.style.display='none';list.innerHTML=albums.map(album=>`<div onclick="selectGalleryAlbum('${album.id}')"style="padding:0.9rem 1.2rem;cursor:pointer;border-bottom:1px solid rgba(0,0,0,0.04);transition:0.15s"onmouseover="this.style.background='rgba(220,38,38,0.05)'"onmouseout="this.style.background='transparent'"><p style="font-weight:700;color:var(--text-main);margin:0 0 0.2rem;font-size:0.95rem">${album.title}</p><p style="font-size:0.78rem;color:var(--text-muted);margin:0;display:flex;gap:0.75rem;flex-wrap:wrap">${album.date?`<span><i class="fas fa-calendar-alt"style="margin-right:3px"></i>${album.date}</span>`:''}
-${album.location?`<span><i class="fas fa-map-marker-alt"style="margin-right:3px"></i>${album.location}</span>`:''}<span><i class="fas fa-image"style="margin-right:3px"></i>${(album.photos||[]).length}photos</span></p></div>`).join('');selectGalleryAlbum(albums[0].id);}
+${album.location?`<span><i class="fas fa-map-marker-alt"style="margin-right:3px"></i>${album.location}</span>`:''}</p></div>`).join('');selectGalleryAlbum(albums[0].id);}
 function openLightbox(index){lightboxIndex=index;const lb=document.getElementById('gallery-lightbox');lb.style.display='flex';document.body.style.overflow='hidden';updateLightbox();}
 function closeLightbox(){document.getElementById('gallery-lightbox').style.display='none';document.body.style.overflow='';}
 function lightboxNav(dir){lightboxIndex=(lightboxIndex+dir+lightboxPhotos.length)%lightboxPhotos.length;updateLightbox();}
@@ -786,7 +987,6 @@ window.toggleGalleryDropdown=toggleGalleryDropdown;window.selectGalleryAlbum=sel
 // ARTICLES / NEWS
 // =========================================================
 let _articles = [];
-
 function initArticlesListener() {
   import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js').then(
     ({ collection, query, orderBy, onSnapshot }) => {
@@ -801,17 +1001,13 @@ function initArticlesListener() {
     }
   );
 }
-
 function renderArticleCards() {
   const grid = document.getElementById('articles-grid');
   const countEl = document.getElementById('articles-count');
   if (!grid) return;
-
   const published = _articles.filter(a => a.status !== 'draft');
-
   if (countEl)
     countEl.textContent = `${published.length} post${published.length !== 1 ? 's' : ''}`;
-
   if (published.length === 0) {
     grid.innerHTML = `
       <div class="articles-empty">
@@ -825,12 +1021,7 @@ function renderArticleCards() {
       </div>`;
     return;
   }
-
   grid.innerHTML = published.map((a, i) => {
-    const slug = a.slug || slugifyArticle(a.title);
-    const date = a.published_at
-      ? new Date(a.published_at).toLocaleDateString('en-PH', { year: 'numeric', month: 'short', day: 'numeric' })
-      : '';
     return `
       <div class="article-card stagger-up" style="animation-delay:${i * 0.06}s"
         onclick="window.location.href='article.html?id=${a.id}'">
@@ -839,25 +1030,108 @@ function renderArticleCards() {
           : `<div class="article-card-cover-placeholder"><i class="fas fa-newspaper"></i></div>`
         }
         <div class="article-card-body">
-          <span class="article-card-category">${a.category || 'News'}</span>
+          <span class="article-card-category">${a.label || a.category || 'Monthly Bulletin'}</span>
           <span class="article-card-title">${a.title}</span>
-          ${a.subtitle ? `<span style="font-size:0.82rem;color:var(--text-muted);line-height:1.4">${a.subtitle}</span>` : ''}
-          <div class="article-card-meta">
-            ${date ? `<span><i class="fas fa-calendar-alt" style="margin-right:4px"></i>${date}</span>` : ''}
-            ${a.read_time ? `<span><i class="fas fa-clock" style="margin-right:4px"></i>${a.read_time} min read</span>` : ''}
-            ${a.author ? `<span><i class="fas fa-user" style="margin-right:4px"></i>${a.author}</span>` : ''}
-          </div>
-          <span class="article-card-read">Read Article →</span>
+          ${a.subtitle ? `<span class="article-card-subtitle">${a.subtitle}</span>` : ''}
+          <div class="article-card-read">Read Article &rarr;</div>
         </div>
       </div>`;
   }).join('');
-
-// Re-observe new cards for stagger animation
+  // Wire Latest 5 Articles to Home Hero Banner (rotating)
+  if (published.length > 0) {
+    const top5 = published.slice(0, 5);
+    const bannerImg = document.querySelector('#home .hero-banner img');
+    const h2 = document.getElementById('home-hero-h2');
+    const h1 = document.getElementById('home-hero-h1');
+    const p  = document.getElementById('home-hero-p');
+    const readMoreBtn = document.querySelector('#home .hero-island .cta a.btn-secondary');
+    let bannerIndex = 0;
+    function getArticleExcerpt(a) {
+      if (a.subtitle) return a.subtitle;
+      if (a.sections && a.sections.length > 0) {
+        const contentSection = a.sections.find(s =>
+          s.type !== 'event' && s.content && s.content.trim().length > 0
+        );
+        if (contentSection) {
+          const tmp = document.createElement('div');
+          tmp.innerHTML = contentSection.content;
+          const text = tmp.textContent.trim();
+          return text.length > 160 ? text.substring(0, 160) + '...' : text;
+        }
+      }
+      return 'Click to read our latest update...';
+    }
+    function applyBannerSlide(idx) {
+  const a = top5[idx];
+  if (!a) return;
+  if (bannerImg) {
+    bannerImg.style.transition = 'opacity 0.5s ease';
+    bannerImg.style.opacity = '0';
+    setTimeout(() => {
+      bannerImg.src = a.cover_image || 'assets/images/hero-bg.png';
+      bannerImg.style.opacity = '1';
+      // Reset and restart pan animation
+      bannerImg.style.animation = 'none';
+      bannerImg.offsetHeight; // force reflow to restart animation
+      bannerImg.style.animation = 'heroPanDown 6s linear forwards';
+    }, 500);
+  }
+      if (h2) h2.innerHTML = `<i class="fas fa-bolt" style="color:#facc15;margin-right:8px"></i> LATEST: ${a.label || a.category || 'UPDATE'}`;
+      if (h1) {
+        h1.style.transition = 'opacity 0.4s ease';
+        h1.style.opacity = '0';
+        setTimeout(() => { h1.textContent = a.title; h1.style.opacity = '1'; }, 400);
+      }
+      if (p) {
+        p.style.transition = 'opacity 0.4s ease';
+        p.style.opacity = '0';
+        setTimeout(() => { p.textContent = getArticleExcerpt(a); p.style.opacity = '1'; }, 400);
+      }
+      if (readMoreBtn) {
+        readMoreBtn.href = `article.html?id=${a.id}`;
+        readMoreBtn.innerHTML = `Read Article <i class="fas fa-arrow-right" style="margin-left:8px"></i>`;
+      }
+      document.querySelectorAll('.hero-banner-dot').forEach((dot, i) => {
+        dot.style.opacity = i === idx ? '1' : '0.4';
+        dot.style.transform = i === idx ? 'scale(1.3)' : 'scale(1)';
+      });
+    }
+    // Inject dots once
+    if (!document.getElementById('hero-banner-dots')) {
+      const heroIsland = document.querySelector('#home .hero-island');
+      if (heroIsland) {
+        const dotsWrap = document.createElement('div');
+        dotsWrap.id = 'hero-banner-dots';
+        dotsWrap.style.cssText = 'display:flex;gap:8px;align-items:center;margin-bottom:1rem';
+        top5.forEach((_, i) => {
+          const dot = document.createElement('button');
+          dot.className = 'hero-banner-dot';
+          dot.style.cssText = 'width:10px;height:10px;border-radius:50%;background:white;border:none;cursor:pointer;padding:0;transition:opacity 0.3s,transform 0.3s;opacity:0.4';
+          dot.addEventListener('click', () => {
+            bannerIndex = i;
+            applyBannerSlide(bannerIndex);
+            resetBannerTimer();
+          });
+          dotsWrap.appendChild(dot);
+        });
+        heroIsland.insertBefore(dotsWrap, heroIsland.firstChild);
+      }
+    }
+    function resetBannerTimer() {
+      if (window._heroBannerTimer) clearInterval(window._heroBannerTimer);
+      window._heroBannerTimer = setInterval(() => {
+        bannerIndex = (bannerIndex + 1) % top5.length;
+        applyBannerSlide(bannerIndex);
+      }, 6000);
+    }
+    applyBannerSlide(0);
+    resetBannerTimer();
+  }
+  // Re-observe new cards for stagger animation
   document.querySelectorAll('.article-card.stagger-up:not(.visible)').forEach(el => {
     if (window.staggerObserver) window.staggerObserver.observe(el);
   });
 }
-
 function slugifyArticle(title) {
   return (title || '').toLowerCase()
     .replace(/[^a-z0-9\s-]/g, '')

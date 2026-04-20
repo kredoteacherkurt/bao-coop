@@ -3,106 +3,858 @@
 <head>
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width, initial-scale=1.0">
-<title>Member Portal | Baao Coop V2.0 - Test Push</title>
+<title>Member Dashboard | Baao Coop</title>
 <link rel=stylesheet href=css/styles.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css>
-<style>body{background-color:var(--bg-color)}.dashboard-header{background:var(--nav-bg);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow-sm);position:sticky;top:0;z-index:100;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}.dashboard-container{max-width:var(--max-width);margin:2rem auto;padding:0 2rem;display:grid;gap:2rem}.stat-card{padding:2rem;display:flex;flex-direction:column;gap:.5rem;border-left:4px solid var(--primary)}.stat-card.secondary{border-left-color:var(--secondary)}.stat-value{font-size:2.5rem;font-weight:700;color:var(--primary)}.dashboard-grid{display:grid;grid-template-columns:1fr 2fr;gap:2rem}.panel{padding:2rem}.form-row{display:flex;gap:1rem;margin-bottom:1.5rem}.form-row>*{flex:1}select,input[type="file"]{width:100%;padding:1rem 1.5rem;border-radius:var(--radius-sm);border:1px solid var(--text-muted);background:var(--bg-alt);color:var(--text-main);font-family:var(--font-family);font-size:1rem}table{width:100%;border-collapse:collapse;margin-top:1rem}th,td{padding:1rem;text-align:left;border-bottom:1px solid rgba(0,0,0,0.05)}th{font-weight:600;color:var(--text-muted);text-transform:uppercase;font-size:.85rem}.status-badge{padding:.3rem .8rem;border-radius:var(--radius-full);font-size:.8rem;font-weight:600}.pending{background:#fef08a;color:#854d0e}.approved{background:#bbf7d0;color:#166534}.rejected{background:#fecdd3;color:#9f1239}@media(max-width:900px){.dashboard-grid{grid-template-columns:1fr}.form-row{flex-direction:column}}.custom-modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;display:flex;justify-content:center;align-items:center;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(5px)}.custom-modal-overlay.active{opacity:1;pointer-events:auto}.custom-modal-box{background:var(--bg-alt);padding:25px;border-radius:var(--radius-md);width:90%;max-width:400px;box-shadow:var(--shadow-lg);text-align:center;transform:translateY(-20px);transition:transform .3s}.custom-modal-overlay.active .custom-modal-box{transform:translateY(0)}.custom-modal-actions{display:flex;justify-content:center;gap:10px;margin-top:1rem}.custom-modal-btn{padding:10px 20px;border:0;border-radius:var(--radius-sm);cursor:pointer;font-weight:bold}.custom-modal-btn-primary{background:var(--primary);color:white}.custom-modal-btn-cancel{background:#ccc;color:#333}.custom-modal-box.wide{max-width:600px;text-align:left;max-height:80vh;overflow-y:auto}</style>
 <link rel=icon href=assets/images/logo.png type=image/png>
+<style>#members-auth-gate{position:fixed;inset:0;background:var(--text-main);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2rem}.login-card{background:var(--bg-alt);padding:2.5rem;border-radius:var(--radius-md);width:90%;max-width:420px;box-shadow:0 25px 50px rgba(0,0,0,0.4);text-align:center;animation:slideUp .4s ease}@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.login-card img{width:64px;margin-bottom:1rem}.login-card h2{font-size:1.5rem;color:var(--text-main);margin-bottom:.25rem}.login-card p{color:var(--text-muted);font-size:.88rem;margin-bottom:1.5rem}.login-field{width:100%;padding:.7rem 1rem;border:1px solid #e2e8f0;border-radius:var(--radius-sm);font-family:inherit;font-size:.95rem;margin-bottom:.75rem;outline:0;transition:.2s}.login-field:focus{border-color:var(--primary)}.login-btn-full{width:100%;padding:.8rem;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:white;border:0;border-radius:var(--radius-sm);font-weight:700;font-size:1rem;cursor:pointer;transition:.3s}.login-btn-full:hover{opacity:.9;transform:translateY(-1px)}#auth-error{color:var(--primary);font-size:.82rem;margin-top:.5rem;min-height:1.2rem}#members-app{display:none}.members-layout{display:grid;grid-template-columns:82fr 18fr;gap:0;max-width:100%;margin:0;padding:0;align-items:start;min-height:calc(100vh - var(--header-h,120px))}.members-sidebar{position:sticky;top:calc(var(--header-h,120px));background:var(--bg-alt);border-radius:0;box-shadow:none;border:0;border-left:1px solid rgba(0,0,0,0.08);overflow:hidden;height:calc(100vh - var(--header-h,120px));display:flex;flex-direction:column;overflow-y:auto;scrollbar-width:none}.members-sidebar::-webkit-scrollbar{display:none}.sidebar-greeting{background:linear-gradient(135deg,var(--text-main) 0,#1e293b 100%);padding:1.25rem 1.5rem;position:relative;overflow:hidden}.sidebar-greeting::before{content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:rgba(220,38,38,0.15);border-radius:50%}.sidebar-greeting::after{content:'';position:absolute;bottom:-30px;left:30px;width:70px;height:70px;background:rgba(29,78,216,0.1);border-radius:50%}.sidebar-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-light));display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;color:white;position:relative;z-index:1;flex-shrink:0}.sidebar-greeting-row{display:flex;align-items:center;gap:.75rem}.sidebar-name{color:white;font-weight:800;font-size:1.2rem;position:relative;z-index:1}.sidebar-role{color:rgba(255,255,255,0.75);font-size:.82rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;position:relative;z-index:1}.sidebar-sep{height:1px;background:rgba(0,0,0,0.06);margin:0}.sidebar-nav{padding:.75rem 0;flex:1}.sidebar-label{padding:.85rem 1.25rem .4rem;font-size:.78rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted)}.sidebar-link{display:flex;align-items:center;gap:.75rem;padding:.9rem 1.25rem;cursor:pointer;color:var(--text-main);font-size:1.05rem;font-weight:600;transition:.2s;border-left:3px solid transparent;text-decoration:none;position:relative;user-select:none}.sidebar-link:hover{background:rgba(0,0,0,0.03);color:var(--primary)}.sidebar-link.active{background:rgba(220,38,38,0.06);color:var(--primary);border-left-color:var(--primary);font-weight:600}.sidebar-link i.icon{width:18px;text-align:center;font-size:.9rem;flex-shrink:0}.sidebar-link .caret{margin-left:auto;font-size:.7rem;color:var(--text-muted);transition:transform .25s}.sidebar-link.open .caret{transform:rotate(180deg)}.sidebar-link .badge{margin-left:auto;background:var(--primary);color:white;font-size:.65rem;font-weight:700;padding:.15rem .45rem;border-radius:99px;min-width:20px;text-align:center}.sidebar-collapse{overflow:hidden;transition:max-height .3s ease;max-height:0}.sidebar-collapse.open{max-height:500px}.sidebar-sub-link{display:flex;align-items:center;gap:.75rem;padding:.7rem 1.25rem .7rem 2.75rem;cursor:pointer;color:var(--text-main);font-size:.95rem;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none}.sidebar-sub-link:hover{color:var(--primary);background:rgba(0,0,0,0.02)}.sidebar-sub-link.active{color:var(--primary);font-weight:600;background:rgba(220,38,38,0.04);border-left-color:var(--primary)}.sidebar-sub-link::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;opacity:.5}.sidebar-link.danger{color:#ef4444}.sidebar-link.danger:hover{background:rgba(239,68,68,0.06)}.members-main{min-width:0;padding:2rem}.members-panel{display:none;animation:fadeIn .35s ease}.members-panel.active{display:block}.panel-header{margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:2px solid rgba(0,0,0,0.06)}.panel-header h2{font-size:1.8rem;color:var(--text-main);margin-bottom:.35rem}.panel-header p{color:var(--text-muted);font-size:1rem}.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}.stat-card{background:var(--bg-alt);border-radius:var(--radius-md);padding:1.25rem 1.5rem;border:var(--glass-border);box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:1rem}.stat-card-icon{width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}.stat-card-icon.red{background:rgba(220,38,38,0.1);color:var(--primary)}.stat-card-icon.blue{background:rgba(29,78,216,0.1);color:var(--secondary)}.stat-card-icon.green{background:rgba(16,185,129,0.1);color:#10b981}.stat-card-body h3{font-size:1.5rem;font-weight:800;color:var(--text-main)}.stat-card-body p{font-size:.85rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px}.info-card{background:var(--bg-alt);border-radius:var(--radius-md);border:var(--glass-border);box-shadow:var(--shadow-sm);padding:1.5rem;margin-bottom:1.5rem}.info-card h3{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;gap:.5rem}.info-card h3 i{color:var(--secondary)}.mini-article-card{display:flex;gap:1rem;align-items:flex-start;padding:.85rem 0;border-bottom:1px solid rgba(0,0,0,0.05);cursor:pointer;transition:.2s;text-decoration:none}.mini-article-card:last-child{border-bottom:0;padding-bottom:0}.mini-article-card:hover{opacity:.75}.mini-article-thumb{width:60px;height:60px;border-radius:var(--radius-sm);object-fit:cover;flex-shrink:0;background:var(--bg-color)}.mini-article-placeholder{width:60px;height:60px;border-radius:var(--radius-sm);background:rgba(220,38,38,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--primary);font-size:1.3rem}.mini-article-cat{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--primary);margin-bottom:.2rem}.mini-article-title{font-weight:700;color:var(--text-main);font-size:.88rem;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.mini-article-date{font-size:.72rem;color:var(--text-muted);margin-top:.2rem}.service-table{width:100%;border-collapse:collapse}.service-table th{padding:.7rem 1rem;text-align:left;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);border-bottom:2px solid rgba(0,0,0,0.06)}.service-table td{padding:.85rem 1rem;border-bottom:1px solid rgba(0,0,0,0.04);font-size:.9rem;color:var(--text-main)}.service-table tr:last-child td{border-bottom:0}.service-table tr:hover td{background:rgba(0,0,0,0.015)}.status-badge{display:inline-block;padding:.2rem .6rem;border-radius:99px;font-size:.7rem;font-weight:700}.status-badge.active{background:rgba(16,185,129,0.1);color:#10b981}.status-badge.pending{background:rgba(245,158,11,0.1);color:#d97706}.status-badge.inactive{background:rgba(0,0,0,0.06);color:var(--text-muted)}.payment-method-card{background:var(--bg-alt);border-radius:var(--radius-md);border:var(--glass-border);box-shadow:var(--shadow-sm);padding:1.5rem;margin-bottom:1rem;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:1rem}.payment-method-card:hover{border-color:var(--secondary);transform:translateY(-2px);box-shadow:var(--shadow-md)}.payment-method-icon{width:48px;height:48px;border-radius:var(--radius-sm);background:rgba(29,78,216,0.08);color:var(--secondary);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}.payment-method-body h4{font-size:.95rem;color:var(--text-main);margin-bottom:.2rem}.payment-method-body p{font-size:.8rem;color:var(--text-muted)}.account-form{max-width:480px}.account-field-group{margin-bottom:1rem}.account-label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);margin-bottom:.3rem}.account-input{width:100%;padding:.6rem .8rem;border:1px solid #e2e8f0;border-radius:var(--radius-sm);font-family:inherit;font-size:.95rem;outline:0;background:var(--bg-color);color:var(--text-main);transition:.2s}.account-input:focus{border-color:var(--primary);background:white}.account-input:disabled{background:#f1f5f9;color:var(--text-muted);cursor:not-allowed}#account-msg{font-size:.82rem;margin-top:.5rem;min-height:1.2rem}.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 2rem;text-align:center;color:var(--text-muted)}.empty-state-icon{width:64px;height:64px;border-radius:50%;background:rgba(220,38,38,0.08);display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--primary);opacity:.5;margin-bottom:1rem}.empty-state h3{color:var(--text-main);font-size:1.1rem;margin-bottom:.4rem}.empty-state p{font-size:.85rem;max-width:320px;line-height:1.6}.quick-links{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}.quick-link-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .9rem;background:var(--bg-alt);border:var(--glass-border);border-radius:99px;font-size:.78rem;font-weight:600;color:var(--text-main);cursor:pointer;transition:.2s;text-decoration:none}.quick-link-chip:hover{border-color:var(--primary);color:var(--primary)}.quick-link-chip i{color:var(--primary)}@media(max-width:768px){.members-layout{grid-template-columns:1fr;padding:1rem;gap:1rem}.members-sidebar{position:static;max-height:none;overflow:visible}.stat-row{grid-template-columns:1fr}.members-main{order:-1;padding:1rem}}</style>
 </head>
-<body id=member-page>
-<header class=dashboard-header>
-<a href=index.html class=logo style=text-decoration:none;color:inherit>
-<img src=assets/images/logo.png alt="Baao Coop Logo" style=height:40px;width:40px;border-radius:var(--radius-sm);object-fit:cover>
-<span>Baao Coop</span>
+<body>
+<div id=members-app style=display:block>
+<header>
+<div class=nav-row-1>
+<a href=index.html class=brand-area>
+<img src=assets/images/logo.png alt="Baao Coop Logo">
+<span>Baao Parish Multi-purpose Cooperative</span>
 </a>
-<div style=display:flex;align-items:center;gap:1.5rem>
-<span style=font-weight:500>Welcome, <span id=display-name class=title-gradient>Member</span></span>
-<button onclick=logout() class="btn btn-secondary" style="padding:.5rem 1rem"><i class="fas fa-sign-out-alt"></i> Logout</button>
+<div class=nav-actions>
+<span style=font-size:0.85rem;color:var(--text-muted);font-weight:600>
+<i class="fas fa-circle" style=color:#22c55e;font-size:0.5rem;vertical-align:middle;margin-right:4px></i>
+Member Portal
+</span>
+<a href=index.html style=font-weight:600;color:var(--text-main);font-size:0.9rem>
+<i class="fas fa-home"></i> Main Site
+</a>
+</div>
 </div>
 </header>
-<div class=dashboard-container>
-<div class=grid-cards style=grid-template-columns:repeat(auto-fit,minmax(300px,1fr))>
-<div class="stat-card glass fade-up visible">
-<h3 style=display:flex;align-items:center;gap:.5rem;font-size:1.1rem;color:var(--text-muted)>
-<i class="fas fa-wallet"></i> Total Savings
-</h3>
-<div class=stat-value id=savings-display>₱ 0.00</div>
+<main class=members-layout style="padding-top:calc(var(--header-h,70px) + 2rem)">
+<div class=members-main>
+<div class="members-panel active" id=panel-home>
+<div class=panel-header>
+<h2>Welcome back, <span id=main-first-name style=color:var(--primary)>Member</span>! 👋</h2>
+<p>Here's an overview of your membership with Baao Parish Multi-Purpose Cooperative.</p>
 </div>
-<div class="stat-card secondary glass fade-up visible">
-<h3 style=display:flex;align-items:center;gap:.5rem;font-size:1.1rem;color:var(--text-muted)>
-<i class="fas fa-hand-holding-usd"></i> Active Loans
-</h3>
-<div class=stat-value id=loan-display style=color:var(--secondary)>₱ 0.00</div>
+<div class=quick-links>
+<a href=index.html#services class=quick-link-chip><i class="fas fa-box"></i> All Services</a>
+<a href=index.html#calculator class=quick-link-chip><i class="fas fa-calculator"></i> Loan Calculator</a>
+<a href=index.html#branches class=quick-link-chip><i class="fas fa-map-marker-alt"></i> Branches</a>
+<a href=index.html#forms class=quick-link-chip><i class="fas fa-download"></i> Forms</a>
+</div>
+<div class=stat-row>
+<div class=stat-card>
+<div class="stat-card-icon red"><i class="fas fa-wallet"></i></div>
+<div class=stat-card-body>
+<h3 id=stat-savings>₱0.00</h3>
+<p>Total Savings</p>
 </div>
 </div>
-<div class="dashboard-grid fade-up visible">
-<div class="panel glass">
-<h2 style=margin-bottom:1rem><i class="fas fa-plus-circle title-gradient"></i> Apply</h2>
-<form id=transactForm>
-<div style=margin-bottom:1rem>
-<select id=serviceType required>
-<option value disabled selected>Select Category</option>
-<option value=savings>Savings Deposit</option>
-<option value=loans>Apply for Loan</option>
-<option value=benefits>Enroll Benefit</option>
+<div class=stat-card>
+<div class="stat-card-icon blue"><i class="fas fa-hand-holding-usd"></i></div>
+<div class=stat-card-body>
+<h3 id=stat-loans>₱0.00</h3>
+<p>Active Loans</p>
+</div>
+</div>
+<div class=stat-card>
+<div class="stat-card-icon green"><i class="fas fa-star"></i></div>
+<div class=stat-card-body>
+<h3 id=stat-points>—</h3>
+<p>Member Since</p>
+</div>
+</div>
+</div>
+<div class=info-card id=home-announcements-card>
+<h3><i class="fas fa-bullhorn"></i> Latest Announcements</h3>
+<div id=home-announcements-list>
+<div class=empty-state style="padding:2rem 0">
+<div class=empty-state-icon><i class="fas fa-bullhorn"></i></div>
+<p>Loading announcements...</p>
+</div>
+</div>
+<div style=margin-top:1rem;text-align:right>
+<button onclick="switchPanel('panel-announcements')" style=background:none;border:none;color:var(--secondary);font-weight:600;font-size:0.85rem;cursor:pointer>
+View all <i class="fas fa-arrow-right"></i>
+</button>
+</div>
+</div>
+<div class=info-card id=home-news-card>
+<h3><i class="fas fa-newspaper"></i> Latest News</h3>
+<div id=home-news-list>
+<div class=empty-state style="padding:2rem 0">
+<div class=empty-state-icon><i class="fas fa-newspaper"></i></div>
+<p>Loading news...</p>
+</div>
+</div>
+<div style=margin-top:1rem;text-align:right>
+<button onclick="switchPanel('panel-news')" style=background:none;border:none;color:var(--secondary);font-weight:600;font-size:0.85rem;cursor:pointer>
+View all <i class="fas fa-arrow-right"></i>
+</button>
+</div>
+</div>
+</div>
+<div class=members-panel id=panel-announcements>
+<div class=panel-header>
+<h2>Announcements</h2>
+<p>Official notices and updates from Baao Coop.</p>
+</div>
+<div class=info-card>
+<div id=announcements-full-list></div>
+</div>
+</div>
+<div class=members-panel id=panel-news>
+<div class=panel-header>
+<h2>News & Articles</h2>
+<p>Stay updated with the latest from Baao Coop.</p>
+</div>
+<div class=info-card>
+<div id=news-full-list></div>
+</div>
+</div>
+<div class=members-panel id=panel-savings-regular>
+<div class=panel-header>
+<h2>Regular Savings</h2>
+<p>Your regular savings account details with Baao Parish Multi-Purpose Cooperative.</p>
+</div>
+<div class=info-card>
+<h3><i class="fas fa-piggy-bank"></i> Account Summary</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 2rem;margin-bottom:1.5rem">
+<div>
+<div style=font-size:0.8rem;font-weight:700;color:var(--text-muted);margin-bottom:0.3rem>Member ID</div>
+<div style=font-size:1rem;font-weight:700;color:var(--text-main) id=sav-member-id>—</div>
+</div>
+<div>
+<div style=font-size:0.8rem;font-weight:700;color:var(--text-muted);margin-bottom:0.3rem>Membership Category</div>
+<div style=font-size:1rem;font-weight:700;color:var(--text-main) id=sav-category>—</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>Initial Remittance Date</label>
+<input class=account-input disabled id=sav-initial-date value=—>
+</div>
+<div>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>Last Remittance Date</label>
+<input class=account-input disabled id=sav-last-date value=—>
+</div>
+<div>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>Total No. of Contributions</label>
+<input class=account-input disabled id=sav-contributions value=—>
+</div>
+<div>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>Total Dividends</label>
+<input class=account-input disabled id=sav-dividends value=—>
+</div>
+<div style=grid-column:1/-1>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>Total Savings</label>
+<input class=account-input disabled id=sav-total value=— style=font-size:1.2rem;font-weight:800;color:var(--primary)>
+</div>
+</div>
+</div>
+<div class=info-card>
+<h3><i class="fas fa-history"></i> Contribution History</h3>
+<div style=display:flex;align-items:center;gap:1rem;margin-bottom:1rem>
+<label style=font-size:0.9rem;font-weight:600;color:var(--text-main)>Year:</label>
+<input type=number id=sav-year-filter class=account-input style=width:120px placeholder="e.g. 2024">
+<button class="btn btn-primary" style="padding:.5rem 1.2rem;font-size:.9rem" onclick=viewContributions()>
+<i class="fas fa-search"></i> View Contributions
+</button>
+</div>
+<div id=contributions-list>
+<div class=empty-state>
+<div class=empty-state-icon><i class="fas fa-piggy-bank"></i></div>
+<h3>No contributions yet</h3>
+<p>Your contribution history will appear here once recorded by the cooperative.</p>
+</div>
+</div>
+</div>
+</div>
+<div class=members-panel id=panel-savings-retirement>
+<div class=panel-header><h2>Retirement Savings</h2><p>Plan your future with Baao Coop's retirement savings program.</p></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-umbrella-beach"></i></div><h3>No balance on file</h3><p>Contact your branch to enroll or inquire about your retirement savings account.</p></div></div>
+</div>
+<div class=members-panel id=panel-savings-birthday>
+<div class=panel-header><h2>Birthday Savings</h2><p>A special savings account that matures on your birthday.</p></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-birthday-cake"></i></div><h3>No balance on file</h3><p>Visit your nearest branch to open a Birthday Savings account.</p></div></div>
+</div>
+<div class=members-panel id=panel-savings-travel>
+<div class=panel-header><h2>Travel Savings</h2><p>Save up for your next adventure.</p></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-plane"></i></div><h3>No balance on file</h3><p>Visit your nearest branch to open a Travel Savings account.</p></div></div>
+</div>
+<div class=members-panel id=panel-savings-anniversary>
+<div class=panel-header><h2>Anniversary Savings</h2><p>Celebrate milestones with special savings.</p></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-heart"></i></div><h3>No balance on file</h3><p>Visit your nearest branch to open an Anniversary Savings account.</p></div></div>
+</div>
+<div class=members-panel id=panel-savings-alkansya>
+<div class=panel-header><h2>Koop Alkansya <span style="font-size:.7rem;background:rgba(220,38,38,0.1);color:var(--primary);padding:.15rem .5rem;border-radius:99px;vertical-align:middle">For Kids</span></h2><p>Teaching children the value of saving.</p></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-child"></i></div><h3>No balance on file</h3><p>Visit your nearest branch to open a Koop Alkansya account for your child.</p></div></div>
+</div>
+<div class=members-panel id=panel-savings-td>
+<div class=panel-header><h2>Time Deposit</h2><p>Grow your money with competitive time deposit rates.</p></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-clock"></i></div><h3>No time deposits on file</h3><p>Contact your branch for current Time Deposit rates and to open an account.</p></div></div>
+</div>
+<div class=members-panel id=panel-loans>
+<div class=panel-header>
+<h2>My Loans</h2>
+<p>View your active loans and balances.</p>
+</div>
+<div class=stat-row style="grid-template-columns:1fr 1fr 1fr">
+<div class=stat-card>
+<div class="stat-card-icon red"><i class="fas fa-hand-holding-usd"></i></div>
+<div class=stat-card-body><h3 id=loans-total>₱0.00</h3><p>Total Outstanding</p></div>
+</div>
+<div class=stat-card>
+<div class="stat-card-icon blue"><i class="fas fa-calendar-check"></i></div>
+<div class=stat-card-body><h3 id=loans-next>—</h3><p>Next Due Date</p></div>
+</div>
+<div class=stat-card>
+<div class="stat-card-icon green"><i class="fas fa-check-circle"></i></div>
+<div class=stat-card-body><h3 id=loans-count>0</h3><p>Active Loans</p></div>
+</div>
+</div>
+<div class=info-card>
+<h3><i class="fas fa-list"></i> Loan Summary</h3>
+<div class=empty-state>
+<div class=empty-state-icon><i class="fas fa-hand-holding-usd"></i></div>
+<h3>No active loans</h3>
+<p>Your loan details will appear here once processed by the cooperative.</p>
+<a href=index.html#calculator class="btn btn-primary" style=margin-top:1rem;font-size:0.85rem>
+<i class="fas fa-calculator"></i> Try Loan Calculator
+</a>
+</div>
+</div>
+</div>
+<div class=members-panel id=panel-loans-microfinance>
+<div class=panel-header><h2>Microfinance Loan</h2><p>Small business and livelihood loan program.</p></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-leaf"></i></div><h3>No active loan</h3><p>Visit your branch to apply for a Microfinance Loan.</p></div></div>
+</div>
+<div class=members-panel id=panel-loans-salary>
+<div class=panel-header><h2>Salary Loan</h2></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-id-badge"></i></div><h3>No active loan</h3><p>Visit your branch to apply.</p></div></div>
+</div>
+<div class=members-panel id=panel-loans-pension>
+<div class=panel-header><h2>Pension Loan</h2></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-id-card"></i></div><h3>No active loan</h3><p>Visit your branch to apply.</p></div></div>
+</div>
+<div class=members-panel id=panel-loans-ofw>
+<div class=panel-header><h2>OFW Loan</h2></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-globe"></i></div><h3>No active loan</h3><p>Visit your branch to apply.</p></div></div>
+</div>
+<div class=members-panel id=panel-loans-grocery>
+<div class=panel-header><h2>Grocery Loan</h2></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-shopping-cart"></i></div><h3>No active loan</h3><p>Visit your branch to apply.</p></div></div>
+</div>
+<div class=members-panel id=panel-loans-medical>
+<div class=panel-header><h2>Medical Loan</h2></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-heartbeat"></i></div><h3>No active loan</h3><p>Visit your branch to apply.</p></div></div>
+</div>
+<div class=members-panel id=panel-loans-calamity>
+<div class=panel-header><h2>Calamity Loan</h2></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-cloud-rain"></i></div><h3>No active loan</h3><p>Visit your branch to apply.</p></div></div>
+</div>
+<div class=members-panel id=panel-loans-enrollment>
+<div class=panel-header><h2>Enrollment Loan</h2></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-book"></i></div><h3>No active loan</h3><p>Visit your branch to apply.</p></div></div>
+</div>
+<div class=members-panel id=panel-loans-emergency>
+<div class=panel-header><h2>Emergency Loan</h2></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-bolt"></i></div><h3>No active loan</h3><p>Visit your branch to apply.</p></div></div>
+</div>
+<div class=members-panel id=panel-loans-b2b>
+<div class=panel-header><h2>Back-to-Back Loan</h2></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-user-clock"></i></div><h3>No active loan</h3><p>Visit your branch to apply.</p></div></div>
+</div>
+<div class=members-panel id=panel-loans-farmer>
+<div class=panel-header><h2>Farmer's Loan</h2></div>
+<div class=info-card><div class=empty-state><div class=empty-state-icon><i class="fas fa-seedling"></i></div><h3>No active loan</h3><p>Visit your branch to apply.</p></div></div>
+</div>
+<div class=members-panel id=panel-pay-online>
+<div class=panel-header>
+<h2>Pay Online</h2>
+<p>Submit your payment details below. Payments are posted within 1-2 banking days.</p>
+</div>
+<div class=info-card>
+<h3><i class="fas fa-credit-card"></i> Payment Form</h3>
+<div style=display:grid;gap:1rem;max-width:560px>
+<div>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>* Program Type</label>
+<select class=account-input id=pay-program style=background:var(--bg-color)>
+<option value>-- Select Program --</option>
+<optgroup label=Savings>
+<option>Regular Savings</option>
+<option>Retirement Savings</option>
+<option>Birthday Savings</option>
+<option>Travel Savings</option>
+<option>Anniversary Savings</option>
+<option>Koop Alkansya</option>
+<option>Time Deposit</option>
+</optgroup>
+<optgroup label=Loans>
+<option>Microfinance Loan</option>
+<option>Salary Loan</option>
+<option>Pension Loan</option>
+<option>OFW Loan</option>
+<option>Back-to-Back Loan</option>
+<option>Grocery Loan</option>
+<option>Medical Loan</option>
+<option>Calamity Loan</option>
+<option>Enrollment Loan</option>
+<option>Emergency Loan</option>
+<option>Farmer's Loan</option>
+</optgroup>
 </select>
 </div>
-<div style=margin-bottom:1rem>
-<select id=serviceProduct required>
-<option value>-- Select Product --</option>
+<div>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>* Membership Category</label>
+<input class=account-input id=pay-category disabled placeholder="Set by admin upon approval">
+</div>
+<div>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>* Payment Method</label>
+<select class=account-input id=pay-method style=background:var(--bg-color)>
+<option value>-- Select Method --</option>
+<option>GCash</option>
+<option>Land Bank Online</option>
+<option>Over-the-Counter</option>
 </select>
 </div>
-<div style=margin-bottom:1.5rem>
-<input type=text id=amountInput inputmode=numeric placeholder="Amount (PHP)" required>
+<div>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>* Member ID</label>
+<input class=account-input id=pay-member-id disabled>
 </div>
-<div id=loan-calculator-section style=display:none;background:rgba(0,0,0,0.02);padding:1rem;border-radius:var(--radius-sm);margin-bottom:1.5rem>
-<h4 style=margin-bottom:0.5rem>Loan Simulator</h4>
-<div style=display:flex;gap:1rem;margin-bottom:1rem;align-items:center>
-<select id=loanTerm style=flex:1;padding:.8rem>
-<option value=3>3 Months</option>
-<option value=6>6 Months</option>
-<option value=9>9 Months</option>
-<option value=12>12 Months</option>
+<div>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>* Member Name</label>
+<input class=account-input id=pay-member-name disabled>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+<div>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>* Period Covered From</label>
+<input type=month class=account-input id=pay-period-from>
+</div>
+<div>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>* Period Covered To</label>
+<input type=month class=account-input id=pay-period-to>
+</div>
+</div>
+<div>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>* Amount (PHP)</label>
+<input type=number class=account-input id=pay-amount placeholder=0.00>
+</div>
+<div>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>Proof of Payment (optional)</label>
+<input type=file class=account-input id=pay-proof accept=image/*,.pdf style=padding:0.4rem>
+</div>
+<div id=pay-msg style=font-size:0.85rem;min-height:1.2rem></div>
+<button class="btn btn-primary" style=padding:0.75rem;font-size:1rem onclick=submitPayment()>
+<i class="fas fa-paper-plane"></i> Submit Payment
+</button>
+</div>
+</div>
+<div class=info-card style=margin-top:0>
+<h3><i class="fas fa-info-circle"></i> Payment Instructions</h3>
+<div style=color:var(--text-muted);font-size:0.92rem;line-height:2>
+<p>1. Always use your <strong>Member ID</strong> as the payment reference.</p>
+<p>2. Take a screenshot or photo of your payment receipt.</p>
+<p>3. Send proof of payment to <a href=mailto:inquire@baaocoop.com style=color:var(--secondary)>inquire@baaocoop.com</a>.</p>
+<p>4. Payments are posted within 1-2 banking days.</p>
+</div>
+</div>
+</div>
+<div class=members-panel id=panel-view-payments>
+<div class=panel-header>
+<h2>View Payments Online</h2>
+<p>Check your payment records posted by the cooperative.</p>
+</div>
+<div class=info-card>
+<h3><i class="fas fa-receipt"></i> Payment Records</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+<div style=grid-column:1/-1>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>* Payment Type</label>
+<select class=account-input id=pay-type-filter style=background:var(--bg-color)>
+<option value>-- Select Payment Type --</option>
+<optgroup label=Savings>
+<option>Regular Savings</option>
+<option>Retirement Savings</option>
+<option>Birthday Savings</option>
+<option>Travel Savings</option>
+<option>Anniversary Savings</option>
+<option>Koop Alkansya</option>
+<option>Time Deposit</option>
+</optgroup>
+<optgroup label=Loans>
+<option>Microfinance Loan</option>
+<option>Salary Loan</option>
+<option>Pension Loan</option>
+<option>OFW Loan</option>
+<option>Back-to-Back Loan</option>
+<option>Grocery Loan</option>
+<option>Medical Loan</option>
+<option>Calamity Loan</option>
+<option>Enrollment Loan</option>
+<option>Emergency Loan</option>
+<option>Farmer's Loan</option>
+</optgroup>
 </select>
-<span style=font-size:.8rem;color:var(--text-muted);flex:1>* 1.5% Monthly Interest</span>
 </div>
-<div id=monthly-amortization style="background:white;padding:1rem;border-radius:var(--radius-sm);border:1px solid rgba(0,0,0,0.05)">
-Estimated Monthly Payment: ₱ 0.00
+<div style=grid-column:1/-1>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>* Member ID</label>
+<input class=account-input id=pay-member-id-view disabled>
 </div>
-<div style=margin-top:1rem>
-<label style=font-weight:500;font-size:.9rem;display:block;margin-bottom:.5rem><i class="fas fa-id-card"></i> Proof of Income (PDF)</label>
-<input type=file id=proofFile accept=.pdf style=padding:.8rem>
+<div>
+<label style=font-size:0.82rem;color:var(--text-muted);font-weight:600;display:block;margin-bottom:0.3rem>* Year</label>
+<input type=number class=account-input id=pay-year-view placeholder="e.g. 2024">
 </div>
 </div>
-<label style=display:flex;gap:.5rem;align-items:start;font-size:.85rem;margin-bottom:1.5rem;cursor:pointer>
-<input type=checkbox id=agreeTerms required style=margin-top:.2rem>
-<span>I certify the info is true. I agree to the <a href=# onclick="showAgreementModal();return false" style=color:var(--primary)>Terms & Conditions</a>.</span>
-</label>
-<button type=submit class="btn btn-primary" style=width:100%>Submit Request</button>
-</form>
-</div>
-<div class="panel glass">
-<h2 style=margin-bottom:1.5rem>Transaction History</h2>
-<div style=overflow-x:auto>
-<table>
-<thead>
-<tr>
-<th>Date</th>
-<th>Product</th>
-<th>Details</th>
-<th>Amount</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody id=member-trans-body>
-<tr><td colspan=5>Loading...</td></tr>
-</tbody>
-</table>
+<button class="btn btn-primary" style="padding:.6rem 1.5rem;font-size:.95rem;margin-bottom:1.5rem" onclick=viewPayments()>
+<i class="fas fa-search"></i> View Payments
+</button>
+<div id=payments-list>
+<div class=empty-state>
+<div class=empty-state-icon><i class="fas fa-receipt"></i></div>
+<h3>No payments on record</h3>
+<p>Select a payment type and year then click View Payments.</p>
 </div>
 </div>
 </div>
 </div>
-<script src=js/main.js></script>
-<script src=js/coop-logic.js></script>
+<div class=members-panel id=panel-account>
+<div class=panel-header>
+<h2>User Settings</h2>
+<p>Manage your profile photo and account credentials.</p>
+</div>
+<div class=info-card>
+<h3><i class="fas fa-camera"></i> Profile Photo</h3>
+<div style=display:flex;align-items:center;gap:1.5rem;margin-bottom:0.5rem>
+<div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-light));display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;border:3px solid var(--glass-border)">
+<i class="fas fa-user" id=avatar-preview-icon style=font-size:2rem;color:white></i>
+<img id=avatar-preview-img style=display:none;width:100%;height:100%;object-fit:cover>
+</div>
+<div style=display:flex;flex-direction:column;gap:0.5rem>
+<input type=file id=avatar-file-input accept=image/* style=display:none onchange=previewAvatar(event)>
+<button class="btn btn-primary" style="padding:.5rem 1rem;font-size:.85rem" onclick="document.getElementById('avatar-file-input').click()">
+<i class="fas fa-upload"></i> Upload Photo
+</button>
+<button class=btn id=avatar-save-btn style="padding:.5rem 1rem;font-size:.85rem;background:var(--secondary);color:white;display:none" onclick=saveAvatar()>
+<i class="fas fa-save"></i> Save Photo
+</button>
+<p id=avatar-msg style=font-size:0.8rem;min-height:1rem></p>
+</div>
+</div>
+</div>
+<div class=info-card>
+<h3><i class="fas fa-user"></i> Member Information</h3>
+<div class=account-form>
+<div class=account-field-group>
+<label class=account-label>Full Name</label>
+<input type=text class=account-input id=acct-fullname disabled>
+</div>
+<div class=account-field-group>
+<label class=account-label>Member ID</label>
+<input type=text class=account-input id=acct-memberid disabled>
+</div>
+<div class=account-field-group>
+<label class=account-label>Email Address</label>
+<input type=email class=account-input id=acct-email disabled>
+</div>
+<div class=account-field-group>
+<label class=account-label>Branch</label>
+<input type=text class=account-input id=acct-branch disabled>
+</div>
+</div>
+</div>
+<div class=info-card>
+<h3><i class="fas fa-lock"></i> Change Password</h3>
+<div class=account-form>
+<div class=account-field-group>
+<label class=account-label>Current Password</label>
+<input type=password class=account-input id=acct-cur-pass placeholder="Enter current password">
+</div>
+<div class=account-field-group>
+<label class=account-label>New Password</label>
+<input type=password class=account-input id=acct-new-pass placeholder="Enter new password">
+</div>
+<div class=account-field-group>
+<label class=account-label>Confirm New Password</label>
+<input type=password class=account-input id=acct-confirm-pass placeholder="Confirm new password">
+</div>
+<button class="btn btn-primary" style=font-size:0.9rem onclick=changePassword()>
+<i class="fas fa-save"></i> Update Password
+</button>
+<p id=account-msg></p>
+</div>
+</div>
+</div>
+</div>
+<div class=members-sidebar>
+<div class=sidebar-greeting>
+<div class=sidebar-greeting-row>
+<div class=sidebar-avatar id=sidebar-avatar>
+<i class="fas fa-user" id=sidebar-avatar-icon></i>
+<img id=sidebar-avatar-img style=display:none;width:100%;height:100%;object-fit:cover;border-radius:50%>
+</div>
+<div>
+<div class=sidebar-name id=sidebar-name>Member</div>
+<div class=sidebar-role>Active Member</div>
+</div>
+</div>
+</div>
+<div class=sidebar-sep></div>
+<div class=sidebar-nav>
+<div class="sidebar-link active" id=nav-home onclick="switchPanel('panel-home','nav-home')">
+<i class="fas fa-home icon"></i> Home
+</div>
+<div class=sidebar-sep></div>
+<div class=sidebar-label>Latest Updates</div>
+<div class=sidebar-link id=nav-announcements onclick="switchPanel('panel-announcements','nav-announcements')">
+<i class="fas fa-bullhorn icon"></i> Announcements
+<span class=badge id=badge-ann style=display:none>0</span>
+</div>
+<div class=sidebar-link id=nav-news onclick="switchPanel('panel-news','nav-news')">
+<i class="fas fa-newspaper icon"></i> News
+<span class=badge id=badge-news style=display:none>0</span>
+</div>
+<div class=sidebar-sep></div>
+<div class=sidebar-link id=nav-savings-toggle onclick="toggleSidebar('savings-group','nav-savings-toggle')">
+<i class="fas fa-piggy-bank icon"></i> Savings
+<i class="fas fa-chevron-down caret"></i>
+</div>
+<div class=sidebar-collapse id=savings-group>
+<div class=sidebar-sub-link id=nav-savings-regular onclick="switchPanel('panel-savings-regular','nav-savings-regular')">Regular</div>
+<div class=sidebar-sub-link id=nav-savings-retirement onclick="switchPanel('panel-savings-retirement','nav-savings-retirement')">Retirement</div>
+<div class=sidebar-sub-link id=nav-savings-birthday onclick="switchPanel('panel-savings-birthday','nav-savings-birthday')">Birthday</div>
+<div class=sidebar-sub-link id=nav-savings-travel onclick="switchPanel('panel-savings-travel','nav-savings-travel')">Travel</div>
+<div class=sidebar-sub-link id=nav-savings-anniversary onclick="switchPanel('panel-savings-anniversary','nav-savings-anniversary')">Anniversary</div>
+<div class=sidebar-sub-link id=nav-savings-alkansya onclick="switchPanel('panel-savings-alkansya','nav-savings-alkansya')">Koop Alkansya</div>
+<div class=sidebar-sub-link id=nav-savings-td onclick="switchPanel('panel-savings-td','nav-savings-td')">Time Deposit</div>
+</div>
+<div class=sidebar-sep></div>
+<div class=sidebar-link id=nav-loans-toggle onclick="toggleSidebar('loans-group','nav-loans-toggle');switchPanel('panel-loans','nav-loans-toggle')">
+<i class="fas fa-hand-holding-usd icon"></i> Loans
+<i class="fas fa-chevron-down caret"></i>
+</div>
+<div class=sidebar-collapse id=loans-group>
+<div class=sidebar-sub-link id=nav-loans-microfinance onclick="switchPanel('panel-loans-microfinance','nav-loans-microfinance')">Microfinance</div>
+<div class=sidebar-sub-link id=nav-loans-salary onclick="switchPanel('panel-loans-salary','nav-loans-salary')">Salary Loan</div>
+<div class=sidebar-sub-link id=nav-loans-pension onclick="switchPanel('panel-loans-pension','nav-loans-pension')">Pension Loan</div>
+<div class=sidebar-sub-link id=nav-loans-ofw onclick="switchPanel('panel-loans-ofw','nav-loans-ofw')">OFW Loan</div>
+<div class=sidebar-sub-link id=nav-loans-b2b onclick="switchPanel('panel-loans-b2b','nav-loans-b2b')">Back-to-Back</div>
+<div class=sidebar-sub-link id=nav-loans-grocery onclick="switchPanel('panel-loans-grocery','nav-loans-grocery')">Grocery Loan</div>
+<div class=sidebar-sub-link id=nav-loans-medical onclick="switchPanel('panel-loans-medical','nav-loans-medical')">Medical Loan</div>
+<div class=sidebar-sub-link id=nav-loans-calamity onclick="switchPanel('panel-loans-calamity','nav-loans-calamity')">Calamity Loan</div>
+<div class=sidebar-sub-link id=nav-loans-enrollment onclick="switchPanel('panel-loans-enrollment','nav-loans-enrollment')">Enrollment Loan</div>
+<div class=sidebar-sub-link id=nav-loans-emergency onclick="switchPanel('panel-loans-emergency','nav-loans-emergency')">Emergency Loan</div>
+<div class=sidebar-sub-link id=nav-loans-farmer onclick="switchPanel('panel-loans-farmer','nav-loans-farmer')">Farmer's Loan</div>
+</div>
+<div class=sidebar-sep></div>
+<div class=sidebar-label>Payments</div>
+<div class=sidebar-link id=nav-pay-online onclick="switchPanel('panel-pay-online','nav-pay-online')">
+<i class="fas fa-credit-card icon"></i> Pay Online
+</div>
+<div class=sidebar-link id=nav-view-payments onclick="switchPanel('panel-view-payments','nav-view-payments')">
+<i class="fas fa-receipt icon"></i> View Payments
+</div>
+<div class=sidebar-sep></div>
+<div class=sidebar-label>Account</div>
+<div class=sidebar-link id=nav-account onclick="switchPanel('panel-account','nav-account')">
+<i class="fas fa-user-cog icon"></i> User Settings
+</div>
+<div class="sidebar-link danger" onclick=memberLogout()>
+<i class="fas fa-sign-out-alt icon"></i> Log Out
+</div>
+</div>
+<div style="margin-top:auto;border-top:1px solid rgba(0,0,0,0.08);padding:1.25rem">
+<p style=font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:0.75rem>Questions? Talk to us!</p>
+<div style=margin-bottom:0.75rem>
+<select id=sidebar-branch-select onchange=updateSidebarBranch() style="width:100%;padding:.4rem .6rem;border:1px solid #e2e8f0;border-radius:var(--radius-sm);font-size:.8rem;font-family:inherit;background:var(--bg-color);color:var(--text-main);outline:0">
+<option value=main>Main Branch</option>
+<option value=goa>Goa Branch</option>
+</select>
+</div>
+<div id=sidebar-branch-info>
+<p style=font-size:0.82rem;color:var(--text-main);font-weight:600;margin-bottom:0.3rem id=sb-hours>Mon–Fri 8:30 AM–2:30 PM</p>
+<p style=font-size:0.82rem;color:var(--text-muted);margin-bottom:0.2rem id=sb-phone><i class="fas fa-phone" style=width:14px;color:var(--primary)></i> 0542663199</p>
+<p style=font-size:0.82rem;color:var(--text-muted) id=sb-email><i class="fas fa-envelope" style=width:14px;color:var(--primary)></i> inquire@baaocoop.com</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script type=module>
+import { db, auth } from './js/config.js';
+import {
+  doc, getDoc, setDoc, collection, query, orderBy, onSnapshot
+} from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+// ============ AUTH ============
+let currentMember = null;
+function setHeaderH() {
+  const h = document.querySelector('header')?.offsetHeight || 70;
+  document.documentElement.style.setProperty('--header-h', h + 'px');
+}
+setHeaderH();
+window.addEventListener('resize', setHeaderH);
+// Auth guard — redirect if not logged in
+onAuthStateChanged(auth, async (user) => {
+  if (!user) { window.location.href = 'login.html'; return; }
+  // Fetch member doc from Firestore
+  try {
+    const snap = await getDoc(doc(db, 'members', user.uid));
+    const data = snap.exists() ? snap.data() : {};
+    const member = {
+      id: user.uid,
+      name: data.firstName ? `${data.firstName} ${data.lastName || ''}`.trim() : (user.displayName || user.email.split('@')[0]),
+      email: user.email,
+      branch: data.branch || 'Main',
+      joinedAt: data.approvedAt || data.appliedAt || ''
+    };
+    currentMember = member;
+    bootMembersApp(member, data);
+  } catch(e) {
+    console.error('BOOT ERROR:', e);
+    alert('Error: ' + e.message);
+    // window.location.href = 'login.html';
+  }
+});
+window.memberLogout = async function() {
+  const { getAuth, signOut } = await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js');
+  await signOut(getAuth());
+  window.location.href = 'login.html';
+};
+function bootMembersApp(member, data = {}) {
+  const mid = member.id;
+  const displayId = 'BPMPCO-' + member.id.slice(-8).toUpperCase();
+  // Set names
+  const first = member.name.split(' ')[0];
+  document.getElementById('main-first-name').textContent = first;
+  document.getElementById('sidebar-name').textContent = member.name;
+  if (data && data.avatarUrl) {
+    // Sidebar
+    document.getElementById('sidebar-avatar-icon').style.display = 'none';
+    const sideImg = document.getElementById('sidebar-avatar-img');
+    sideImg.src = data.avatarUrl; sideImg.style.display = 'block';
+    // Panel preview
+    document.getElementById('avatar-preview-icon').style.display = 'none';
+    const panelImg = document.getElementById('avatar-preview-img');
+    panelImg.src = data.avatarUrl; panelImg.style.display = 'block';
+  }
+  document.getElementById('stat-points').textContent = member.joinedAt
+    ? new Date(member.joinedAt).toLocaleDateString('en-PH', { year:'numeric', month:'short' }) : '—';
+  // Account panel
+  document.getElementById('acct-fullname').value = member.name;
+  document.getElementById('acct-memberid').value = displayId;
+  document.getElementById('acct-email').value = member.email;
+  document.getElementById('acct-branch').value = member.branch;
+  // Prefill member ID across panels
+  const mname = member.name;
+  ['sav-member-id'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = displayId; });
+  ['pay-member-id','pay-member-id-view'].forEach(id => { const el = document.getElementById(id); if(el) el.value = displayId; });
+  const nameEl = document.getElementById('pay-member-name');
+  if(nameEl) nameEl.value = mname;
+  const catEl = document.getElementById('sav-category');
+  if(catEl) catEl.textContent = (data && data.membershipCategory) ? data.membershipCategory : '—';
+  const payCatEl = document.getElementById('pay-category');
+  if(payCatEl) payCatEl.value = (data && data.membershipCategory) ? data.membershipCategory : '—';
+  // Load articles from Firestore
+  loadArticles();
+}
+// ============ LOAD ARTICLES (shared with index) ============
+let _allArticles = [];
+function loadArticles() {
+  const q = query(collection(db, 'articles'), orderBy('createdAt', 'desc'));
+  onSnapshot(q, snap => {
+    _allArticles = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+                          .filter(a => a.status !== 'draft');
+    renderHomeArticles();
+    renderFullLists();
+    updateBadges();
+  });
+}
+function articleMiniCard(a) {
+  const date = a.published_at
+    ? new Date(a.published_at).toLocaleDateString('en-PH', { year:'numeric', month:'short', day:'numeric' })
+    : '';
+  return `
+    <a class="mini-article-card" href="article.html?id=${a.id}" target="_blank">
+      ${a.cover_image
+        ? `<img class="mini-article-thumb" src="${a.cover_image}" alt="${a.title}">`
+        : `<div class="mini-article-placeholder"><i class="fas fa-newspaper"></i></div>`}
+      <div class="mini-article-body">
+        <div class="mini-article-cat">${a.category || 'News'}</div>
+        <div class="mini-article-title">${a.title}</div>
+        ${date ? `<div class="mini-article-date"><i class="fas fa-calendar-alt" style="margin-right:3px"></i>${date}</div>` : ''}
+      </div>
+    </a>`;
+}
+const ANNOUNCEMENT_CATS = ['Announcement', 'Update'];
+function renderHomeArticles() {
+  const announcements = _allArticles.filter(a => ANNOUNCEMENT_CATS.includes(a.category)).slice(0, 3);
+  const news = _allArticles.filter(a => !ANNOUNCEMENT_CATS.includes(a.category)).slice(0, 3);
+  const annEl = document.getElementById('home-announcements-list');
+  if (annEl) {
+    annEl.innerHTML = announcements.length
+      ? announcements.map(articleMiniCard).join('')
+      : `<div class="empty-state" style="padding:1.5rem 0"><div class="empty-state-icon"><i class="fas fa-bullhorn"></i></div><p>No announcements yet.</p></div>`;
+  }
+  const newsEl = document.getElementById('home-news-list');
+  if (newsEl) {
+    newsEl.innerHTML = news.length
+      ? news.map(articleMiniCard).join('')
+      : `<div class="empty-state" style="padding:1.5rem 0"><div class="empty-state-icon"><i class="fas fa-newspaper"></i></div><p>No news yet.</p></div>`;
+  }
+}
+function renderFullLists() {
+  const announcements = _allArticles.filter(a => ANNOUNCEMENT_CATS.includes(a.category));
+  const news = _allArticles.filter(a => !ANNOUNCEMENT_CATS.includes(a.category));
+  const annFull = document.getElementById('announcements-full-list');
+  if (annFull) {
+    annFull.innerHTML = announcements.length
+      ? announcements.map(articleMiniCard).join('')
+      : `<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-bullhorn"></i></div><h3>No Announcements</h3><p>Check back later for updates.</p></div>`;
+  }
+  const newsFull = document.getElementById('news-full-list');
+  if (newsFull) {
+    newsFull.innerHTML = news.length
+      ? news.map(articleMiniCard).join('')
+      : `<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-newspaper"></i></div><h3>No News Yet</h3><p>Check back later for articles.</p></div>`;
+  }
+}
+function updateBadges() {
+  const annCount = _allArticles.filter(a => ANNOUNCEMENT_CATS.includes(a.category)).length;
+  const newsCount = _allArticles.filter(a => !ANNOUNCEMENT_CATS.includes(a.category)).length;
+  const annBadge = document.getElementById('badge-ann');
+  const newsBadge = document.getElementById('badge-news');
+  if (annBadge) { annBadge.textContent = annCount; annBadge.style.display = annCount > 0 ? 'inline-block' : 'none'; }
+  if (newsBadge) { newsBadge.textContent = newsCount; newsBadge.style.display = newsCount > 0 ? 'inline-block' : 'none'; }
+}
+// ============ PANEL SWITCHING ============
+window.switchPanel = function(panelId, navId) {
+  document.querySelectorAll('.members-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-link, .sidebar-sub-link').forEach(l => l.classList.remove('active'));
+  const panel = document.getElementById(panelId);
+  if (panel) panel.classList.add('active');
+  if (navId) {
+    const navEl = document.getElementById(navId);
+    if (navEl) navEl.classList.add('active');
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+window.toggleSidebar = function(groupId, navId) {
+  const group = document.getElementById(groupId);
+  const btn = document.getElementById(navId);
+  if (!group) return;
+  const isOpen = group.classList.contains('open');
+  group.classList.toggle('open', !isOpen);
+  if (btn) btn.classList.toggle('open', !isOpen);
+};
+window.viewContributions = function() {
+  const year = document.getElementById('sav-year-filter').value;
+  const list = document.getElementById('contributions-list');
+  if (!year) { list.innerHTML = `<p style="color:var(--primary);font-size:0.9rem">Please enter a year.</p>`; return; }
+  list.innerHTML = `<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-piggy-bank"></i></div><h3>No contributions for ${year}</h3><p>No records found for the selected year.</p></div>`;
+};
+window.viewPayments = function() {
+  const type = document.getElementById('pay-type-filter').value;
+  const year = document.getElementById('pay-year-view').value;
+  const list = document.getElementById('payments-list');
+  if (!type || !year) { list.innerHTML = `<p style="color:var(--primary);font-size:0.9rem">Please select a payment type and enter a year.</p>`; return; }
+  list.innerHTML = `<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-receipt"></i></div><h3>No payments found</h3><p>No ${type} records for ${year}.</p></div>`;
+};
+window.previewAvatar = function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  if (file.size > 3 * 1024 * 1024) {
+    document.getElementById('avatar-msg').textContent = 'Max 3MB allowed.';
+    document.getElementById('avatar-msg').style.color = 'var(--primary)';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const src = ev.target.result;
+    // Update panel preview
+    document.getElementById('avatar-preview-icon').style.display = 'none';
+    const img = document.getElementById('avatar-preview-img');
+    img.src = src; img.style.display = 'block';
+    // Update sidebar preview immediately
+    document.getElementById('sidebar-avatar-icon').style.display = 'none';
+    const sideImg = document.getElementById('sidebar-avatar-img');
+    sideImg.src = src; sideImg.style.display = 'block';
+    document.getElementById('avatar-save-btn').style.display = 'inline-flex';
+    document.getElementById('avatar-msg').style.color = 'var(--text-muted)';
+    document.getElementById('avatar-msg').textContent = 'Click Save Photo to apply changes.';
+  };
+  reader.readAsDataURL(file);
+};
+window.saveAvatar = async function() {
+  const file = document.getElementById('avatar-file-input').files[0];
+  const msg = document.getElementById('avatar-msg');
+  const btn = document.getElementById('avatar-save-btn');
+  if (!file) return;
+  try {
+    btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+    const { cloudinaryConfig } = await import('./js/config.js');
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', cloudinaryConfig.uploadPreset);
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudinaryConfig.cloudName}/image/upload`, { method: 'POST', body: formData });
+    const data = await res.json();
+    if (!data.secure_url) throw new Error('Upload failed');
+    await setDoc(doc(db, 'members', currentMember.id), { avatarUrl: data.secure_url }, { merge: true });
+    // Update sidebar avatar too
+    document.getElementById('sidebar-avatar-icon').style.display = 'none';
+    const sideImg = document.getElementById('sidebar-avatar-img');
+    sideImg.src = data.secure_url;
+    sideImg.style.display = 'block';
+    msg.style.color = 'var(--secondary)'; msg.textContent = '✓ Photo saved successfully!';
+  } catch(e) {
+    console.error(e);
+    msg.style.color = 'var(--primary)'; msg.textContent = 'Upload failed. Try again.';
+  } finally {
+    btn.disabled = false; btn.innerHTML = '<i class="fas fa-save"></i> Save Photo';
+  }
+};
+window.submitPayment = function() {
+  const program = document.getElementById('pay-program').value;
+  const method = document.getElementById('pay-method').value;
+  const amount = document.getElementById('pay-amount').value;
+  const msg = document.getElementById('pay-msg');
+  if (!program || !method || !amount) { msg.style.color='var(--primary)'; msg.textContent='Please fill all required fields.'; return; }
+  msg.style.color='var(--secondary)'; msg.textContent='Payment request submitted! Our team will process it within 1-2 banking days.';
+};
+const SIDEBAR_BRANCHES = {
+  main: { hours: 'Mon–Fri 8:30 AM–2:30 PM', phone: '0542663199', email: 'inquire@baaocoop.com' },
+  goa:  { hours: 'Mon–Fri 8:30 AM–3:30 PM', phone: '09508983131', email: 'goa@baaocoop.com' }
+};
+window.updateSidebarBranch = function() {
+  const id = document.getElementById('sidebar-branch-select').value;
+  const b = SIDEBAR_BRANCHES[id];
+  document.getElementById('sb-hours').innerHTML = `<i class="fas fa-clock" style="width:14px;color:var(--primary)"></i> ${b.hours}`;
+  document.getElementById('sb-phone').innerHTML = `<i class="fas fa-phone" style="width:14px;color:var(--primary)"></i> ${b.phone}`;
+  document.getElementById('sb-email').innerHTML = `<i class="fas fa-envelope" style="width:14px;color:var(--primary)"></i> ${b.email}`;
+};
+// ============ CHANGE PASSWORD ============
+window.changePassword = async function() {
+  const cur = document.getElementById('acct-cur-pass').value;
+  const nw  = document.getElementById('acct-new-pass').value;
+  const cfm = document.getElementById('acct-confirm-pass').value;
+  const msg = document.getElementById('account-msg');
+  if (!cur || !nw || !cfm) { msg.style.color='var(--primary)'; msg.textContent='Please fill all fields.'; return; }
+  if (nw !== cfm) { msg.style.color='var(--primary)'; msg.textContent='New passwords do not match.'; return; }
+  if (nw.length < 6)  { msg.style.color='var(--primary)'; msg.textContent='Password must be at least 6 characters.'; return; }
+  try {
+    const { getAuth, reauthenticateWithCredential, EmailAuthProvider, updatePassword } =
+      await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js');
+    const authInstance = getAuth();
+    const credential = EmailAuthProvider.credential(authInstance.currentUser.email, cur);
+    await reauthenticateWithCredential(authInstance.currentUser, credential);
+    await updatePassword(authInstance.currentUser, nw);
+    msg.style.color='var(--secondary)'; msg.textContent='Password updated successfully!';
+    document.getElementById('acct-cur-pass').value='';
+    document.getElementById('acct-new-pass').value='';
+    document.getElementById('acct-confirm-pass').value='';
+  } catch(e) {
+    console.error(e);
+    msg.style.color='var(--primary)'; msg.textContent='Failed to update password. Try again.';
+  }
+};
+</script>
 </body>
 </html>

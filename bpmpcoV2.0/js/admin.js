@@ -135,7 +135,8 @@ function parseImageUrl(raw) {
 }
 function initModernDropzones() {
     document.querySelectorAll('input[type="file"]').forEach(input => {
-        if (input.dataset.modernized) return;
+    if (input.dataset.modernized) return;
+    if (input.id === 'art-cover-input') return;
         input.dataset.modernized = 'true';
         const wrapper = document.createElement('div');
         wrapper.className = 'modern-dropzone';
@@ -259,7 +260,9 @@ function switchMainTab(tabId, btn) {
     document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
     if (btn) btn.classList.add('active');
-    window.location.hash = tabId;
+    history.replaceState(null, null, '#' + tabId);
+    localStorage.setItem('bpmpc_admin_tab', tabId);
+    window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
 // Hash-based routing for admin
@@ -278,16 +281,98 @@ function switchSubTab(tabId, btn) {
     document.getElementById(tabId).classList.add('active');
     btn.classList.add('active');
 }
-// Generic branch modal
-function openBranchModal(val1='', val2='', val3='', val4='', val5='') {
-    document.getElementById('modal-title').innerText = val1 ? 'Edit Branch' : 'Add Branch';
-    document.getElementById('modal-body').innerHTML = `
-        <div class="form-group"><label class="form-label">Branch Name</label><input type="text" class="form-control" value="${val1}"></div>
-        <div class="form-group"><label class="form-label">Address</label><input type="text" class="form-control" value="${val2}"></div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;"><div class="form-group"><label class="form-label">Phone</label><input type="text" class="form-control" value="${val3}"></div><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" value="${val4}"></div></div>
-        <div style="text-align:right; margin-top:2rem;"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="showToast('Saved'); closeModal()"><i class="fas fa-save"></i> Save</button></div>`;
-    document.getElementById('crud-modal').style.display = 'flex';
+let _branchesData = [];
+async function loadBranchesAdmin() {
+    const tbody = document.getElementById('branch-table-body');
+    if(!tbody) return;
+    try {
+        const snap = await getDoc(doc(db, 'settings', 'branches'));
+        if(snap.exists() && snap.data().items && snap.data().items.length > 0) {
+            _branchesData = snap.data().items;
+        } else {
+            _branchesData = [
+                {name: 'Baao Parish Multi-Purpose Cooperative (Main)', address: 'Rizal Street, San Nicolas District, Baao, 4432 Camarines Sur', phone: '0542663199', email: 'inquire@baaocoop.com', hours: 'Mon-Fri 8:30 AM–2:30 PM', mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3880.3040773402536!2d123.36318577508484!3d13.455343886906247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a197438f68d539%3A0x87a534f84abc3f68!2sBaao%20Parish%20Multi-Purpose%20Cooperative!5e0!3m2!1sen!2sph!4v1776357602995!5m2!1sen!2sph'},
+                {name: 'Goa Branch', address: 'Rivero Building, San Jose St Goa N/A, 4422 Camarines Sur', phone: '09508983131', email: 'goa@baaocoop.com', hours: 'Mon-Fri 8:30 AM–3:30 PM', mapUrl: 'https://maps.google.com/maps?q=Goa+Branch-Baao+Parish+Multi-Purpose+Cooperative&t=&z=17&ie=UTF8&iwloc=&output=embed'}
+            ];
+            await setDoc(doc(db, 'settings', 'branches'), { items: _branchesData }, { merge: true });
+        }
+        renderBranchesAdmin();
+    } catch(e) { console.error('Failed to load branches:', e); }
 }
+
+function renderBranchesAdmin() {
+    const tbody = document.getElementById('branch-table-body');
+    if(!tbody) return;
+    tbody.innerHTML = _branchesData.map((b, i) => `
+        <tr>
+            <td><strong>${b.name}</strong><br><span style="font-size:0.8rem;color:var(--text-muted)">${b.address}</span></td>
+            <td>${b.phone} <br> <span style="font-size:0.8rem;color:var(--text-muted)">${b.email}</span></td>
+            <td class="action-icons">
+                <i class="fas fa-edit" onclick="openBranchModal(${i})" title="Edit Branch"></i>
+                <i class="fas fa-trash" onclick="deleteBranch(${i})" title="Delete Branch"></i>
+            </td>
+        </tr>
+    `).join('');
+}
+
+window.openBranchModal = (index = -1) => {
+    // Ensures data exists before trying to map it
+    let b = (index > -1 && _branchesData[index]) ? _branchesData[index] : {name:'', address:'', phone:'', email:'', hours:'', mapUrl:''};
+    
+    document.getElementById('modal-title').innerText = index > -1 ? 'Edit Branch' : 'Add Branch';
+    document.getElementById('modal-body').innerHTML = `
+        <input type="hidden" id="branch-edit-index" value="${index}">
+        <div class="form-group"><label class="form-label">Branch Name</label><input type="text" id="branch-name" class="form-control" value="${b.name}"></div>
+        <div class="form-group"><label class="form-label">Address</label><input type="text" id="branch-address" class="form-control" value="${b.address}"></div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group"><label class="form-label">Phone</label><input type="text" id="branch-phone" class="form-control" value="${b.phone}"></div>
+            <div class="form-group"><label class="form-label">Email</label><input type="email" id="branch-email" class="form-control" value="${b.email}"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Office Hours</label><input type="text" id="branch-hours" class="form-control" value="${b.hours || ''}"></div>
+        <div class="form-group"><label class="form-label">Google Maps Embed URL (src)</label><textarea id="branch-mapUrl" class="form-control" rows="2" placeholder="https://www.google.com/maps/embed?...">${b.mapUrl || ''}</textarea></div>
+        <div style="display:flex; gap:0.5rem; justify-content:flex-end; margin-top:2rem;">
+            <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveBranch()"><i class="fas fa-save"></i> Save</button>
+        </div>`;
+    document.getElementById('crud-modal').style.display = 'flex';
+};
+
+window.saveBranch = async () => {
+    const index = parseInt(document.getElementById('branch-edit-index').value);
+    const newBranch = {
+        name: document.getElementById('branch-name').value.trim(),
+        address: document.getElementById('branch-address').value.trim(),
+        phone: document.getElementById('branch-phone').value.trim(),
+        email: document.getElementById('branch-email').value.trim(),
+        hours: document.getElementById('branch-hours').value.trim(),
+        mapUrl: document.getElementById('branch-mapUrl').value.trim()
+    };
+    if(!newBranch.name) { showToast('Branch Name is required', 'error'); return; }
+    
+    const btn = document.querySelector('#modal-body .btn-primary');
+    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...'; }
+    
+    if(index > -1) _branchesData[index] = newBranch;
+    else _branchesData.push(newBranch);
+    
+    try {
+        await setDoc(doc(db, 'settings', 'branches'), { items: _branchesData }, { merge: true });
+        renderBranchesAdmin();
+        closeModal();
+        showToast('Branch saved successfully!');
+    } catch(e) { showToast('Failed to save branch', 'error'); console.error(e); }
+};
+
+window.deleteBranch = async (index) => {
+    if(!confirm('Are you sure you want to delete this branch?')) return;
+    _branchesData.splice(index, 1);
+    try {
+        await setDoc(doc(db, 'settings', 'branches'), { items: _branchesData }, { merge: true });
+        renderBranchesAdmin();
+        showToast('Branch deleted', 'error');
+    } catch(e) { showToast('Failed to delete branch', 'error'); }
+};
+
 function closeModal() { document.getElementById('crud-modal').style.display = 'none'; }
 // Dynamic Admin About Us Data
 async function saveAboutAll() {
@@ -453,6 +538,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     await renderAboutTables(); 
     await loadServicesAdmin();
     await loadMembershipAdmin();
+    await loadBranchesAdmin();
 });
 
 let _servicesAdmin = [];
@@ -542,17 +628,26 @@ function renderMediaLinkList() {
         list.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem">No links added yet.</p>';
         return;
     }
-    list.innerHTML = mediaLinks.map((url, i) => `
-        <div style="display:flex; flex-direction:column; gap:0.5rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:var(--radius-sm); padding:0.75rem;">
-            <div style="display:flex;align-items:center;gap:0.5rem;">
-                <i class="fas ${url.includes('youtube') ? 'fa-youtube' : url.includes('facebook') ? 'fa-facebook' : 'fa-google-drive'}" style="color:var(--primary);font-size:1rem;width:20px"></i>
-                <span style="flex:1;font-size:0.8rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${url}">${url}</span>
-                <button onclick="toggleMediaPreview(${i})" class="btn btn-secondary" style="padding:0.3rem 0.6rem; font-size:0.75rem; background:#cbd5e1; color:#0f172a;"><i class="fas fa-eye"></i> Preview</button>
-                <button onclick="removeMediaLink(${i})" style="background:none;border:none;color:#ef4444;cursor:pointer;font-size:1rem;margin-left:0.5rem;"><i class="fas fa-times"></i></button>
+    list.innerHTML = mediaLinks.map((item, i) => {
+        const url = typeof item === 'string' ? item : (item.url || '');
+        const title = typeof item === 'object' ? (item.title || '') : '';
+        const icon = url.includes('youtube') ? 'fa-youtube' : url.includes('facebook') ? 'fa-facebook' : 'fa-google-drive';
+        return `
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:var(--radius-sm);padding:0.75rem;display:flex;flex-direction:column;gap:0.6rem">
+            <div style="display:flex;align-items:center;gap:0.5rem">
+                <i class="fas ${icon}" style="color:var(--primary);font-size:1rem;flex-shrink:0;width:20px"></i>
+                <input type="text" value="${title}" placeholder="Video Title"
+                    onchange="mediaLinks[${i}] = { url: '${url}', title: this.value }"
+                    style="width:28%;padding:0.3rem 0.6rem;border:1px solid #e2e8f0;border-radius:var(--radius-sm);font-size:0.8rem;font-weight:600;color:var(--text-main);background:white;flex-shrink:0">
+                <input type="text" value="${url}" placeholder="Embed URL"
+                    onchange="mediaLinks[${i}] = { url: this.value, title: '${title}' }"
+                    style="flex:1;padding:0.3rem 0.6rem;border:1px solid #e2e8f0;border-radius:var(--radius-sm);font-size:0.78rem;color:var(--text-muted);background:white;min-width:0">
+                <button onclick="toggleMediaPreview(${i})" class="btn btn-secondary" style="padding:0.3rem 0.6rem;font-size:0.75rem;background:#cbd5e1;color:#0f172a;flex-shrink:0"><i class="fas fa-eye"></i></button>
+                <button onclick="removeMediaLink(${i})" style="background:none;border:none;color:#ef4444;cursor:pointer;font-size:1rem;flex-shrink:0"><i class="fas fa-times"></i></button>
             </div>
-            <div id="admin-preview-${i}" style="display:none; width:100%; height:220px; background:#000; border-radius:var(--radius-sm); overflow:hidden; margin-top:0.5rem;"></div>
-        </div>
-    `).join('');
+            <div id="admin-preview-${i}" style="display:none;width:100%;height:220px;background:#000;border-radius:var(--radius-sm);overflow:hidden"></div>
+        </div>`;
+    }).join('');
 }
 function addMediaLink() {
     const input = document.getElementById('admin-vid-link');
@@ -565,9 +660,11 @@ function addMediaLink() {
         status.textContent = '⚠ Unrecognized link format. Accepted: YouTube, Facebook, Google Drive.';
         return;
     }
-    mediaLinks.push(embed);
-    renderMediaLinkList();
+    const title = document.getElementById('admin-vid-title').value.trim();
+mediaLinks.push({ url: embed, title });
+renderMediaLinkList();
     input.value = '';
+document.getElementById('admin-vid-title').value = '';
     status.style.color = '#10b981';
     status.textContent = '✓ Link parsed and added!';
     setTimeout(() => status.textContent = '', 2500);
@@ -577,7 +674,8 @@ function toggleMediaPreview(i) {
     const container = document.getElementById(`admin-preview-${i}`);
     if (container.style.display === 'none') {
         container.style.display = 'block';
-        container.innerHTML = `<iframe src="${mediaLinks[i]}" width="100%" height="100%" style="border:none;" allowfullscreen></iframe>`;
+        const src = typeof mediaLinks[i] === 'string' ? mediaLinks[i] : mediaLinks[i].url;
+container.innerHTML = `<iframe src="${src}" width="100%" height="100%" style="border:none;" allowfullscreen></iframe>`;
     } else {
         container.style.display = 'none';
         container.innerHTML = '';
@@ -603,7 +701,7 @@ let formLinks = [];
 })();
 function parseDriveLink(url) {
     const m = url.match(/drive\.google\.com\/file\/d\/([A-Za-z0-9_-]+)/);
-    if (m) return `https://drive.google.com/uc?export=download&id=${m[1]}`;
+    if (m) return `https://drive.google.com/file/d/${m[1]}/preview?usp=sharing`;
     return url;
 }
 function renderFormLinkList() {
@@ -994,7 +1092,7 @@ window.saveServiceCategory = saveServiceCategory;
 window.handleLogin = handleLogin;
 window.switchMainTab = switchMainTab;
 window.switchSubTab = switchSubTab;
-window.openBranchModal = openBranchModal;
+
 window.closeModal = closeModal;
 window.saveAboutAll = saveAboutAll;
 window.openDataModal = openDataModal;
@@ -1361,7 +1459,12 @@ async function _saveArticleToDb(status) {
     coverImage = await uploadToCloudinary(_articleCoverFile);
     if (!coverImage) return;
   }
-  const payload = {
+  // Helper to strip undefined values Firestore can't handle
+  function sanitize(obj) {
+    return JSON.parse(JSON.stringify(obj, (_, v) => v === undefined ? null : v));
+  }
+
+  const payload = sanitize({
     slug: slugifyArticleAdmin(title),
     title,
     subtitle: document.getElementById('art-subtitle')?.value.trim() || '',
@@ -1377,7 +1480,7 @@ async function _saveArticleToDb(status) {
       return clean;
     }),
     status,
-  };
+  });
   try {
     const { collection, addDoc, updateDoc, doc, serverTimestamp } =
       await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js');
@@ -1467,3 +1570,157 @@ function slugifyArticleAdmin(title) {
 }
 
 window.renderArticleSections = renderArticleSections;
+
+// =========================================================
+// MODE TOGGLE: CMS <-> MEMBERS
+// =========================================================
+window.switchMode = function(mode) {
+  const cmsHeader = document.querySelector('.nav-tabs');
+  const cmsMain = document.querySelector('main.admin-content')?.closest('main') || document.querySelector('main');
+  const membersNav = document.getElementById('members-nav');
+  const membersMain = document.getElementById('members-main');
+  const cmsBtnEl = document.getElementById('mode-cms-btn');
+  const memBtnEl = document.getElementById('mode-members-btn');
+  if (mode === 'members') {
+    if (cmsHeader) cmsHeader.style.display = 'none';
+    if (cmsMain && cmsMain !== membersMain) cmsMain.style.display = 'none';
+    if (membersNav) membersNav.style.display = 'block';
+    if (membersMain) membersMain.style.display = 'block';
+    cmsBtnEl.style.background = 'transparent'; cmsBtnEl.style.color = 'var(--text-muted)';
+    memBtnEl.style.background = 'var(--primary)'; memBtnEl.style.color = 'white';
+    loadActiveMembers();
+    loadApplications();
+  } else {
+    if (cmsHeader) cmsHeader.style.display = 'flex';
+    if (cmsMain && cmsMain !== membersMain) cmsMain.style.display = 'grid';
+    if (membersNav) membersNav.style.display = 'none';
+    if (membersMain) membersMain.style.display = 'none';
+    cmsBtnEl.style.background = 'var(--primary)'; cmsBtnEl.style.color = 'white';
+    memBtnEl.style.background = 'transparent'; memBtnEl.style.color = 'var(--text-muted)';
+  }
+};
+
+window.switchMembersTab = function(tabId, btn) {
+  document.querySelectorAll('#members-main .admin-pane').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('#members-nav .tab-btn').forEach(el => el.classList.remove('active'));
+  const pane = document.getElementById(tabId);
+  if (pane) pane.style.display = 'block';
+  if (btn) btn.classList.add('active');
+};
+
+window.switchMembersSubTab = function(tabId, btn) {
+  document.querySelectorAll('#mtab-members .sub-pane').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('#mtab-members .sub-tab-btn').forEach(el => el.classList.remove('active'));
+  const pane = document.getElementById(tabId);
+  if (pane) pane.classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (tabId === 'msub-active') loadActiveMembers();
+  if (tabId === 'msub-applications') loadApplications();
+};
+
+async function loadActiveMembers() {
+  const list = document.getElementById('active-members-list');
+  const countEl = document.getElementById('active-members-count');
+  if (!list) return;
+  list.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem">Loading...</p>';
+  try {
+    const { collection, query, where, getDocs } = await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js');
+    const q = query(collection(db, 'members'), where('status', '==', 'approved'));
+    const snap = await getDocs(q);
+    if (countEl) countEl.textContent = snap.size;
+    if (snap.empty) { list.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem;padding:1rem 0">No active members yet.</p>'; return; }
+    list.innerHTML = snap.docs.map(d => {
+      const m = d.data();
+      const name = `${m.firstName || ''} ${m.lastName || ''}`.trim() || m.email;
+      const date = m.approvedAt ? new Date(m.approvedAt).toLocaleDateString('en-PH', {year:'numeric',month:'short',day:'numeric'}) : '—';
+      return `<div style="display:flex;align-items:center;gap:1rem;padding:0.75rem 1rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:var(--radius-sm)">
+        <div style="width:38px;height:38px;border-radius:50%;background:var(--secondary);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <i class="fas fa-user" style="color:white;font-size:0.9rem"></i>
+        </div>
+        <div style="flex:1;min-width:0">
+          <p style="font-weight:700;color:var(--text-main);margin:0;font-size:0.92rem">${name}</p>
+          <p style="font-size:0.78rem;color:var(--text-muted);margin:0">${m.email || ''}</p>
+        </div>
+        <span style="font-size:0.75rem;color:var(--text-muted);flex-shrink:0">${date}</span>
+        <span style="font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:99px;font-weight:700;background:#e8f5e9;color:#388e3c;flex-shrink:0">Active</span>
+      </div>`;
+    }).join('');
+  } catch(e) { list.innerHTML = '<p style="color:var(--primary);font-size:0.85rem">Failed to load members.</p>'; console.error(e); }
+}
+
+async function loadApplications() {
+  const tbody = document.getElementById('applications-tbody');
+  const countEl = document.getElementById('applications-count');
+  if (!tbody) return;
+  tbody.innerHTML = '<tr><td colspan="6" style="color:var(--text-muted);text-align:center;padding:2rem">Loading...</td></tr>';
+  try {
+    const { collection, getDocs, doc: fdoc, updateDoc } = await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js');
+    const snap = await getDocs(collection(db, 'members'));
+    const all = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(m => m.status !== 'approved');
+    if (countEl) countEl.textContent = all.length;
+    if (all.length === 0) { tbody.innerHTML = '<tr><td colspan="6" style="color:var(--text-muted);text-align:center;padding:2rem">No applications yet.</td></tr>'; return; }
+    tbody.innerHTML = all.map(m => {
+      const name = `${m.firstName || ''} ${m.lastName || ''}`.trim() || '—';
+      const date = m.appliedAt ? new Date(m.appliedAt).toLocaleDateString('en-PH', {year:'numeric',month:'short',day:'numeric'}) : '—';
+      const statusColor = m.status === 'rejected' ? '#fee2e2' : '#fff3e0';
+      const statusText = m.status === 'rejected' ? '#b91c1c' : '#e65100';
+      const statusLabel = m.status === 'rejected' ? 'Rejected' : 'Pending';
+      const fileHtml = m.fileUrl
+        ? `<a href="${m.fileUrl}" target="_blank" title="View File" style="color:var(--secondary)"><i class="fas fa-file-alt" style="font-size:1.2rem"></i></a>`
+        : `<span style="color:var(--text-muted);font-size:0.8rem">No file</span>`;
+      const actionsHtml = m.status !== 'rejected'
+        ? `<button onclick="handleApplication('${m.id}','approved')" class="btn btn-primary" style="padding:0.3rem 0.8rem;font-size:0.75rem;margin-right:0.4rem">Approve</button>
+           <button onclick="handleApplication('${m.id}','rejected')" class="btn btn-danger" style="padding:0.3rem 0.8rem;font-size:0.75rem">Reject</button>`
+        : `<span style="font-size:0.78rem;color:var(--text-muted)">—</span>`;
+      return `<tr>
+        <td style="font-size:0.82rem;color:var(--text-muted)">${date}</td>
+        <td style="font-weight:600">${name}</td>
+        <td style="font-size:0.82rem;color:var(--text-muted)">${m.email || '—'}</td>
+        <td style="text-align:center">${fileHtml}</td>
+        <td><span style="font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:99px;font-weight:700;background:${statusColor};color:${statusText}">${statusLabel}</span></td>
+        <td>${actionsHtml}</td>
+      </tr>`;
+    }).join('');
+  } catch(e) { tbody.innerHTML = '<tr><td colspan="6" style="color:var(--primary);text-align:center;padding:2rem">Failed to load.</td></tr>'; console.error(e); }
+}
+
+window.handleApplication = async (memberId, newStatus) => {
+  const label = newStatus === 'approved' ? 'approve' : 'reject';
+  if (!confirm(`Are you sure you want to ${label} this application?`)) return;
+  try {
+    const { doc: fdoc, getDoc, updateDoc } = await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js');
+    const memberSnap = await getDoc(fdoc(db, 'members', memberId));
+    if (!memberSnap.exists()) { showToast('Member not found.', 'error'); return; }
+    const memberData = memberSnap.data();
+    const updates = { status: newStatus };
+    if (newStatus === 'approved') {
+      // Create Firebase Auth account then send password reset (set password) email
+      try {
+        const { getAuth, createUserWithEmailAndPassword, sendPasswordResetEmail } = await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js');
+        const auth = getAuth();
+        const tempPass = 'Temp_' + Math.random().toString(36).slice(2, 10) + '!';
+        const userCred = await createUserWithEmailAndPassword(auth, memberData.email, tempPass);
+        await sendPasswordResetEmail(auth, memberData.email);
+        updates.approvedAt = new Date().toISOString();
+        updates.uid = userCred.user.uid;
+        // Also update member doc to use uid as doc id reference
+        showToast('Approved! Password setup email sent to ' + memberData.email);
+      } catch(authErr) {
+        // If account already exists, just send reset email
+        if (authErr.code === 'auth/email-already-in-use') {
+          const { getAuth, sendPasswordResetEmail } = await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js');
+          await sendPasswordResetEmail(getAuth(), memberData.email);
+          updates.approvedAt = new Date().toISOString();
+          showToast('Approved! Password reset email sent to ' + memberData.email);
+        } else {
+          showToast('Auth error: ' + authErr.message, 'error');
+          console.error(authErr); return;
+        }
+      }
+    }
+    await updateDoc(fdoc(db, 'members', memberId), updates);
+    if (newStatus === 'rejected') showToast('Application rejected.', 'error');
+    loadApplications();
+    if (newStatus === 'approved') loadActiveMembers();
+  } catch(e) { showToast('Failed to update status.', 'error'); console.error(e); }
+};

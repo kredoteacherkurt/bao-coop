@@ -6,7 +6,7 @@
 <title>Admin Dashboard | Baao Coop</title>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css>
 <link rel=icon href=assets/images/logo.png type=image/png>
-<style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');:root{--bg-color:#f1f5f9;--bg-alt:#fff;--text-main:#0f172a;--text-muted:#64748b;--primary:#dc2626;--primary-light:#ef4444;--secondary:#1d4ed8;--nav-bg:rgba(255,255,255,0.95);--glass-border:1px solid rgba(0,0,0,0.08);--shadow-sm:0 1px 2px rgba(0,0,0,0.05);--shadow-md:0 4px 6px -1px rgba(0,0,0,0.1);--shadow-lg:0 10px 15px -3px rgba(0,0,0,0.1);--radius-sm:8px;--radius-md:12px;--font-family:'Inter',sans-serif}*{margin:0;padding:0;box-sizing:border-box;font-family:var(--font-family)}body{background:var(--bg-color);color:var(--text-main);overflow-x:hidden}#login-overlay{position:fixed;inset:0;background:var(--text-main);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2rem}.login-box{background:var(--bg-alt);padding:3rem;border-radius:var(--radius-md);width:90%;max-width:400px;box-shadow:var(--shadow-lg);text-align:center}.login-input{width:100%;padding:.8rem 1rem;border:1px solid #cbd5e1;border-radius:var(--radius-sm);margin-bottom:1rem;font-size:1rem;outline:0}.login-input:focus{border-color:var(--primary)}.login-btn{width:100%;padding:.8rem;background:var(--primary);color:white;border:0;border-radius:var(--radius-sm);font-weight:700;font-size:1rem;cursor:pointer;transition:.3s}.login-btn:hover{background:var(--primary-light)}header{background:var(--nav-bg);border-bottom:var(--glass-border);position:sticky;top:0;z-index:100}.header-top{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;border-bottom:1px solid rgba(0,0,0,0.04)}.brand{display:flex;align-items:center;gap:1rem;font-weight:800;font-size:1.2rem;color:var(--text-main)}.brand img{width:40px}.nav-tabs{display:flex;gap:1rem;padding:0 2rem;background:var(--bg-alt);overflow-x:auto}.tab-btn{padding:1rem;border:0;background:0;font-weight:600;color:var(--text-muted);cursor:pointer;border-bottom:3px solid transparent;transition:.2s;white-space:nowrap}.tab-btn:hover{color:var(--primary)}.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}header{padding:0}.header-top{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;max-width:none;margin:0}.nav-tabs{display:flex;gap:1rem;padding:0 2rem;max-width:none;margin:0}main{padding:2rem;max-width:100%;margin:0;display:grid;grid-template-columns:78fr 22fr;gap:2rem;align-items:start}.admin-content{min-width:0}.admin-sidebar{position:sticky;top:150px}.admin-pane{display:none;animation:fadeIn .3s ease}.admin-pane.active{display:block}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.cms-card{background:var(--bg-alt);border-radius:var(--radius-md);padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);border:var(--glass-border)}.cms-card h3{margin-bottom:1rem;color:var(--secondary);display:flex;align-items:center;gap:.5rem;font-size:1.1rem;border-bottom:1px solid rgba(0,0,0,0.05);padding-bottom:.8rem}.form-group{margin-bottom:1rem}.form-label{display:block;font-size:.85rem;font-weight:600;color:var(--text-muted);margin-bottom:.4rem}.form-control{width:100%;padding:.6rem .8rem;border:1px solid #e2e8f0;border-radius:var(--radius-sm);font-family:inherit;outline:0;background:#f8fafc}.form-control:focus{border-color:var(--primary);background:white}.btn{padding:.6rem 1.2rem;border-radius:var(--radius-sm);font-weight:600;cursor:pointer;border:0;display:inline-flex;align-items:center;gap:.5rem;transition:.2s}.btn-primary{background:var(--primary);color:white}.btn-primary:hover{background:var(--primary-light)}.btn-secondary{background:#e2e8f0;color:var(--text-main)}.btn-secondary:hover{background:#cbd5e1}.btn-danger{background:#ef4444;color:white}.sub-tabs{display:flex;gap:.5rem;margin-bottom:1rem;background:#f1f5f9;padding:.5rem;border-radius:var(--radius-sm)}.sub-tab-btn{padding:.5rem 1rem;border:0;background:transparent;border-radius:var(--radius-sm);font-weight:600;color:var(--text-muted);cursor:pointer}.sub-tab-btn.active{background:white;color:var(--primary);box-shadow:var(--shadow-sm)}.sub-pane{display:none}.sub-pane.active{display:block}.data-table{width:100%;border-collapse:collapse}.data-table th,.data-table td{padding:1rem;text-align:left;border-bottom:1px solid rgba(0,0,0,0.05)}.data-table th{color:var(--text-muted);font-size:.85rem;text-transform:uppercase}.data-table tr:hover{background:rgba(0,0,0,0.02)}.action-icons i{cursor:pointer;color:var(--text-muted);margin-right:1rem;font-size:1.1rem}.action-icons i.fa-edit:hover{color:var(--secondary)}.action-icons i.fa-trash:hover{color:var(--primary)}.grid-70-30{display:grid;grid-template-columns:70fr 30fr;gap:2rem;align-items:start}.glass-scroll{background:rgba(255,255,255,0.8);backdrop-filter:blur(10px);border:var(--glass-border);border-radius:var(--radius-md);box-shadow:var(--shadow-md);height:600px;overflow-y:auto;padding:1.5rem}.toast-container{position:fixed;bottom:2rem;right:2rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem}.toast{background:var(--text-main);color:white;padding:1rem 1.5rem;border-radius:var(--radius-sm);font-weight:600;font-size:.9rem;display:flex;align-items:center;gap:.75rem;box-shadow:var(--shadow-lg);transform:translateX(120%);opacity:0;transition:.3s cubic-bezier(0.2,0.8,0.2,1)}.toast.show{transform:translateX(0);opacity:1}.toast-success{border-left:4px solid #10b981}.toast-error{border-left:4px solid #ef4444}.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(3px);z-index:2000;display:none;align-items:center;justify-content:center;padding:2rem 0}.modal-content{background:var(--bg-alt);padding:2.5rem;border-radius:var(--radius-md);width:90%;max-width:700px;min-height:600px;max-height:95vh;overflow-y:auto;box-shadow:var(--shadow-lg);display:flex;flex-direction:column}#modal-body{flex:1;display:flex;flex-direction:column}.modal-header{display:flex;justify-content:space-between;margin-bottom:1.5rem;font-size:1.2rem;font-weight:700;color:var(--text-main)}.modern-dropzone{position:relative;border:2px dashed #cbd5e1;border-radius:var(--radius-md);padding:2.5rem 1rem;text-align:center;background:rgba(255,255,255,0.5);cursor:pointer;transition:.3s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:var(--text-muted);overflow:hidden;margin-top:.5rem}.modern-dropzone:hover,.modern-dropzone.dragover{border-color:var(--primary);background:rgba(220,38,38,0.05);color:var(--primary)}.modern-dropzone input[type="file"]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:10}.modern-dropzone .dz-icon{font-size:2.5rem;color:inherit;transition:.3s;margin-bottom:.5rem}.modern-dropzone .dz-text{font-weight:700;font-size:1rem;color:var(--text-main)}.modern-dropzone .dz-subtext{font-size:.85rem;opacity:.8}.thumb-container{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.thumb-item{position:relative;width:80px;height:80px;border-radius:var(--radius-sm);border:1px solid rgba(0,0,0,0.1);overflow:hidden;background:#fff;box-shadow:var(--shadow-sm);animation:fadeIn .3s ease}.thumb-item img{width:100%;height:100%;object-fit:cover}.thumb-item .thumb-name{font-size:.65rem;padding:.5rem;word-break:break-all;text-align:center;color:var(--text-muted);display:flex;align-items:center;justify-content:center;height:100%;background:#f8fafc}.thumb-remove{position:absolute;top:4px;right:4px;background:rgba(220,38,38,0.9);color:white;border:0;border-radius:50%;width:20px;height:20px;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:.2s;box-shadow:0 2px 4px rgba(0,0,0,0.2)}.thumb-remove:hover{background:#b91c1c;transform:scale(1.1)}</style>
+<style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');:root{--bg-color:#f1f5f9;--bg-alt:#fff;--text-main:#0f172a;--text-muted:#64748b;--primary:#dc2626;--primary-light:#ef4444;--secondary:#1d4ed8;--nav-bg:rgba(255,255,255,0.95);--glass-border:1px solid rgba(0,0,0,0.08);--shadow-sm:0 1px 2px rgba(0,0,0,0.05);--shadow-md:0 4px 6px -1px rgba(0,0,0,0.1);--shadow-lg:0 10px 15px -3px rgba(0,0,0,0.1);--radius-sm:8px;--radius-md:12px;--font-family:'Inter',sans-serif}*{margin:0;padding:0;box-sizing:border-box;font-family:var(--font-family)}body{background:var(--bg-color);color:var(--text-main);overflow-x:hidden}#login-overlay{position:fixed;inset:0;background:var(--text-main);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2rem}.login-box{background:var(--bg-alt);padding:3rem;border-radius:var(--radius-md);width:90%;max-width:400px;box-shadow:var(--shadow-lg);text-align:center}.login-input{width:100%;padding:.8rem 1rem;border:1px solid #cbd5e1;border-radius:var(--radius-sm);margin-bottom:1rem;font-size:1rem;outline:0}.login-input:focus{border-color:var(--primary)}.login-btn{width:100%;padding:.8rem;background:var(--primary);color:white;border:0;border-radius:var(--radius-sm);font-weight:700;font-size:1rem;cursor:pointer;transition:.3s}.login-btn:hover{background:var(--primary-light)}header{background:var(--nav-bg);border-bottom:var(--glass-border);position:sticky;top:0;z-index:100}.header-top{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;border-bottom:1px solid rgba(0,0,0,0.04)}.brand{display:flex;align-items:center;gap:1rem;font-weight:800;font-size:1.2rem;color:var(--text-main)}.brand img{width:40px}.nav-tabs{display:flex;gap:1rem;padding:0 2rem;background:var(--bg-alt);overflow-x:auto}.tab-btn{padding:1rem;border:0;background:0;font-weight:600;color:var(--text-muted);cursor:pointer;border-bottom:3px solid transparent;transition:.2s;white-space:nowrap}.tab-btn:hover{color:var(--primary)}.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}header{padding:0}.header-top{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;max-width:none;margin:0}.nav-tabs{display:flex;gap:1rem;padding:0 2rem;max-width:none;margin:0}main{padding:0;max-width:100%;margin:0;display:grid;grid-template-columns:78fr 22fr;gap:0;align-items:stretch;min-height:calc(100vh - 115px)}.admin-content{min-width:0;padding:2rem}.admin-sidebar{position:sticky;top:115px;background:linear-gradient(135deg,#0f172a 0,#1e293b 100%);color:white;height:calc(100vh - 115px);border-left:1px solid rgba(0,0,0,0.2);overflow-y:auto;padding:0;scrollbar-width:none;display:flex;flex-direction:column}.admin-sidebar::-webkit-scrollbar{display:none}.admin-pane{display:none;animation:fadeIn .3s ease}.admin-pane.active{display:block}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.cms-card{background:var(--bg-alt);border-radius:var(--radius-md);padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);border:var(--glass-border)}.cms-card h3{margin-bottom:1rem;color:var(--secondary);display:flex;align-items:center;gap:.5rem;font-size:1.1rem;border-bottom:1px solid rgba(0,0,0,0.05);padding-bottom:.8rem}.form-group{margin-bottom:1rem}.form-label{display:block;font-size:.85rem;font-weight:600;color:var(--text-muted);margin-bottom:.4rem}.form-control{width:100%;padding:.6rem .8rem;border:1px solid #e2e8f0;border-radius:var(--radius-sm);font-family:inherit;outline:0;background:#f8fafc}.form-control:focus{border-color:var(--primary);background:white}.btn{padding:.6rem 1.2rem;border-radius:var(--radius-sm);font-weight:600;cursor:pointer;border:0;display:inline-flex;align-items:center;gap:.5rem;transition:.2s}.btn-primary{background:var(--primary);color:white}.btn-primary:hover{background:var(--primary-light)}.btn-secondary{background:#e2e8f0;color:var(--text-main)}.btn-secondary:hover{background:#cbd5e1}.btn-danger{background:#ef4444;color:white}.sub-tabs{display:flex;gap:.5rem;margin-bottom:1rem;background:#f1f5f9;padding:.5rem;border-radius:var(--radius-sm)}.sub-tab-btn{padding:.5rem 1rem;border:0;background:transparent;border-radius:var(--radius-sm);font-weight:600;color:var(--text-muted);cursor:pointer}.sub-tab-btn.active{background:white;color:var(--primary);box-shadow:var(--shadow-sm)}.sub-pane{display:none}.sub-pane.active{display:block}.data-table{width:100%;border-collapse:collapse}.data-table th,.data-table td{padding:1rem;text-align:left;border-bottom:1px solid rgba(0,0,0,0.05)}.data-table th{color:var(--text-muted);font-size:.85rem;text-transform:uppercase}.data-table tr:hover{background:rgba(0,0,0,0.02)}.action-icons i{cursor:pointer;color:var(--text-muted);margin-right:1rem;font-size:1.1rem}.action-icons i.fa-edit:hover{color:var(--secondary)}.action-icons i.fa-trash:hover{color:var(--primary)}.grid-70-30{display:grid;grid-template-columns:70fr 30fr;gap:2rem;align-items:start}.glass-scroll{background:rgba(255,255,255,0.8);backdrop-filter:blur(10px);border:var(--glass-border);border-radius:var(--radius-md);box-shadow:var(--shadow-md);height:600px;overflow-y:auto;padding:1.5rem}.toast-container{position:fixed;bottom:2rem;right:2rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem}.toast{background:var(--text-main);color:white;padding:1rem 1.5rem;border-radius:var(--radius-sm);font-weight:600;font-size:.9rem;display:flex;align-items:center;gap:.75rem;box-shadow:var(--shadow-lg);transform:translateX(120%);opacity:0;transition:.3s cubic-bezier(0.2,0.8,0.2,1)}.toast.show{transform:translateX(0);opacity:1}.toast-success{border-left:4px solid #10b981}.toast-error{border-left:4px solid #ef4444}.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(3px);z-index:2000;display:none;align-items:center;justify-content:center;padding:2rem 0}.modal-content{background:var(--bg-alt);padding:2.5rem;border-radius:var(--radius-md);width:90%;max-width:700px;min-height:600px;max-height:95vh;overflow-y:auto;box-shadow:var(--shadow-lg);display:flex;flex-direction:column}#modal-body{flex:1;display:flex;flex-direction:column}.modal-header{display:flex;justify-content:space-between;margin-bottom:1.5rem;font-size:1.2rem;font-weight:700;color:var(--text-main)}.modern-dropzone{position:relative;border:2px dashed #cbd5e1;border-radius:var(--radius-md);padding:2.5rem 1rem;text-align:center;background:rgba(255,255,255,0.5);cursor:pointer;transition:.3s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:var(--text-muted);overflow:hidden;margin-top:.5rem}.modern-dropzone:hover,.modern-dropzone.dragover{border-color:var(--primary);background:rgba(220,38,38,0.05);color:var(--primary)}.modern-dropzone input[type="file"]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:10}.modern-dropzone .dz-icon{font-size:2.5rem;color:inherit;transition:.3s;margin-bottom:.5rem}.modern-dropzone .dz-text{font-weight:700;font-size:1rem;color:var(--text-main)}.modern-dropzone .dz-subtext{font-size:.85rem;opacity:.8}.thumb-container{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.thumb-item{position:relative;width:80px;height:80px;border-radius:var(--radius-sm);border:1px solid rgba(0,0,0,0.1);overflow:hidden;background:#fff;box-shadow:var(--shadow-sm);animation:fadeIn .3s ease}.thumb-item img{width:100%;height:100%;object-fit:cover}.thumb-item .thumb-name{font-size:.65rem;padding:.5rem;word-break:break-all;text-align:center;color:var(--text-muted);display:flex;align-items:center;justify-content:center;height:100%;background:#f8fafc}.thumb-remove{position:absolute;top:4px;right:4px;background:rgba(220,38,38,0.9);color:white;border:0;border-radius:50%;width:20px;height:20px;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:.2s;box-shadow:0 2px 4px rgba(0,0,0,0.2)}.thumb-remove:hover{background:#b91c1c;transform:scale(1.1)}</style>
 </head>
 <body>
 <div id=login-overlay>
@@ -28,23 +28,23 @@
 <img src=assets/images/logo.png alt=Logo>
 Admin Control Panel
 </div>
-<div style=display:flex;align-items:center;gap:1rem>
-<span style=font-weight:600;font-size:0.9rem>Logged in as: SuperAdmin</span>
-<button onclick=location.reload() class="btn btn-secondary"><i class="fas fa-sign-out-alt"></i> Logout</button>
+<div style=display:flex;align-items:center;gap:0.5rem;background:#f1f5f9;padding:0.35rem;border-radius:var(--radius-sm)>
+<button id=mode-cms-btn onclick="switchMode('cms')" style="padding:.35rem .9rem;border:0;border-radius:var(--radius-sm);font-weight:700;font-size:.82rem;cursor:pointer;display:flex;align-items:center;gap:.4rem;background:var(--primary);color:white"><i class="fas fa-sliders-h"></i> CMS</button>
+<button id=mode-members-btn onclick="switchMode('members')" style="padding:.35rem .9rem;border:0;border-radius:var(--radius-sm);font-weight:700;font-size:.82rem;cursor:pointer;display:flex;align-items:center;gap:.4rem;background:transparent;color:var(--text-muted)"><i class="fas fa-users"></i> MEMBERS</button>
 </div>
 </div>
 <div class=nav-tabs>
-<button class="tab-btn active" onclick="switchMainTab('tab-home',this)" data-tab="tab-home"><i class="fas fa-home"></i> Home</button>
-<button class=tab-btn onclick="switchMainTab('tab-about',this)"data-tab="tab-about-us"><i class="fas fa-info-circle"></i> About Us</button>
-<button class=tab-btn onclick="switchMainTab('tab-services',this)"data-tab="tab-products-&-services"><i class="fas fa-box"></i> Products & Services</button>
-<button class=tab-btn onclick="switchMainTab('tab-membership',this)"data-tab="tab-membership"><i class="fas fa-users"></i> Membership</button>
-<button class=tab-btn onclick="switchMainTab('tab-gallery',this)"data-tab="tab-gallery"><i class="fas fa-images"></i> Gallery</button>
-<button class=tab-btn onclick="switchMainTab('tab-news',this)"data-tab="tab-news"><i class="fas fa-newspaper"></i> Articles</button>
-<button class=tab-btn onclick="switchMainTab('tab-branches',this)"data-tab="tab-branches"><i class="fas fa-map-marker-alt"></i> Branches</button>
-<button class=tab-btn onclick="switchMainTab('tab-feedback',this)"data-tab="tab-feedback"><i class="fas fa-comments"></i> Feedback</button>
-<button class=tab-btn onclick="switchMainTab('tab-contact',this)"data-tab="tab-contact-us"><i class="fas fa-envelope"></i> Contact Us</button>
-<button class=tab-btn onclick="switchMainTab('tab-livechat',this)"data-tab="tab-chat"><i class="fas fa-headset"></i> Live Chat</button>
-<button class=tab-btn onclick="switchMainTab('tab-settings',this)"data-tab="tab-settings"><i class="fas fa-cog"></i> Settings</button>
+<button class="tab-btn active" onclick="switchMainTab('tab-home',this)" data-tab=tab-home><i class="fas fa-home"></i> Home</button>
+<button class=tab-btn onclick="switchMainTab('tab-about',this)"data-tab=tab-about-us><i class="fas fa-info-circle"></i> About Us</button>
+<button class=tab-btn onclick="switchMainTab('tab-services',this)"data-tab=tab-products-&-services><i class="fas fa-box"></i> Products & Services</button>
+<button class=tab-btn onclick="switchMainTab('tab-membership',this)"data-tab=tab-membership><i class="fas fa-users"></i> Membership</button>
+<button class=tab-btn onclick="switchMainTab('tab-gallery',this)"data-tab=tab-gallery><i class="fas fa-images"></i> Gallery</button>
+<button class=tab-btn onclick="switchMainTab('tab-news',this)"data-tab=tab-news><i class="fas fa-newspaper"></i> Articles</button>
+<button class=tab-btn onclick="switchMainTab('tab-branches',this)"data-tab=tab-branches><i class="fas fa-map-marker-alt"></i> Branches</button>
+<button class=tab-btn onclick="switchMainTab('tab-feedback',this)"data-tab=tab-feedback><i class="fas fa-comments"></i> Feedback</button>
+<button class=tab-btn onclick="switchMainTab('tab-contact',this)"data-tab=tab-contact-us><i class="fas fa-envelope"></i> Contact Us</button>
+<button class=tab-btn onclick="switchMainTab('tab-livechat',this)"data-tab=tab-chat><i class="fas fa-headset"></i> Live Chat</button>
+<button class=tab-btn onclick="switchMainTab('tab-settings',this)"data-tab=tab-settings><i class="fas fa-cog"></i> Settings</button>
 </div>
 </header>
 <div id=toast-container class=toast-container></div>
@@ -52,20 +52,20 @@ Admin Control Panel
 <div class=admin-content>
 <div id=tab-home class="admin-pane active">
 <div class=cms-card>
-<h3><i class="fas fa-heading"></i> Home Hero Content</h3>
+<h3><i class="fas fa-heading"></i> Home Banner</h3>
 <div class=form-group>
-<label class=form-label>Hero Tagline (H2/H3)</label>
+<label class=form-label>Home Tagline (H2/H3)</label>
 <input type=text id=admin-home-h2 class=form-control placeholder="e.g. BPMPC UPDATES">
 </div>
 <div class=form-group>
-<label class=form-label>Hero Main Title (H1)</label>
+<label class=form-label>Home Main Title (H1)</label>
 <input type=text id=admin-home-h1 class=form-control placeholder="e.g. Welcome to Baao Coop">
 </div>
 <div class=form-group>
-<label class=form-label>Hero Description (P)</label>
+<label class=form-label>Home Description (P)</label>
 <textarea id=admin-home-p class=form-control rows=3 placeholder="Enter description..."></textarea>
 </div>
-<button class="btn btn-primary" onclick=saveHomeHero()><i class="fas fa-save"></i> Save Hero Content</button>
+<button class="btn btn-primary" onclick=saveHomeHero()><i class="fas fa-save"></i> Save Changes</button>
 </div>
 <div class=cms-card>
 <h3><i class="fas fa-play-circle"></i> Media Embeds</h3>
@@ -73,21 +73,24 @@ Admin Control Panel
 <div class=form-group>
 <label class=form-label>Add Video Link <span style=font-weight:normal;color:var(--text-muted);font-size:0.75rem>(paste link or iframe, then press Add)</span></label>
 <div style=display:flex;gap:0.5rem>
-<input type=text id=admin-vid-link class=form-control placeholder="https://youtu.be/... or facebook.com/... or drive.google.com/...">
-<button class="btn btn-secondary" onclick=addMediaLink() style=white-space:nowrap><i class="fas fa-plus"></i> Add</button>
+<div style=display:flex;gap:0.5rem;align-items:center;width:100%>
+<input type=text id=admin-vid-title class=form-control placeholder="Video Title" style=width:30%>
+<input type=text id=admin-vid-link class=form-control placeholder="https://youtu.be/... or facebook.com/... or drive.google.com/..." style=width:70%>
+<button class="btn btn-secondary" onclick=addMediaLink() style=white-space:nowrap;flex-shrink:0><i class="fas fa-plus"></i> Add</button>
+</div>
 </div>
 <p id=vid-parse-status style=font-size:0.8rem;margin-top:0.4rem;min-height:1.2rem></p>
 </div>
 <div id=media-link-list style=display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1rem></div>
-<button class="btn btn-primary" onclick=saveMediaLinks()><i class="fas fa-save"></i> Save All Links</button>
+<button class="btn btn-primary" onclick=saveMediaLinks()><i class="fas fa-save"></i> Save</button>
 </div>
 </div>
 <div id=tab-about class=admin-pane>
 <div class=cms-card>
-<h3><i class="fas fa-heading"></i> About Us Hero Banner</h3>
-<div class=form-group><label class=form-label>Hero Subtitle (H2)</label><input type=text id=admin-about-hero-h2 class=form-control value="ABOUT US"></div>
-<div class=form-group><label class=form-label>Hero Main Title (H1)</label><input type=text id=admin-about-hero-h1 class=form-control value="Rooted in Faith, Built Through Cooperation"></div>
-<div class=form-group><label class=form-label>Hero Description (P)</label><textarea id=admin-about-hero-p class=form-control rows=2>Discover our journey...</textarea></div>
+<h3><i class="fas fa-heading"></i> About Us Banner</h3>
+<div class=form-group><label class=form-label>About Us Subtitle (H2)</label><input type=text id=admin-about-hero-h2 class=form-control value="ABOUT US"></div>
+<div class=form-group><label class=form-label>About Us Main Title (H1)</label><input type=text id=admin-about-hero-h1 class=form-control value="Rooted in Faith, Built Through Cooperation"></div>
+<div class=form-group><label class=form-label>About Us Description (P)</label><textarea id=admin-about-hero-p class=form-control rows=2>Discover our journey...</textarea></div>
 </div>
 <div class=sub-tabs>
 <button class="sub-tab-btn active" onclick="switchSubTab('sub-about',this)">About Us</button>
@@ -147,7 +150,7 @@ Admin Control Panel
 </div>
 <table class=data-table>
 <thead><tr><th>Category Name</th><th>Programs Included</th><th>Actions</th></tr></thead>
-<tbody id="services-table-body">
+<tbody id=services-table-body>
 <tr><td>Loan Products</td><td>14 Items</td><td class=action-icons><i class="fas fa-edit" onclick="openModal('Edit Service Category','Loan Products','Microfinance Loan|Salary Loan|Pension Loan|OFW Loan|Back-to-Back Loan|Solar Package Loan|Jewelry Loan|Character Loan|Grocery Loan|Medical Loan|Enrollment Loan|Farmer’s Loan|Calamity Loan|Petty Cash / Emergency Loan')"></i><i class="fas fa-trash" onclick="alert('Category deleted')"></i></td></tr>
 <tr><td>Regular Savings</td><td>6 Items</td><td class=action-icons><i class="fas fa-edit" onclick="openModal('Edit Service Category','Regular Savings','Retirement Savings|Birthday Savings|Travel Savings|Anniversary Savings|Koop Alkansya (For Kids)|Time Deposit')"></i><i class="fas fa-trash" onclick="alert('Category deleted')"></i></td></tr>
 <tr><td>Social Services</td><td>5 Items</td><td class=action-icons><i class="fas fa-edit" onclick="openModal('Edit Service Category','Social Services','Damayang Pangkalusugan (DPK)|Death Aid Program (DAP)|Coop Life Program (CLP)|Koop Assurance Program|Baaocoop Damayan Insurance')"></i><i class="fas fa-trash" onclick="alert('Category deleted')"></i></td></tr>
@@ -162,7 +165,7 @@ Admin Control Panel
 <h3><i class="fas fa-user-plus"></i> Join Us Details</h3>
 <div class=form-group>
 <label class=form-label>Requirements List (One per line)</label>
-<textarea id="admin-req-list" class=form-control rows=5>Pre-membership Education Seminar Attendance
+<textarea id=admin-req-list class=form-control rows=5>Pre-membership Education Seminar Attendance
 1x1 Recent Colored Picture (4 pcs.)
 1x1 Recent Colored Picture of Spouse; if married (1 pc.)
 Photocopy of Birth Certificate or Marriage Contract
@@ -170,7 +173,7 @@ Photocopy of two (2) valid IDs</textarea>
 </div>
 <div class=form-group>
 <label class=form-label>Payment List (One per line)</label>
-<textarea id="admin-pay-list" class=form-control rows=5>Php 200.00 - Membership Fee
+<textarea id=admin-pay-list class=form-control rows=5>Php 200.00 - Membership Fee
 Php 100.00 - Initial Savings
 Php 100.00 - Initial Share Capital
 Php 100.00 - 2 Passbook (Share Capital & Savings)
@@ -205,7 +208,7 @@ Php 300.00 - DAMAYAN</textarea>
 <table class=data-table>
 <thead><tr><th>Title</th><th>Category</th><th>Sections</th><th>Status</th><th>Actions</th></tr></thead>
 <tbody id=articles-tbody>
-<tr><td colspan=5 style="color:var(--text-muted);text-align:center;padding:2rem">No articles yet.</td></tr>
+<tr><td colspan=5 style=color:var(--text-muted);text-align:center;padding:2rem>No articles yet.</td></tr>
 </tbody>
 </table>
 </div>
@@ -231,12 +234,12 @@ Php 300.00 - DAMAYAN</textarea>
 <div class=form-group>
 <label class=form-label>Category</label>
 <select id=art-category class=form-control>
-<option value="News">News</option>
-<option value="Announcement">Announcement</option>
-<option value="Promotion">Promotion</option>
-<option value="Event">Event</option>
-<option value="Article">Article</option>
-<option value="Update">Update</option>
+<option value=News>News</option>
+<option value=Announcement>Announcement</option>
+<option value=Promotion>Promotion</option>
+<option value=Event>Event</option>
+<option value=Article>Article</option>
+<option value=Update>Update</option>
 </select>
 </div>
 <div class=form-group>
@@ -249,18 +252,18 @@ Php 300.00 - DAMAYAN</textarea>
 </div>
 <div class=form-group>
 <label class=form-label style=color:var(--primary);font-weight:700>Cover Image</label>
-<input type=file id=art-cover-input accept="image/jpeg,image/png" class=form-control>
+<input type=file id=art-cover-input accept=image/jpeg,image/png class=form-control>
 <div id=art-cover-preview style=display:none;margin-top:0.75rem></div>
 </div>
-<div style="display:flex;gap:0.75rem;margin-top:1.25rem;flex-wrap:wrap">
+<div style=display:flex;gap:0.75rem;margin-top:1.25rem;flex-wrap:wrap>
 <button class="btn btn-primary" onclick=saveArticle()><i class="fas fa-upload"></i> Publish</button>
-<button class=btn onclick=saveArticleDraft() style="background:#e2e8f0;color:var(--text-main)"><i class="fas fa-save"></i> Save Draft</button>
-<button class=btn onclick=cancelEditArticle() id=art-cancel-btn style="display:none;background:#fee2e2;color:var(--primary)">Cancel</button>
+<button class=btn onclick=saveArticleDraft() style=background:#e2e8f0;color:var(--text-main)><i class="fas fa-save"></i> Save Draft</button>
+<button class=btn onclick=cancelEditArticle() id=art-cancel-btn style=display:none;background:#fee2e2;color:var(--primary)>Cancel</button>
 </div>
 </div>
-<div class=cms-card id=art-sections-card style="position:sticky;top:80px;max-height:88vh;overflow-y:auto">
+<div class=cms-card id=art-sections-card style=position:sticky;top:80px;max-height:88vh;overflow-y:auto>
 <h3><i class="fas fa-layer-group"></i> Content Sections</h3>
-<div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap">
+<div style=display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap>
 <select id=art-section-type class=form-control style=flex:1>
 <option value=news>News Update</option>
 <option value=announcement>Announcement</option>
@@ -270,10 +273,10 @@ Php 300.00 - DAMAYAN</textarea>
 <option value=gallery>Photo Gallery</option>
 <option value=custom>Custom Section</option>
 </select>
-<button class="btn btn-primary" onclick=addArticleSection() style="padding:0.6rem 1rem"><i class="fas fa-plus"></i> Add</button>
+<button class="btn btn-primary" onclick=addArticleSection() style="padding:.6rem 1rem"><i class="fas fa-plus"></i> Add</button>
 </div>
 <div id=art-sections-list>
-<div style="text-align:center;padding:2rem;color:var(--text-muted);font-size:0.85rem;border:1px dashed #e2e8f0;border-radius:var(--radius-sm)">No sections yet. Add one above.</div>
+<div style="text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border:1px dashed #e2e8f0;border-radius:var(--radius-sm)">No sections yet. Add one above.</div>
 </div>
 </div>
 </div>
@@ -287,8 +290,8 @@ Php 300.00 - DAMAYAN</textarea>
 <table class=data-table>
 <thead><tr><th>Branch Name</th><th>Contact / Email</th><th>Actions</th></tr></thead>
 <tbody id=branch-table-body>
-<tr><td>Baao Parish Multi-Purpose Cooperative (Main)</td><td>0542663199 <br> inquire@baaocoop.com</td><td class=action-icons><i class="fas fa-edit" onclick="openBranchModal('Baao Parish Multi-Purpose Cooperative (Main)','Rizal Street, San Nicolas District, Baao, 4432 Camarines Sur','0542663199','inquire@baaocoop.com','Mon-Fri 8:30 AM–2:30 PM')"></i><i class="fas fa-trash" onclick="alert('Branch deleted')"></i></td></tr>
-<tr><td>Goa Branch</td><td>09508983131 <br> goa@baaocoop.com</td><td class=action-icons><i class="fas fa-edit" onclick="openBranchModal('Goa Branch','Rivero Building, San Jose St Goa N/A, 4422 Camarines Sur','09508983131','goa@baaocoop.com','Mon-Fri 8:30 AM–3:30 PM')"></i><i class="fas fa-trash" onclick="alert('Branch deleted')"></i></td></tr>
+<tr><td><strong>Baao Parish Multi-Purpose Cooperative (Main)</strong><br><span style=font-size:0.8rem;color:var(--text-muted)>Rizal Street, San Nicolas District, Baao, 4432 Camarines Sur</span></td><td>0542663199 <br> <span style=font-size:0.8rem;color:var(--text-muted)>inquire@baaocoop.com</span></td><td class=action-icons><i class="fas fa-edit" onclick=openBranchModal(0)></i><i class="fas fa-trash" onclick=deleteBranch(0)></i></td></tr>
+<tr><td><strong>Goa Branch</strong><br><span style=font-size:0.8rem;color:var(--text-muted)>Rivero Building, San Jose St Goa N/A, 4422 Camarines Sur</span></td><td>09508983131 <br> <span style=font-size:0.8rem;color:var(--text-muted)>goa@baaocoop.com</span></td><td class=action-icons><i class="fas fa-edit" onclick=openBranchModal(1)></i><i class="fas fa-trash" onclick=deleteBranch(1)></i></td></tr>
 </tbody>
 </table>
 </div>
@@ -363,15 +366,57 @@ Php 300.00 - DAMAYAN</textarea>
 </div>
 </div>
 <div class=admin-sidebar>
-<div class=cms-card style="background:linear-gradient(to bottom right,#1e293b,#0f172a);color:white;padding:1.5rem">
-<h3 style=color:white;border-color:rgba(255,255,255,0.1);font-size:1.05rem;margin-bottom:0.5rem><i class="fas fa-images"></i> Banner Manager</h3>
-<p style=font-size:.8rem;color:#94a3b8;margin-bottom:1.2rem;line-height:1.4>Upload an image to change the Hero Banner of the currently active tab.</p>
-<div class=form-group>
-<input type=file id=admin-banner-upload accept=image/* class=form-control style="background:rgba(255,255,255,0.05);color:white;border:1px solid rgba(255,255,255,0.1);padding:.5rem;font-size:.8rem">
+<div style="padding:1.25rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.08);background:rgba(0,0,0,0.2);display:flex;flex-direction:column;gap:.8rem">
+<span style=font-weight:600;font-size:0.85rem;color:#cbd5e1>Logged in as: <span style=color:white>BPMPCO Admin</span></span>
+<button onclick=handleLogout() class="btn btn-secondary" style=width:100%;justify-content:center;padding:0.6rem;font-size:0.85rem><i class="fas fa-sign-out-alt"></i> Logout</button>
 </div>
-<button class="btn btn-primary" id=upload-banner-btn style=width:100%;justify-content:center;padding:0.7rem;font-size:0.85rem><i class="fas fa-upload"></i> Apply to Active Tab</button>
-<div id=banner-preview-strip style=margin-top:1.5rem;display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem></div>
+<div style="padding:2rem 1.5rem">
+<h3 style="color:white;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:1rem;font-size:1.1rem;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem"><i class="fas fa-images" style=color:var(--primary)></i> Banner Manager</h3>
+<p style=font-size:0.85rem;color:#94a3b8;margin-bottom:1.5rem;line-height:1.5>Upload an image to change the Hero Banner of the currently active tab.</p>
+<div class=form-group style=margin-bottom:1.5rem>
+<input type=file id=admin-banner-upload accept=image/* class=form-control style="background:rgba(255,255,255,0.05);color:white;border:1px solid rgba(255,255,255,0.1);padding:.6rem;font-size:.85rem">
 </div>
+<button class="btn btn-primary" id=upload-banner-btn style=width:100%;justify-content:center;padding:0.8rem;font-size:0.9rem><i class="fas fa-upload"></i> Apply to Active Tab</button>
+<div id=banner-preview-strip style=margin-top:2rem;display:grid;grid-template-columns:repeat(2,1fr);gap:1rem></div>
+</div>
+</div>
+</main>
+<div id=members-nav style="display:none;background:var(--bg-alt);border-bottom:1px solid rgba(0,0,0,0.08)">
+<div style="display:flex;gap:1rem;padding:0 2rem;overflow-x:auto">
+<button class="tab-btn active" id=mtab-btn-members onclick="switchMembersTab('mtab-members',this)"><i class="fas fa-id-card"></i> Members</button>
+<button class=tab-btn id=mtab-btn-loans onclick="switchMembersTab('mtab-loans',this)"><i class="fas fa-hand-holding-usd"></i> Loans</button>
+<button class=tab-btn id=mtab-btn-savings onclick="switchMembersTab('mtab-savings',this)"><i class="fas fa-piggy-bank"></i> Savings</button>
+<button class=tab-btn id=mtab-btn-settings onclick="switchMembersTab('mtab-settings',this)"><i class="fas fa-cog"></i> Settings</button>
+</div>
+</div>
+<main id=members-main style=display:none;padding:2rem;max-width:100%;margin:0>
+<div id=mtab-members class=admin-pane style=display:block>
+<div class=cms-card>
+<div class=sub-tabs>
+<button class="sub-tab-btn active" id=msub-btn-active onclick="switchMembersSubTab('msub-active',this)">Active Members</button>
+<button class=sub-tab-btn id=msub-btn-applications onclick="switchMembersSubTab('msub-applications',this)">Applications</button>
+</div>
+<div id=msub-active class="sub-pane active">
+<h3 style=margin-bottom:1rem;color:var(--secondary);font-size:1.1rem;display:flex;align-items:center;gap:0.5rem><i class="fas fa-users"></i> Active Members <span id=active-members-count style="font-size:.8rem;background:#e8f5e9;color:#388e3c;padding:.2rem .6rem;border-radius:99px;font-weight:700"></span></h3>
+<div id=active-members-list style=display:flex;flex-direction:column;gap:0.5rem></div>
+</div>
+<div id=msub-applications class=sub-pane>
+<h3 style=margin-bottom:1rem;color:var(--secondary);font-size:1.1rem;display:flex;align-items:center;gap:0.5rem><i class="fas fa-file-alt"></i> Applications <span id=applications-count style="font-size:.8rem;background:#fff3e0;color:#e65100;padding:.2rem .6rem;border-radius:99px;font-weight:700"></span></h3>
+<table class=data-table>
+<thead><tr><th>Date</th><th>Name</th><th>Email</th><th>File</th><th>Status</th><th>Actions</th></tr></thead>
+<tbody id=applications-tbody></tbody>
+</table>
+</div>
+</div>
+</div>
+<div id=mtab-loans class=admin-pane>
+<div class=cms-card><h3><i class="fas fa-hand-holding-usd"></i> Loans</h3><p style=color:var(--text-muted)>Loan records will appear here.</p></div>
+</div>
+<div id=mtab-savings class=admin-pane>
+<div class=cms-card><h3><i class="fas fa-piggy-bank"></i> Savings</h3><p style=color:var(--text-muted)>Savings records will appear here.</p></div>
+</div>
+<div id=mtab-settings class=admin-pane>
+<div class=cms-card style=max-width:500px><h3><i class="fas fa-cog"></i> Members Module Settings</h3><p style=color:var(--text-muted)>Settings for the members module.</p></div>
 </div>
 </main>
 <div class=modal-overlay id=album-modal>

@@ -26,23 +26,22 @@
 <span>Baao Parish Multi-purpose Cooperative</span>
 </a>
 <div class=nav-actions>
+<button id=mobile-menu-btn onclick="document.querySelector('.nav-row-2').classList.toggle('active')" class="btn btn-secondary" style="display:none;padding:.5rem .8rem;font-size:1.2rem;margin-right:.5rem"><i class="fas fa-bars"></i></button>
 <button style="width:200px;align-items:left"class=cmd-palette-btn onclick=openSearch()>
 <i class="fas fa-search"></i>
 <span>Search</span>
 </button>
-<a href=login.html style=font-weight:600;color:var(--text-main)>Log In</a>
-<a href=membership.html class="btn btn-primary">Join Now</a>
+<a href=login.html id=nav-login-btn style=font-weight:600;color:var(--text-main)>Log In</a>
+<a href=membership.html id=nav-join-btn class="btn btn-primary">Join Now</a>
+<a href=members.html id=nav-member-btn class="btn btn-secondary" style="display:none;align-items:center;gap:.4rem;font-size:.85rem;padding:.5rem 1rem"></a>
+<button onclick=indexLogout() id=nav-logout-btn class=btn style="display:none;background:rgba(220,38,38,0.1);color:var(--primary);font-size:.85rem;padding:.5rem 1rem">Log Out</button>
 </div>
 </div>
 <div class=nav-row-2>
 <div style=display:flex;gap:1rem;align-items:center;flex-wrap:wrap>
 <div class=nav-item><a href=#home><i class="fas fa-home"></i> HOME</a></div>
 <div class=nav-item><a href=#about><i class="fas fa-info-circle"></i> ABOUT US</a></div>
-<div class=nav-item><i class="fas fa-box"></i> PRODUCTS & SERVICES <i class="fas fa-caret-down"></i>
-<div class=dropdown-menu>
-<a href=#services><i class="fas fa-box"></i> ALL SERVICES</a>
-</div>
-</div>
+<div class=nav-item><a href=#services><i class="fas fa-box"></i> PRODUCTS & SERVICES</a></div>
 <div class=nav-item><i class="fas fa-id-card"></i> MEMBERSHIP <i class="fas fa-caret-down"></i>
 <div class=dropdown-menu>
 <a href=#join-us><i class="fas fa-users"></i> JOIN US</a>
@@ -188,7 +187,7 @@
 <p>Explore our wide range of loan products, savings accounts, and specialized programs designed to secure your financial future and support your goals.</p>
 </div>
 </div>
-<div id="dynamic-services-container" style="display:grid;gap:2rem">
+<div id=dynamic-services-container style=display:grid;gap:2rem>
 <div class=grid-2>
 <div class=service-category>
 <h3><i class="fas fa-hand-holding-usd"></i> Loan Products</h3>
@@ -209,7 +208,7 @@
 </ul>
 </div>
 </div>
-<div id="dynamic-services-container" style="display:grid;gap:2rem">
+<div id=dynamic-services-container style=display:grid;gap:2rem>
 <div class=grid-2>
 <div class=service-category>
 <h3><i class="fas fa-heartbeat"></i> Social Services</h3>
@@ -254,7 +253,7 @@
 <div class=grid-2>
 <div class=service-card style=height:auto>
 <h3>Requirements</h3>
-<ul id="front-req-list">
+<ul id=front-req-list>
 <li>Pre-membership Education Seminar Attendance</li>
 <li>1x1 Recent Colored Picture (4 pcs.)</li>
 <li>1x1 Recent Colored Picture of Spouse; if married (1 pc.)</li>
@@ -263,7 +262,7 @@
 </ul>
 <br>
 <h3>Amount to be paid upon membership:</h3>
-<ul id="front-pay-list" style=color:var(--text-main)>
+<ul id=front-pay-list style=color:var(--text-main)>
 <li>Php 200.00 - Membership Fee</li>
 <li>Php 100.00 - Initial Savings</li>
 <li>Php 100.00 - Initial Share Capital</li>
@@ -455,8 +454,8 @@
 </div>
 <div style="max-width:var(--max-width);margin:0 auto;padding:0 2rem 4rem">
 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding-bottom:1rem;border-bottom:2px solid rgba(0,0,0,0.06)">
-<h2 style="font-size:1.4rem;color:var(--text-main)">Latest Posts</h2>
-<span id=articles-count style="font-size:0.8rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:1px"></span>
+<h2 style=font-size:1.4rem;color:var(--text-main)>Latest Posts</h2>
+<span id=articles-count style=font-size:0.8rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:1px></span>
 </div>
 <div id=articles-grid class=articles-grid></div>
 </div>
@@ -502,12 +501,17 @@
 <p style=color:var(--text-muted)>Your experience matters. Share your thoughts, suggestions, and stories so we can continue to improve our services and strengthen our cooperative community.</p>
 </div>
 <div id=feedback-gate style=display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:40vh;gap:1.5rem;text-align:center>
-<i class="fas fa-lock" style=font-size:3rem;color:var(--primary);opacity:0.6></i>
-<h3 style=color:var(--text-main);font-size:1.8rem>Members Only</h3>
-<p style=color:var(--text-muted);max-width:420px>Must be logged in to view and submit feedback. Join our community of cooperative members.</p>
-<div style=display:flex;gap:1rem;flex-wrap:wrap;justify-content:center>
-<a href=login.html class="btn btn-primary" style="padding:.8rem 2rem;font-size:1rem"><i class="fas fa-sign-in-alt" style=margin-right:8px></i>Log In</a>
-<a href=membership.html class="btn btn-secondary" style="padding:.8rem 2rem;font-size:1rem"><i class="fas fa-user-plus" style=margin-right:8px></i>Join Now</a>
+<div style=background:var(--bg-alt);border:var(--glass-border);border-radius:var(--radius-lg);padding:2.5rem;max-width:400px;width:90%;box-shadow:var(--shadow-lg);text-align:center>
+<i class="fas fa-lock" style=font-size:2.5rem;color:var(--primary);opacity:0.7;margin-bottom:1rem;display:block></i>
+<h3 style=color:var(--text-main);font-size:1.4rem;margin-bottom:0.5rem>Members Only</h3>
+<p style=color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem>Sign in to your Baao Coop account to leave feedback.</p>
+<div style=display:flex;flex-direction:column;gap:0.75rem>
+<input type=email id=gate-email class=calc-form-control placeholder="Email address">
+<input type=password id=gate-pass class=calc-form-control placeholder=Password>
+<button onclick=gateLogin() class="btn btn-primary" style=width:100%;padding:0.75rem><i class="fas fa-sign-in-alt" style=margin-right:6px></i>Sign In</button>
+<p id=gate-msg style=font-size:0.8rem;min-height:1rem;color:var(--primary)></p>
+<a href=membership.html style=font-size:0.85rem;color:var(--secondary)>Not a member yet? Join Now</a>
+</div>
 </div>
 </div>
 <div id=feedback-authenticated style=display:none>
@@ -579,13 +583,13 @@
 <div class=footer-grid>
 <div style=text-align:left>
 <h4 style=margin-bottom:1rem>Get In Touch</h4>
-<div class="nav-item footer-branch-dropdown" style="margin-bottom:1rem;background:#1e293b;border:1px solid #334155;border-radius:var(--radius-sm);padding:.6rem;color:white;position:relative">
-<div id=branch-select-display style=display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600>
-<span style=white-space:nowrap;overflow:hidden;text-overflow:ellipsis>Main</span> <i class="fas fa-caret-down"></i>
+<div class=footer-branch-dropdown tabindex=0 style=margin-bottom:1rem;position:relative;outline:none onblur="setTimeout(()=>{const menu=document.getElementById('footer-branch-list');if(menu)menu.style.display='none';},200)">
+<div id=branch-select-display onclick="const menu=document.getElementById('footer-branch-list');menu.style.display=menu.style.display==='block'?'none':'block'" style="background:#1e293b;border:1px solid #334155;border-radius:var(--radius-sm);padding:.75rem 1rem;color:white;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600;transition:.2s" onmouseover="this.style.borderColor='#475569'" onmouseout="this.style.borderColor='#334155'">
+<span style=white-space:nowrap;overflow:hidden;text-overflow:ellipsis>Main Branch</span> <i class="fas fa-caret-down" style=color:#94a3b8></i>
 </div>
-<div class=dropdown-menu style="width:100%;left:0;transform:none;background:#0f172a;border:1px solid #334155;top:100%;padding:.5rem;box-shadow:var(--shadow-lg)">
-<a href=javascript:void(0) onclick="updateFooterBranch('main','Baao Parish Multi-Purpose Cooperative (Main)')" style="color:#f8fafc;padding:.6rem 1rem;border-radius:4px;transition:.3s;margin-bottom:.2rem" onmouseover="this.style.background='var(--primary)';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#f8fafc'">Main</a>
-<a href=javascript:void(0) onclick="updateFooterBranch('goa','Goa Branch-Baao Parish Multi-Purpose Cooperative')" style="color:#f8fafc;padding:.6rem 1rem;border-radius:4px;transition:.3s" onmouseover="this.style.background='var(--primary)';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#f8fafc'">Goa</a>
+<div id=footer-branch-list style="display:none;position:absolute;width:100%;left:0;top:100%;margin-top:.3rem;background:#0f172a;border:1px solid #334155;border-radius:var(--radius-sm);padding:.4rem;box-shadow:0 10px 15px -3px rgba(0,0,0,0.5);z-index:100">
+<div onclick="updateFooterBranch('main','Main Branch');this.parentElement.style.display='none'" style="display:block;cursor:pointer;color:#cbd5e1;padding:.6rem 1rem;border-radius:4px;transition:.2s;margin-bottom:.2rem;font-size:.9rem" onmouseover="this.style.background='rgba(255,255,255,0.08)';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#cbd5e1'">Main Branch</div>
+<div onclick="updateFooterBranch('goa','Goa Branch');this.parentElement.style.display='none'" style="display:block;cursor:pointer;color:#cbd5e1;padding:.6rem 1rem;border-radius:4px;transition:.2s;font-size:.9rem" onmouseover="this.style.background='rgba(255,255,255,0.08)';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#cbd5e1'">Goa Branch</div>
 </div>
 </div>
 <div id=branch-details class=branch-details></div>
@@ -657,20 +661,18 @@
 </div>
 <div id=chat-pane-message style=background:white;display:none;flex-direction:column;max-height:420px;padding:1.5rem;gap:1rem;overflow-y:auto>
 <h4 style=color:var(--text-main);margin-bottom:0.2rem>Live Chat</h4>
-<!-- Name Gate -->
 <div id=chat-name-gate style=display:flex;flex-direction:column;gap:0.75rem>
 <p style=color:var(--text-muted);font-size:0.88rem>Before we start, what's your name?</p>
 <input id=chat-name-input type=text class=calc-form-control placeholder="Enter your name..." style=font-size:0.9rem onkeypress="if(event.key==='Enter')askChatName()">
-<button onclick=askChatName() style="background:var(--text-main);color:white;border:0;border-radius:var(--radius-sm);padding:0.6rem 1rem;font-weight:600;cursor:pointer;font-size:0.88rem">Start Chat</button>
+<button onclick=askChatName() style="background:var(--text-main);color:white;border:0;border-radius:var(--radius-sm);padding:.6rem 1rem;font-weight:600;cursor:pointer;font-size:.88rem">Start Chat</button>
 </div>
-<!-- Message Body -->
 <div id=chat-message-body style=display:none;flex-direction:column;gap:0.75rem>
 <div id=chat-messages style=flex:1;min-height:150px;background:#f8fafc;border-radius:var(--radius-sm);padding:1rem;display:flex;flex-direction:column;gap:0.75rem;overflow-y:auto></div>
 <div style=display:flex;gap:0.5rem>
 <input type=text id=chat-input placeholder="Type a message..." style="flex:1;padding:.6rem .9rem;border:1px solid rgba(0,0,0,0.1);border-radius:var(--radius-sm);font-family:inherit;font-size:.88rem;outline:0;background:white" onkeypress="if(event.key==='Enter')sendChatMessage()">
 <button onclick=sendChatMessage() style="background:#2563eb;color:white;border:0;padding:0 1rem;border-radius:var(--radius-sm);font-weight:600;cursor:pointer;transition:.3s"><i class="fas fa-paper-plane"></i></button>
 </div>
-<button onclick=guestEndChat() style="background:none;border:none;color:#94a3b8;font-size:0.75rem;cursor:pointer;text-align:center;padding:0.3rem;transition:0.2s;align-self:center" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#94a3b8'"><i class="fas fa-phone-slash" style="margin-right:4px"></i>End Chat</button>
+<button onclick=guestEndChat() style=background:none;border:none;color:#94a3b8;font-size:0.75rem;cursor:pointer;text-align:center;padding:0.3rem;transition:0.2s;align-self:center onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='#94a3b8'"><i class="fas fa-phone-slash" style=margin-right:4px></i>End Chat</button>
 </div>
 </div>
 <div id=chat-pane-help style=background:white;display:none;padding:1.5rem;flex-direction:column;gap:0.75rem;max-height:380px;overflow-y:auto>
